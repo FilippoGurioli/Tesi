@@ -1,0 +1,13 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione}{2}{}%
+\contentsline {chapter}{\numberline {2}Lavori correlati in letteratura}{3}{}%
+\contentsline {chapter}{\numberline {3}Analisi dei requisiti}{4}{}%
+\contentsline {section}{\numberline {3.1}Requisiti funzionali}{4}{}%
+\contentsline {section}{\numberline {3.2}Requisiti non funzionali}{5}{}%
+\contentsline {chapter}{\numberline {4}Design Architetturale}{6}{}%
+\contentsline {chapter}{\numberline {5}Progettazione dettagliata}{7}{}%
+\contentsline {chapter}{\numberline {6}Implementazione}{8}{}%
+\contentsline {chapter}{\numberline {7}Testing}{9}{}%
+\contentsline {chapter}{\numberline {8}Gestione del progetto}{10}{}%
+\contentsline {chapter}{\numberline {9}Conclusione}{11}{}%
