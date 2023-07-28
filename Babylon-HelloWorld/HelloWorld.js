@@ -8,14 +8,13 @@ window.addEventListener('DOMContentLoaded', async function () {
                     // create a basic BJS Scene object
                     var scene = new BABYLON.Scene(engine);
                     // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
-                    var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
-                    // target the camera to scene origin
-                    camera.setTarget(BABYLON.Vector3.Zero());
+                    var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 10, BABYLON.Vector3.Zero(), scene);
                     // attach the camera to the canvas
-                    camera.attachControl(canvas, false);
+                    camera.attachControl(canvas, true);
                     // create a basic light, aiming 0,1,0 - meaning, to the sky
                     var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
                     // create a built-in "sphere" shape; its constructor takes 6 params: name, segment, diameter, scene, updatable, sideOrientation 
+                    
                     var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
                     // move the sphere upward 1/2 of its height
                     sphere.position.y = 1;
