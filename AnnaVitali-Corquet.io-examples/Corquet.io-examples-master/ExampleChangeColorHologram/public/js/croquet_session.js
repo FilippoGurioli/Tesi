@@ -7,8 +7,8 @@ import { RootView } from "./view.js";
 import { RootModel } from "./model.js";
 
 Croquet.Session.join({
-    apiKey: '1qyNnOonAkPmJ464x9pgDidv8rEf429oxDhsgrjzM',
-    appId: 'it.unibo.studio.anna_2evitali4.CroquetOSExample_myapp',
+    apiKey: '1HE1txmpJCe5Cp8Pzd3Dpmq4a9gu6PqKhar4tcHtq',
+    appId: 'it.unibo.studio.filippo.gurioli.microverse',
     name: "unnamed",
     password: "secret",
     model: RootModel,
