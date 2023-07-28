@@ -1,0 +1,45 @@
+\chapter{Capitolo con Immagini e Codice}
+
+Introduzione al capitolo
+
+\section{Prima sezione del secondo capitolo}
+
+Qui di seguito un'immagine. Tutte le immagini devono essere inserite nella cartella \texttt{images}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{images/placeholder.jpg}
+\caption{Testo della didascalia}
+\label{fig:figure1}
+\end{figure}
+
+Qui invece il testo con il riferimento all'immagine: Figura \ref{fig:figure1}.
+
+Qui un'immagine con due sotto-immagini:
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.42\textwidth}
+\includegraphics[width=\textwidth]{images/placeholder.jpg}
+\caption{Didascalia prima figura}
+\label{fig:figure2}
+\end{subfigure}
+\qquad
+\begin{subfigure}[b]{0.42\textwidth}
+\includegraphics[width=\textwidth]{images/placeholder.jpg}
+\caption{Didascalia seconda figura}
+\label{fig:figure3}
+\end{subfigure}
+\caption{Didascalia globale}
+\label{fig:figures12}
+\end{figure}
+
+Altri tipi di riferimenti: Figura \ref{fig:figures12} oppure \ref{fig:figure3}.
+
+\section{Seconda sezione con codice sorgente}
+
+Il codice sorgente può essere inserito mediante un link al file del codice sorgente, in questo caso il file con il codice va inserito nella cartella \texttt{code}.
+
+\lstinputlisting[caption={Didascalia o il nome del file}, label=lst:listato1]{code/Main.java}
+
+

@@ -1,17 +1,24 @@
-\input{Packages}
+\documentclass[12pt,a4paper,twoside,openright]{book}
+
+\usepackage[italian]{babel}
+\usepackage{style/isi-lt}
+
+\input{style/isi-lst}
+\input{Frontespizio}
 
 \begin{document}
 
-    \input{Frontespizio}
+    \frontmatter 
 
-    % Indice
+    \maketitle
     \tableofcontents
 
-    \setstretch{1.5} % Imposta l'interlinea a 1.5
-
-    % Inizio del corpo della tesi
-
     \input{Capitoli/Introduzione}
+
+    \mainmatter
+    %\pagesyle{fancy}
+    \fancyhead[LE,RO]{\thepage}
+    \fancyfoot{}
 
     \input{Capitoli/Letteratura}
 
@@ -28,5 +35,9 @@
     \input{Capitoli/Gestione}
 
     \input{Capitoli/Conclusione}
+
+    \backmatter
+    \bibliography{Bibliografia}{}
+    \bibliographystyle{plain}
 
 \end{document}
