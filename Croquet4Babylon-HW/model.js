@@ -32,6 +32,9 @@ class RootModel extends Croquet.Model {
         this.GUIManager.useRealisticScaling = true;
 
         //TODO: qui inizializzare gli oggetti della scena
+        var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.1}, this.scene);
+        sphere.position.y = 1.7;
+        canvas.addEventListener("click", _ => { this.publish("consoleLog", "click") });
     }
 
     async #createWebXRExperience() {
