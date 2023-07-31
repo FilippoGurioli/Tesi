@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
     <head>
-        <title>Progetto</title>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-        <title>Babylon - Hello World</title>
-        <!--- Link to the last version of BabylonJS --->
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+        <title>Croquet4Babylon - Hello World</title>
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@croquet/croquet@1.0.5"></script>
         <style>
             html,
@@ -25,9 +24,11 @@
             }
         </style>
     </head>
+
     <body>
         <canvas id="renderCanvas"></canvas>
-        <script src="MyModel1.js"></script>
-        <script src="MyView.js"></script>
+        <script type="module" src="model.js"></script>
+        <script type="module" src="view.js"></script>
+        <script type="module" src="croquet_session.js"></script>
     </body>
 </html>
