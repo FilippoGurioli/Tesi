@@ -1,13 +1,13 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {chapter}{Introduzione}{vii}{}%
-\contentsline {chapter}{\numberline {1}Lavori correlati in letteratura}{1}{}%
-\contentsline {chapter}{\numberline {2}Analisi dei requisiti}{3}{}%
-\contentsline {section}{\numberline {2.1}Requisiti funzionali}{3}{}%
-\contentsline {section}{\numberline {2.2}Requisiti non funzionali}{4}{}%
-\contentsline {chapter}{\numberline {3}Design Architetturale}{5}{}%
-\contentsline {chapter}{\numberline {4}Progettazione dettagliata}{7}{}%
-\contentsline {chapter}{\numberline {5}Implementazione}{9}{}%
-\contentsline {chapter}{\numberline {6}Testing}{11}{}%
-\contentsline {chapter}{\numberline {7}Gestione del progetto}{13}{}%
-\contentsline {chapter}{\numberline {8}Conclusione}{15}{}%
+\contentsline {chapter}{\numberline {1}Stato dell'arte}{1}{}%
+\contentsline {chapter}{\numberline {2}Progetto}{3}{}%
+\contentsline {section}{\numberline {2.1}Analisi dei requisiti}{3}{}%
+\contentsline {subsection}{\numberline {2.1.1}Requisiti funzionali}{3}{}%
+\contentsline {subsection}{\numberline {2.1.2}Requisiti non funzionali}{4}{}%
+\contentsline {section}{\numberline {2.2}Design Architetturale}{5}{}%
+\contentsline {section}{\numberline {2.3}Progettazione dettagliata}{6}{}%
+\contentsline {section}{\numberline {2.4}Implementazione}{7}{}%
+\contentsline {chapter}{Conclusioni}{9}{}%
+\contentsline {chapter}{Ringraziamenti}{11}{}%
