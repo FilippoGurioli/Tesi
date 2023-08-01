@@ -8,6 +8,7 @@ class RootModel extends Croquet.Model {
     init() {
 
         //TODO: this.subscribe();
+        this.subscribe("screen", "click", _ => {console.log("click")});
 
         this.#initializeScene();
         this.#activateRenderLoop();
@@ -34,7 +35,6 @@ class RootModel extends Croquet.Model {
         //TODO: qui inizializzare gli oggetti della scena
         var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.1}, this.scene);
         sphere.position.y = 1.7;
-        canvas.addEventListener("click", _ => { this.publish("consoleLog", "click") });
     }
 
     async #createWebXRExperience() {
@@ -78,4 +78,4 @@ class RootModel extends Croquet.Model {
 RootModel.register("RootModel");
 
 
-export { RootModel };
+export { canvas, RootModel };
