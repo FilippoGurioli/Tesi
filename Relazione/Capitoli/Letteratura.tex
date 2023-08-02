@@ -1,4 +1,52 @@
 \chapter{Stato dell'arte}\label{chap:Letteratura}
-Qui bisogna dare una definizione formale delle componenti del progetto, degli 
-strumenti di partenza, di tutto ciò che è stato utilizzato per lo sviluppo del
-progetto di tesi.
+Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante
+tecnologie e metodologie utilizzate per lo sviluppo di videogiochi e come 
+vengano adattate alla realtà aumentata. Si affronteranno le problematiche della 
+gestione cooperativa dell'esperienza di gioco e quali tecnologie ne permettano 
+la realizzazione. Infine si darà una panoramica delle strutture messe a 
+disposizione per creare mondi virtuali attualmente presenti in letteratura.
+
+\section{Game Design Pattern}\label{sec:GameDesignPattern}
+In questa sezione si farà principalmente riferimento al libro \textit{''Game Programming Patterns''}
+di Robert Nystrom\cite{Nystrom2014}, in cui vengono descritti i pattern più comuni nel
+game design. Nel testo vengono citate 5 macrocategorie di pattern:
+\begin{itemize}
+    \item Design Pattern rivisitati;
+    \item Sequencing pattern;
+    \item Pattern comportamentali;
+    \item Pattern di disaccoppiamento;
+    \item Pattern di ottimizzazione.
+\end{itemize}
+Di seguito si riporta una breve descrizione per ognuna di esse e se ne analizzano
+i pattern più significativi.
+
+\subsection{Design Pattern rivisitati}\label{ssec:DesignPattern}
+I design pattern sono i pattern più comuni e noti, sono stati descritti per la prima
+volta nel libro \textit{''Design Patterns: Elements of Reusable Object-Oriented Software''}
+~\cite{gangof4}. Nel libro di Nystrom vengono rivisitati alcuni di questi pattern
+in chiave videoludica ed in particolare si analizzano i seguenti: Command, Flyweight,
+Observer, Prototype, Singleton e State. Data la vastità di argomenti che copre quel libro
+non verranno analizzati tutti, bensì solo quelli che si ritengono più rilevanti per
+questo progetto di tesi.
+\paragraph{Command Pattern}
+Il command pattern è definito nel libro come \textit{''la reificazione 
+di una chiamata di funzione''}, in pratica si tratta di modellare una classe
+che permetta di creare un livello di astrazione tra quando un comando
+viene invocato e quando viene eseguito. Si crea un'interfaccia `Command'
+che specifica solo un metodo `execute', dopodichè si creano delle classi
+che implementano tale interfaccia e che rappresentino un comando ben specifico
+(e.g. salta, corri, attacca etc.). Nella sua essenza il command pattern è quanto
+appena detto ma il modo in cui viene utilizzato è forse la cosa più interessante:
+nell'ipotetica classe `InputHandler' si potrà dichiarare una istanza della classe
+`Command' per ogni tipo di interazione che l'utente può eseguire (e.g. premere un tasto,
+drag and drop, gestures di vario genere etc.) ed assegnare a questo oggetto una qualsiasi
+delle classi precedentemente definite, svincolando così l'interazione dall'esecuzione
+di un determinato evento. I vantaggi del command pattern, spiega Nystrom, non si
+fermano solo alla possibilità di creare il key binding ma, serializzando i comandi,
+si possono mandare in rete per realizzare un gioco multiplayer. Si lascia il codice
+~\ref{lst:commandPattern.ts} come esemplificazione di quanto appena spiegato.
+\code{commandPattern.ts}{Codice d'esempio per l'implementazione del command pattern}
+
+\section{Framework per la gestione cooperativa}\label{sec:Cooperativa}
+
+\section{Framework per sviluppo 3D}\label{sec:FW3D}

@@ -3,6 +3,13 @@
 \usepackage[italian]{babel}
 \usepackage{style/isi-lt}
 
+\newcommand{\code}[2]{
+    \lstinputlisting[
+        caption={#2}, 
+        label=lst:#1
+    ]{code/#1}
+}
+
 \input{style/isi-lst}
 \input{Frontespizio}
 
@@ -23,6 +30,8 @@
     \input{Capitoli/Letteratura.tex}
 
     \input{Capitoli/Progetto.tex}
+
+    \input{Capitoli/Sviluppo.tex}
 
     \input{Capitoli/Conclusioni.tex}
 

@@ -1,3 +1,13 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{gangof4}
+Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides.
+\newblock {\em Design Patterns: Elements of Reusable Object-Oriented Software}.
+\newblock Addison-Wesley Professional, Reading, MA, 1994.
+
+\bibitem{Nystrom2014}
+Robert Nystrom.
+\newblock {\em Game Programming Patterns}.
+\newblock Genever Benning, San Francisco, CA, 2014.
 
 \end{thebibliography}
