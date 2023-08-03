@@ -47,6 +47,25 @@ si possono mandare in rete per realizzare un gioco multiplayer. Si lascia il cod
 ~\ref{lst:commandPattern.ts} come esemplificazione di quanto appena spiegato.
 \code{commandPattern.ts}{Codice d'esempio per l'implementazione del command pattern}
 
+\paragraph{Observer pattern}
+L'observer pattern è uno dei più famosi e più utilizzati pattern presenti in
+letteratura. La stessa Microsoft ne ha fornito una implementazione all'interno del framework 
+.NET. L'observer pattern si basa sui concetti di \textit{evento} e \textit{osservatore}:
+quando un oggetto modifica il suo stato e produce un qualche risultato visibile
+genera un \textit{evento} il quale può essere osservato dall'\textit{osservatore} 
+che, a sua volta, può reagire, eseguendo del codice, all'evento stesso. Questa idea
+ribalta il concetto normalmente utilizzato in cui per permettere ad un oggetto B
+di reagire ad un cambiamento di stato di un oggetto A, quest'ultimo deve avere
+un riferimento all'oggetto B. Questo pattern crea un layer di astrazione tra l'oggetto
+che genera l'evento e l'oggetto che vuole reagirci svincolando il generatore dal
+conoscere l'osservatore. Nel contesto di un videogioco questo pattern è spesso usato in modo
+verticale su tutta la codebase, a partire dalla gestione generale di eventi di gioco fino ad arrivare
+alla gestione di contesti particolari come la gestione degli input, degli achievements o delle
+collisioni./*qui inserire il fatto che l'applicazione del pattern potrebbe sfuggire di mano*/ 
+Nystrom spiega che il pattern andrebbe applicato ogni qualvolta l'oggetto che genera l'evento
+non ha senso che conosca l'osservatore. Si lascia il codice ~\ref{lst:observerPattern.ts} come esempio
+di implementazione del pattern observer.
+
 \section{Framework per la gestione cooperativa}\label{sec:Cooperativa}
 
 \section{Framework per sviluppo 3D}\label{sec:FW3D}
