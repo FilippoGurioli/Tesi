@@ -10,6 +10,15 @@
     ]{code/#1}
 }
 
+\newcommand{\img}[2]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/#1}
+        \caption{#2}
+        \label{fig:#1}
+    \end{figure}
+}
+
 \input{style/isi-lst}
 \input{Frontespizio}
 

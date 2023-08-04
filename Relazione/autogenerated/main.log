@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.25)  3 AUG 2023 15:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.26)  4 AUG 2023 18:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/Utente/Documents/Tesi/Relazione/main.tex
-(c:/Users/Utente/Documents/Tesi/Relazione/main.tex
+**c:/Users/Filippo/Documents/Progetti/Tesi/Relazione/main.tex
+(c:/Users/Filippo/Documents/Progetti/Tesi/Relazione/main.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-03-30> (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+L3 programming layer <2023-03-30> (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
 Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
-(C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+(C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
 File: bk12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
@@ -23,50 +23,50 @@ File: bk12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
 Package: babel 2023/03/28 3.87 The Babel package
 \babel@savecnt=\count194
 \U@D=\dimen141
 \l@unhyphenated=\language79
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count195
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+(C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.ldf
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.ldf
 Language: italian 2022/03/27 v.1.4.07 Italian support for the babel system
 \it@lettering=\count196
 \it@doublequoteactive=\count197
 \it@ISOcompliance=\count198
-)) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/it\babel-italian.tex
+)) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/it\babel-italian.tex
 Package babel Info: Importing font and identification data for italian
 (babel)             from babel-it.ini. Reported on input line 11.
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count199
-) (style/isi-lt.sty (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+) (style/isi-lt.sty (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks16
 \inpenc@posthook=\toks17
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
 \@mathmargin=\skip50
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks18
 \ex@=\dimen142
-)) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+)) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen143
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count266
@@ -116,16 +116,16 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks23
 \thm@bodyfont=\toks24
@@ -136,11 +136,11 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip54
 \thm@headsep=\skip55
 \dth@everypar=\toks28
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/03/12 v3.6j Customizing captions (AR)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks29
 )
@@ -156,18 +156,18 @@ Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count278
 \c@continuedfloat=\count279
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
 Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/tools\enumerate.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/tools\enumerate.sty
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks30
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@headwidth=\skip56
 \f@nch@O@elh=\skip57
@@ -178,7 +178,7 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@erf=\skip62
 \f@nch@O@olf=\skip63
 \f@nch@O@orf=\skip64
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
 Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
 \FV@CodeLineNo=\count280
 \FV@InFile=\read3
@@ -186,29 +186,29 @@ Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
 \c@FancyVerbLine=\count281
 \FV@StepNumber=\count282
 \FV@OutFile=\write3
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
 \float@exts=\toks31
 \float@box=\box54
 \@float@everytoks=\toks32
 \@floatcapt=\box55
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
 \Gin@req@height=\dimen159
 \Gin@req@width=\dimen160
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
 \lst@mode=\count284
 \lst@gtempboxa=\box56
 \lst@token=\toks33
@@ -221,18 +221,18 @@ Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 \lst@newlines=\count288
 \lst@lineno=\count289
 \lst@maxwidth=\dimen164
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 \c@lstnumber=\count290
 \lst@skipnumbers=\count291
 \lst@framebox=\box57
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/marvosym\marvosym.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/marvosym\marvosym.sty
 Package: marvosym 2011/07/20 v2.2 Martin Vogel's Symbols font definitions
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
 Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \c@tracingmulticols=\count292
 \mult@box=\box58
@@ -300,7 +300,7 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \mult@nat@firstbox=\box101
 \colbreak@box=\box102
 \mc@col@check@num=\count301
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/sectsty\sectsty.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/sectsty\sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading styles
 
 
@@ -311,13 +311,13 @@ LaTeX Warning: Command \underbar  has changed.
 LaTeX Warning: Command \underline  has changed.
                Check if current package is valid.
 
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
 Package: subcaption 2023/02/19 v1.6 Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 239.
 \c@subfigure=\count302
 Package caption Info: New subtype `subtable' on input line 239.
 \c@subtable=\count303
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has chapter divisions on input line 51.
 \cftparskip=\skip67
@@ -356,15 +356,15 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 \cftbeforetabskip=\skip98
 \cfttabindent=\skip99
 \cfttabnumwidth=\skip100
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 227.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
 \col@sep=\dimen174
 \ar@mcellbox=\box103
@@ -379,7 +379,7 @@ Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
 \rownum=\count306
 )
 LaTeX Info: Redefining \color on input line 711.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
 Package xcolor Info: Model `RGB' extended on input line 1369.
@@ -389,12 +389,12 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
-)) (style/isi-lst.tex (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+)) (style/isi-lst.tex (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )) (Frontespizio.tex
 \@indexfile=\write4
@@ -402,29 +402,29 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 
 
 Writing index file main.idx
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count307
 \l__pdf_internal_box=\box105
-) (c:\Users\Utente\Documents\Tesi\Relazione\autogenerated\main.aux)
+) (c:\Users\Filippo\Documents\Progetti\Tesi\Relazione\autogenerated\main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Info: Redefining \it@ocap on input line 16.
-LaTeX Info: Redefining \it@ccap on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Info: Redefining \it@ocap on input line 25.
+LaTeX Info: Redefining \it@ccap on input line 25.
 
 
 File italian.ldf warning: 
@@ -432,13 +432,13 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 16.
+italian.ldf    on input line 25.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-(C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+(C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count308
 \scratchdimen=\dimen176
@@ -451,31 +451,31 @@ Package caption Info: End \AtBeginDocument code.
 \MPnumerator=\count312
 \makeMPintoPDFobject=\count313
 \everyMPtoPDFconversion=\toks37
-) (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+) (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count314
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 20.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 29.
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ) [1
 
 
 
-{C:/Users/Utente/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2
+{C:/Users/Filippo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2
 
 ] [3] [4
 
-] (c:\Users\Utente\Documents\Tesi\Relazione\autogenerated\main.toc
+] (c:\Users\Filippo\Documents\Progetti\Tesi\Relazione\autogenerated\main.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
- (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+ (C:\Users\Filippo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ))
 \tf@toc=\write5
@@ -484,12 +484,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  (Capitoli/Introduzione.tex [5] [6
 
 ])
-Underfull \hbox (badness 10000) in paragraph at lines 4--24
+Underfull \hbox (badness 10000) in paragraph at lines 4--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4--24
+Underfull \hbox (badness 10000) in paragraph at lines 4--33
 
  []
 
@@ -499,48 +499,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--24
 Capitolo 1.
 [1
 
-] (code/commandPattern.ts [2])
+] (code/commandPattern.ts [2]) (code/observerPattern.ts [3]) (code/gameLoop1.ts [4])
+<images/GameLoopLogics.png, id=47, 773.89125pt x 149.55875pt>
+File: images/GameLoopLogics.png Graphic file (type png)
+<use images/GameLoopLogics.png>
+Package pdftex.def Info: images/GameLoopLogics.png  used on input line 106.
+(pdftex.def)             Requested size: 318.67207pt x 61.5842pt.
+ (code/gameLoop2.ts)
+Underfull \hbox (badness 10000) in paragraph at lines 114--120
 
-LaTeX Warning: Reference `lst:observerPattern.ts' on page 3 undefined on input line 66.
+ []
 
-) (Capitoli/Progetto.tex [3] [4
-
-]
+[5 <./images/GameLoopLogics.png>]) (Capitoli/Progetto.tex [6]
 Capitolo 2.
 (Capitoli/Core/Analisi.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--5
 
  []
 
-[5] [6]) (Capitoli/Core/Tecnologie.tex [7])) (Capitoli/Sviluppo.tex [8
+[7
+
+] [8]) (Capitoli/Core/Tecnologie.tex [9])) (Capitoli/Sviluppo.tex [10
 
 ]
 Capitolo 3.
-(Capitoli/Core/Design.tex [9]) (Capitoli/Core/Progettazione.tex [10]) (Capitoli/Core/Implementazione.tex [11])) (Capitoli/Conclusioni.tex [12
+(Capitoli/Core/Design.tex [11]) (Capitoli/Core/Progettazione.tex [12]) (Capitoli/Core/Implementazione.tex [13])) (Capitoli/Conclusioni.tex [14
 
-]) (Capitoli/Ringraziamenti.tex [13] [14
+]) (Capitoli/Ringraziamenti.tex [15] [16
 
-]) [15] [16
+]) [17] [18
 
-] (c:\Users\Utente\Documents\Tesi\Relazione\autogenerated\main.bbl) [17
+] (c:\Users\Filippo\Documents\Progetti\Tesi\Relazione\autogenerated\main.bbl) [19
 
-] (c:\Users\Utente\Documents\Tesi\Relazione\autogenerated\main.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (c:\Users\Filippo\Documents\Progetti\Tesi\Relazione\autogenerated\main.aux) ) 
 Here is how much of TeX's memory you used:
- 9793 strings out of 476331
- 155536 string characters out of 5787293
- 1876660 words of memory out of 5000000
- 30034 multiletter control sequences out of 15000+600000
+ 9854 strings out of 476331
+ 157213 string characters out of 5786821
+ 1887660 words of memory out of 5000000
+ 30083 multiletter control sequences out of 15000+600000
  527515 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,6n,77p,854b,1847s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Utente\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on c:\Users\Utente\Documents\Tesi\Relazione\autogenerated\main.pdf (25 pages, 134707 bytes).
+ 72i,7n,77p,864b,1847s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Filippo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Filippo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on c:\Users\Filippo\Documents\Progetti\Tesi\Relazione\autogenerated\main.pdf (27 pages, 149439 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
