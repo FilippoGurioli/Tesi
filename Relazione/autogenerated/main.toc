@@ -24,16 +24,16 @@
 \contentsline {section}{\numberline {2.1}Analisi dei requisiti}{3}{}%
 \contentsline {subsection}{\numberline {2.1.1}Requisiti funzionali}{3}{}%
 \contentsline {subsection}{\numberline {2.1.2}Requisiti non funzionali}{4}{}%
-\contentsline {section}{\numberline {2.2}Design Architetturale}{5}{}%
-\contentsline {subsection}{\numberline {2.2.1}Back-end}{5}{}%
-\contentsline {subsection}{\numberline {2.2.2}Front-end}{5}{}%
-\contentsline {section}{\numberline {2.3}Tecnologie}{6}{}%
-\contentsline {subsection}{\numberline {2.3.1}Hololens}{6}{}%
-\contentsline {subsection}{\numberline {2.3.2}WebXR}{6}{}%
-\contentsline {subsection}{\numberline {2.3.3}MRTK}{6}{}%
-\contentsline {subsection}{\numberline {2.3.4}NodeJS}{6}{}%
-\contentsline {subsection}{\numberline {2.3.5}BabylonJS}{6}{}%
-\contentsline {subsection}{\numberline {2.3.6}Croquet}{6}{}%
+\contentsline {section}{\numberline {2.2}Tecnologie}{5}{}%
+\contentsline {subsection}{\numberline {2.2.1}Hololens}{5}{}%
+\contentsline {subsection}{\numberline {2.2.2}WebXR}{5}{}%
+\contentsline {subsection}{\numberline {2.2.3}MRTK}{5}{}%
+\contentsline {subsection}{\numberline {2.2.4}NodeJS}{5}{}%
+\contentsline {subsection}{\numberline {2.2.5}BabylonJS}{5}{}%
+\contentsline {subsection}{\numberline {2.2.6}Croquet}{5}{}%
+\contentsline {section}{\numberline {2.3}Design Architetturale}{6}{}%
+\contentsline {subsection}{\numberline {2.3.1}Back-end}{6}{}%
+\contentsline {subsection}{\numberline {2.3.2}Front-end}{6}{}%
 \contentsline {chapter}{\numberline {3}Sviluppo}{7}{}%
 \contentsline {section}{\numberline {3.1}Progettazione dettagliata}{7}{}%
 \contentsline {subsection}{\numberline {3.1.1}Model}{7}{}%
