@@ -568,13 +568,14 @@ INPUT .\Capitoli\Introduzione.tex
 INPUT Capitoli\Introduzione.tex
 INPUT .\Capitoli\Introduzione.tex
 INPUT Capitoli\Introduzione.tex
-INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
+INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsl12.tfm
 INPUT .\Capitoli\Letteratura.tex
 INPUT Capitoli\Letteratura.tex
 INPUT .\Capitoli\Letteratura.tex
 INPUT Capitoli\Letteratura.tex
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
+INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT .\code\commandPattern.ts
@@ -585,7 +586,6 @@ INPUT .\code\commandPattern.ts
 INPUT code\commandPattern.ts
 INPUT .\code\commandPattern.ts
 INPUT code\commandPattern.ts
-INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsl12.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
 INPUT .\code\observerPattern.ts
 INPUT code\observerPattern.ts
