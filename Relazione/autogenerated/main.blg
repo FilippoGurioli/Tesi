@@ -4,45 +4,47 @@ The top-level auxiliary file: main.aux
 Reallocating 'name_of_file' (item size: 1) to 13 items.
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
+I found no \citation commands---while reading file main.aux
 Database file #1: Bibliografia.bib
-You've used 2 entries,
+You've used 0 entries,
             2118 wiz_defined-function locations,
-            510 strings with 4266 characters,
-and the built_in function-call counts, 556 in all, are:
-= -- 47
-> -- 30
+            497 strings with 3993 characters,
+and the built_in function-call counts, 18 in all, are:
+= -- 0
+> -- 0
 < -- 0
-+ -- 12
-- -- 10
-* -- 33
-:= -- 105
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 9
++ -- 0
+- -- 0
+* -- 2
+:= -- 7
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 24
-empty$ -- 45
-format.name$ -- 10
-if$ -- 112
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 4
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 17
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 0
 quote$ -- 0
-skip$ -- 12
+skip$ -- 1
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 0
+swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
+type$ -- 0
 warning$ -- 0
-while$ -- 4
-width$ -- 3
-write$ -- 24
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There was 1 error message)
