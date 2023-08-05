@@ -8,7 +8,6 @@ class RootModel extends Croquet.Model {
     init() {
 
         //TODO: this.subscribe();
-        this.subscribe("screen", "click", _ => {console.log("click")});
 
         this.#initializeScene();
         this.#activateRenderLoop();
@@ -17,7 +16,7 @@ class RootModel extends Croquet.Model {
 
     //TODO: Metodi pubblici per la sottoscrizione agli eventi
 
-    #initializeScene(){
+    #initializeScene() {
         this.engine = new BABYLON.Engine(canvas, true);
         this.scene = new BABYLON.Scene(this.engine);
         this.scene.clearColor = new BABYLON.Color3.Black;
@@ -32,9 +31,10 @@ class RootModel extends Croquet.Model {
         this.GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
         this.GUIManager.useRealisticScaling = true;
 
-        //TODO: qui inizializzare gli oggetti della scena
-        var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.1}, this.scene);
-        sphere.position.y = 1.7;
+        //TODO: qui inizializzare gli oggetti della scena condivisi tra i 2 giocatori
+        //this.turn = new Turn();
+
+
     }
 
     async #createWebXRExperience() {
