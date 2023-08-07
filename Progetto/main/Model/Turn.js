@@ -25,7 +25,28 @@ class Turn {
         }
     }
     toString() {
-        return this._turnNumber + " - " + this._phase;
+        let phase = "";
+        switch (this._phase) {
+            case Phase.DrawPhase:
+                phase = "Draw Phase";
+                break;
+            case Phase.StandbyPhase:
+                phase = "Standby Phase";
+                break;
+            case Phase.MainPhase1:
+                phase = "Main Phase 1";
+                break;
+            case Phase.BattlePhase:
+                phase = "Battle Phase";
+                break;
+            case Phase.MainPhase2:
+                phase = "Main Phase 2";
+                break;
+            case Phase.EndPhase:
+                phase = "End Phase";
+                break;
+        }
+        return this._turnNumber + " - " + phase;
     }
 }
 export { Turn };
