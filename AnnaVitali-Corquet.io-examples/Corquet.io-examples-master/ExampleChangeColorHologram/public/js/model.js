@@ -9,7 +9,7 @@ class RootModel extends Croquet.Model {
         this.linkedViews = [];
 
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
-        this.subscribe(this.sessionId, "view-exit", this.viewDrop)
+        this.subscribe(this.sessionId, "view-exit", this.viewDrop);
         this.subscribe("colorButton", "clicked", this.changeHologramColor);
 
         this.#initializeScene();

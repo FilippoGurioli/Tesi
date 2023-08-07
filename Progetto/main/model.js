@@ -1,20 +1,67 @@
+import { Turn } from "./Model/Turn.js";
+
 const canvas = document.getElementById("renderCanvas");
 
 class RootModel extends Croquet.Model {
+
+    players = {p1: "", p2: ""};
+
+    turn = new Turn();
+
+    connectedViews = [];
 
     /**
     * Initialize the Model.
     * */
     init() {
-
         //TODO: this.subscribe();
+        this.Log("MODEL: " + this.id + " created.");
+        this.subscribe(this.sessionId, "view-join", this.viewJoin);
+        this.subscribe(this.sessionId, "view-exit", this.viewDrop);
+
+        this.subscribe("nextPhase", "clicked", this.nextPhase);
 
         this.#initializeScene();
         this.#activateRenderLoop();
+    }
 
+    /**
+     * Handle a new connected view.
+     * @param {any} viewId the id of the new view connected.
+     */
+    viewJoin(viewId) {
+        this.connectedViews.push(viewId);
+        this.Log("view " + viewId + " joined.");
+        if (this.players.p1 === "") {
+            this.players.p1 = viewId;
+        } else if (this.players.p2 === "") {
+            this.players.p2 = viewId;
+        }
+    }
+
+    /**
+     * Handle the view left event.
+     * @param {any} viewId the id of the outgoing view.
+     */
+    viewDrop(viewId) {
+        this.connectedViews = this.connectedViews.splice(this.connectedViews.indexOf(viewId), 1);
+        this.Log("view " + viewId + " left.");
+        if (this.players.p1 === viewId) {
+            this.players.p1 = "";
+        } else if (this.players.p2 === viewId) {
+            this.players.p2 = "";
+        }
+        
+        if(this.connectedViews.length === 0) {
+            this.destroy();
+        }
     }
 
     //TODO: Metodi pubblici per la sottoscrizione agli eventi
+    nextPhase() {
+        this.turn.nextPhase();
+        this.Log("TURN: " + this.turn);
+    }
 
     #initializeScene() {
         this.engine = new BABYLON.Engine(canvas, true);
@@ -32,16 +79,13 @@ class RootModel extends Croquet.Model {
         this.GUIManager.useRealisticScaling = true;
 
         //TODO: qui inizializzare gli oggetti della scena condivisi tra i 2 giocatori
-        //this.turn = new Turn();
-
-
     }
 
     async #createWebXRExperience() {
         const supported = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-ar')
 
         if (supported) {
-            console.log("IMMERSIVE AR SUPPORTED");
+            this.Log("IMMERSIVE AR SUPPORTED");
             const xrHelper = await this.scene.createDefaultXRExperienceAsync({
                 uiOptions: {
                     sessionMode: 'immersive-ar',
@@ -49,7 +93,7 @@ class RootModel extends Croquet.Model {
                 }
             });
         } else {
-            console.log("IMMERSIVE VR SUPPORTED")
+            this.Log("IMMERSIVE VR SUPPORTED")
             const xrHelper = await this.scene.createDefaultXRExperienceAsync({
                 uiOptions: {
                     sessionMode: 'immersive-vr',
@@ -61,7 +105,7 @@ class RootModel extends Croquet.Model {
             xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
             xrHelper.baseExperience.camera.position = new BABYLON.Vector3(0, 0, -0.3);
         } catch (err) {
-            console.log("Articulated hand tracking not supported in this browser.");
+            this.Log("Articulated hand tracking not supported in this browser.");
         }
 
         return this.scene;
@@ -73,6 +117,9 @@ class RootModel extends Croquet.Model {
         });
     }
 
+    Log(string) {
+        console.log("MODEL: " + string);
+    }
 }
 
 RootModel.register("RootModel");

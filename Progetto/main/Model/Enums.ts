@@ -49,11 +49,4 @@ enum CardPosition {
     FaceDown
 }
 
-enum Phase {
-    DrawPhase,
-    StandbyPhase,
-    MainPhase1,
-    BattlePhase,
-    MainPhase2,
-    EndPhase
-}
+export { CardSubType, CardAttribute, CardRace, CardPosition };
