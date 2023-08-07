@@ -11,7 +11,6 @@ Croquet.Session.join({
     appId: 'it.unibo.studio.filippo.gurioli.microverse',
     name: "unnamed",
     password: "secret",
-    inactivityTimeout: 600, //timeout dopo 10 minuti di inattività
     model: RootModel,
     view: RootView
 });

@@ -11,51 +11,66 @@ class RootView extends Croquet.View {
         this.model = model;
 
         this.Log("Questa pagina è legata al modello " + this.model.id + ".");
+        this.nearMenu = null;
         
         this.#setRole();
 
-        //TODO: creare oggetti di scena per l'interazione utente + lanciare eventi all'interazione
-        this.#addMenu();
-        // const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        if (this.role === Role.PLAYER1 && this.model.turn.turn % 2 === 1) {
+            this.#addMenu();
+        } else if (this.role === Role.PLAYER2 && this.model.turn.turn % 2 === 0) {
+            this.#addMenu();
+        }
 
-        // const textBlock = new BABYLON.GUI.TextBlock();
-        // textBlock.text = "Testo di esempio";
-        // textBlock.color = "white";
-        // textBlock.fontSize = 48;
-        // textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-        // textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-
-        // advancedTexture.addControl(textBlock);
-
-        // setTimeout(() => {
-        //     advancedTexture.removeControl(textBlock);
-        // }, 3000);
+        this.subscribe(this.model.id, "changeTurn", this.changeTurn);
     }
     //TODO: creare metodi per gestire gli eventi ricevuti dal modello
 
+    changeTurn(viewId) {
+        if (viewId === this.viewId) {
+            this.#addMenu();
+        } else {
+            this.nearMenu.dispose();
+        }
+    }
+
     #addMenu() {
-        const nearMenu = new BABYLON.GUI.NearMenu("NearMenu");
-        this.model.GUIManager.addControl(nearMenu);
-        nearMenu.position = new BABYLON.Vector3(-0.2, 1.2, 0.5);
-        const button = new BABYLON.GUI.TouchHolographicButton();
-        button.text = "Next phase";
-        button.onPointerDownObservable.add(() => {
+        this.nearMenu = new BABYLON.GUI.NearMenu("NearMenu");
+        this.nearMenu.position = new BABYLON.Vector3(0, 0, 1);
+        this.button = new BABYLON.GUI.TouchHolographicButton();
+        this.button.text = "Next phase";
+        this.button.onPointerDownObservable.add(() => {
             this.publish("nextPhase", "clicked");
         });
-        nearMenu.addButton(button);
+        this.model.GUIManager.addControl(this.nearMenu);
+        this.nearMenu.addButton(this.button);
     }
 
     #setRole() {
-        this.role = Role.SPECTATOR;
         if (this.model.players.p1 === this.viewId) {
             this.role = Role.PLAYER1;
-            this.Log("I'm player 1");
+            this.#HUDText("You are Player 1", 3000);
         } else if (this.model.players.p2 === this.viewId) {
             this.role = Role.PLAYER2;
-            this.Log("I'm player 2");
+            this.#HUDText("You are Player 2", 3000);
         } else {
-            this.Log("I'm a spectator");
+            this.role = Role.SPECTATOR;
+            this.#HUDText("You are a Spectator", 3000);
         }
+    }
+
+    #HUDText(text, time = 0) {
+        const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        const textBlock = new BABYLON.GUI.TextBlock();
+        textBlock.text = text;
+        textBlock.color = "white";
+        textBlock.fontSize = 48;
+        textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+        textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+        advancedTexture.addControl(textBlock);
+        
+        setTimeout(() => {
+            advancedTexture.dispose();
+        }, time);
     }
 
     Log(string) {

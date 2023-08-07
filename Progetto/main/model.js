@@ -1,4 +1,5 @@
 import { Turn } from "./Model/Turn.js";
+import { Phase } from "./Model/Phase.js";
 
 const canvas = document.getElementById("renderCanvas");
 
@@ -15,10 +16,10 @@ class RootModel extends Croquet.Model {
     * */
     init() {
         //TODO: this.subscribe();
-        this.Log("MODEL: " + this.id + " created.");
+        this.Log(this.id + " created.");
+
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
-
         this.subscribe("nextPhase", "clicked", this.nextPhase);
 
         this.#initializeScene();
@@ -51,7 +52,6 @@ class RootModel extends Croquet.Model {
         } else if (this.players.p2 === viewId) {
             this.players.p2 = "";
         }
-        
         if(this.connectedViews.length === 0) {
             this.destroy();
         }
@@ -61,6 +61,9 @@ class RootModel extends Croquet.Model {
     nextPhase() {
         this.turn.nextPhase();
         this.Log("TURN: " + this.turn);
+        if (this.turn.phase === Phase.DrawPhase) {
+            this.publish(this.id, "changeTurn", this.turn.turn % 2 === 0 ? this.players.p2 : this.players.p1);
+        }
     }
 
     #initializeScene() {
