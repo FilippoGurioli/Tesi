@@ -1,4 +1,5 @@
 import { Role } from "./Model/Role.js";
+import { Constants } from "./Utils/Constants.js";
 
 const canvas = document.getElementById("renderCanvas");
 
@@ -42,13 +43,22 @@ class RootView extends Croquet.View {
         if (this.model.players.p1 === this.viewId) {
             this.role = Role.PLAYER1;
             this.overlayText("You are Player 1", 3000);
+
+            var camera = new BABYLON.FreeCamera("camera1", Constants.P1_POS, this.scene);
         } else if (this.model.players.p2 === this.viewId) {
             this.role = Role.PLAYER2;
             this.overlayText("You are Player 2", 3000);
+
+            var camera = new BABYLON.FreeCamera("camera2", Constants.P2_POS, this.scene);
         } else {
             this.role = Role.SPECTATOR;
             this.overlayText("You are a Spectator", 3000);
+
+            var camera = new BABYLON.FreeCamera("cameraN", Constants.SPEC_POS, this.scene);
         }
+        camera.setTarget(new BABYLON.Vector3(0, 0, 0));
+        camera.minZ = 0.01;
+        camera.attachControl(canvas, true);
     }
 
     overlayText(text, time = 3000) {
@@ -76,15 +86,23 @@ class RootView extends Croquet.View {
         this.scene = new BABYLON.Scene(this.engine);
         this.scene.clearColor = new BABYLON.Color3.Black;
         
-        var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1.7, -0.3), this.scene);
-        camera.minZ = 0.01;
-        camera.attachControl(canvas, true);
-
+        
         const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
         light.intensity = 1;
         
         this.GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
         this.GUIManager.useRealisticScaling = true;
+        
+        //! Dal di qui inizia la mia parte
+        
+        const plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 10 }, this.scene);
+        const material = new BABYLON.StandardMaterial("planeMaterial", this.scene);
+        material.diffuseTexture = new BABYLON.Texture("main/res/yu-gi-oh-battlefield.png", this.scene);
+        material.hasAlpha = true;
+        material.useAlphaFromDiffuseTexture = true;
+        plane.material = material;
+        plane.position.y = 0;
+        plane.rotation.x = Math.PI / 2;
     }
 
     async #createWebXRExperience() {
