@@ -7,4 +7,21 @@ const Phase = {
     EndPhase: 5
 };
 
+// Phase.toString = function() {
+//     switch(phase) {
+//         case Phase.DrawPhase:
+//             return "Draw Phase";
+//         case Phase.StandbyPhase:
+//             return "Standby Phase";
+//         case Phase.MainPhase1:
+//             return "Main Phase 1";
+//         case Phase.BattlePhase:
+//             return "Battle Phase";
+//         case Phase.MainPhase2:
+//             return "Main Phase 2";
+//         case Phase.EndPhase:
+//             return "End Phase";
+//     }
+// }
+
 export { Phase };

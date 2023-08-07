@@ -4,8 +4,8 @@ const Role = {
     SPECTATOR: 2
 }
 
-Role.toString = function() {
-    switch(this) {
+Role.toString = function(role) {
+    switch(role) {
         case Role.PLAYER1:
             return "Player 1";
         case Role.PLAYER2:

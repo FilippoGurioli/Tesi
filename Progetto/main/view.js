@@ -15,56 +15,43 @@ class RootView extends Croquet.View {
         this.#activateRenderLoop();
         
         this.Log("View " + this.viewId + " created from model " + this.model.id + ".");
-        //this.nearMenu = null;
         
         this.#setRole();
-        
-        // if (this.role === Role.PLAYER1 && this.model.turnModel.turn.turn % 2 === 1 ||
-        //     this.role === Role.PLAYER2 && this.model.turnModel.turn.turn % 2 === 0) {
-        //     this.#addMenu();
-        // }
 
-        //this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
+        this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
 
         new TurnView(this.model.turnModel, this);
     }
 
-    //TODO: creare metodi per gestire gli eventi ricevuti dal modello
-
-    // changeTurn(viewId) {
-    //     if (viewId === this.viewId) {
-    //         this.#addMenu();
-    //     } else {
-    //         this.nearMenu.dispose();
-    //     }
-    // }
-
-    // #addMenu() {
-    //     this.nearMenu = new BABYLON.GUI.NearMenu("NearMenu");
-    //     this.nearMenu.position = new BABYLON.Vector3(0, 0, 1);
-    //     this.button = new BABYLON.GUI.TouchHolographicButton();
-    //     this.button.text = "Next phase";
-    //     this.button.onPointerDownObservable.add(() => {
-    //         this.publish(this.model.turnModel.id, "nextPhase");
-    //     });
-    //     this.GUIManager.addControl(this.nearMenu);
-    //     this.nearMenu.addButton(this.button);
-    // }
+    changeTurn(viewId) {
+        if (this.viewId === viewId) {
+            this.overlayText("Your turn", 3000);
+        } else if (this.viewId !== viewId && this.role !== Role.SPECTATOR) {
+            this.overlayText("Opponent's turn", 3000);
+        } else if (this.role == Role.SPECTATOR) {
+            if (this.model.players.p1 === viewId) {
+                this.overlayText("Player 1's turn", 3000);
+            } else {
+                this.overlayText("Player 2's turn", 3000); 
+            }
+        }
+        //! TODO: fixare sto scempio, possibile miglioria: far sì che il parametro sia il player e non la viewId
+    }
 
     #setRole() {
         if (this.model.players.p1 === this.viewId) {
             this.role = Role.PLAYER1;
-            this.#HUDText("You are Player 1", 3000);
+            this.overlayText("You are Player 1", 3000);
         } else if (this.model.players.p2 === this.viewId) {
             this.role = Role.PLAYER2;
-            this.#HUDText("You are Player 2", 3000);
+            this.overlayText("You are Player 2", 3000);
         } else {
             this.role = Role.SPECTATOR;
-            this.#HUDText("You are a Spectator", 3000);
+            this.overlayText("You are a Spectator", 3000);
         }
     }
 
-    #HUDText(text, time = 0) {
+    overlayText(text, time = 3000) {
         const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         const textBlock = new BABYLON.GUI.TextBlock();
         textBlock.text = text;
@@ -170,5 +157,9 @@ class TurnView extends Croquet.View {
         });
         this.parentView.GUIManager.addControl(this.turnMenu);
         this.turnMenu.addButton(this.button);
+    }
+
+    Log(string) {
+        console.log("TURNVIEW: " + string);
     }
 }
