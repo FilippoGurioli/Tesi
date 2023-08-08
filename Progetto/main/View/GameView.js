@@ -1,6 +1,5 @@
 import { Constants } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
-import { Role } from "./Role.js";
 
 class GameView extends Croquet.View {
     
@@ -9,7 +8,7 @@ class GameView extends Croquet.View {
         this.model = model;
         this.parentView = parentView;
         this.Log(this.viewId + " created.");
-        this.#setRole();
+        this.#showRole();
         this.#initializeScene();
         new TurnView(this.model.turnModel, this);
 
@@ -25,29 +24,30 @@ class GameView extends Croquet.View {
     }
 
     changeTurn(viewId) {
-        if (this.viewId === viewId) {
-            this.overlayText("Your turn", 3000);
-        } else if (this.viewId !== viewId && this.role !== Role.SPECTATOR) {
-            this.overlayText("Opponent's turn", 3000);
-        } else if (this.role == Role.SPECTATOR) {
-            if (this.model.players.p1.viewId === viewId) {
-                this.overlayText("Player 1's turn", 3000);
-            } else {
-                this.overlayText("Player 2's turn", 3000); 
-            }
+        if (this.#isAPlayer()) {
+            if (this.viewId === viewId) this.overlayText("Your turn", 3000);
+            else                        this.overlayText("Opponent's turn", 3000);
+        } else {
+            if (this.model.players.p1.viewId === viewId) this.overlayText("Player 1's turn", 3000);
+            else                                         this.overlayText("Player 2's turn", 3000); 
         }
         //! TODO: fixare sto scempio, possibile miglioria: far sì che il parametro sia il player e non la viewId
     }
 
-    #setRole() {
+    #isAPlayer() {
+        return this.viewId === this.model.players.p1.viewId || this.viewId === this.model.players.p2.viewId;
+    }
+
+    getPlayer() {
+        return this.viewId === this.model.players.p1.viewId ? 1 : this.viewId === this.model.players.p2.viewId ? 2 : 0;
+    }
+
+    #showRole() {
         if (this.model.players.p1.viewId === this.viewId) {
-            this.role = Role.PLAYER1;
             this.overlayText("You are Player 1", 3000);
         } else if (this.model.players.p2.viewId === this.viewId) {
-            this.role = Role.PLAYER2;
             this.overlayText("You are Player 2", 3000);
         } else {
-            this.role = Role.SPECTATOR;
             this.overlayText("You are a Spectator", 3000);
         }
     }
@@ -61,16 +61,12 @@ class GameView extends Croquet.View {
         plane.material = material;
         plane.position.y = 0;
         plane.rotation.x = Math.PI / 2;
-        switch(this.role) {
-            case Role.PLAYER1:
-                this.parentView.camera.position = Constants.P1_POS;
-                break;
-            case Role.PLAYER2:
-                this.parentView.camera.position = Constants.P2_POS;
-                break;
-            case Role.SPECTATOR:
-                this.parentView.camera.position = Constants.SPEC_POS;
-                break;
+        if (this.model.players.p1.viewId === this.viewId) {
+            this.parentView.camera.position = Constants.P1_POS;
+        } else if (this.model.players.p2.viewId === this.viewId) {
+            this.parentView.camera.position = Constants.P2_POS;
+        } else {
+            this.parentView.camera.position = Constants.SPEC_POS;
         }
         this.parentView.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
     }

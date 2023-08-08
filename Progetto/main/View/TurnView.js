@@ -1,5 +1,3 @@
-import { Role } from "./Role.js";
-
 class TurnView extends Croquet.View {
 
     constructor(model, parentView) {
@@ -7,8 +5,7 @@ class TurnView extends Croquet.View {
         this.model = model;
         this.parentView = parentView;
         this.turnMenu = null;
-        if (this.parentView.role === Role.PLAYER1 && this.model.turn.turn % 2 === 1 ||
-            this.parentView.role === Role.PLAYER2 && this.model.turn.turn % 2 === 0) {
+        if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) { //!pretty cringe but works
             this.#addMenu();
         }
         this.subscribe(this.model.id, "changeTurn", this.changeTurn);
