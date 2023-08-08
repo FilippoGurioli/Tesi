@@ -15,6 +15,7 @@ class GameView extends Croquet.View {
 
         this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
         this.subscribe(this.model.id, "game-over", this.selfDestroy);
+        this.subscribe(this.model.id, "broadcastText", (text) => this.overlayText(text));
     }
 
     selfDestroy() {

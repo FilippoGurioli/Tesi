@@ -37,17 +37,32 @@ class GameModel extends Croquet.Model {
         if (this.players.p1.viewId === viewId) {
             this.players.p1.isConnected = false;
             this.Log("Player 1 left.");
-            this.selfDestroy();
+            this.selfDestroy("Player 1");
         } else if (this.players.p2.viewId === viewId) {
             this.players.p2.isConnected = false;
             this.Log("Player 2 left.");
-            this.selfDestroy();
+            this.selfDestroy("player 2");
         }
     }
 
-    selfDestroy() {
-        this.Log(this.id + " destroyed.");
-        this.parentModel.destroyGameModel();
+    selfDestroy(who) {
+        this.publish(this.id, "broadcastText", who + " disconnected.");
+        this.destroyAlgorithm();
+    }
+
+    destroyAlgorithm() {
+        if (!this.players.p1.isConnected || !this.players.p2.isConnected) {
+            this.counter++;
+            if (this.counter >= 30) {
+                this.Log(this.id + " destroyed.");
+                this.parentModel.destroyGameModel();
+            } else {
+                this.Log("Waiting for reconnection...");
+                this.future(1000).destroyAlgorithm();
+            }
+        } else {
+            this.counter = 0;
+        }
     }
 
     Log(string) {
