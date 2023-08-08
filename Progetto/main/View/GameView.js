@@ -12,7 +12,6 @@ class GameView extends Croquet.View {
         this.#initializeScene();
         new TurnView(this.model.turnModel, this);
 
-        this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
         this.subscribe(this.model.id, "game-over", this.selfDestroy);
         this.subscribe(this.model.id, "broadcastText", (text) => this.overlayText(text));
     }
@@ -21,21 +20,6 @@ class GameView extends Croquet.View {
         this.Log(this.viewId + " destroyed.");
         this.overlayText("Game Over", 10000);
         this.detach();
-    }
-
-    changeTurn(viewId) {
-        if (this.#isAPlayer()) {
-            if (this.viewId === viewId) this.overlayText("Your turn", 3000);
-            else                        this.overlayText("Opponent's turn", 3000);
-        } else {
-            if (this.model.players.p1.viewId === viewId) this.overlayText("Player 1's turn", 3000);
-            else                                         this.overlayText("Player 2's turn", 3000); 
-        }
-        //! TODO: fixare sto scempio, possibile miglioria: far sì che il parametro sia il player e non la viewId
-    }
-
-    #isAPlayer() {
-        return this.viewId === this.model.players.p1.viewId || this.viewId === this.model.players.p2.viewId;
     }
 
     getPlayer() {
@@ -53,13 +37,12 @@ class GameView extends Croquet.View {
     }
 
     #initializeScene() {
-        const plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 10 }, this.parentView.scene);
+        const plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, this.parentView.scene);
         const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
         material.diffuseTexture = new BABYLON.Texture("main/res/yu-gi-oh-battlefield.png", this.parentView.scene);
-        material.hasAlpha = true;
-        material.useAlphaFromDiffuseTexture = true;
+        material.diffuseTexture.hasAlpha = true;
         plane.material = material;
-        plane.position.y = 0;
+        plane.position.y = -1;
         plane.rotation.x = Math.PI / 2;
         if (this.model.players.p1.viewId === this.viewId) {
             this.parentView.camera.position = Constants.P1_POS;

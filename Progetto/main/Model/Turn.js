@@ -14,6 +14,10 @@ class Turn {
     get phase() {
         return this._phase;
     }
+    
+    get isPlayer1Turn() {
+        return this._turnNumber % 2 === 1;
+    }
 
     nextPhase() {
         if (this._phase == Phase.EndPhase) {

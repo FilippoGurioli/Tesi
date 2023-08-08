@@ -21,7 +21,6 @@ class RootView extends Croquet.View {
         console.log("VIEW: " + string);
     }
 
-    //----------------------Anna Vitali----------------------
     #initializeScene() {
         this.engine = new BABYLON.Engine(canvas, true);
         this.scene = new BABYLON.Scene(this.engine);
@@ -33,10 +32,8 @@ class RootView extends Croquet.View {
         const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
         light.intensity = 1;
         
-        this.GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
-        this.GUIManager.useRealisticScaling = true;
-        
-        //! Dal di qui inizia la mia parte
+        var GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
+        GUIManager.useRealisticScaling = true;
 
         this.nearMenu = new BABYLON.GUI.NearMenu("NearMenu");
         this.nearMenu.position = new BABYLON.Vector3(0, 0, 1);
@@ -48,7 +45,7 @@ class RootView extends Croquet.View {
             this.nearMenu.dispose();
             new GameView(this.model.gameModel, this);
         });
-        this.GUIManager.addControl(this.nearMenu);
+        GUIManager.addControl(this.nearMenu);
         this.nearMenu.addButton(this.button);
     }
 
