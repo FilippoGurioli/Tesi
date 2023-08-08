@@ -20,7 +20,7 @@ const express = require("express");
 var path = require("path");
 const app = express();
 const port = 3000;
-const host = ipv4Addresses[0];
+const host = ipv4Addresses[ipv4Addresses.length - 1];
 
 https.createServer(
 	{
