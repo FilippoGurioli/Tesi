@@ -1,5 +1,19 @@
 import { Turn } from "./Model/Turn.js";
 import { Phase } from "./Model/Phase.js";
+//!
+//!
+//!
+//!
+//!
+//!
+//! LOG: devo ancora decidere come separare i vari modelli e view
+//!      se conviene creare una scena in unity e come farlo nel caso
+//!      provare il gioco su hololens
+//!      
+//!
+//!
+//!
+//!
 
 class RootModel extends Croquet.Model {
 
