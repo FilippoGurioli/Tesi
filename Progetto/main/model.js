@@ -22,7 +22,6 @@ class RootModel extends Croquet.Model {
      */
     viewJoin(viewId) {
         this.connectedViews.push(viewId);
-        this.Log("view " + viewId + " joined.");
 
         if (this.gameModel === null) {
             this.gameModel = GameModel.create({parent: this});
@@ -35,9 +34,18 @@ class RootModel extends Croquet.Model {
      */
     viewDrop(viewId) {
         this.connectedViews = this.connectedViews.splice(this.connectedViews.indexOf(viewId), 1);
-        this.Log("view " + viewId + " left.");
         if(this.connectedViews.length === 0) {
             this.destroy();
+        }
+    }
+
+    destroyGameModel() {
+        this.connectedViews.forEach(viewId => {
+            this.publish(this.gameModel.id, "game-over");
+        });
+        if (this.gameModel !== null) {
+            this.gameModel.destroy();
+            this.gameModel = null;
         }
     }
 

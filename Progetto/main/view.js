@@ -11,10 +11,10 @@ class RootView extends Croquet.View {
     constructor(model) {
         super(model);
         this.model = model;
+        this.Log(this.viewId + " created.");
+
         this.#initializeScene();
         this.#activateRenderLoop();
-        
-        this.Log("View " + this.viewId + " created from model " + this.model.id + ".");
     }
 
     Log(string) {

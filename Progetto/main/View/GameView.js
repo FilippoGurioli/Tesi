@@ -8,12 +8,19 @@ class GameView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("View " + this.viewId + " created from model " + this.model.id + ".");
+        this.Log(this.viewId + " created.");
         this.#setRole();
         this.#initializeScene();
         new TurnView(this.model.turnModel, this);
 
         this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
+        this.subscribe(this.model.id, "game-over", this.selfDestroy);
+    }
+
+    selfDestroy() {
+        this.Log(this.viewId + " destroyed.");
+        this.overlayText("Game Over", 10000);
+        this.detach();
     }
 
     changeTurn(viewId) {
@@ -22,7 +29,7 @@ class GameView extends Croquet.View {
         } else if (this.viewId !== viewId && this.role !== Role.SPECTATOR) {
             this.overlayText("Opponent's turn", 3000);
         } else if (this.role == Role.SPECTATOR) {
-            if (this.model.players.p1 === viewId) {
+            if (this.model.players.p1.viewId === viewId) {
                 this.overlayText("Player 1's turn", 3000);
             } else {
                 this.overlayText("Player 2's turn", 3000); 
