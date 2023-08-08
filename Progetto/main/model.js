@@ -3,9 +3,7 @@ import { Phase } from "./Model/Phase.js";
 
 class RootModel extends Croquet.Model {
 
-    players = {p1: "", p2: ""};
-
-    turnModel = TurnModel.create({parent: this});
+    gameModel = null;
 
     connectedViews = [];
 
@@ -17,7 +15,6 @@ class RootModel extends Croquet.Model {
 
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
-        //this.subscribe("nextPhase", "clicked", this.nextPhase);
     }
 
     /**
@@ -27,10 +24,9 @@ class RootModel extends Croquet.Model {
     viewJoin(viewId) {
         this.connectedViews.push(viewId);
         this.Log("view " + viewId + " joined.");
-        if (this.players.p1 === "") {
-            this.players.p1 = viewId;
-        } else if (this.players.p2 === "") {
-            this.players.p2 = viewId;
+
+        if (this.gameModel === null) {
+            this.gameModel = GameModel.create({parent: this});
         }
     }
 
@@ -41,24 +37,10 @@ class RootModel extends Croquet.Model {
     viewDrop(viewId) {
         this.connectedViews = this.connectedViews.splice(this.connectedViews.indexOf(viewId), 1);
         this.Log("view " + viewId + " left.");
-        if (this.players.p1 === viewId) {
-            this.players.p1 = "";
-        } else if (this.players.p2 === viewId) {
-            this.players.p2 = "";
-        }
         if(this.connectedViews.length === 0) {
             this.destroy();
         }
     }
-
-    // nextPhase() {
-    //     this.turn.nextPhase();
-    //     this.Log("TURN: " + this.turn);
-    //     if (this.turn.phase === Phase.DrawPhase) {
-    //         this.publish(this.id, "changeTurn", this.turn.turn % 2 === 0 ? this.players.p2 : this.players.p1);
-    //     }
-    // }
-
 
     Log(string) {
         console.log("MODEL: " + string);
@@ -66,6 +48,69 @@ class RootModel extends Croquet.Model {
 }
 
 RootModel.register("RootModel");
+
+class GameModel extends Croquet.Model {
+
+    players = {p1: {viewId: "", isConnected: false}, p2: {viewId: "", isConnected: false}}; //più avanti saranno Croquet.Model
+
+    turnModel = TurnModel.create({parent: this});
+
+    init({parent: parentModel}) {
+        this.parentModel = parentModel;
+        this.Log(this.id + " created.");
+        this.subscribe(this.sessionId, "view-join", this.join);
+        this.subscribe(this.sessionId, "view-exit", this.left); //mi piacerebbe un giorno uniformarla a viewJoin (o il contrario)
+    }
+
+    join(viewId) {
+        if (this.players.p1.viewId === "") {
+            this.players.p1.viewId = viewId;
+            this.players.p1.isConnected = true;
+            this.Log("view " + viewId + " joined as Player 1.");
+        } else if (this.players.p2.viewId === "") {
+            this.players.p2.viewId = viewId;
+            this.players.p2.isConnected = true;
+            this.Log("view " + viewId + " joined as Player 2.");
+        } else if (this.players.p1.viewId === viewId) {
+            this.players.p1.isConnected = true;
+            this.Log("view " + viewId + " reconnected as Player 1.");
+        } else if (this.players.p2.viewId === viewId) {
+            this.players.p2.isConnected = true;
+            this.Log("view " + viewId + " reconnected as Player 2.");
+        }
+    }
+
+    left(viewId) {
+        if (this.players.p1.viewId === viewId) {
+            this.players.p1.isConnected = false;
+            this.Log("Player 1 left.");
+            this.future(1000).selfDestroy();
+        } else if (this.players.p2.viewId === viewId) {
+            this.players.p2.isConnected = false;
+            this.Log("Player 2 left.");
+            this.future(1000).selfDestroy();
+        }
+    }
+
+    selfDestroy() {
+        this.counter++;
+        if (this.counter === 30) {
+            this.destroy();
+        }
+        if (this.players.p1.isConnected === false || this.players.p2.isConnected === false) {
+            this.future(1000).selfDestroy();
+        }
+        else {
+            this.counter = 0;
+        }
+    }
+
+    Log(string) {
+        console.log("GAMEMODEL: " + string);
+    }
+}
+
+GameModel.register("GameModel");
 
 class TurnModel extends Croquet.Model {
 
@@ -82,17 +127,15 @@ class TurnModel extends Croquet.Model {
         this.turn.nextPhase();
         this.Log(this.turn);
         if (this.turn.phase === Phase.DrawPhase) {
-            this.publish(this.id, "changeTurn", this.turn.turn % 2 === 0 ? this.parentModel.players.p2 : this.parentModel.players.p1);
+            this.publish(this.id, "changeTurn", this.turn.turn % 2 === 0 ? this.parentModel.players.p2.viewId : this.parentModel.players.p1.viewId);
         }
     }
 
     Log(string) {
         console.log("TURNMODEL: " + string);
     }
-
 }
 
 TurnModel.register("TurnModel");
-
 
 export { RootModel };
