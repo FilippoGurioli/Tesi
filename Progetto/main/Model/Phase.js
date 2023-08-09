@@ -1,27 +1,10 @@
 const Phase = {
-    DrawPhase: 0,
-    StandbyPhase: 1,
-    MainPhase1: 2,
-    BattlePhase: 3,
-    MainPhase2: 4,
-    EndPhase: 5
+    DrawPhase: "Draw Phase",
+    StandbyPhase: "Standby Phase",
+    MainPhase1: "Main Phase 1",
+    BattlePhase: "Battle Phase",
+    MainPhase2: "Main Phase 2",
+    EndPhase: "End Phase"
 };
-
-// Phase.toString = function() {
-//     switch(phase) {
-//         case Phase.DrawPhase:
-//             return "Draw Phase";
-//         case Phase.StandbyPhase:
-//             return "Standby Phase";
-//         case Phase.MainPhase1:
-//             return "Main Phase 1";
-//         case Phase.BattlePhase:
-//             return "Battle Phase";
-//         case Phase.MainPhase2:
-//             return "Main Phase 2";
-//         case Phase.EndPhase:
-//             return "End Phase";
-//     }
-// }
 
 export { Phase };

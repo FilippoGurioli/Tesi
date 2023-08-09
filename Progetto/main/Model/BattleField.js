@@ -20,4 +20,6 @@ class BattleField {
             this.p2SpellField[position] = card;
         }
     }
+
+    
 }
