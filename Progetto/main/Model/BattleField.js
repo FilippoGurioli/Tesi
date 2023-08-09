@@ -1,5 +1,5 @@
 class BattleField {
-    
+
     p1MonsterField = [null, null, null, null, null];
     p2MonsterField = [null, null, null, null, null];
     p1SpellField = [null, null, null, null, null];

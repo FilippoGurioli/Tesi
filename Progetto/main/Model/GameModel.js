@@ -1,10 +1,22 @@
 import { TurnModel } from "./TurnModel.js";
+import { LifePointsModel } from "./LifePointsModel.js";
 
 class GameModel extends Croquet.Model {
 
     counter = 0;
 
-    players = {p1: {viewId: "", isConnected: false}, p2: {viewId: "", isConnected: false}}; //più avanti saranno Croquet.Model
+    players = {
+        p1: {
+            viewId: "",
+            isConnected: false,
+            lifePoints: LifePointsModel.create({parent: this})
+        },
+        p2: {
+            viewId: "",
+            isConnected: false,
+            lifePoints: LifePointsModel.create({parent: this})
+        }
+    }; //più avanti saranno Croquet.Model
 
     turnModel = TurnModel.create({parent: this});
 
@@ -12,7 +24,7 @@ class GameModel extends Croquet.Model {
         this.parentModel = parentModel;
         this.Log(this.id + " created.");
         this.subscribe(this.sessionId, "view-join", this.join);
-        this.subscribe(this.sessionId, "view-exit", this.left); //mi piacerebbe un giorno uniformarla a viewJoin (o il contrario)
+        this.subscribe(this.sessionId, "view-exit", this.left);
     }
 
     join(viewId) {

@@ -40,7 +40,7 @@ class RootModel extends Croquet.Model {
     }
 
     destroyGameModel() {
-        this.connectedViews.forEach(viewId => {
+        this.connectedViews.forEach(_ => {
             this.publish(this.gameModel.id, "game-over");
         });
         if (this.gameModel !== null) {

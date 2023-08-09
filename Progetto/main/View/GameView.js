@@ -1,5 +1,6 @@
 import { Constants } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
+import { LifePointsView } from "./LifePointsView.js";
 
 class GameView extends Croquet.View {
     
@@ -11,6 +12,8 @@ class GameView extends Croquet.View {
         this.#showRole();
         this.#initializeScene();
         new TurnView(this.model.turnModel, this);
+        new LifePointsView(this.model.players.p1.lifePoints, this);
+        new LifePointsView(this.model.players.p2.lifePoints, this);
 
         this.subscribe(this.model.id, "game-over", this.selfDestroy);
         this.subscribe(this.model.id, "broadcastText", (text) => this.overlayText(text));
