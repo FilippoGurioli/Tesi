@@ -72,6 +72,16 @@ class TurnView extends Croquet.View {
         this.turnText.text = "Turn: " + this.model.turn.turn + "\nPhase: " + this.model.turn.phase;
         this.future(500).updateTurnHUD();
     }
+
+    discardUncoverableObjects() {
+        this.turnMenu?.dispose();
+    }
+
+    restoreUncoverableObjects() {
+        if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) {
+            this.addMenu();
+        }
+    }
 }
 
 export { TurnView };
