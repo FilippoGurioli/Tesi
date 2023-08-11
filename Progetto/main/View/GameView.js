@@ -20,6 +20,8 @@ class GameView extends Croquet.View {
     }
 
     initializeScene(role) {
+        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
         this.overlay = new BABYLON.GUI.Rectangle();
         this.overlay.width = "100%";
         this.overlay.height = "100%";
@@ -53,23 +55,23 @@ class GameView extends Croquet.View {
 
     wait(reason, finalSentence, waitingForP2 = false) {
         this.turnView?.discardUncoverableObjects();
-        const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         const textBlock = new BABYLON.GUI.TextBlock();
         textBlock.text = reason;
         textBlock.color = "white";
         textBlock.fontSize = 48;
         textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-        advancedTexture.addControl(this.overlay);
-        advancedTexture.addControl(textBlock);
+        this.advancedTexture.addControl(this.overlay);
+        this.advancedTexture.addControl(textBlock);
 
 
-        this.waiting(finalSentence, waitingForP2, advancedTexture, textBlock);
+        this.waiting(finalSentence, waitingForP2, textBlock);
     }
 
-    waiting(finalSentence, waitingForP2, advancedTexture, textBlock) {
+    waiting(finalSentence, waitingForP2, textBlock) {
         if (this.opponentRecovered) {
-            advancedTexture.dispose();
+            this.advancedTexture.removeControl(textBlock);
+            this.advancedTexture.removeControl(this.overlay);
             this.overlayText(finalSentence, 1000);
             this.opponentRecovered = false;
             this.turnView?.restoreUncoverableObjects();
@@ -80,7 +82,7 @@ class GameView extends Croquet.View {
             textBlock.text = "";
             return;
         }
-        this.future(500).waiting(finalSentence, waitingForP2, advancedTexture, textBlock);
+        this.future(500).waiting(finalSentence, waitingForP2, textBlock);
     }
 
     gameOver(reason) {
@@ -105,17 +107,16 @@ class GameView extends Croquet.View {
 
 
     overlayText(text, time = 3000) {
-        const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         const textBlock = new BABYLON.GUI.TextBlock();
         textBlock.text = text;
         textBlock.color = "white";
         textBlock.fontSize = 48;
         textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-        advancedTexture.addControl(textBlock);
+        this.advancedTexture.addControl(textBlock);
         
         setTimeout(() => {
-            advancedTexture.dispose();
+            this.advancedTexture.removeControl(textBlock);
         }, time);
     }
 
@@ -123,6 +124,7 @@ class GameView extends Croquet.View {
         super.detach();
         this.plane.dispose();
         this.overlay.dispose();
+        this.advancedTexture.dispose();
         this.turnView.detach();
         this.LPViewP1.detach();
         this.LPViewP2.detach();
