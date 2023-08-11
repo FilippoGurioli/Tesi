@@ -108,11 +108,6 @@ class GameView extends Croquet.View {
         }
     }
 
-    getPlayer() {
-        return this.viewId === this.model.players.p1.viewId ? 1 : this.viewId === this.model.players.p2.viewId ? 2 : 0;
-    }
-
-
     overlayText(text, time = 3000) {
         const textBlock = new BABYLON.GUI.TextBlock();
         textBlock.color = "white";

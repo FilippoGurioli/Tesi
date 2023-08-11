@@ -7,12 +7,9 @@ class TurnView extends Croquet.View {
 
         this.#initializeScene();
 
-        if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) {
+        if (this.#isMyTurn()) {
             this.addMenu();
         }
-
-        //this.#addTurnHUD();
-
 
         this.subscribe(this.viewId, "yourTurn", this.addMenu);
         this.subscribe(this.viewId, "endTurn", this.removeMenu);
@@ -59,6 +56,11 @@ class TurnView extends Croquet.View {
         
     }
 
+    #isMyTurn() {
+        return (this.viewId === this.parentView.model.players.p1.viewId && this.model.turn.isPlayer1Turn) ||
+               (this.viewId === this.parentView.model.players.p2.viewId && !this.model.turn.isPlayer1Turn);
+    }
+
     addMenu() {
         this.parentView.overlayText("Your turn");
 
@@ -89,7 +91,7 @@ class TurnView extends Croquet.View {
     }
 
     restoreUncoverableObjects() {
-        if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) {
+        if (this.#isMyTurn()) {
             this.addMenu();
         }
     }
