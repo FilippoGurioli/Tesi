@@ -34,7 +34,6 @@ class GameView extends Croquet.View {
         this.overlay.height = "100%";
         this.overlay.background = "black";
         this.overlay.alpha = 0;
-        this.overlay.isPointerBlocker = true; // Impedisce interazioni con gli oggetti sottostanti
 
         this.advancedTexture.addControl(this.overlay);
         this.advancedTexture.addControl(this.textBlock);
@@ -49,7 +48,7 @@ class GameView extends Croquet.View {
         if (role === "Player 1") {
             this.parentView.camera.position = Constants.P1_POS;
             if (!this.model.players.p2.isConnected) {
-                this.wait("Waiting for Player 2...", "Player 2 joined", true);
+                this.wait("Waiting for Player 2...", "", true);
             } else {
                 this.#gameStart(role);
             }
@@ -140,8 +139,8 @@ class GameView extends Croquet.View {
     }
 
     #gameStart(role) {
-        this.overlayText("You are " + role);
-        
+        this.overlayText("You are " + role, 1000);
+
         this.turnView = new TurnView(this.model.turnModel, this);
         this.LPViewP1 = new LifePointsView(this.model.players.p1.lifePoints, this);
         this.LPViewP2 = new LifePointsView(this.model.players.p2.lifePoints, this);
