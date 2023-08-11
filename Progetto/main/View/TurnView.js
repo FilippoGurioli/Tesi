@@ -4,47 +4,26 @@ class TurnView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.turnMenu = null;
+
+        this.#initializeScene();
+
         if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) {
             this.addMenu();
         }
 
-        this.#addTurnHUD();
+        //this.#addTurnHUD();
+
 
         this.subscribe(this.viewId, "yourTurn", this.addMenu);
         this.subscribe(this.viewId, "endTurn", this.removeMenu);
     }
 
-    addMenu() {
-        this.parentView.overlayText("Your turn");
-        this.turnMenu = new BABYLON.GUI.NearMenu("TurnMenu");
-        this.turnMenu.position = new BABYLON.Vector3(0, 0, 1);
-        this.button = new BABYLON.GUI.TouchHolographicButton();
-        this.button.text = "Next phase";
-        this.button.onPointerDownObservable.add(() => {
-            this.publish(this.model.id, "nextPhase");
-        });
-        var buttonH = new BABYLON.GUI.TouchHolographicButton();
-        var buttonD = new BABYLON.GUI.TouchHolographicButton();
-        buttonH.text = "Heal";
-        buttonD.text = "Damage";
-        
-        var GUIManager = new BABYLON.GUI.GUI3DManager(this.parentView.scene);
-        GUIManager.useRealisticScaling = true;
-        GUIManager.addControl(this.turnMenu);
-        this.turnMenu.addButton(this.button);
-    }
+    #initializeScene() {
+        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        this.GUIManager = new BABYLON.GUI.GUI3DManager(this.parentView.scene);
+        this.GUIManager.useRealisticScaling = true;
 
-    removeMenu() {
-        this.parentView.overlayText("Opponent's turn");
-        this.turnMenu.dispose();
-    }
-
-    Log(string) {
-        console.log("TURNVIEW: " + string);
-    }
-
-    #addTurnHUD() {
+        //HUD
         this.turnHUD = new BABYLON.GUI.Rectangle();
         this.turnHUD.width = "300px";
         this.turnHUD.height = "120px";
@@ -55,8 +34,7 @@ class TurnView extends Croquet.View {
         this.turnHUD.alpha = 0.5;
         this.turnHUD.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.turnHUD.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-        advancedTexture.addControl(this.turnHUD);
+        this.advancedTexture.addControl(this.turnHUD);
 
         this.turnText = new BABYLON.GUI.TextBlock();
         this.turnText.color = "white";
@@ -65,6 +43,37 @@ class TurnView extends Croquet.View {
         this.turnText.paddingLeft = "20px";
         this.turnHUD.addControl(this.turnText);
         this.updateTurnHUD();
+
+        //Menu
+        this.turnMenu = new BABYLON.GUI.NearMenu("TurnMenu");
+        this.turnMenu.position = new BABYLON.Vector3(0, 0, 1);
+        this.button = new BABYLON.GUI.TouchHolographicButton();
+        this.button.text = "Next phase";
+        this.button.onPointerDownObservable.add(() => {
+            this.publish(this.model.id, "nextPhase");
+        });
+        //var buttonH = new BABYLON.GUI.TouchHolographicButton();
+        //var buttonD = new BABYLON.GUI.TouchHolographicButton();
+        //buttonH.text = "Heal";
+        //buttonD.text = "Damage";
+        
+    }
+
+    addMenu() {
+        this.parentView.overlayText("Your turn");
+
+        this.GUIManager.addControl(this.turnMenu);
+        this.turnMenu.addButton(this.button);
+    }
+
+    removeMenu() {
+        this.parentView.overlayText("Opponent's turn");
+        this.GUIManager.removeControl(this.turnMenu);
+        this.turnMenu.removeControl(this.button);
+    }
+
+    Log(string) {
+        console.log("TURNVIEW: " + string);
     }
 
     updateTurnHUD() {
@@ -75,7 +84,8 @@ class TurnView extends Croquet.View {
     }
 
     discardUncoverableObjects() {
-        this.turnMenu?.dispose();
+        this.turnMenu.removeControl(this.button);
+        this.GUIManager.removeControl(this.turnMenu);
     }
 
     restoreUncoverableObjects() {
@@ -87,7 +97,10 @@ class TurnView extends Croquet.View {
     detach() {
         super.detach();
         this.turnHUD.dispose();
+        this.advancedTexture.dispose();
         this.turnMenu?.dispose();
+        this.GUIManager?.dispose();
+        this.button?.dispose();
     }
 }
 
