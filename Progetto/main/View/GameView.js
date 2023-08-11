@@ -9,8 +9,10 @@ class GameView extends Croquet.View {
         this.model = model;
         this.parentView = parentView;
         this.Log(this.viewId + " created.");
+
+        this.#initializeScene();
         
-        this.subscribe(this.viewId, "join-response", this.initializeScene);
+        this.subscribe(this.viewId, "join-response", this.setPosition);
         this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
         this.subscribe(this.viewId, "opponent-recover", () => this.opponentRecovered = true);
         this.subscribe(this.model.id, "game-over", this.gameOver);
@@ -19,7 +21,7 @@ class GameView extends Croquet.View {
         this.publish(this.model.id, "join", this.viewId);
     }
 
-    initializeScene(role) {
+    #initializeScene() {
         this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
         this.textBlock = new BABYLON.GUI.TextBlock();
@@ -45,6 +47,9 @@ class GameView extends Croquet.View {
         this.plane.material = material;
         this.plane.position.y = -1;
         this.plane.rotation.x = Math.PI / 2;
+    }
+
+    setPosition(role) {
         if (role === "Player 1") {
             this.parentView.camera.position = Constants.P1_POS;
             if (!this.model.players.p2.isConnected) {

@@ -1,6 +1,6 @@
 import { TurnModel } from "./TurnModel.js";
-import { LifePointsModel } from "./LifePointsModel.js";
 import { Constants } from "../Utils/Constants.js";
+import { LifePointsModel } from "./LifePointsModel.js";
 
 class GameModel extends Croquet.Model {
 
@@ -17,7 +17,7 @@ class GameModel extends Croquet.Model {
             isConnected: false,
             lifePoints: LifePointsModel.create({parent: this})
         }
-    }; //più avanti saranno Croquet.Model
+    };
 
     turnModel = TurnModel.create({parent: this});
 
