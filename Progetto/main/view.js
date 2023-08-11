@@ -13,6 +13,8 @@ class RootView extends Croquet.View {
         this.model = model;
         this.Log(this.viewId + " created.");
 
+        this.subscribe(this.sessionId, "reload", this.reload);
+
         this.#initializeScene();
         this.#activateRenderLoop();
     }
@@ -32,20 +34,26 @@ class RootView extends Croquet.View {
         const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
         light.intensity = 1;
         
-        var GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
-        GUIManager.useRealisticScaling = true;
+        this.GUIManager = new BABYLON.GUI.GUI3DManager(this.scene);
+        this.GUIManager.useRealisticScaling = true;
 
         this.nearMenu = new BABYLON.GUI.NearMenu("NearMenu");
         this.nearMenu.position = new BABYLON.Vector3(0, 0, 1);
         this.nearMenu.rows = 2;
         this.button = new BABYLON.GUI.TouchHolographicButton();
         this.button.text = "Join Game";
-        this.button.isEnabled = false;
         this.button.onPointerDownObservable.add(() => {
-            this.nearMenu.dispose();
+            this.nearMenu.removeControl(this.button);
+            this.GUIManager.removeControl(this.nearMenu);
             new GameView(this.model.gameModel, this);
         });
-        GUIManager.addControl(this.nearMenu);
+        this.GUIManager.addControl(this.nearMenu);
+        this.nearMenu.addButton(this.button);
+    }
+
+    reload() {
+        this.Log("Reloading scene.");
+        this.GUIManager.addControl(this.nearMenu);
         this.nearMenu.addButton(this.button);
     }
 

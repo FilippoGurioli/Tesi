@@ -22,13 +22,23 @@ class GameView extends Croquet.View {
     initializeScene(role) {
         this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
+        this.textBlock = new BABYLON.GUI.TextBlock();
+        this.textBlock.color = "white";
+        this.textBlock.fontSize = 48;
+        this.textBlock.text = "";
+        this.textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+        this.textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+        
         this.overlay = new BABYLON.GUI.Rectangle();
         this.overlay.width = "100%";
         this.overlay.height = "100%";
         this.overlay.background = "black";
-        this.overlay.alpha = 0.5;
+        this.overlay.alpha = 0;
         this.overlay.isPointerBlocker = true; // Impedisce interazioni con gli oggetti sottostanti
 
+        this.advancedTexture.addControl(this.overlay);
+        this.advancedTexture.addControl(this.textBlock);
+        
         this.plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, this.parentView.scene);
         const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
         material.diffuseTexture = new BABYLON.Texture("main/res/yu-gi-oh-battlefield.png", this.parentView.scene);
@@ -55,23 +65,16 @@ class GameView extends Croquet.View {
 
     wait(reason, finalSentence, waitingForP2 = false) {
         this.turnView?.discardUncoverableObjects();
-        const textBlock = new BABYLON.GUI.TextBlock();
-        textBlock.text = reason;
-        textBlock.color = "white";
-        textBlock.fontSize = 48;
-        textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-        textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-        this.advancedTexture.addControl(this.overlay);
-        this.advancedTexture.addControl(textBlock);
+        this.textBlock.text = reason;
+        this.overlay.alpha = 0.5;
 
-
-        this.waiting(finalSentence, waitingForP2, textBlock);
+        this.waiting(finalSentence, waitingForP2);
     }
 
-    waiting(finalSentence, waitingForP2, textBlock) {
+    waiting(finalSentence, waitingForP2) {
         if (this.opponentRecovered) {
-            this.advancedTexture.removeControl(textBlock);
-            this.advancedTexture.removeControl(this.overlay);
+            this.textBlock.text = "";
+            this.overlay.alpha = 0;
             this.overlayText(finalSentence, 1000);
             this.opponentRecovered = false;
             this.turnView?.restoreUncoverableObjects();
@@ -79,10 +82,10 @@ class GameView extends Croquet.View {
             return;
         } else if (this.emergencyExit) {
             this.emergencyExit = false;
-            textBlock.text = "";
+            this.textBlock.text = "";
             return;
         }
-        this.future(500).waiting(finalSentence, waitingForP2, textBlock);
+        this.future(500).waiting(finalSentence, waitingForP2);
     }
 
     gameOver(reason) {
@@ -96,8 +99,8 @@ class GameView extends Croquet.View {
         this.overlay.alpha += 0.01;
         if (this.overlay.alpha < 1) this.future(100).endScene();
         else {
-            this.publish(this.sessionId, "reload"); //per ora non ascoltato da nessuno
-            this.future(5000).detach();
+            this.publish(this.sessionId, "reload");
+            this.future(500).detach(); //tempo di sicurezza per il reload
         }
     }
 
@@ -108,9 +111,9 @@ class GameView extends Croquet.View {
 
     overlayText(text, time = 3000) {
         const textBlock = new BABYLON.GUI.TextBlock();
-        textBlock.text = text;
         textBlock.color = "white";
         textBlock.fontSize = 48;
+        textBlock.text = text;
         textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
         this.advancedTexture.addControl(textBlock);
@@ -124,6 +127,7 @@ class GameView extends Croquet.View {
         super.detach();
         this.plane.dispose();
         this.overlay.dispose();
+        this.textBlock.dispose();
         this.advancedTexture.dispose();
         this.turnView.detach();
         this.LPViewP1.detach();

@@ -1,5 +1,6 @@
 import { TurnModel } from "./TurnModel.js";
 import { LifePointsModel } from "./LifePointsModel.js";
+import { Constants } from "../Utils/Constants.js";
 
 class GameModel extends Croquet.Model {
 
@@ -73,9 +74,9 @@ class GameModel extends Croquet.Model {
     selfDestroy() {
         if (!this.players.p1.isConnected || !this.players.p2.isConnected) {
             this.counter++;
-            if (this.counter >= 10) {
+            if (this.counter >= Constants.DISC_TIME_LIMIT) {
                 this.publish(this.id, "game-over", "Player disconnected");
-                this.parentModel.future(10000).destroyGameModel();
+                this.parentModel.destroyGameModel();
             } else {
                 this.Log("Waiting for reconnection...");
                 this.future(1000).selfDestroy();

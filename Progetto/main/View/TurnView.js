@@ -47,7 +47,7 @@ class TurnView extends Croquet.View {
     #addTurnHUD() {
         this.turnHUD = new BABYLON.GUI.Rectangle();
         this.turnHUD.width = "300px";
-        this.turnHUD.height = "100px";
+        this.turnHUD.height = "120px";
         this.turnHUD.cornerRadius = 20;
         this.turnHUD.color = "Blue";
         this.turnHUD.thickness = 4;
@@ -59,7 +59,6 @@ class TurnView extends Croquet.View {
         advancedTexture.addControl(this.turnHUD);
 
         this.turnText = new BABYLON.GUI.TextBlock();
-        this.turnText.text = "Turn: " + this.model.turn.turn + "\nPhase: " + this.model.turn.phase;
         this.turnText.color = "white";
         this.turnText.fontSize = 24;
         this.turnText.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -69,7 +68,9 @@ class TurnView extends Croquet.View {
     }
 
     updateTurnHUD() {
-        this.turnText.text = "Turn: " + this.model.turn.turn + "\nPhase: " + this.model.turn.phase;
+        this.turnText.text = "Turn: " + this.model.turn.turn + 
+        "\nPlayer" + (this.model.turn.isPlayer1Turn ? "1": "2") + "'s turn" + 
+        "\nPhase: " + this.model.turn.phase;
         this.future(500).updateTurnHUD();
     }
 
@@ -81,6 +82,12 @@ class TurnView extends Croquet.View {
         if (((this.model.turn.turn + 1) % 2) + 1 === this.parentView.getPlayer()) {
             this.addMenu();
         }
+    }
+
+    detach() {
+        super.detach();
+        this.turnHUD.dispose();
+        this.turnMenu?.dispose();
     }
 }
 
