@@ -8,7 +8,7 @@ class GameView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log(this.viewId + " created.");
+        this.Log("Created.");
 
         this.#initializeScene();
         
@@ -106,7 +106,7 @@ class GameView extends Croquet.View {
         this.overlay.alpha += 0.01;
         if (this.overlay.alpha < 1) this.future(100).endScene();
         else {
-            this.publish(this.sessionId, "reload");
+            this.publish(this.viewId, "reload"); //view that generates the event must be one
             this.future(500).detach(); //tempo di sicurezza per il reload
         }
     }
@@ -119,21 +119,10 @@ class GameView extends Croquet.View {
         textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
         this.wordsToStamp.push({text:textBlock, time:time});
-
-        /*if (this.wordsToStamp.length === 1) {
-            this.advancedTexture.addControl(wordsToStamp[0]);
-
-        }
-        this.advancedTexture.addControl(textBlock);
-        
-        setTimeout(() => {
-            this.advancedTexture.removeControl(textBlock);
-        }, time);*/
     }
 
     stampOverlayText() {
         if (this.wordsToStamp.length > 0) {
-            console.log("length: " + this.wordsToStamp.length + ", text: " + this.wordsToStamp[0].text.text + ", time: " + this.wordsToStamp[0].time + "ms");
             this.advancedTexture.addControl(this.wordsToStamp[0].text);
             this.future(this.wordsToStamp[0].time).destroyOverlayText();
         } else {
@@ -156,7 +145,7 @@ class GameView extends Croquet.View {
         this.turnView.detach();
         this.LPViewP1.detach();
         this.LPViewP2.detach();
-        this.Log(this.viewId + " detached.");
+        this.Log("Detached.");
     }
 
     Log(string) {

@@ -4,15 +4,18 @@ class TurnView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
+        this.Log("Created.");
+        this.Log("Model: " + this.model.id);
 
         this.#initializeScene();
-
+        
         if (this.#isMyTurn()) {
             this.addMenu();
         }
-
+        
         this.subscribe(this.viewId, "yourTurn", this.addMenu);
         this.subscribe(this.viewId, "endTurn", this.removeMenu);
+        this.updateTurnHUD();
     }
 
     #initializeScene() {
@@ -39,7 +42,6 @@ class TurnView extends Croquet.View {
         this.turnText.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.turnText.paddingLeft = "20px";
         this.turnHUD.addControl(this.turnText);
-        this.updateTurnHUD();
 
         //Menu
         this.turnMenu = new BABYLON.GUI.NearMenu("TurnMenu");
@@ -102,7 +104,7 @@ class TurnView extends Croquet.View {
         this.advancedTexture.dispose();
         this.turnMenu?.dispose();
         this.GUIManager?.dispose();
-        //this.button?.dispose();
+        this.Log("Detached");
     }
 }
 

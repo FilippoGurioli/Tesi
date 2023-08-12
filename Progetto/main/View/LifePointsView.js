@@ -4,11 +4,11 @@ class LifePointsView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log(this.viewId + " created.");
+        this.Log("Created.");
     }
 
     Log(string) {
-        console.log("LPVIEW: " + string);
+        //console.log("LPVIEW: " + string);
     }
 }
 

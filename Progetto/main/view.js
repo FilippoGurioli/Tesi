@@ -11,9 +11,9 @@ class RootView extends Croquet.View {
     constructor(model) {
         super(model);
         this.model = model;
-        this.Log(this.viewId + " created.");
+        this.Log("Created.");
 
-        this.subscribe(this.sessionId, "reload", this.reload);
+        this.subscribe(this.viewId, "reload", this.reload);
 
         this.#initializeScene();
         this.#activateRenderLoop();
@@ -45,10 +45,21 @@ class RootView extends Croquet.View {
         this.button.onPointerDownObservable.add(() => {
             this.nearMenu.removeControl(this.button);
             this.GUIManager.removeControl(this.nearMenu);
-            new GameView(this.model.gameModel, this);
+            this.gameView = new GameView(this.model.gameModel, this);
         });
         this.GUIManager.addControl(this.nearMenu);
         this.nearMenu.addButton(this.button);
+    }
+
+    detach() {
+        this.Log("Detached.");
+        super.detach();
+        this.GUIManager.dispose();
+        this.scene.dispose();
+        this.engine.dispose();
+        this.camera.dispose();
+        this.gameView?.detach();
+        this.nearMenu.dispose();
     }
 
     reload() {

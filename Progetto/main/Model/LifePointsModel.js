@@ -6,7 +6,7 @@ class LifePointsModel extends Croquet.Model {
 
     init({parent: parentModel}) {
         this.parentModel = parentModel;
-        this.Log(this.id + " created.");
+        this.Log("Created.");
 
         this.subscribe(this.id, "heal", this.heal);
         this.subscribe(this.id, "damage", this.damage);
@@ -21,7 +21,7 @@ class LifePointsModel extends Croquet.Model {
     }
 
     Log(string) {
-        console.log("LPMODEL: " + string);
+        //console.log("LPMODEL: " + string);
     }
 }
 

@@ -23,14 +23,14 @@ class GameModel extends Croquet.Model {
 
     init({parent: parentModel}) {
         this.parentModel = parentModel;
-        this.Log(this.id + " created.");
+        this.Log("Created.");
         this.subscribe(this.id, "join", this.join);
         this.subscribe(this.sessionId, "view-exit", this.left);
     }
 
     join(viewId) {
-        var action = viewId;
         var role = "a Spectator";
+        var action = viewId;
         if (this.players.p1.viewId === "") {
             this.players.p1.viewId = viewId;
             this.players.p1.isConnected = true;
@@ -52,6 +52,8 @@ class GameModel extends Croquet.Model {
             action += " reconnected as Player 2.";
             role = "Player 2";
             this.publish(this.players.p1.viewId, "opponent-recover");
+        } else {
+            action += " joined the game as a Spectator.";
         }
         this.Log(action);
         this.publish(viewId, "join-response", role);
