@@ -19,6 +19,9 @@ class GameView extends Croquet.View {
 
 
         this.publish(this.model.id, "join", this.viewId);
+
+        this.wordsToStamp = [];
+        this.stampOverlayText();
     }
 
     #initializeScene() {
@@ -115,11 +118,33 @@ class GameView extends Croquet.View {
         textBlock.text = text;
         textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
         textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+        this.wordsToStamp.push({text:textBlock, time:time});
+
+        /*if (this.wordsToStamp.length === 1) {
+            this.advancedTexture.addControl(wordsToStamp[0]);
+
+        }
         this.advancedTexture.addControl(textBlock);
         
         setTimeout(() => {
             this.advancedTexture.removeControl(textBlock);
-        }, time);
+        }, time);*/
+    }
+
+    stampOverlayText() {
+        if (this.wordsToStamp.length > 0) {
+            console.log("length: " + this.wordsToStamp.length + ", text: " + this.wordsToStamp[0].text.text + ", time: " + this.wordsToStamp[0].time + "ms");
+            this.advancedTexture.addControl(this.wordsToStamp[0].text);
+            this.future(this.wordsToStamp[0].time).destroyOverlayText();
+        } else {
+            this.future(500).stampOverlayText();
+        }
+    }
+
+    destroyOverlayText() {
+        this.advancedTexture.removeControl(this.wordsToStamp[0].text);
+        this.wordsToStamp.shift();
+        this.stampOverlayText();
     }
 
     detach() {

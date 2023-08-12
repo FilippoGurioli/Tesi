@@ -102,7 +102,7 @@ class TurnView extends Croquet.View {
         this.advancedTexture.dispose();
         this.turnMenu?.dispose();
         this.GUIManager?.dispose();
-        this.button?.dispose();
+        //this.button?.dispose();
     }
 }
 
