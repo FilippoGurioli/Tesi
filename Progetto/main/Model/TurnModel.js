@@ -14,7 +14,6 @@ class TurnModel extends Croquet.Model {
 
     nextPhase() {
         this.turn.nextPhase();
-        this.Log(this.turn);
         if (this.turn.phase === Phase.DrawPhase) {
             if (this.turn.isPlayer1Turn) {
                 this.publish(this.parentModel.players.p1.viewId, "yourTurn");
@@ -27,7 +26,7 @@ class TurnModel extends Croquet.Model {
     }
 
     Log(string) {
-        //console.log("TURNMODEL: " + string);
+        console.log("TURNMODEL: " + string);
     }
 }
 

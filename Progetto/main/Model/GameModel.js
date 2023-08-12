@@ -23,9 +23,9 @@ class GameModel extends Croquet.Model {
 
     init({parent: parentModel}) {
         this.parentModel = parentModel;
-        this.Log("Created.");
         this.subscribe(this.id, "join", this.join);
         this.subscribe(this.sessionId, "view-exit", this.left);
+        this.Log("Created.");
     }
 
     join(viewId) {

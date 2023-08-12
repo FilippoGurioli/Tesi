@@ -159,6 +159,10 @@ class GameView extends Croquet.View {
         this.LPViewP1 = new LifePointsView(this.model.players.p1.lifePoints, this);
         this.LPViewP2 = new LifePointsView(this.model.players.p2.lifePoints, this);
     }
+
+    get scene() {
+        return this.parentView.scene;
+    }
 }
 
 export { GameView };

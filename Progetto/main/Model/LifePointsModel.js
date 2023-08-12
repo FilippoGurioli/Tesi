@@ -21,7 +21,7 @@ class LifePointsModel extends Croquet.Model {
     }
 
     Log(string) {
-        //console.log("LPMODEL: " + string);
+        console.log("LPMODEL: " + string);
     }
 }
 

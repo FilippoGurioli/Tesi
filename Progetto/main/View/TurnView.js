@@ -5,7 +5,6 @@ class TurnView extends Croquet.View {
         this.model = model;
         this.parentView = parentView;
         this.Log("Created.");
-        this.Log("Model: " + this.model.id);
 
         this.#initializeScene();
         
@@ -48,13 +47,13 @@ class TurnView extends Croquet.View {
         this.turnMenu.position = new BABYLON.Vector3(0, 0, 1);
         this.button = new BABYLON.GUI.TouchHolographicButton();
         this.button.text = "Next phase";
+        var buttonH = new BABYLON.GUI.TouchHolographicButton();
+        var buttonD = new BABYLON.GUI.TouchHolographicButton();
+        buttonH.text = "Heal";
+        buttonD.text = "Damage";
         this.button.onPointerDownObservable.add(() => {
             this.publish(this.model.id, "nextPhase");
         });
-        //var buttonH = new BABYLON.GUI.TouchHolographicButton();
-        //var buttonD = new BABYLON.GUI.TouchHolographicButton();
-        //buttonH.text = "Heal";
-        //buttonD.text = "Damage";
         
     }
 
