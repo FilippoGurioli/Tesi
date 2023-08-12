@@ -2,7 +2,7 @@ import { LifePoints } from "./LifePoints.js";
 
 class LifePointsModel extends Croquet.Model {
     
-    lifePoints = new LifePoints();
+    #lifePoints = new LifePoints();
 
     init({parent: parentModel}) {
         this.parentModel = parentModel;
@@ -13,15 +13,20 @@ class LifePointsModel extends Croquet.Model {
     }
 
     heal(lifePoints) {
-        this.lifePoints.heal(lifePoints);
+        this.#lifePoints.heal(lifePoints);
+        this.Log("heal:" + this.#lifePoints.LP);
     }
 
     damage(lifePoints) {
-        this.lifePoints.damage(lifePoints);
+        this.#lifePoints.damage(lifePoints);
     }
 
     Log(string) {
         console.log("LPMODEL: " + string);
+    }
+
+    get LP() {
+        return this.#lifePoints.LP;
     }
 }
 

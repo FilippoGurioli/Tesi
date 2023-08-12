@@ -38,7 +38,8 @@ class LifePointsView extends Croquet.View {
     }
 
     updateHUD() {
-        this.text = "LP: " + this.model.getLifePointsOf(this.viewId);
+        this.text.text = "LP: " + this.model.LP;
+        this.future(500).updateHUD();
     }
 
     Log(string) {
