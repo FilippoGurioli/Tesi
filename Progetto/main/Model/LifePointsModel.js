@@ -19,6 +19,9 @@ class LifePointsModel extends Croquet.Model {
 
     damage(lifePoints) {
         this.#lifePoints.damage(lifePoints);
+        if (this.#lifePoints.LP === 0) {
+            this.parentModel.gameOver(this.id);
+        }
     }
 
     Log(string) {

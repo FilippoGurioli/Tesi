@@ -142,8 +142,8 @@ class GameView extends Croquet.View {
         this.overlay.dispose();
         this.textBlock.dispose();
         this.advancedTexture.dispose();
-        this.turnView.detach();
         this.LPView.detach();
+        this.turnView.detach();
         this.Log("Detached.");
     }
 

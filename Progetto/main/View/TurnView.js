@@ -54,13 +54,13 @@ class TurnView extends Croquet.View {
         this.buttonH.text = "Heal";
         this.buttonH.onPointerDownObservable.add(() => {
             this.Log("Invio heal a:" + this.viewId);
-            this.publish(this.viewId, "heal", 100);
+            this.publish(this.viewId, "heal", 1000);
         });
         this.buttonD = new BABYLON.GUI.TouchHolographicButton();
         this.buttonD.text = "Damage";
         this.buttonD.onPointerDownObservable.add(() => {
             this.Log("Invio damage a:" + this.viewId);
-            this.publish(this.viewId, "damage", 100);
+            this.publish(this.viewId, "damage", 1000);
         });
     }
 
@@ -113,9 +113,12 @@ class TurnView extends Croquet.View {
     detach() {
         super.detach();
         this.turnHUD.dispose();
+        this.button.dispose();
+        this.buttonH.dispose();
+        this.buttonD.dispose();
+        this.turnMenu.dispose();
         this.advancedTexture.dispose();
-        this.turnMenu?.dispose();
-        this.GUIManager?.dispose();
+        this.GUIManager.dispose();
         this.Log("Detached");
     }
 }

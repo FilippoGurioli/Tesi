@@ -88,6 +88,11 @@ class GameModel extends Croquet.Model {
         }
     }
 
+    gameOver(loser) {
+        this.publish(this.id, "game-over", loser === this.players.p1.lifePoints.id ? "Player 2 win" : "Player 1 win");
+        this.parentModel.destroyGameModel();
+    }
+
     Log(string) {
         console.log("GAMEMODEL: " + string);
     }
