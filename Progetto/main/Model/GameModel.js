@@ -5,7 +5,7 @@ import { LifePointsModel } from "./LifePointsModel.js";
 class GameModel extends Croquet.Model {
 
     counter = 0;
-
+    
     players = {
         p1: {
             viewId: "",
@@ -18,14 +18,14 @@ class GameModel extends Croquet.Model {
             lifePoints: LifePointsModel.create({parent: this})
         }
     };
-
+    
     turnModel = TurnModel.create({parent: this});
-
+    
     init({parent: parentModel}) {
         this.parentModel = parentModel;
         this.subscribe(this.id, "join", this.join);
         this.subscribe(this.sessionId, "view-exit", this.left);
-        this.Log("Created.");
+        this.Log("Created - " + this.id);
     }
 
     join(viewId) {

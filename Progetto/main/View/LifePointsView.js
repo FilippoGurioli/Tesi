@@ -4,7 +4,10 @@ class LifePointsView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created.");
+        this.Log("Created: " + this.viewId + " for model: " + this.model.id);
+        
+        this.subscribe(this.viewId, "heal", this.heal);
+        this.subscribe(this.viewId, "damage", this.damage);
 
         this.#initializeScene();
         this.updateHUD();
@@ -37,6 +40,18 @@ class LifePointsView extends Croquet.View {
         this.HUD.addControl(this.text);
     }
 
+    heal(amount) {
+        this.Log("Ricevuto heal da:" + this.viewId);
+        this.Log("Invio heal a:" + this.model.id);
+        this.publish(this.model.id, "heal", amount);
+    }
+
+    damage(amount) {
+        this.Log("Ricevuto damage da:" + this.viewId);
+        this.Log("Invio damage a:" + this.model.id);
+        this.publish(this.model.id, "damage", amount);
+    }
+
     updateHUD() {
         this.text.text = "LP: " + this.model.LP;
         this.future(500).updateHUD();
@@ -47,8 +62,12 @@ class LifePointsView extends Croquet.View {
     }
 
     detach() {
-        this.Log("Detached.");
         super.detach();
+        this.HUD.dispose();
+        this.text.dispose();
+        this.advancedTexture.dispose();
+        this.GUIManager.dispose();
+        this.Log("Detached.");
     }
 }
 

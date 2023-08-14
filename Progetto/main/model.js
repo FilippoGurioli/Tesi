@@ -10,7 +10,7 @@ class RootModel extends Croquet.Model {
     * Initialize the Model.
     * */
     init() {
-        this.Log("Created.");
+        this.Log("Created - " + this.id);
 
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
@@ -43,9 +43,8 @@ class RootModel extends Croquet.Model {
     destroyGameModel() {
         this.Log("Destroying game model.");
         this.gameModel.destroy();
-        if (this.connectedViews.length !== 0) {
-            this.gameModel = GameModel.create({parent: this});
-        }
+        this.Log("Connected Views: " + this.connectedViews.length + ".");
+        this.gameModel = GameModel.create({parent: this}); //for testing, probably has to be changed with an if
     }
 
     Log(string) {

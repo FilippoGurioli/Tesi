@@ -4,7 +4,7 @@ class TurnView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created.");
+        this.Log("Created: " + this.viewId + " for model: " + this.model.id + " - " + this.parentView.viewId);
 
         this.#initializeScene();
         
@@ -47,14 +47,21 @@ class TurnView extends Croquet.View {
         this.turnMenu.position = new BABYLON.Vector3(0, 0, 1);
         this.button = new BABYLON.GUI.TouchHolographicButton();
         this.button.text = "Next phase";
-        var buttonH = new BABYLON.GUI.TouchHolographicButton();
-        var buttonD = new BABYLON.GUI.TouchHolographicButton();
-        buttonH.text = "Heal";
-        buttonD.text = "Damage";
         this.button.onPointerDownObservable.add(() => {
             this.publish(this.model.id, "nextPhase");
         });
-        
+        this.buttonH = new BABYLON.GUI.TouchHolographicButton();
+        this.buttonH.text = "Heal";
+        this.buttonH.onPointerDownObservable.add(() => {
+            this.Log("Invio heal a:" + this.viewId);
+            this.publish(this.viewId, "heal", 100);
+        });
+        this.buttonD = new BABYLON.GUI.TouchHolographicButton();
+        this.buttonD.text = "Damage";
+        this.buttonD.onPointerDownObservable.add(() => {
+            this.Log("Invio damage a:" + this.viewId);
+            this.publish(this.viewId, "damage", 100);
+        });
     }
 
     #isMyTurn() {
@@ -67,12 +74,16 @@ class TurnView extends Croquet.View {
 
         this.GUIManager.addControl(this.turnMenu);
         this.turnMenu.addButton(this.button);
+        this.turnMenu.addButton(this.buttonH);
+        this.turnMenu.addButton(this.buttonD);
     }
 
     removeMenu() {
         this.parentView.overlayText("Opponent's turn");
         this.GUIManager.removeControl(this.turnMenu);
         this.turnMenu.removeControl(this.button);
+        this.turnMenu.removeControl(this.buttonH);
+        this.turnMenu.removeControl(this.buttonD);
     }
 
     Log(string) {
@@ -88,6 +99,8 @@ class TurnView extends Croquet.View {
 
     discardUncoverableObjects() {
         this.turnMenu.removeControl(this.button);
+        this.turnMenu.removeControl(this.buttonH);
+        this.turnMenu.removeControl(this.buttonD);
         this.GUIManager.removeControl(this.turnMenu);
     }
 

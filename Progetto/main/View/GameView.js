@@ -8,7 +8,7 @@ class GameView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created.");
+        this.Log("Created - " + this.viewId + " - " + this.model.id);
 
         this.#initializeScene();
         
@@ -143,8 +143,7 @@ class GameView extends Croquet.View {
         this.textBlock.dispose();
         this.advancedTexture.dispose();
         this.turnView.detach();
-        this.LPViewP1.detach();
-        this.LPViewP2.detach();
+        this.LPView.detach();
         this.Log("Detached.");
     }
 
@@ -156,8 +155,8 @@ class GameView extends Croquet.View {
         this.overlayText("You are " + role, 1000);
 
         this.turnView = new TurnView(this.model.turnModel, this);
-        this.LPViewP1 = new LifePointsView(this.model.players.p1.lifePoints, this);
-        this.LPViewP2 = new LifePointsView(this.model.players.p2.lifePoints, this);
+        if (this.viewId === this.model.players.p1.viewId)      this.LPView = new LifePointsView(this.model.players.p1.lifePoints, this);
+        else if (this.viewId === this.model.players.p2.viewId) this.LPView = new LifePointsView(this.model.players.p2.lifePoints, this);
     }
 
     get scene() {

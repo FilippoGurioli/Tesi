@@ -11,7 +11,7 @@ class RootView extends Croquet.View {
     constructor(model) {
         super(model);
         this.model = model;
-        this.Log("Created.");
+        this.Log("Created - " + this.viewId + " - " + this.model.id);
 
         this.subscribe(this.viewId, "reload", this.reload);
 
