@@ -5,4 +5,13 @@ const Constants = {
     DISC_TIME_LIMIT: 10,
 };
 
-export { Constants };
+let Cards;
+
+fetch('./main/Utils/Cards.json')
+    .then((response) => response.json())
+    .then((json) => {
+        Cards = json; 
+        Cards = Object.freeze(Cards);
+    });
+
+export { Constants, Cards };

@@ -1,17 +1,16 @@
 import { GameModel } from "./Model/GameModel.js";
 
 class RootModel extends Croquet.Model {
-
+    
     gameModel = null;
-
+    
     connectedViews = [];
-
+    
     /**
-    * Initialize the Model.
-    * */
+     * Initialize the Model.
+     * */
     init() {
         this.Log("Created - " + this.id);
-
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
     }

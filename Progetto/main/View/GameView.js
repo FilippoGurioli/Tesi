@@ -1,4 +1,4 @@
-import { Constants } from "../Utils/Constants.js";
+import { Constants, Cards } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
 import { BattleFieldView } from "./BattleFieldView.js";
 import { LifePointsView } from "./LifePointsView.js";
@@ -17,7 +17,6 @@ class GameView extends Croquet.View {
         this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
         this.subscribe(this.viewId, "opponent-recover", () => this.opponentRecovered = true);
         this.subscribe(this.model.id, "game-over", this.gameOver);
-
 
         this.publish(this.model.id, "join", this.viewId);
 
@@ -135,8 +134,8 @@ class GameView extends Croquet.View {
         this.textBlock.dispose();
         this.advancedTexture.dispose();
         this.LPView.detach();
-        this.turnView.detach();
         this.BFView.detach();
+        this.turnView.detach();
         this.Log("Detached.");
     }
 

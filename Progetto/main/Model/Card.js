@@ -1,12 +1,8 @@
 import { CardPosition } from "./CardFeature.js";
 
 class Card {
-    constructor(id, name, image, description) {
+    constructor(id) {
         this.id = id;
-        this.name = name;
-        this.image = image;
-        this.description = description;
-        this.cardPosition = CardPosition.FaceUp;
     }
 
     activateEffect() {

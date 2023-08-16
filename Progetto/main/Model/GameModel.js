@@ -11,12 +11,14 @@ class GameModel extends Croquet.Model {
         p1: {
             viewId: "",
             isConnected: false,
-            lifePoints: LifePointsModel.create({parent: this})
+            lifePoints: LifePointsModel.create({parent: this}),
+            deck: [],
         },
         p2: {
             viewId: "",
             isConnected: false,
-            lifePoints: LifePointsModel.create({parent: this})
+            lifePoints: LifePointsModel.create({parent: this}),
+            deck: [],
         }
     };
     

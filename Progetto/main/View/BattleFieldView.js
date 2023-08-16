@@ -19,6 +19,23 @@ class BattleFieldView extends Croquet.View {
         this.plane.material = material;
         this.plane.position.y = -1;
         this.plane.rotation.x = Math.PI / 2;
+
+        //Fade in animation
+        this.plane.visibility = 0;
+        const fadeInAnimation = new BABYLON.Animation(
+            "fadeInAnimation",
+            "visibility", 
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+        );
+        const fadeInKeys = [
+            { frame: 0, value: 0 },  
+            { frame: 60, value: 1 }  
+        ];
+        fadeInAnimation.setKeys(fadeInKeys);
+        this.plane.animations.push(fadeInAnimation);
+        this.parentView.scene.beginAnimation(this.plane, 0, 60, false);
     }
 
     Log(message) {
