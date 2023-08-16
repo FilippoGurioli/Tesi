@@ -1,5 +1,6 @@
 import { Constants } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
+import { BattleFieldView } from "./BattleFieldView.js";
 import { LifePointsView } from "./LifePointsView.js";
 
 class GameView extends Croquet.View {
@@ -42,14 +43,6 @@ class GameView extends Croquet.View {
 
         this.advancedTexture.addControl(this.overlay);
         this.advancedTexture.addControl(this.textBlock);
-        
-        this.plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, this.parentView.scene);
-        const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
-        material.diffuseTexture = new BABYLON.Texture("main/res/yu-gi-oh-battlefield.png", this.parentView.scene);
-        material.diffuseTexture.hasAlpha = true;
-        this.plane.material = material;
-        this.plane.position.y = -1;
-        this.plane.rotation.x = Math.PI / 2;
     }
 
     setPosition(role) {
@@ -138,12 +131,12 @@ class GameView extends Croquet.View {
 
     detach() {
         super.detach();
-        this.plane.dispose();
         this.overlay.dispose();
         this.textBlock.dispose();
         this.advancedTexture.dispose();
         this.LPView.detach();
         this.turnView.detach();
+        this.BFView.detach();
         this.Log("Detached.");
     }
 
@@ -155,6 +148,7 @@ class GameView extends Croquet.View {
         this.overlayText("You are " + role, 1000);
 
         this.turnView = new TurnView(this.model.turnModel, this);
+        this.BFView = new BattleFieldView(this.model.battleFieldModel, this);
         if (this.viewId === this.model.players.p1.viewId)      this.LPView = new LifePointsView(this.model.players.p1.lifePoints, this);
         else if (this.viewId === this.model.players.p2.viewId) this.LPView = new LifePointsView(this.model.players.p2.lifePoints, this);
     }

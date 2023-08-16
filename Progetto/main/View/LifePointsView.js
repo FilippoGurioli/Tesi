@@ -41,14 +41,10 @@ class LifePointsView extends Croquet.View {
     }
 
     heal(amount) {
-        this.Log("Ricevuto heal da:" + this.viewId);
-        this.Log("Invio heal a:" + this.model.id);
         this.publish(this.model.id, "heal", amount);
     }
 
     damage(amount) {
-        this.Log("Ricevuto damage da:" + this.viewId);
-        this.Log("Invio damage a:" + this.model.id);
         this.publish(this.model.id, "damage", amount);
     }
 

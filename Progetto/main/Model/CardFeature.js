@@ -10,4 +10,9 @@ const CardType = {
     Trap: "Trap"
 }
 
-export { CardPosition, CardType };
+const MonsterPosition = {
+    Attack: "Attack",
+    Defense: "Defense",
+};
+
+export { CardPosition, CardType, MonsterPosition };

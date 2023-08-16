@@ -1,4 +1,5 @@
 import { Card } from "./Card.js";
+import { MonsterPosition } from "./CardFeature.js";
 
 class Monster extends Card {
 
@@ -10,6 +11,11 @@ class Monster extends Card {
         this.subtype = subtype;
         this.atk = atk;
         this.def = def;
+        this.position = MonsterPosition.NotSummoned;
+    }
+
+    summon() {
+        this.position = MonsterPosition.Attack;
     }
 }
 

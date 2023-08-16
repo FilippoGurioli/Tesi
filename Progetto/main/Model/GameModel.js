@@ -1,6 +1,7 @@
 import { TurnModel } from "./TurnModel.js";
 import { Constants } from "../Utils/Constants.js";
 import { LifePointsModel } from "./LifePointsModel.js";
+import { BattleFieldModel } from "./BattleFieldModel.js";
 
 class GameModel extends Croquet.Model {
 
@@ -20,6 +21,7 @@ class GameModel extends Croquet.Model {
     };
     
     turnModel = TurnModel.create({parent: this});
+    battleFieldModel = BattleFieldModel.create({parent: this});
     
     init({parent: parentModel}) {
         this.parentModel = parentModel;

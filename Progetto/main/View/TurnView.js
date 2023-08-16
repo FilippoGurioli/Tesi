@@ -53,13 +53,11 @@ class TurnView extends Croquet.View {
         this.buttonH = new BABYLON.GUI.TouchHolographicButton();
         this.buttonH.text = "Heal";
         this.buttonH.onPointerDownObservable.add(() => {
-            this.Log("Invio heal a:" + this.viewId);
             this.publish(this.viewId, "heal", 1000);
         });
         this.buttonD = new BABYLON.GUI.TouchHolographicButton();
         this.buttonD.text = "Damage";
         this.buttonD.onPointerDownObservable.add(() => {
-            this.Log("Invio damage a:" + this.viewId);
             this.publish(this.viewId, "damage", 1000);
         });
     }
