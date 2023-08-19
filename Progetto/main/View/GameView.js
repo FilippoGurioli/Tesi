@@ -44,23 +44,23 @@ class GameView extends Croquet.View {
         this.advancedTexture.addControl(this.textBlock);
 
         //! TMP: carta davanti al p1
-        this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.parentView.scene);
-        const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
-        const textureFront = new BABYLON.Texture("main/res/dark-magician.webp", this.parentView.scene);
-        const textureBack = new BABYLON.Texture("main/res/card-back.png", this.parentView.scene);
+        // this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.parentView.scene);
+        // const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
+        // const textureFront = new BABYLON.Texture("main/res/dark-magician.webp", this.parentView.scene);
+        // const textureBack = new BABYLON.Texture("main/res/card-back.png", this.parentView.scene);
 
-        material.diffuseTexture = textureFront;
-        material.backFaceCulling = false; // Abilita il rendering delle facce posteriori
+        // material.diffuseTexture = textureFront;
+        // material.backFaceCulling = false; // Abilita il rendering delle facce posteriori
 
-        this.plane.material = material;
+        // this.plane.material = material;
 
-        // Assegna la texture alla faccia posteriore
-        this.plane.onBeforeRenderObservable.add(() => {
-            if (this.parentView.scene.activeCamera.isReady()) {
-                material.diffuseTexture = this.parentView.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
-            }
-        });
-        this.plane.position.y = 1;
+        // // Assegna la texture alla faccia posteriore
+        // this.plane.onBeforeRenderObservable.add(() => {
+        //     if (this.parentView.scene.activeCamera.isReady()) {
+        //         material.diffuseTexture = this.parentView.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
+        //     }
+        // });
+        // this.plane.position.y = 1;
     }
 
     setPosition(role) {

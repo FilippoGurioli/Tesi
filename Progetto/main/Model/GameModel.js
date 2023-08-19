@@ -7,13 +7,13 @@ class GameModel extends Croquet.Model {
 
     counter = 0;
 
-    player1 = PlayerModel.create({parent: this});
+    battleFieldModel = BattleFieldModel.create({parent: this});
+    
+    player1 = PlayerModel.create({parent: this, battleField: battleFieldModel});
 
-    player2 = PlayerModel.create({parent: this});
+    player2 = PlayerModel.create({parent: this, battleField: battleFieldModel});
 
     turnModel = TurnModel.create({parent: this});
-    
-    battleFieldModel = BattleFieldModel.create({parent: this});
     
     playersInfo = {
         p1: {
