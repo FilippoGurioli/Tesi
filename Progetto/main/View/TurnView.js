@@ -63,8 +63,8 @@ class TurnView extends Croquet.View {
     }
 
     #isMyTurn() {
-        return (this.viewId === this.parentView.model.players.p1.viewId && this.model.turn.isPlayer1Turn) ||
-               (this.viewId === this.parentView.model.players.p2.viewId && !this.model.turn.isPlayer1Turn);
+        return (this.viewId === this.parentView.model.playersInfo.p1.viewId && this.model.turn.isPlayer1Turn) ||
+               (this.viewId === this.parentView.model.playersInfo.p2.viewId && !this.model.turn.isPlayer1Turn);
     }
 
     addMenu() {

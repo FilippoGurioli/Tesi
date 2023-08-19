@@ -66,7 +66,7 @@ class GameView extends Croquet.View {
     setPosition(role) {
         if (role === "Player 1") {
             this.parentView.camera.position = Constants.P1_POS;
-            if (!this.model.players.p2.isConnected) {
+            if (!this.model.playersInfo.p2.isConnected) {
                 this.wait("Waiting for Player 2...", "", true);
             } else {
                 this.#gameStart(role);
@@ -114,8 +114,8 @@ class GameView extends Croquet.View {
     }
 
     endScene() {
-        this.overlay.alpha += 0.01;
-        if (this.overlay.alpha < 1) this.future(100).endScene();
+        this.BFView.plane.visibility -= 0.01;
+        if (this.BFView.plane.visibility > 0) this.future(100).endScene();
         else {
             this.publish(this.viewId, "reload"); //view that generates the event must be one
             this.future(500).detach(); //tempo di sicurezza per il reload
@@ -167,8 +167,8 @@ class GameView extends Croquet.View {
 
         this.turnView = new TurnView(this.model.turnModel, this);
         this.BFView = new BattleFieldView(this.model.battleFieldModel, this);
-        if (this.viewId === this.model.players.p1.viewId)      this.LPView = new LifePointsView(this.model.players.p1.lifePoints, this);
-        else if (this.viewId === this.model.players.p2.viewId) this.LPView = new LifePointsView(this.model.players.p2.lifePoints, this);
+        if (this.viewId === this.model.playersInfo.p1.viewId)      this.LPView = new LifePointsView(this.model.player1.lifePoints, this);
+        else if (this.viewId === this.model.playersInfo.p2.viewId) this.LPView = new LifePointsView(this.model.player2.lifePoints, this);
     }
 
     get scene() {

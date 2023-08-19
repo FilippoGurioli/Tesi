@@ -16,11 +16,11 @@ class TurnModel extends Croquet.Model {
         this.turn.nextPhase();
         if (this.turn.phase === Phase.DrawPhase) {
             if (this.turn.isPlayer1Turn) {
-                this.publish(this.parentModel.players.p1.viewId, "yourTurn");
-                this.publish(this.parentModel.players.p2.viewId, "endTurn");
+                this.publish(this.parentModel.playersInfo.p1.viewId, "yourTurn");
+                this.publish(this.parentModel.playersInfo.p2.viewId, "endTurn");
             } else {
-                this.publish(this.parentModel.players.p2.viewId, "yourTurn");
-                this.publish(this.parentModel.players.p1.viewId, "endTurn");
+                this.publish(this.parentModel.playersInfo.p2.viewId, "yourTurn");
+                this.publish(this.parentModel.playersInfo.p1.viewId, "endTurn");
             }
         }
     }
