@@ -4,7 +4,7 @@ class TurnView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created: " + this.viewId + " for model: " + this.model.id + " - " + this.parentView.viewId);
+        this.Log("Model associated: " + this.model.id.substring(this.id.length - 2));
 
         this.#initializeScene();
         

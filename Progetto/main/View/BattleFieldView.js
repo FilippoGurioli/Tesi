@@ -8,7 +8,7 @@ class BattleFieldView extends Croquet.View {
         this.parentView = parentView;
 
         this.#initializeScene();
-        this.Log("Created - " + this.viewId + " - " + this.model.id);
+        this.Log("Model associated: " + this.model.id.substring(this.id.length - 2));
     }
 
     #initializeScene() {

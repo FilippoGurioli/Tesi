@@ -10,7 +10,7 @@ class RootModel extends Croquet.Model {
      * Initialize the Model.
      * */
     init() {
-        this.Log("Created - " + this.id);
+        this.Log("Created");
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
     }
@@ -47,7 +47,7 @@ class RootModel extends Croquet.Model {
     }
 
     Log(string) {
-        console.log("MODEL: " + string);
+        console.log("MODEL | " + this.id.substring(this.id.length - 2) + ": " + string);
     }
 }
 

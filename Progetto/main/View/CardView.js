@@ -4,7 +4,7 @@ class CardView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created - " + this.viewId + " - " + this.model.id);
+        this.Log("Model associated: " + this.model.id.substring(this.id.length - 2));
     }
 
     Log(message) {

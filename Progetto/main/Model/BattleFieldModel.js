@@ -6,7 +6,7 @@ class BattleFieldModel extends Croquet.Model {
 
     init({parent: parentModel}) {
         this.parentModel = parentModel;
-        this.Log("Created - " + this.id);
+        this.Log("Created");
     }
 
     getBattleFieldOf(p1 = true) {
@@ -34,7 +34,7 @@ class BattleFieldModel extends Croquet.Model {
     }
 
     Log(message) {
-        console.log("BFMODEL: " + message);
+        console.log("BFMODEL | " + this.id.substring(this.id.length - 2) + ": " + message);
     }
 }
 

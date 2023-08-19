@@ -1,5 +1,6 @@
 import { LifePointsModel } from "./LifePointsModel.js";
 import { DeckModel } from "./DeckModel.js";
+import { HandModel } from "./HandModel.js";
 
 class PlayerModel extends Croquet.Model {
     
@@ -9,8 +10,8 @@ class PlayerModel extends Croquet.Model {
 
     init({parent: parentModel, battleField: battleFieldModel}) {
         this.parentModel = parentModel;
-        hand = HandModel.create({parent: this, battleField: battleFieldModel});
-        this.Log("Created - " + this.id);
+        this.hand = HandModel.create({parent: this, battleField: battleFieldModel});
+        this.Log("Created");
     }
 
     Log(string) {

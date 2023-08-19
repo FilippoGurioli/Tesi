@@ -5,7 +5,7 @@ class HandModel extends Croquet.Model {
     init({parent: parentModel, battleField: battleFieldModel}) {
         this.parentModel = parentModel;
         this.BFModel = battleFieldModel;
-        Log("Created - " + this.id);
+        this.Log("Created");
     }
 
     addCard(card) {

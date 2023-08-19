@@ -9,10 +9,7 @@ class GameModel extends Croquet.Model {
 
     battleFieldModel = BattleFieldModel.create({parent: this});
     
-    player1 = PlayerModel.create({parent: this, battleField: battleFieldModel});
-
-    player2 = PlayerModel.create({parent: this, battleField: battleFieldModel});
-
+    
     turnModel = TurnModel.create({parent: this});
     
     playersInfo = {
@@ -28,11 +25,14 @@ class GameModel extends Croquet.Model {
     
     init({parent: parentModel}) {
         this.parentModel = parentModel;
+        this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.Log("Created");
+
         this.subscribe(this.id, "join", this.join);
         this.subscribe(this.sessionId, "view-exit", this.left);
         this.subscribe(this.player1.id, "gameOver", () => this.gameOver(this.player1.id));
         this.subscribe(this.player2.id, "gameOver", () => this.gameOver(this.player2.id));
-        this.Log("Created - " + this.id);
     }
 
     join(viewId) {
@@ -101,7 +101,7 @@ class GameModel extends Croquet.Model {
     }
 
     Log(string) {
-        console.log("GAMEMODEL: " + string);
+        console.log("GAMEMODEL | " + this.id.substring(this.id.length - 2) + ": " + string);
     }
 }
 

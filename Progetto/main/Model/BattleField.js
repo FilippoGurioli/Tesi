@@ -56,3 +56,5 @@ class BattleField {
         }
     }
 }
+
+export { BattleField }; 

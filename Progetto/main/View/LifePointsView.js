@@ -4,7 +4,7 @@ class LifePointsView extends Croquet.View {
         super(model);
         this.model = model;
         this.parentView = parentView;
-        this.Log("Created: " + this.viewId + " for model: " + this.model.id);
+        this.Log("Model associated: " + this.model.id.substring(this.id.length - 2));
         
         this.subscribe(this.viewId, "heal", this.heal); 
         this.subscribe(this.viewId, "damage", this.damage);  //API: tutta la codebase view può inviare messaggi qui che poi vengono inoltrati al model

@@ -6,7 +6,7 @@ class TurnModel extends Croquet.Model {
     turn = new Turn();
 
     init({parent: parentModel}) {
-        this.Log("Created - " + this.id);
+        this.Log("Created");
 
         this.parentModel = parentModel;
         this.subscribe(this.id, "nextPhase", this.nextPhase);
@@ -26,7 +26,7 @@ class TurnModel extends Croquet.Model {
     }
 
     Log(string) {
-        console.log("TURNMODEL: " + string);
+        console.log("TURNMODEL | " + this.id.substring(this.id.length - 2) + ": " + string);
     }
 }
 

@@ -5,11 +5,11 @@ class CardModel extends Croquet.Model {
     init({parent: parentModel, cardId: cardId}) {
         this.parentModel = parentModel;
         this.card = new Card(cardId);
-        this.Log("Created - " + this.id);
+        this.Log("Created");
     }
 
     Log(message) {
-        console.log("CARDMODEL: " + message);
+        console.log("CARDMODEL | " + this.id.substring(this.id.length - 2) + ": " + message);
     }
 }
 
