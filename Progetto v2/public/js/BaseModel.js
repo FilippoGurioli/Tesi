@@ -12,6 +12,10 @@ class BaseModel extends Croquet.Model {
         this._initialize(data);
     }
 
+    _subscribeAll() {}
+
+    _initialize() {}
+
     _log(message) {
         console.log(this.constructor.name.toUpperCase() + " | " + this.id.substring(this.id.length - 2) + ": " + message);
     }

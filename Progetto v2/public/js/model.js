@@ -8,9 +8,9 @@ class RootModel extends BaseModel {
     }
 
     _subscribeAll() {
+        this.subscribe("colorButton", "clicked", this.changeHologramColor);
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop)
-        this.subscribe("colorButton", "clicked", this.changeHologramColor);
     }
     
     /**
