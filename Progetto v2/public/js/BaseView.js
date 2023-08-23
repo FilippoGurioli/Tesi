@@ -95,12 +95,18 @@ class BaseView extends Croquet.View {
      */
     sharedComponents = sharedComponents;
 
-    constructor(model) {
-        super(model);
-        this.model = model;
+    constructor(data) {
+        if (data.hasOwnProperty("model")) {
+            super(data.model);
+            this.model = data.model;
+        } else { //the first view initialized by croquet has only the ref to the model.
+            super(data);
+            this.model = data;
+        }
+        this.parent = data.parent;
         this._log("Created");
         this._subscribeAll();   //Croquet subscription method
-        this._initialize();     //Variables init method
+        this._initialize(data); //Variables init method
         this._initializeScene();//BABYLON scene init method
     }
 
