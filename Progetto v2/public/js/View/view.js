@@ -1,15 +1,16 @@
 import { BaseView } from "../BaseView.js";
+import { GameView } from "./GameView.js";
 
 const canvas = document.getElementById("renderCanvas"); 
 
 class RootView extends BaseView {
     
     _initialize() {
-        this._log("This view is " + this.viewId + " with model " + this.model.id.substring(this.model.id.length - 2));
+        this._log("This view is " + this.viewId);
     }
 
     _subscribeAll() {
-        //this.subscribe(this.viewId, "reload", this.reload);
+        this.subscribe(this.viewId, "reload", this._initializeScene);
     }
 
     _initializeScene() {
@@ -40,9 +41,8 @@ class RootView extends BaseView {
         button.onPointerDownObservable.add(() => {
             nearMenu.removeControl(button);
             this.sharedComponents.GUIManager.removeControl(nearMenu);
-            // this.gameView = new GameView(this.model.gameModel, this);
-            // this.children.push(this.gameView);
-            console.log("CREAZIONE GAMEVIEW");
+            this.gameView = new GameView({model: this.model.gameModel, parent: this});
+            this.children.push(this.gameView);
         });
         this.sharedComponents.GUIManager.addControl(nearMenu);
         nearMenu.addButton(button);
@@ -83,8 +83,8 @@ class RootView extends BaseView {
         } catch (err) {
             console.log("Articulated hand tracking not supported in this browser.");
         }
-        
-        xrHelper.baseExperience.camera.setTransformationFromNonVRCamera();
+        if (this.sharedComponents.xrCamera === null) this.sharedComponents.xrCamera = xrHelper.baseExperience.camera;
+        this.sharedComponents.xrCamera.setTransformationFromNonVRCamera();
         return this.sharedComponents.scene;
     }
 }

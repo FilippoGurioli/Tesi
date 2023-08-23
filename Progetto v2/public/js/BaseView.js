@@ -6,9 +6,10 @@ class SharedComponents {
 
     #scene = null;
     #camera = null;
+    #xrCamera = null;
     #light = null;
     #GUIManager = null;
-    tokens = {scene: true, camera: true, light: true, GUIManager: true };
+    tokens = {scene: true, camera: true, xr: true, light: true, GUIManager: true };
 
     /**
      * @param {BABYLON.Scene} value, the scene to set.
@@ -40,6 +41,22 @@ class SharedComponents {
 
     get camera() {
         return this.#camera;
+    }
+
+    /**
+     * @param {BABYLON.WebXRCamera} value, the xrCamera to set.
+     */
+     set xrCamera(value) {
+        if (this.tokens.xr) {
+            this.#xrCamera = value;
+            this.tokens.xr = false;
+        } else {
+            throw new Error("xrCamera already initialized");
+        }
+    }
+
+    get xrCamera() {
+        return this.#xrCamera;
     }
 
     /**
@@ -104,7 +121,7 @@ class BaseView extends Croquet.View {
             this.model = data;
         }
         this.parent = data.parent;
-        this._log("Created");
+        this._log("Created. Model associated: " + this.model.id.substring(this.model.id.length - 2));
         this._subscribeAll();   //Croquet subscription method
         this._initialize(data); //Variables init method
         this._initializeScene();//BABYLON scene init method

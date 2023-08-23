@@ -1,4 +1,5 @@
 import { BaseModel } from "../BaseModel.js";
+import { GameModel } from "./GameModel.js";
 
 class RootModel extends BaseModel {
 
@@ -20,9 +21,7 @@ class RootModel extends BaseModel {
         this._log("received view join " + viewId);
         this.linkedViews.push(viewId);
         if (this.gameModel === null) {
-            //this.gameModel = GameModel.create({parent: this});
-            //this.children.push(this.gameModel);
-            console.log("CREAZIONE GAMEMODEL");
+            this.gameModel = GameModel.create({parent: this});
         }
     }
 
@@ -35,11 +34,13 @@ class RootModel extends BaseModel {
         this.linkedViews.splice(this.linkedViews.indexOf(viewId),1);
     }
 
-    //! ci sarebbe destroyGameModel ma provo a non metterlo attualmente
+    destroyGameModel() {
+        this._log("Restarting game model");
+        this.gameModel.destroy();
+        this.gameModel = GameModel.create({parent: this}); //for testing, probably has to be changed with an if
+    }
 }
 
-
 RootModel.register("RootModel");
-
 
 export { RootModel };
