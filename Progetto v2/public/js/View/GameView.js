@@ -16,29 +16,34 @@ class GameView extends BaseView {
     }
 
     _initializeScene() {
-
-
         this.slate = new BABYLON.GUI.HolographicSlate("Info point");
         this.sharedComponents.GUIManager.addControl(this.slate);
-
-
-        this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        this.slate.minDimensions = new BABYLON.Vector2(5, 5);
+        this.slate.dimensions = new BABYLON.Vector2(5, 5);
+        this.slate.titleBarHeight = 0.75;
+        this.slate.title = "Titolo d'esempio!";
+        
+        this.grid = new BABYLON.GUI.Grid("Grid");
 
         this.textBlock = new BABYLON.GUI.TextBlock();
+        this.textBlock.width = 0.75;
+        this.textBlock.height = 0.55;
         this.textBlock.color = "white";
-        this.textBlock.fontSize = 48;
+        this.textBlock.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
+        this.textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.textBlock.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.textBlock.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
         this.textBlock.text = "Testo d'esempio";
-        this.textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-        this.textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-        
+
+        this.grid.background = "#000080";
+        this.grid.addControl(this.textBlock);
+        this.slate.content = this.grid;
+
         this.overlay = new BABYLON.GUI.Rectangle();
         this.overlay.width = "100%";
         this.overlay.height = "100%";
         this.overlay.background = "black";
         this.overlay.alpha = 0;
-
-        this.advancedTexture.addControl(this.overlay);
-        this.advancedTexture.addControl(this.textBlock);
         
         //! TMP: carta davanti al p1
         this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.sharedComponents.scene);
