@@ -17,7 +17,7 @@ class RootView extends BaseView {
         this.sharedComponents.scene.clearColor = new BABYLON.Color3.Black;
         
         //CAMERA
-        if (this.sharedComponents.camera === null) this.sharedComponents.camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1.7, -0.3), this.sharedComponents.scene);
+        if (this.sharedComponents.camera === null) this.sharedComponents.camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1.7, -1), this.sharedComponents.scene);
         this.sharedComponents.camera.minZ = 0.01;
         this.sharedComponents.camera.attachControl(canvas, true);
         
@@ -80,30 +80,35 @@ class RootView extends BaseView {
 
     async createWebXRExperience() {
         const supported = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-ar');
-        
+        let xrHelper;
         if (supported) {
             console.log("IMMERSIVE AR SUPPORTED");
-            const xrHelper = await this.sharedComponents.scene.createDefaultXRExperienceAsync({
+            xrHelper = await this.sharedComponents.scene.createDefaultXRExperienceAsync({
                 uiOptions: {
                     sessionMode: 'immersive-ar',
                     referenceSpaceType: "local-floor"
                 }
             });
         } else {
-            console.log("IMMERSIVE VR SUPPORTED")
-            const xrHelper = await this.sharedComponents.scene.createDefaultXRExperienceAsync({
+            console.log("IMMERSIVE VR SUPPORTED");
+            xrHelper = await this.sharedComponents.scene.createDefaultXRExperienceAsync({
                 uiOptions: {
                     sessionMode: 'immersive-vr',
                 }
             });
         }
         
+        //xrHelper.baseExperience.camera.setTransformationFromNonVRCamera(); //! attualmente bisogna ricordarsi ogni volta di richiamare questo metodo per far sì che camera e xrCamera siano sincronizzate
         try {
             xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
         } catch (err) {
             console.log("Articulated hand tracking not supported in this browser.");
         }
         
+        if (this.sharedComponents.bindedXRCamera === null) this.sharedComponents.bindedXRCamera = xrHelper.baseExperience.camera;
+        this.publish(this.model.id, "info", "prima xrCam: " + xrHelper.baseExperience.camera.position);
+        this.sharedComponents.camera.position = new BABYLON.Vector3(2,2,2);
+        this.publish(this.model.id, "info", "aggiornamento xrCam: " + xrHelper.baseExperience.camera.position);
         return this.sharedComponents.scene;
     }
 

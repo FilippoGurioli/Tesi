@@ -11,8 +11,9 @@ class RootModel extends BaseModel {
         this.subscribe("colorButton", "clicked", this.changeHologramColor);
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop)
+        this.subscribe(this.id, "info", (data) => this._log(data));
     }
-    
+
     /**
      * Handle a new connected view.
      * @param {any} viewId the id of the new view connected.
