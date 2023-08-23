@@ -6,10 +6,9 @@ class SharedComponents {
 
     #scene = null;
     #camera = null;
-    #xrCamera = null;
     #light = null;
     #GUIManager = null;
-    tokens = {scene: true, camera: true, xr: true, light: true, GUIManager: true };
+    tokens = {scene: true, camera: true, light: true, GUIManager: true };
 
     /**
      * @param {BABYLON.Scene} value, the scene to set.
@@ -41,21 +40,6 @@ class SharedComponents {
 
     get camera() {
         return this.#camera;
-    }
-
-    /**
-     * @param {BABYLON.WebXRCamera} value, the xrCamera to bind to the normal camera.s
-     */
-    set bindedXRCamera(value) {
-        //if (xr) {
-            this.#xrCamera = value;
-            this.#camera.onViewMatrixChangedObservable.add(function () {
-                console.log("aggiornamento");
-                this.#xrCamera.setTransformationFromNonVRCamera();
-            });
-        // } else {
-        //     throw new Error("XRCamera already initialized");
-        // }
     }
 
     /**

@@ -98,17 +98,13 @@ class RootView extends BaseView {
             });
         }
         
-        //xrHelper.baseExperience.camera.setTransformationFromNonVRCamera(); //! attualmente bisogna ricordarsi ogni volta di richiamare questo metodo per far sì che camera e xrCamera siano sincronizzate
         try {
             xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
         } catch (err) {
             console.log("Articulated hand tracking not supported in this browser.");
         }
         
-        if (this.sharedComponents.bindedXRCamera === null) this.sharedComponents.bindedXRCamera = xrHelper.baseExperience.camera;
-        this.publish(this.model.id, "info", "prima xrCam: " + xrHelper.baseExperience.camera.position);
-        this.sharedComponents.camera.position = new BABYLON.Vector3(2,2,2);
-        this.publish(this.model.id, "info", "aggiornamento xrCam: " + xrHelper.baseExperience.camera.position);
+        xrHelper.baseExperience.camera.setTransformationFromNonVRCamera();
         return this.sharedComponents.scene;
     }
 
