@@ -14,17 +14,6 @@ class TurnModel extends BaseModel {
 
     nextPhase() {
         this.turn.nextPhase();
-        if (this.turn.phase === Phase.DrawPhase) {
-            if (this.turn.isPlayer1Turn) {
-                // this.publish(this.parent.playersInfo.p1.viewId, "yourTurn");
-                // this.publish(this.parent.playersInfo.p2.viewId, "endTurn");
-                this.publish(this.id, "changeTurn", {view: this.parent.playersInfo.p1.viewId});
-            } else {
-                // this.publish(this.parent.playersInfo.p2.viewId, "yourTurn");
-                // this.publish(this.parent.playersInfo.p1.viewId, "endTurn");
-                this.publish(this.id, "changeTurn", {view: this.parent.playersInfo.p2.viewId});
-            }
-        }
     }
 }
 
