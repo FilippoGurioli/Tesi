@@ -3,12 +3,15 @@ import { Constants } from "../Utils/Constants.js";
 
 class GameView extends BaseView {
     
-    #wordsToStamp = [];
     #opponentRecovered = false;
+
+    counter = 0;
     
     _subscribeAll() {
         this.subscribe(this.viewId, "join-response", this.setPosition);
-        this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true)
+        this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
+        this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true);
+        this.subscribe(this.model.id, "game-over", this.gameOver);
     }
     
     _initialize() {
@@ -16,60 +19,65 @@ class GameView extends BaseView {
     }
 
     _initializeScene() {
-        this.slate = new BABYLON.GUI.HolographicSlate("Info point");
-        this.sharedComponents.GUIManager.addControl(this.slate);
-        //slate.minDimensions = new BABYLON.Vector2(50, 50);
-        this.slate.dimensions = new BABYLON.Vector2(50, 50);
-        this.slate.titleBarHeight = 3;
-        this.slate.title = "PLAYER 1 INFO";
-        this.slate.position = new BABYLON.Vector3(43, 83, 0);
-        
-        this.textBlock = new BABYLON.GUI.TextBlock(); //textBlock.text has to be modified during all the game (need the reference)
-        this.textBlock.width = 0.75;
-        this.textBlock.height = 0.55;
-        this.textBlock.color = "white";
-        this.textBlock.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
-        this.textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        this.textBlock.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.textBlock.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.textBlock.text = "";
-        
-        const grid = new BABYLON.GUI.Grid("Grid");
-        grid.background = "#000080";
-        grid.addControl(this.textBlock);
-        this.slate.content = grid;
 
-        this.overlay = new BABYLON.GUI.Rectangle();
-        this.overlay.width = "100%";
-        this.overlay.height = "100%";
-        this.overlay.background = "black";
-        this.overlay.alpha = 0;
+        //DA QUI INIZIA LA SLATE
+
+        const dialogSlate = new BABYLON.GUI.HolographicSlate("dialogSlate");
+    
+        dialogSlate.titleBarHeight = 0;
+        this.sharedComponents.GUIManager.addControl(dialogSlate);
+        dialogSlate.dimensions = new BABYLON.Vector2(15, 15);
+        dialogSlate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+        dialogSlate.node.position = new BABYLON.Vector3(-8, 10, 0);
         
+        const contentGrid = new BABYLON.GUI.Grid("grid");
+        const title = new BABYLON.GUI.TextBlock("title");
+        this.text = new BABYLON.GUI.TextBlock("text"); //the only one that could change
+
+        title.height = 0.2;
+        title.color = "white";
+        title.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
+        title.setPadding("5%", "5%", "5%", "5%");
+        title.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        title.text = "INFO";
+        title.fontWeight = "bold";
+        title.fontSize = 70;
+
+        this.text.height = 0.8;
+        this.text.color = "white";
+        this.text.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
+        this.text.setPadding("5%", "5%", "5%", "5%");
+        this.text.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.text.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.text.fontSize = 50;
+
+        contentGrid.addControl(title);
+        contentGrid.addControl(this.text);
+        contentGrid.background = "#000080";
+        dialogSlate.content = contentGrid;
+
+        //FINE SLATE
+
         //! TMP: carta davanti al p1
-        this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.sharedComponents.scene);
-        const material = new BABYLON.StandardMaterial("planeMaterial", this.sharedComponents.scene);
-        const textureFront = new BABYLON.Texture("img/dark-magician.webp", this.sharedComponents.scene);
-        const textureBack = new BABYLON.Texture("img/card-back.png", this.sharedComponents.scene);
-        
-        material.diffuseTexture = textureFront;
-        material.backFaceCulling = false; // Abilita il rendering delle facce posteriori
-        
-        this.plane.material = material;
-        
-        // Assegna la texture alla faccia posteriore
-        this.plane.onBeforeRenderObservable.add(() => {
-            if (this.sharedComponents.scene.activeCamera.isReady()) {
-                material.diffuseTexture = this.sharedComponents.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
-            }
-        });
-        this.plane.position = new BABYLON.Vector3(0,0,0);
-        this.plane.rotation.x = Math.PI / 2;
-        
-        this.sceneObjects.push(this.textBlock, this.overlay, this.plane, grid, this.slate);
-    }
+        // this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.parentView.scene);
+        // const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
+        // const textureFront = new BABYLON.Texture("main/res/dark-magician.webp", this.parentView.scene);
+        // const textureBack = new BABYLON.Texture("main/res/card-back.png", this.parentView.scene);
 
-    _update() {
-        console.log("POSITION: " + this.slate.position);
+        // material.diffuseTexture = textureFront;
+        // material.backFaceCulling = false; // Abilita il rendering delle facce posteriori
+
+        // this.plane.material = material;
+
+        // // Assegna la texture alla faccia posteriore
+        // this.plane.onBeforeRenderObservable.add(() => {
+        //     if (this.parentView.scene.activeCamera.isReady()) {
+        //         material.diffuseTexture = this.parentView.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
+        //     }
+        // });
+        // this.plane.position.y = 1;
+
+        this.sceneObjects.push(dialogSlate, contentGrid, this.text, title);
     }
 
     setPosition(data) {
@@ -93,24 +101,20 @@ class GameView extends BaseView {
 
     wait(reason, finalSentence, waitingForP2 = false) {
         //this.turnView?.discardUncoverableObjects();
-        this.textBlock.text = reason;
-        this.overlay.alpha = 0.5;
+        this.text.text = reason;
 
         this.waiting(finalSentence, waitingForP2);
     }
 
     waiting(finalSentence, waitingForP2) {
         if (this.#opponentRecovered) {
-            this.textBlock.text = "";
-            this.overlay.alpha = 0;
-            this.overlayText(finalSentence, 500);
             this.#opponentRecovered = false;
+            this.deleteText();
             //this.turnView?.restoreUncoverableObjects();
             if (waitingForP2)   this.#gameStart("Player 1");
             return;
         } else if (this.emergencyExit) {
             this.emergencyExit = false;
-            this.textBlock.text = "";
             return;
         }
         this.future(500).waiting(finalSentence, waitingForP2);
@@ -119,48 +123,28 @@ class GameView extends BaseView {
     gameOver(reason) {
         this.emergencyExit = true; //esce dalla wait
         //this.turnView.discardUncoverableObjects();
-        this.overlayText("Game Over\n" + reason, 6000);
+        this.text.text = "Game Over\n" + reason;
+        this.future(6000).deleteText();
         this.endScene();
     }
 
     endScene() {
         //this.BFView.plane.visibility -= 0.01;
-        this.plane.visibility -= 0.01;
         //if (this.BFView.plane.visibility > 0) this.future(100).endScene();
-        if (this.plane.visibility > 0) this.future(100).endScene();
+        this.counter++;
+        if (this.counter < 60) this.future(100).endScene();
         else {
             this.publish(this.viewId, "reload"); //view that generates the event must be one
             this.future(500).detach(); //tempo di sicurezza per il reload
         }
     }
 
-    overlayText(text, time = 3000) {
-        const textBlock = new BABYLON.GUI.TextBlock();
-        textBlock.color = "white";
-        textBlock.fontSize = 48;
-        textBlock.text = text;
-        textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-        textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-        this.#wordsToStamp.push({text:textBlock, time:time});
-    }
-
-    stampOverlayText() {
-        if (this.#wordsToStamp.length > 0) {
-            this.advancedTexture.addControl(this.#wordsToStamp[0].text);
-            this.future(this.#wordsToStamp[0].time).destroyOverlayText();
-        } else {
-            this.future(500).stampOverlayText();
-        }
-    }
-
-    destroyOverlayText() {
-        this.advancedTexture.removeControl(this.#wordsToStamp[0].text);
-        this.#wordsToStamp.shift();
-        this.stampOverlayText();
+    deleteText() {
+        this.text.text = "";
     }
 
     #gameStart(role) {
-        this.overlayText("You are " + role, 1000);
+        this.text.text = "You are " + role;
 
         // this.turnView = new TurnView(this.model.turnModel, this);
         // this.BFView = new BattleFieldView(this.model.battleFieldModel, this);

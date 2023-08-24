@@ -36,7 +36,7 @@ class RootModel extends BaseModel {
 
     destroyGameModel() {
         this._log("Restarting game model");
-        this.gameModel.destroy();
+        this.gameModel?.destroy();
         this.gameModel = GameModel.create({parent: this}); //for testing, probably has to be changed with an if
     }
 }
