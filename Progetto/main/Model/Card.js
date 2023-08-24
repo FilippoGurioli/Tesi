@@ -1,14 +1,18 @@
 import { Cards } from "../Utils/Constants.js"
+import { CardType } from "./CardFeature.js";
 
 class Card {
     constructor(id) {
         this.id = id;
-        const thisCard = Cards.find(card => card.id === id);
-        if (thisCard === undefined) throw new Error("Card not found");
-        this.name = thisCard.name;
-        this.type = thisCard.type;
-        this.image = image;
-        this.effect = thisCard.effect;
+        const cardIdentity = Cards.find(card => card.id === id);
+        if (cardIdentity === undefined) throw new Error("Card not found");
+        this.name = cardIdentity.name;
+        if (cardIdentity.type === "monster") this.type = CardType.Monster;
+        else if (cardIdentity.type === "spell") this.type = CardType.Spell;
+        else if (cardIdentity.type === "trap") this.type = CardType.Trap;
+        else throw new Error("Card type not found");
+        this.effect = cardIdentity.effect;
+        this.description = cardIdentity.description;
     }
 
     activateEffect() {

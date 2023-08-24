@@ -9,7 +9,6 @@ class GameModel extends Croquet.Model {
 
     battleFieldModel = BattleFieldModel.create({parent: this});
     
-    
     turnModel = TurnModel.create({parent: this});
     
     playersInfo = {
