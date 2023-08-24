@@ -80,6 +80,7 @@ class RootView extends BaseView {
         
         try {
             xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
+            this.sharedComponents.handTrackingSupport = true;
         } catch (err) {
             console.log("Articulated hand tracking not supported in this browser.");
         }

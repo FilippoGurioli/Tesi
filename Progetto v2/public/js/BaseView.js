@@ -9,15 +9,16 @@ class SharedComponents {
     #xrCamera = null;
     #light = null;
     #GUIManager = null;
-    tokens = {scene: true, camera: true, xr: true, light: true, GUIManager: true };
+    #handTrackingSupport = false;
+    #tokens = {scene: true, camera: true, xr: true, hts: true, light: true, GUIManager: true };
 
     /**
      * @param {BABYLON.Scene} value, the scene to set.
      */
     set scene(value) {
-        if (this.tokens.scene) {
+        if (this.#tokens.scene) {
             this.#scene = value;
-            this.tokens.scene = false;
+            this.#tokens.scene = false;
         } else {
             throw new Error("Scene already initialized");
         }
@@ -31,9 +32,9 @@ class SharedComponents {
      * @param {BABYLON.Camera} value, the camera to set.
      */
     set camera(value) {
-        if (this.tokens.camera) {
+        if (this.#tokens.camera) {
             this.#camera = value;
-            this.tokens.camera = false;
+            this.#tokens.camera = false;
         } else {
             throw new Error("Camera already initialized");
         }
@@ -47,9 +48,9 @@ class SharedComponents {
      * @param {BABYLON.WebXRCamera} value, the xrCamera to set.
      */
      set xrCamera(value) {
-        if (this.tokens.xr) {
+        if (this.#tokens.xr) {
             this.#xrCamera = value;
-            this.tokens.xr = false;
+            this.#tokens.xr = false;
         } else {
             throw new Error("xrCamera already initialized");
         }
@@ -63,9 +64,9 @@ class SharedComponents {
      * @param {BABYLON.Light} value, the light to set.
      */
     set light(value) {
-        if (this.tokens.light) {
+        if (this.#tokens.light) {
             this.#light = value;
-            this.tokens.light = false;
+            this.#tokens.light = false;
         } else {
             throw new Error("Light already initialized");
         }
@@ -79,9 +80,9 @@ class SharedComponents {
      * @param {BABYLON.GUIManager} value, the GUIManager to set.
      */
     set GUIManager(value) {
-        if (this.tokens.GUIManager) {
+        if (this.#tokens.GUIManager) {
             this.#GUIManager = value;
-            this.tokens.GUIManager = false;
+            this.#tokens.GUIManager = false;
         } else {
             throw new Error("GUIManager already initialized");
         }
@@ -89,6 +90,22 @@ class SharedComponents {
 
     get GUIManager() {
         return this.#GUIManager;
+    }
+
+    /**
+     * @param {boolean} value, set to true if the hand tracking is supported in this browser.
+     */
+    set handTrackingSupport(value) {
+        if (this.#tokens.hts) {
+            this.#handTrackingSupport = value;
+            this.#tokens.hts = false;
+        } else {
+            throw new Error("Hand tracking support already initialized");
+        }
+    }
+
+    get handTrackingSupport() {
+        return this.#handTrackingSupport;
     }
 }
 
