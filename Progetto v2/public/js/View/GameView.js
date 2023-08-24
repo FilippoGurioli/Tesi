@@ -2,7 +2,7 @@ import { BaseView } from "../BaseView.js";
 import { Constants } from "../Utils/Constants.js";
 
 class GameView extends BaseView {
-
+    
     #wordsToStamp = [];
     #opponentRecovered = false;
     
@@ -10,7 +10,7 @@ class GameView extends BaseView {
         this.subscribe(this.viewId, "join-response", this.setPosition);
         this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true)
     }
-
+    
     _initialize() {
         this.publish(this.model.id, "join", {view: this.viewId});
     }
@@ -18,14 +18,13 @@ class GameView extends BaseView {
     _initializeScene() {
         this.slate = new BABYLON.GUI.HolographicSlate("Info point");
         this.sharedComponents.GUIManager.addControl(this.slate);
-        this.slate.minDimensions = new BABYLON.Vector2(5, 5);
-        this.slate.dimensions = new BABYLON.Vector2(5, 5);
-        this.slate.titleBarHeight = 0.75;
-        this.slate.title = "Titolo d'esempio!";
+        //slate.minDimensions = new BABYLON.Vector2(50, 50);
+        this.slate.dimensions = new BABYLON.Vector2(50, 50);
+        this.slate.titleBarHeight = 3;
+        this.slate.title = "PLAYER 1 INFO";
+        this.slate.position = new BABYLON.Vector3(43, 83, 0);
         
-        this.grid = new BABYLON.GUI.Grid("Grid");
-
-        this.textBlock = new BABYLON.GUI.TextBlock();
+        this.textBlock = new BABYLON.GUI.TextBlock(); //textBlock.text has to be modified during all the game (need the reference)
         this.textBlock.width = 0.75;
         this.textBlock.height = 0.55;
         this.textBlock.color = "white";
@@ -33,11 +32,12 @@ class GameView extends BaseView {
         this.textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.textBlock.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
         this.textBlock.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        this.textBlock.text = "Testo d'esempio";
-
-        this.grid.background = "#000080";
-        this.grid.addControl(this.textBlock);
-        this.slate.content = this.grid;
+        this.textBlock.text = "";
+        
+        const grid = new BABYLON.GUI.Grid("Grid");
+        grid.background = "#000080";
+        grid.addControl(this.textBlock);
+        this.slate.content = grid;
 
         this.overlay = new BABYLON.GUI.Rectangle();
         this.overlay.width = "100%";
@@ -62,28 +62,33 @@ class GameView extends BaseView {
                 material.diffuseTexture = this.sharedComponents.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
             }
         });
-        this.plane.position.y = 1;
+        this.plane.position = new BABYLON.Vector3(0,0,0);
+        this.plane.rotation.x = Math.PI / 2;
         
-        this.sceneObjects.push(this.textBlock, this.plane, this.advancedTexture);
+        this.sceneObjects.push(this.textBlock, this.overlay, this.plane, grid, this.slate);
+    }
+
+    _update() {
+        console.log("POSITION: " + this.slate.position);
     }
 
     setPosition(data) {
-        // if (data.role === "Player 1") {
-        //     this.sharedComponents.camera.position = Constants.P1_POS;
-        //     if (!this.model.playersInfo.p2.isConnected) {
-        //         this.wait("Waiting for Player 2...", "", true);
-        //     } else {
-        //         this.#gameStart(data.role);
-        //     }
-        // } else if (data.role === "Player 2") {
-        //     this.sharedComponents.camera.position = Constants.P2_POS;
-        //     this.#gameStart(data.role);
-        // } else {
-        //     this.sharedComponents.camera.position = Constants.SPEC_POS;
-        //     this.#gameStart(data.role);
-        // }
-        // this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
-        // this.sharedComponents.xrCamera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
+        if (data.role === "Player 1") {
+            this.sharedComponents.camera.position = Constants.P1_POS;
+            if (!this.model.playersInfo.p2.isConnected) {
+                this.wait("Waiting for Player 2...", "", true);
+            } else {
+                this.#gameStart(data.role);
+            }
+        } else if (data.role === "Player 2") {
+            this.sharedComponents.camera.position = Constants.P2_POS;
+            this.#gameStart(data.role);
+        } else {
+            this.sharedComponents.camera.position = Constants.SPEC_POS;
+            this.#gameStart(data.role);
+        }
+        this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
+        this.sharedComponents.xrCamera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
     }
 
     wait(reason, finalSentence, waitingForP2 = false) {
