@@ -27,7 +27,6 @@ class GameModel extends BaseModel {
         this.subscribe(this.sessionId, "view-exit", this.left); //lefting the game (coincide with lefting the session)
         // this.subscribe(this.player1.id, "gameOver", () => this.gameOver(this.player1.id));
         // this.subscribe(this.player2.id, "gameOver", () => this.gameOver(this.player2.id));
-        this.subscribe(this.id, "info", (data) => console.log(data));
     }
 
     join(data) {

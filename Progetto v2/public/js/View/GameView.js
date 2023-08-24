@@ -5,6 +5,7 @@ class GameView extends BaseView {
     
     #opponentRecovered = false;
 
+    #resumeInfo = "";
     counter = 0;
     
     _subscribeAll() {
@@ -31,17 +32,16 @@ class GameView extends BaseView {
         dialogSlate.node.position = new BABYLON.Vector3(-8, 10, 0);
         
         const contentGrid = new BABYLON.GUI.Grid("grid");
-        const title = new BABYLON.GUI.TextBlock("title");
+        this.title = new BABYLON.GUI.TextBlock("title");
         this.text = new BABYLON.GUI.TextBlock("text"); //the only one that could change
 
-        title.height = 0.2;
-        title.color = "white";
-        title.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
-        title.setPadding("5%", "5%", "5%", "5%");
-        title.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-        title.text = "INFO";
-        title.fontWeight = "bold";
-        title.fontSize = 70;
+        this.title.height = 0.2;
+        this.title.color = "white";
+        this.title.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
+        this.title.setPadding("5%", "5%", "5%", "5%");
+        this.title.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        this.title.fontWeight = "bold";
+        this.title.fontSize = 70;
 
         this.text.height = 0.8;
         this.text.color = "white";
@@ -51,7 +51,7 @@ class GameView extends BaseView {
         this.text.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
         this.text.fontSize = 50;
 
-        contentGrid.addControl(title);
+        contentGrid.addControl(this.title);
         contentGrid.addControl(this.text);
         contentGrid.background = "#000080";
         dialogSlate.content = contentGrid;
@@ -77,23 +77,24 @@ class GameView extends BaseView {
         // });
         // this.plane.position.y = 1;
 
-        this.sceneObjects.push(contentGrid, this.text, title, dialogSlate);
+        this.sceneObjects.push(contentGrid, this.text, this.title, dialogSlate);
     }
 
     setPosition(data) {
+        this.title.text = data.role.toUpperCase();
         if (data.role === "Player 1") {
             this.sharedComponents.camera.position = Constants.P1_POS;
             if (!this.model.playersInfo.p2.isConnected) {
                 this.wait("Waiting for Player 2...", "", true);
             } else {
-                this.#gameStart(data.role);
+                this.#gameStart();
             }
         } else if (data.role === "Player 2") {
             this.sharedComponents.camera.position = Constants.P2_POS;
-            this.#gameStart(data.role);
+            this.#gameStart();
         } else {
             this.sharedComponents.camera.position = Constants.SPEC_POS;
-            this.#gameStart(data.role);
+            this.#gameStart();
         }
         this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
         this.sharedComponents.xrCamera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
@@ -101,21 +102,18 @@ class GameView extends BaseView {
 
     wait(reason, finalSentence, waitingForP2 = false) {
         //this.turnView?.discardUncoverableObjects();
+        this.resumeInfo = this.text.text;
         this.text.text = reason;
 
         this.waiting(finalSentence, waitingForP2);
     }
 
-    _update() {
-        this.publish(this.model.id, "info", this.sceneObjects.length);
-    }
-
     waiting(finalSentence, waitingForP2) {
         if (this.#opponentRecovered) {
             this.#opponentRecovered = false;
-            this.deleteText();
+            this.#gameResume();
             //this.turnView?.restoreUncoverableObjects();
-            if (waitingForP2)   this.#gameStart("Player 1");
+            if (waitingForP2)   this.#gameStart();
             return;
         } else if (this.emergencyExit) {
             this.emergencyExit = false;
@@ -128,7 +126,6 @@ class GameView extends BaseView {
         this.emergencyExit = true; //esce dalla wait
         //this.turnView.discardUncoverableObjects();
         this.text.text = "Game Over\n" + reason;
-        this.future(6000).deleteText();
         this.endScene();
     }
 
@@ -143,17 +140,20 @@ class GameView extends BaseView {
         }
     }
 
-    deleteText() {
-        this.text.text = "";
-    }
-
-    #gameStart(role) {
-        this.text.text = "You are " + role;
+    #gameStart() {
+        this.text.text = "YOUR TURN\n";
+        this.text.text += "Standby Phase";
+        this.#resumeInfo = this.text.text;
 
         // this.turnView = new TurnView(this.model.turnModel, this);
         // this.BFView = new BattleFieldView(this.model.battleFieldModel, this);
         // if (this.viewId === this.model.playersInfo.p1.viewId)      this.LPView = new LifePointsView(this.model.player1.lifePoints, this);
         // else if (this.viewId === this.model.playersInfo.p2.viewId) this.LPView = new LifePointsView(this.model.player2.lifePoints, this);
+    }
+
+    #gameResume() {
+        this.text.text = this.#resumeInfo;
+        console.log("RESUME INFO CALLED: " + this.#resumeInfo);
     }
 }
 
