@@ -21,9 +21,9 @@ const express = require("express");
 var path = require("path");
 const app = express();
 const port = 3000;
-const host = '192.168.40.100';//unibo
+//const host = '192.168.40.100';//unibo
 //const host = ipv4Addresses[0]; //portatile
-//const host = ipv4Addresses.find(addr => addr.startsWith('192.168.')); //fisso
+const host = ipv4Addresses.find(addr => addr.startsWith('192.168.')); //fisso
 
 https.createServer(
 	{

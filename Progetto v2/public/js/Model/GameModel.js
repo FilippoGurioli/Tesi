@@ -1,12 +1,13 @@
 import { BaseModel } from "../BaseModel.js";
 import { Constants } from "../Utils/Constants.js";
+import { TurnModel } from "./TurnModel.js";
 
 class GameModel extends BaseModel {
     
     #counter = 0;
-
+    
     _initialize() {
-
+        
         this.playersInfo = {
             p1: {
                 viewId: "",
@@ -18,6 +19,7 @@ class GameModel extends BaseModel {
             }
         }
 
+        this.turnModel = TurnModel.create({parent: this});
         // this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
         // this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
     }

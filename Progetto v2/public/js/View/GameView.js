@@ -1,5 +1,6 @@
 import { BaseView } from "../BaseView.js";
 import { Constants } from "../Utils/Constants.js";
+import { TurnView } from "./TurnView.js";
 
 class GameView extends BaseView {
     
@@ -12,6 +13,8 @@ class GameView extends BaseView {
         this.subscribe(this.viewId, "join-response", this.setPosition);
         this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
         this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true);
+        this.subscribe(this.model.turnModel.id, "changeTurn", this.changeTurn);
+        this.subscribe(this.model.turnModel.id, "nextPhase", this.nextPhase);
         this.subscribe(this.model.id, "game-over", this.gameOver);
     }
     
@@ -20,20 +23,16 @@ class GameView extends BaseView {
     }
 
     _initializeScene() {
-
-        //DA QUI INIZIA LA SLATE
-
-        const dialogSlate = new BABYLON.GUI.HolographicSlate("dialogSlate");
+        this.slate = new BABYLON.GUI.HolographicSlate("slate");
     
-        dialogSlate.titleBarHeight = 0;
-        this.sharedComponents.GUIManager.addControl(dialogSlate);
-        dialogSlate.dimensions = new BABYLON.Vector2(15, 11);
-        dialogSlate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-        dialogSlate.node.position = new BABYLON.Vector3(-8, 8, 0);
+        this.slate.titleBarHeight = 0;
+        this.sharedComponents.GUIManager.addControl(this.slate);
+        this.slate.dimensions = new BABYLON.Vector2(15, 11);
+        this.slate.node.position = new BABYLON.Vector3(-8, 8, 0);
         
         const contentGrid = new BABYLON.GUI.Grid("grid");
         this.title = new BABYLON.GUI.TextBlock("title");
-        this.text = new BABYLON.GUI.TextBlock("text"); //the only one that could change
+        this.text = new BABYLON.GUI.TextBlock("text");
 
         this.title.height = 0.2;
         this.title.color = "white";
@@ -54,9 +53,7 @@ class GameView extends BaseView {
         contentGrid.addControl(this.title);
         contentGrid.addControl(this.text);
         contentGrid.background = "#000080";
-        dialogSlate.content = contentGrid;
-
-        //FINE SLATE
+        this.slate.content = contentGrid;
 
         //! TMP: carta davanti al p1
         // this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.parentView.scene);
@@ -77,13 +74,14 @@ class GameView extends BaseView {
         // });
         // this.plane.position.y = 1;
 
-        this.sceneObjects.push(contentGrid, this.text, this.title, dialogSlate);
+        this.sceneObjects.push(contentGrid, this.text, this.title, this.slate);
     }
 
     setPosition(data) {
         this.title.text = data.role.toUpperCase();
         if (data.role === "Player 1") {
             this.sharedComponents.camera.position = Constants.P1_POS;
+            this.slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
             if (!this.model.playersInfo.p2.isConnected) {
                 this.wait("Waiting for Player 2...", "", true);
             } else {
@@ -91,9 +89,12 @@ class GameView extends BaseView {
             }
         } else if (data.role === "Player 2") {
             this.sharedComponents.camera.position = Constants.P2_POS;
+            this.slate.node.rotation = new BABYLON.Vector3(0, 0, 0);
             this.#gameStart();
         } else {
             this.sharedComponents.camera.position = Constants.SPEC_POS;
+            this.slate.node.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
+            this.title.text = this.title.text.substring(2); //needed to remove the "a" in "a Spectator"
             this.#gameStart();
         }
         this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
@@ -140,12 +141,35 @@ class GameView extends BaseView {
         }
     }
 
-    #gameStart() {
-        this.text.text = "YOUR TURN\n";
-        this.text.text += "Standby Phase";
-        this.#resumeInfo = this.text.text;
+    changeTurn(data) {
+        let rest = this.text.text.split("\n").slice(1).join("\n");
+        const currentPlayerInfo = this.model.playersInfo;
 
-        // this.turnView = new TurnView(this.model.turnModel, this);
+        let textToShow = "";
+
+        if (data.view === this.viewId) {
+            textToShow = "YOUR TURN";
+        } else if (this.viewId === currentPlayerInfo.p1.viewId || this.viewId === currentPlayerInfo.p2.viewId) {
+            textToShow = "OPPONENT'S TURN";
+        } else {
+            if (data.view === currentPlayerInfo.p1.viewId) {
+                textToShow = "PLAYER1'S TURN";
+            } else if (data.view === currentPlayerInfo.p2.viewId) {
+                textToShow = "PLAYER2'S TURN";
+            }
+        }
+
+        this.text.text = textToShow + "\n" + rest;
+        this.#resumeInfo = this.text.text;
+    }
+
+    #gameStart() {
+        this.text.text = "TURN\n";
+        this.text.text += "PHASE";
+        this.changeTurn({view: this.model.playersInfo.p1.viewId});
+
+        this.turnView = new TurnView({model: this.model.turnModel, parent: this, myTurn: this.viewId === this.model.playersInfo.p1.viewId});
+        this.children.push(this.turnView);
         // this.BFView = new BattleFieldView(this.model.battleFieldModel, this);
         // if (this.viewId === this.model.playersInfo.p1.viewId)      this.LPView = new LifePointsView(this.model.player1.lifePoints, this);
         // else if (this.viewId === this.model.playersInfo.p2.viewId) this.LPView = new LifePointsView(this.model.player2.lifePoints, this);
@@ -153,7 +177,6 @@ class GameView extends BaseView {
 
     #gameResume() {
         this.text.text = this.#resumeInfo;
-        console.log("RESUME INFO CALLED: " + this.#resumeInfo);
     }
 }
 
