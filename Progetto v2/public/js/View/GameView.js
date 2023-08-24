@@ -77,7 +77,7 @@ class GameView extends BaseView {
         // });
         // this.plane.position.y = 1;
 
-        this.sceneObjects.push(dialogSlate, contentGrid, this.text, title);
+        this.sceneObjects.push(contentGrid, this.text, title, dialogSlate);
     }
 
     setPosition(data) {
@@ -104,6 +104,10 @@ class GameView extends BaseView {
         this.text.text = reason;
 
         this.waiting(finalSentence, waitingForP2);
+    }
+
+    _update() {
+        this.publish(this.model.id, "info", this.sceneObjects.length);
     }
 
     waiting(finalSentence, waitingForP2) {
