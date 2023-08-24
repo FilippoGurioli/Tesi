@@ -27,9 +27,9 @@ class GameView extends BaseView {
     
         dialogSlate.titleBarHeight = 0;
         this.sharedComponents.GUIManager.addControl(dialogSlate);
-        dialogSlate.dimensions = new BABYLON.Vector2(15, 15);
+        dialogSlate.dimensions = new BABYLON.Vector2(15, 11);
         dialogSlate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-        dialogSlate.node.position = new BABYLON.Vector3(-8, 10, 0);
+        dialogSlate.node.position = new BABYLON.Vector3(-8, 8, 0);
         
         const contentGrid = new BABYLON.GUI.Grid("grid");
         this.title = new BABYLON.GUI.TextBlock("title");
