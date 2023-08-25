@@ -27,7 +27,7 @@ class BattleFieldView extends BaseView {
         fadeInAnimation.setKeys(fadeInKeys);
         this.plane.animations.push(fadeInAnimation);
         this.sharedComponents.scene.beginAnimation(this.plane, 0, 60, false);
-        this.sceneObjects.push(this.plane, material, fadeInAnimation, fadeInKeys);
+        this.sceneObjects.push(this.plane);
     }
 
 }

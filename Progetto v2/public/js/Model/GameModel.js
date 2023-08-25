@@ -2,6 +2,7 @@ import { BaseModel } from "../BaseModel.js";
 import { Constants } from "../Utils/Constants.js";
 import { TurnModel } from "./TurnModel.js";
 import { BattleFieldModel } from "./BattleFieldModel.js";
+import { PlayerModel } from "./PlayerModel.js";
 
 class GameModel extends BaseModel {
     
@@ -22,15 +23,15 @@ class GameModel extends BaseModel {
 
         this.turnModel = TurnModel.create({parent: this});
         this.battleFieldModel = BattleFieldModel.create({parent: this});
-        // this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
-        // this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player1.opponent = this.player2;
+        this.player2.opponent = this.player1;
     }
 
     _subscribeAll() {
         this.subscribe(this.id, "join", this.join); //joining the game (different from simply joining the session)
         this.subscribe(this.sessionId, "view-exit", this.left); //lefting the game (coincide with lefting the session)
-        // this.subscribe(this.player1.id, "gameOver", () => this.gameOver(this.player1.id));
-        // this.subscribe(this.player2.id, "gameOver", () => this.gameOver(this.player2.id));
     }
 
     join(data) {
@@ -82,7 +83,7 @@ class GameModel extends BaseModel {
         if (!this.playersInfo.p1.isConnected || !this.playersInfo.p2.isConnected) {
             this.#counter++;
             if (this.#counter >= Constants.DISC_TIME_LIMIT) {
-                this.publish(this.id, "game-over", "Player disconnected");
+                this.publish(this.id, "disconnection");
                 this.parent.destroyGameModel();
             } else {
                 this._log("Waiting for reconnection...");
@@ -91,10 +92,6 @@ class GameModel extends BaseModel {
         } else {
             this.#counter = 0;
         }
-    }
-
-    gameOver(loser) {
-        this.publish(this.id, "game-over", loser === this.player1.lifePoints.id ? "Player 2 win" : "Player 1 win");
     }
 
 }

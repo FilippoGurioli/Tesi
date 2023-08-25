@@ -2,6 +2,7 @@ import { BaseView } from "../BaseView.js";
 import { Constants } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
 import { BattleFieldView } from "./BattleFieldView.js";
+import { PlayerView } from "./PlayerView.js";
 
 class GameView extends BaseView {
     
@@ -15,7 +16,7 @@ class GameView extends BaseView {
         this.subscribe(this.viewId, "join-response", this.setPosition);
         this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
         this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true);
-        this.subscribe(this.model.id, "game-over", this.gameOver);
+        this.subscribe(this.model.id, "disconnection", () => this.gameOver("Player disconnected"));
     }
     
     _initialize() {
@@ -35,16 +36,16 @@ class GameView extends BaseView {
         this.sharedComponents.xrCamera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
         this.#gameStart();
         if (!this.model.playersInfo.p2.isConnected) {
-            this.wait("Waiting for Player 2...", "", true);
+            this.wait("Waiting for Player 2...", "");
         }
     }
 
-    wait(reason, finalSentence, waitingForP2 = false) {
+    wait(reason, finalSentence) {
         this.turnView.displaySpecialMessage(reason);
-        this.waiting(finalSentence, waitingForP2);
+        this.waiting(finalSentence);
     }
 
-    waiting(finalSentence, waitingForP2) {
+    waiting(finalSentence) {
         if (this.#opponentRecovered) {
             this.#opponentRecovered = false;
             this.turnView.resume();
@@ -53,12 +54,12 @@ class GameView extends BaseView {
             this.emergencyExit = false;
             return;
         }
-        this.future(500).waiting(finalSentence, waitingForP2);
+        this.future(500).waiting(finalSentence);
     }
 
-    gameOver(reason) {
+    gameOver(data) {
         this.emergencyExit = true; //exit from waiting
-        this.turnView.displaySpecialMessage("Game Over\n" + reason);
+        this.turnView.displaySpecialMessage("Game Over\n" + data.reason);
         this.endScene();
     }
 
@@ -68,17 +69,22 @@ class GameView extends BaseView {
         this.counter++;
         if (this.counter < 60) this.future(100).endScene();
         else {
-            this.publish(this.viewId, "reload"); //view that generates the event must be one
-            this.future(500).detach(); //tempo di sicurezza per il reload
+            this.publish(this.viewId, "reload"); //reload the first scene
+            this.detach();
         }
     }
 
     #gameStart() {
         this.turnView = new TurnView({model: this.model.turnModel, parent: this, role: this.#role});
-        this.children.push(this.turnView);
         this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
-        // if (this.viewId === this.model.playersInfo.p1.viewId)      this.LPView = new LifePointsView(this.model.player1.lifePoints, this);
-        // else if (this.viewId === this.model.playersInfo.p2.viewId) this.LPView = new LifePointsView(this.model.player2.lifePoints, this);
+        this.children.push(this.turnView, this.BFView);
+        if (this.viewId === this.model.playersInfo.p1.viewId) {
+            this.playerView = new PlayerView({model: this.model.player1, parent: this});
+            this.children.push(this.playerView);
+        } else if (this.viewId === this.model.playersInfo.p2.viewId) {
+            this.playerView = new PlayerView({model: this.model.player2, parent: this});
+            this.children.push(this.playerView);
+        }
     }
 
 }

@@ -76,21 +76,21 @@ class TurnView extends BaseView {
         
         const lines = this.text.text.split("\n");
 
-        if (this.model.turn.isPlayer1Turn && this.role === "Player 1" || !this.model.turn.isPlayer1Turn && this.role === "Player 2") {
+        if (this.model.isPlayer1Turn && this.role === "Player 1" || !this.model.isPlayer1Turn && this.role === "Player 2") {
             lines[0] = "Your turn";
             this.turnMenu.isVisible = true;
-        } else if (this.model.turn.isPlayer1Turn && this.role === "Player 2" || !this.model.turn.isPlayer1Turn && this.role === "Player 1") {
+        } else if (this.model.isPlayer1Turn && this.role === "Player 2" || !this.model.isPlayer1Turn && this.role === "Player 1") {
             lines[0] = "Opponent's turn";
             this.turnMenu.isVisible = false;
         } else {
-            if (this.model.turn.isPlayer1Turn) {
+            if (this.model.isPlayer1Turn) {
                 lines[0] = "Player 1's turn";
             } else {
                 lines[0] = "Player 2's turn";
             }
         }
 
-        lines[1] = this.model.turn.phase;
+        lines[1] = this.model.phase;
         
         this.text.text = lines.join("\n");
         
