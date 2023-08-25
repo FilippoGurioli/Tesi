@@ -1,129 +1,24 @@
 \chapter{Stato dell'arte}\label{chap:Letteratura}
-Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante
-tecnologie e metodologie utilizzate per lo sviluppo di videogiochi e come 
-vengano adattate alla realtà aumentata. Si affronteranno le problematiche della 
-gestione cooperativa dell'esperienza di gioco e quali tecnologie ne permettano 
-la realizzazione. Infine si darà una panoramica delle strutture messe a 
-disposizione per creare mondi virtuali attualmente presenti in letteratura.
+Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante la extended reality, 
+in particolare, si toccherà il tema di dello sviluppo di videogiochi in ambito AR e VR. Successivamente
+si analizzerà la letteratura riguardante il tema della cooperativa, come questa sia attualmente 
+realizzata nei software comuni e come invece viene applicata al caso di studio di questa tesi, 
+sottolineando l'importanza del web al giorno d'oggi.
 
-\section{Game Programming Pattern}\label{sec:GameProgrammingPattern}
-% In questa sezione si farà principalmente riferimento al libro \textit{''Game Programming Patterns''}
-% di Robert Nystrom\cite{Nystrom2014}, in cui vengono descritti i pattern più comuni nel
-% game design. Nel testo vengono citate 5 macrocategorie:
-% \begin{itemize}
-%     \item Design Pattern rivisitati,
-%     \item sequencing pattern,
-%     \item pattern comportamentali,
-%     \item pattern di disaccoppiamento,
-%     \item pattern di ottimizzazione.
-% \end{itemize}
+\section{Extended Reality}\label{sec:XR}
+    \subsection{Definizione}\label{subsec:XRDef}
+    \subsection{Tipologie}\label{subsec:XRTipologie}
 
-\subsection{Design Pattern rivisitati}\label{ssec:DesignPattern}
-% I design pattern sono i pattern più comuni e noti, sono stati descritti per la prima
-% volta nel libro \textit{''Design Patterns: Elements of Reusable Object-Oriented Software''}
-% ~\cite{gangof4}. Nel libro di Nystrom vengono rivisitati alcuni di questi pattern
-% in chiave videoludica ed in particolare si analizzano i seguenti: Command, Flyweight,
-% Observer, Prototype, Singleton e State. Data la vastità di argomenti che copre quel libro
-% non verranno analizzati tutti, bensì solo quelli che si ritengono più rilevanti per
-% questo progetto di tesi.
+\section{Videogiochi}\label{sec:Videogiochi}
+Qui verrà introdotto Unity.
+    \subsection{Definizione}\label{subsec:VideogiochiDef}
+    \subsection{Tipologie}\label{subsec:VideogiochiTipologie}
 
-\paragraph{Command Pattern}
-% Il command pattern è definito nel libro come \textit{''la reificazione 
-% di una chiamata di funzione''}, in pratica si tratta di modellare una classe
-% che permetta di creare un livello di astrazione tra quando un comando
-% viene invocato e quando viene eseguito. Si crea un'interfaccia `Command'
-% che specifica solo un metodo `execute', dopodichè si creano delle classi
-% che implementano tale interfaccia e che rappresentino un comando ben specifico
-% (e.g. salta, corri, attacca etc.). Nella sua essenza il command pattern è quanto
-% appena detto ma il modo in cui viene utilizzato è forse la cosa più interessante:
-% nell'ipotetica classe `InputHandler' si potrà dichiarare una istanza della classe
-% `Command' per ogni tipo di interazione che l'utente può eseguire (e.g. premere un tasto,
-% drag and drop, gestures di vario genere etc.) ed assegnare a questo oggetto una qualsiasi
-% delle classi precedentemente definite, svincolando così l'interazione dall'esecuzione
-% di un determinato evento. I vantaggi del command pattern, spiega Nystrom, non si
-% fermano solo alla possibilità di creare il key binding ma, serializzando i comandi,
-% si possono mandare in rete per realizzare un gioco multiplayer. Si lascia il codice
-% ~\ref{lst:commandPattern.ts} come esemplificazione di quanto appena spiegato.
-% \code{commandPattern.ts}{Codice d'esempio per l'implementazione del command pattern.}
-
-\paragraph{Observer pattern}
-% L'observer pattern è uno dei più famosi e più utilizzati pattern presenti in
-% letteratura. La stessa Microsoft ne ha fornito una implementazione all'interno del framework 
-% .NET. L'observer pattern si basa sui concetti di \textit{evento} e \textit{osservatore}:
-% quando un oggetto modifica il suo stato e produce un qualche risultato visibile
-% genera un \textit{evento}. Questo può essere osservato dall'\textit{osservatore} 
-% che, a sua volta, può reagire all'evento stesso, eseguendo del codice. Questa idea
-% ribalta il concetto normalmente utilizzato in cui per permettere ad un oggetto B
-% di reagire ad un cambiamento di stato di un oggetto A, quest'ultimo deve avere
-% un riferimento all'oggetto B. Questo pattern crea un layer di astrazione tra l'oggetto
-% che genera l'evento e l'oggetto che vuole reagirci, svincolando il generatore dal
-% conoscere l'osservatore. Nel contesto di un videogioco questo pattern è spesso usato in modo
-% verticale su tutta la codebase, a partire dalla gestione generale di eventi di gioco fino ad arrivare
-% alla gestione di contesti particolari come la gestione degli input, degli achievements o delle
-% collisioni. Data la grande versatilità del pattern è facile che possa sfuggire di mano,
-% inserendolo anche dove basterebbe usare una banalissima chiamata di metodo. Per questo
-% Nystrom fornisce un semplice criterio da seguire per evitare di cadere in errore: 
-% il pattern, spiega, andrebbe applicato ogni qualvolta l'oggetto che genera l'evento
-% non ha senso che conosca l'osservatore, l'esempio lampante che viene fornito anche nel libro
-% è il voler implementare un achievement alla prima volta che si viaggia ad una certa
-% velocità verticale (si cade). Nel modo più semplice basterebbe mettere nel sistema che
-% gestisce la fisica un controllo che verifica se le condizioni si avverano, 
-% nel qual caso chiamare un metodo del sistema di achievement `unlockAchievement' per 
-% completare l'operazione. In questo scenario il motore fisico dovrebbe avere
-% un riferimento alla classe di Achievement; al contrario se il motore fisico
-% generasse un evento non preoccupandosi di chi reagisce a questo ecco che il vincolo
-% referenziale non esisterebbe più. Si lascia il codice ~\ref{lst:observerPattern.ts} come esempio
-% di implementazione del pattern observer.
-% \code{observerPattern.ts}{Codice d'esempio per l'implementazione dell'observer pattern.}
-
-\subsection{Sequencing pattern}\label{ssec:SequencingPattern}
-% I sequencing pattern sono pattern che permettono di gestire il tempo di gioco,
-% ovvero la sequenza di eventi che caratterizzano il passare del tempo all'interno
-% di un gioco. Si analizzeranno quindi i seguenti pattern: Game Loop e Update Method.
-
-\paragraph{Game Loop}
-% È risaputo che i videogiochi rompano il concetto di macchina di Turing, ovvero
-% non esiste un concetto di input, calcolo e output, dopo il quale il programma termina.
-% Al contrario l'eseprienza di gioco risulta in un flusso continuo di operazioni, questo
-% flusso ininterrotto è dato proprio dal game loop. Il game loop è un pattern che
-% permette di gestire il tempo di gioco, ovvero il passare del tempo all'interno
-% di un gioco. Il game loop è un ciclo infinito che si occupa di gestire gli input,
-% aggiornare la logica di gioco e renderizzare il frame corrente. 
-% \code{gameLoop1.ts}{Game loop semplice.}
-% Le sue caratteristiche permettono di scindere il tempo reale dal tempo di gioco 
-% sfruttando il concetto di frame rate. Il frame rate è il numero di frame che 
-% vengono renderizzati in un secondo. Se non ci fosse alcun controllo sul framerate a 
-% cui viaggia il gioco si riscontrerebbero ambiguità per cui se un pc è più 
-% potente di un altro il gioco viaggerà più veloce sul primo che sul secondo, 
-% con conseguenze ancora peggiori se i due giocatori stessero giocando alla 
-% stessa partita in multiplayer. Per questo motivo il game loop è anche 
-% responsabile di rendere il gioco indipendente dal framerate, ovvero di 
-% aggiornare la logica di gioco in base al tempo trascorso dall'ultimo aggiornamento
-% e non in base al numero di frame renderizzati. Per realizzare ciò (nel
-% modo più semplice) si sceglie un framerate a cui far andare il gioco (e.g. 60 
-% fps) e si calcola il tempo che intercorre tra un frame e l'altro (e.g. 16.6 ms),
-% facendo attendere il gioco se avanzasse tempo (e.g. 60 - 16.6 = 43.4ms).
-% \img{GameLoopLogics.png}{Logica di gestione del tempo nel game loop.}
-% \code{gameLoop2.ts}{Game loop con gestione del tempo.}
-
-\paragraph{Update Method}
-
-\subsection{Pattern di disaccoppiamento}\label{ssec:PatternDisaccoppiamento}
-\paragraph{Component pattern}
-\paragraph{Event queue}
-placeholder
-\\\newline
-Si noti che sono stati analizzati solo alcuni dei pattern presenti nel libro di 
-Nystrom, per una trattazione più approfondita si rimanda al libro stesso. Le scelte
-delle tematiche sono state fatte per brevità e per rilevanza rispetto al progetto
-di tesi.
-
-\section{Framework per la gestione cooperativa}\label{sec:Cooperativa}
-\subsection{Reti}\label{ssec:Reti}
-\subsection{Client-Server e peer-to-peer}\label{ssec:CS&P2P}
-\subsection{Croquet}\label{ssec:IntroCroquet}
-
-\section{Framework per sviluppo 3D}\label{sec:FW3D}
-\subsection{Blender}\label{ssec:Blender}
-\subsection{Unity}\label{ssec:Unity}
-\subsection{BabylonJS}\label{ssec:IntroBabylonJS}
+\section{Cooperativa}\label{sec:Coop}
+    \subsection{Definizione}\label{subsec:CoopDef}
+    \subsection{Tipologie}\label{subsec:CoopTipologie}
+    \subsection{Applicazioni}\label{subsec:CoopApplicazioni}
+        \paragraph{Al giorno d'oggi}\label{par:CoopOggi}
+        \paragraph{Videogiochi}\label{par:CoopVideogiochi}
+        \paragraph{Web}\label{par:CoopWeb}
+        Qui verrà fatto il confronto tra Unity e WebXR.
