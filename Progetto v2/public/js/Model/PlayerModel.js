@@ -1,5 +1,6 @@
 import { BaseModel } from "../BaseModel.js";
 import { LifePointsModel } from "./LifePointsModel.js";
+import { HandModel } from "./HandModel.js";
 
 class PlayerModel extends BaseModel {
 
@@ -9,8 +10,7 @@ class PlayerModel extends BaseModel {
 
         this.lifePoints = LifePointsModel.create({parent: this});
 
-        this.battleField = data.battleField;
-        //this.handModel = HandModel.create({parent: this});
+        this.hand = HandModel.create({parent: this, battleField: data.battleField, hand: [46986414]});
         //this.deck.addCardOnTop(CardModel.create({parent: this, cardId: 83968380}));
     }
 
