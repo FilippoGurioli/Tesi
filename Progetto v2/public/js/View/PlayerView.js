@@ -3,7 +3,11 @@ import { LifePointsView } from "./LifePointsView.js";
 
 class PlayerView extends BaseView {
 
-    #lifePoints = new LifePointsView({parent: this, model: this.model.lifePoints});
+    
+    _initialize() {
+        this.lifePoints = new LifePointsView({parent: this, model: this.model.lifePoints});
+        this.children.push(this.lifePoints);
+    }
 
     _subscribeAll() {
         this.subscribe(this.model.id, "gameOver", this.gameOver);
