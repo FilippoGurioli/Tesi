@@ -1,6 +1,7 @@
 import { BaseModel } from "../BaseModel.js";
 import { Constants } from "../Utils/Constants.js";
 import { TurnModel } from "./TurnModel.js";
+import { BattleFieldModel } from "./BattleFieldModel.js";
 
 class GameModel extends BaseModel {
     
@@ -20,6 +21,7 @@ class GameModel extends BaseModel {
         }
 
         this.turnModel = TurnModel.create({parent: this});
+        this.battleFieldModel = BattleFieldModel.create({parent: this});
         // this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
         // this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
     }

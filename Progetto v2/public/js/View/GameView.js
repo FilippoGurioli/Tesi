@@ -1,6 +1,7 @@
 import { BaseView } from "../BaseView.js";
 import { Constants } from "../Utils/Constants.js";
 import { TurnView } from "./TurnView.js";
+import { BattleFieldView } from "./BattleFieldView.js";
 
 class GameView extends BaseView {
     
@@ -21,30 +22,6 @@ class GameView extends BaseView {
         this.publish(this.model.id, "join", {view: this.viewId});
     }
 
-    _initializeScene() {
-
-        //! TMP: carta davanti al p1
-        // this.plane = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.parentView.scene);
-        // const material = new BABYLON.StandardMaterial("planeMaterial", this.parentView.scene);
-        // const textureFront = new BABYLON.Texture("main/res/dark-magician.webp", this.parentView.scene);
-        // const textureBack = new BABYLON.Texture("main/res/card-back.png", this.parentView.scene);
-
-        // material.diffuseTexture = textureFront;
-        // material.backFaceCulling = false; // Abilita il rendering delle facce posteriori
-
-        // this.plane.material = material;
-
-        // // Assegna la texture alla faccia posteriore
-        // this.plane.onBeforeRenderObservable.add(() => {
-        //     if (this.parentView.scene.activeCamera.isReady()) {
-        //         material.diffuseTexture = this.parentView.scene.activeCamera.position.z > this.plane.position.z ? textureBack : textureFront;
-        //     }
-        // });
-        // this.plane.position.y = 1;
-
-        //this.sceneObjects.push(contentGrid, this.text, this.title, this.slate);
-    }
-
     setPosition(data) {
         this.#role = data.role;
         if (data.role === "Player 1") {
@@ -63,7 +40,6 @@ class GameView extends BaseView {
     }
 
     wait(reason, finalSentence, waitingForP2 = false) {
-        //this.turnView?.discardUncoverableObjects();
         this.turnView.displaySpecialMessage(reason);
         this.waiting(finalSentence, waitingForP2);
     }
@@ -72,7 +48,6 @@ class GameView extends BaseView {
         if (this.#opponentRecovered) {
             this.#opponentRecovered = false;
             this.turnView.resume();
-            //this.turnView?.restoreUncoverableObjects();
             return;
         } else if (this.emergencyExit) {
             this.emergencyExit = false;
@@ -83,7 +58,6 @@ class GameView extends BaseView {
 
     gameOver(reason) {
         this.emergencyExit = true; //exit from waiting
-        //this.turnView.discardUncoverableObjects();
         this.turnView.displaySpecialMessage("Game Over\n" + reason);
         this.endScene();
     }
@@ -102,7 +76,7 @@ class GameView extends BaseView {
     #gameStart() {
         this.turnView = new TurnView({model: this.model.turnModel, parent: this, role: this.#role});
         this.children.push(this.turnView);
-        // this.BFView = new BattleFieldView(this.model.battleFieldModel, this);
+        this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
         // if (this.viewId === this.model.playersInfo.p1.viewId)      this.LPView = new LifePointsView(this.model.player1.lifePoints, this);
         // else if (this.viewId === this.model.playersInfo.p2.viewId) this.LPView = new LifePointsView(this.model.player2.lifePoints, this);
     }
