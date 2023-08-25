@@ -58,7 +58,7 @@ class TurnView extends BaseView {
         slate.content = contentGrid;
 
         //TURN MENU
-        if (this.sharedComponents.handTrackingSupport) this.turnMenu = new BABYLON.GUI.HandMenu("Turn Menu");
+        if (this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeature(BABYLON.WebXRFeatureName.HAND_TRACKING)) this.turnMenu = new BABYLON.GUI.HandMenu("Turn Menu");
         else                                           this.turnMenu = new BABYLON.GUI.NearMenu("Turn Menu");
         this.button = new BABYLON.GUI.TouchHolographicButton("Next Phase");
         this.button.text = "Next Phase";

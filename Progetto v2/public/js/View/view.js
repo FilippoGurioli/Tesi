@@ -77,15 +77,13 @@ class RootView extends BaseView {
                 }
             });
         }
-        
+        if (this.sharedComponents.xrHelper === null) this.sharedComponents.xrHelper = xrHelper;
         try {
-            xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
-            this.sharedComponents.handTrackingSupport = true;
+            this.sharedComponents.xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
         } catch (err) {
             console.log("Articulated hand tracking not supported in this browser.");
         }
-        if (this.sharedComponents.xrCamera === null) this.sharedComponents.xrCamera = xrHelper.baseExperience.camera;
-        this.sharedComponents.xrCamera.setTransformationFromNonVRCamera();
+        this.sharedComponents.xrHelper.baseExperience.camera.setTransformationFromNonVRCamera();
         return this.sharedComponents.scene;
     }
 }

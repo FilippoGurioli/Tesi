@@ -33,7 +33,7 @@ class GameView extends BaseView {
             this.sharedComponents.camera.position = Constants.SPEC_POS;
         }
         this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
-        this.sharedComponents.xrCamera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
+        this.sharedComponents.xrHelper.baseExperience.camera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
         this.#gameStart();
         if (!this.model.playersInfo.p2.isConnected) {
             this.wait("Waiting for Player 2...", "");

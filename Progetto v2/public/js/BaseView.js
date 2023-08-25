@@ -6,11 +6,10 @@ class SharedComponents {
 
     #scene = null;
     #camera = null;
-    #xrCamera = null;
+    #xrHelper = null;
     #light = null;
     #GUIManager = null;
-    #handTrackingSupport = false;
-    #tokens = {scene: true, camera: true, xr: true, hts: true, light: true, GUIManager: true };
+    #tokens = {scene: true, camera: true, xr: true, light: true, GUIManager: true };
 
     /**
      * @param {BABYLON.Scene} value, the scene to set.
@@ -45,19 +44,19 @@ class SharedComponents {
     }
 
     /**
-     * @param {BABYLON.WebXRCamera} value, the xrCamera to set.
+     * @param {BABYLON.XRHelper} value, the xrHelper to set.
      */
-     set xrCamera(value) {
+     set xrHelper(value) {
         if (this.#tokens.xr) {
-            this.#xrCamera = value;
+            this.#xrHelper = value;
             this.#tokens.xr = false;
         } else {
-            throw new Error("xrCamera already initialized");
+            throw new Error("xrHelper already initialized");
         }
     }
 
-    get xrCamera() {
-        return this.#xrCamera;
+    get xrHelper() {
+        return this.#xrHelper;
     }
 
     /**
@@ -90,22 +89,6 @@ class SharedComponents {
 
     get GUIManager() {
         return this.#GUIManager;
-    }
-
-    /**
-     * @param {boolean} value, set to true if the hand tracking is supported in this browser.
-     */
-    set handTrackingSupport(value) {
-        if (this.#tokens.hts) {
-            this.#handTrackingSupport = value;
-            this.#tokens.hts = false;
-        } else {
-            throw new Error("Hand tracking support already initialized");
-        }
-    }
-
-    get handTrackingSupport() {
-        return this.#handTrackingSupport;
     }
 }
 
