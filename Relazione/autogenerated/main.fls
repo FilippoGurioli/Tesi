@@ -576,6 +576,13 @@ INPUT Capitoli\Letteratura.tex
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
+INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
+INPUT .\images\ARvsMR.png
+INPUT images\ARvsMR.png
+INPUT .\images\ARvsMR.png
+INPUT .\images\ARvsMR.png
+INPUT .\images\ARvsMR.png
+INPUT .\images\ARvsMR.png
 INPUT .\Capitoli\Progetto.tex
 INPUT Capitoli\Progetto.tex
 INPUT .\Capitoli\Progetto.tex
@@ -622,6 +629,8 @@ INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsl12.pfb
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsl12.pfb
+INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
+INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
 INPUT C:\Users\Filippo\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmri8a.pfb
