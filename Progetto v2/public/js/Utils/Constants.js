@@ -7,7 +7,7 @@ const Constants = {
 
 let Cards;
 
-fetch('./main/Utils/Cards.json')
+fetch('./js/Utils/Cards.json')
     .then((response) => response.json())
     .then((json) => {
         Cards = json; 

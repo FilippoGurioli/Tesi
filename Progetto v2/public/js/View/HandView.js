@@ -1,10 +1,10 @@
-import { BaseView } from "./BaseView.js";
+import { BaseView } from "../BaseView.js";
 
 class HandView extends BaseView {
 
     _initializeScene() {
 
-        hand = [];
+        this.hand = [];
 
         this.model.hand.forEach(cardId => {
 
