@@ -6,30 +6,36 @@
 \contentsline {subsection}{\numberline {1.1.1}Definizione}{1}{}%
 \contentsline {paragraph}{Augmented Reality e Mixed Reality}{2}{}%
 \contentsline {subsection}{\numberline {1.1.2}Applicazioni}{3}{}%
-\contentsline {section}{\numberline {1.2}Videogiochi}{3}{}%
-\contentsline {subsection}{\numberline {1.2.1}Definizione}{3}{}%
-\contentsline {subsection}{\numberline {1.2.2}Applicazioni}{3}{}%
-\contentsline {section}{\numberline {1.3}Multiplayer}{3}{}%
-\contentsline {subsection}{\numberline {1.3.1}Definizione}{3}{}%
-\contentsline {subsection}{\numberline {1.3.2}Tipologie}{3}{}%
-\contentsline {subsection}{\numberline {1.3.3}Applicazioni}{3}{}%
-\contentsline {paragraph}{Al giorno d'oggi}{3}{}%
-\contentsline {paragraph}{Web}{3}{}%
-\contentsline {chapter}{\numberline {2}Tecnologie}{5}{}%
-\contentsline {section}{\numberline {2.1}Hololens}{5}{}%
-\contentsline {section}{\numberline {2.2}MRTK}{5}{}%
-\contentsline {section}{\numberline {2.3}WebXR}{5}{}%
-\contentsline {section}{\numberline {2.4}NodeJS}{5}{}%
-\contentsline {section}{\numberline {2.5}BabylonJS}{5}{}%
-\contentsline {section}{\numberline {2.6}Croquet}{5}{}%
-\contentsline {chapter}{\numberline {3}Sviluppo}{7}{}%
-\contentsline {section}{\numberline {3.1}Analisi dei requisiti}{7}{}%
-\contentsline {subsection}{\numberline {3.1.1}Requisiti funzionali}{7}{}%
-\contentsline {subsection}{\numberline {3.1.2}Requisiti non funzionali}{8}{}%
-\contentsline {section}{\numberline {3.2}Design Architetturale}{9}{}%
-\contentsline {subsection}{\numberline {3.2.1}Back-end}{9}{}%
-\contentsline {subsection}{\numberline {3.2.2}Front-end}{9}{}%
-\contentsline {section}{\numberline {3.3}Progettazione dettagliata}{10}{}%
-\contentsline {chapter}{Conclusioni}{11}{}%
-\contentsline {chapter}{Ringraziamenti}{13}{}%
-\contentsline {chapter}{Bibliografia}{15}{}%
+\contentsline {paragraph}{La spada di Damocle}{3}{}%
+\contentsline {paragraph}{Sensorama}{4}{}%
+\contentsline {paragraph}{HTC Vive}{5}{}%
+\contentsline {paragraph}{IllumiRoom}{5}{}%
+\contentsline {paragraph}{Dispositivi mobili}{5}{}%
+\contentsline {paragraph}{Hololens}{5}{}%
+\contentsline {section}{\numberline {1.2}Videogiochi}{6}{}%
+\contentsline {subsection}{\numberline {1.2.1}Definizione}{6}{}%
+\contentsline {subsection}{\numberline {1.2.2}Applicazioni}{6}{}%
+\contentsline {section}{\numberline {1.3}Multiplayer}{6}{}%
+\contentsline {subsection}{\numberline {1.3.1}Definizione}{6}{}%
+\contentsline {subsection}{\numberline {1.3.2}Tipologie}{6}{}%
+\contentsline {subsection}{\numberline {1.3.3}Applicazioni}{6}{}%
+\contentsline {paragraph}{Al giorno d'oggi}{6}{}%
+\contentsline {paragraph}{Web}{6}{}%
+\contentsline {chapter}{\numberline {2}Tecnologie}{7}{}%
+\contentsline {section}{\numberline {2.1}Hololens}{7}{}%
+\contentsline {section}{\numberline {2.2}MRTK}{7}{}%
+\contentsline {section}{\numberline {2.3}WebXR}{7}{}%
+\contentsline {section}{\numberline {2.4}NodeJS}{7}{}%
+\contentsline {section}{\numberline {2.5}BabylonJS}{7}{}%
+\contentsline {section}{\numberline {2.6}Croquet}{7}{}%
+\contentsline {chapter}{\numberline {3}Sviluppo}{9}{}%
+\contentsline {section}{\numberline {3.1}Analisi dei requisiti}{9}{}%
+\contentsline {subsection}{\numberline {3.1.1}Requisiti funzionali}{9}{}%
+\contentsline {subsection}{\numberline {3.1.2}Requisiti non funzionali}{10}{}%
+\contentsline {section}{\numberline {3.2}Design Architetturale}{11}{}%
+\contentsline {subsection}{\numberline {3.2.1}Back-end}{11}{}%
+\contentsline {subsection}{\numberline {3.2.2}Front-end}{11}{}%
+\contentsline {section}{\numberline {3.3}Progettazione dettagliata}{12}{}%
+\contentsline {chapter}{Conclusioni}{13}{}%
+\contentsline {chapter}{Ringraziamenti}{15}{}%
+\contentsline {chapter}{Bibliografia}{17}{}%
