@@ -11,6 +11,7 @@ class TurnModel extends BaseModel {
     }
 
     nextPhase() {
+        this._log("next phase");
         this.#turn.nextPhase();
     }
 

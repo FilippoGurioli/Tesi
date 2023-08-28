@@ -63,6 +63,7 @@ class TurnView extends BaseView {
         this.button = new BABYLON.GUI.TouchHolographicButton("Next Phase");
         this.button.text = "Next Phase";
         this.button.onPointerDownObservable.add(() => {
+            this._log("sending to " + this.model.id);
             if (!this.standby)   this.publish(this.model.id, "nextPhase");
         });
         this.sharedComponents.GUIManager.addControl(this.turnMenu);
@@ -96,6 +97,24 @@ class TurnView extends BaseView {
         
         this.resumeInfo = this.text.text;
     }
+
+    // _endScene(data) {
+    //     let message = "";
+    //     if (data.winner === this.viewId) message = "You won!";
+    //     else                             message = "You lost!";
+    //     if (this.role === "a Spectator") {
+    //         if (data.winner === this.model.parent.playersInfo.p1.viewId)
+    //             message = "Player 1 won!";
+    //         else
+    //             message = "Player 2 won!";
+    //     }
+    //     this.displaySpecialMessage(message);
+    //     return 6000;
+    // }
+    _endScene() {
+        return 5000;
+    }
+
 
     displaySpecialMessage(message) {
         this.resumeInfo = this.text.text;

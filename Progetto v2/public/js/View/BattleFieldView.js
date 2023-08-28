@@ -30,6 +30,26 @@ class BattleFieldView extends BaseView {
         this.sceneObjects.push(this.plane);
     }
 
+    _endScene() {
+        const fadeOutAnimation = new BABYLON.Animation(
+            "fadeOutAnimation",
+            "visibility",
+            30,
+            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+        );
+        
+        const fadeOutKeys = [
+            { frame: 0, value: 1 },
+            { frame: 60, value: 0 }
+        ];
+        
+        fadeOutAnimation.setKeys(fadeOutKeys);
+        this.plane.animations.push(fadeOutAnimation);
+        this.sharedComponents.scene.beginAnimation(this.plane, 0, 60, false);
+
+        return 5000;
+    }
 }
 
 export { BattleFieldView };

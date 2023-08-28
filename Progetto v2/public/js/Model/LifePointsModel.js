@@ -5,6 +5,8 @@ class LifePointsModel extends BaseModel {
 
     #lifePoints = new LifePoints();
 
+    #opponent = null;
+
     _subscribeAll() {
         this.subscribe(this.id, "heal", this.heal);
         this.subscribe(this.id, "damage", this.damage);
@@ -19,12 +21,20 @@ class LifePointsModel extends BaseModel {
         this.#lifePoints.damage(data.lifePoints);
         this._log("damaged " + data.lifePoints + " LP");
         if (this.#lifePoints.LP === 0) {
-            this.parent.gameOver();
+            this.publish(this.sessionId, "game-over", {winner: this.opponent.id});
         }
     }
 
     get LP() {
         return this.#lifePoints.LP;
+    }
+
+    get opponent() {
+        return this.#opponent;
+    }
+
+    set opponent(opponent) {
+        this.#opponent = opponent;
     }
 }
 

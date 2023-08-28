@@ -3,10 +3,6 @@ import { BaseView } from "../BaseView.js";
 //!dovrà gestire due oggetti: un hand menu che ti fa vedere sempre la vita corrente di entrambi e una slate che compare e scompare quando viene modificata la health
 class LifePointsView extends BaseView { 
 
-    _initialize(data) {
-        console.log(data);
-    }
-
     _initializeScene() {
 
         //PERSONAL SLATE (ALWAYS ON)
@@ -47,7 +43,7 @@ class LifePointsView extends BaseView {
     }
 
     _update() {
-        this.text.text = this.model.LP + " - " + this.model.parent.opponent.lifePoints.LP;
+        this.text.text = this.model.LP + " - " + this.model.opponent.LP;
     }
 }
 

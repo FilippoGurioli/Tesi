@@ -83,8 +83,7 @@ class GameModel extends BaseModel {
         if (!this.playersInfo.p1.isConnected || !this.playersInfo.p2.isConnected) {
             this.#counter++;
             if (this.#counter >= Constants.DISC_TIME_LIMIT) {
-                this.publish(this.id, "disconnection");
-                this.parent.destroyGameModel();
+                this.publish(this.sessionId, "game-over", {winner: this.playersInfo.p1.isConnected ? this.playersInfo.p1.viewId : this.playersInfo.p2.viewId});
             } else {
                 this._log("Waiting for reconnection...");
                 this.future(1000).selfDestroy();

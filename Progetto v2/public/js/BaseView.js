@@ -122,6 +122,7 @@ class BaseView extends Croquet.View {
         }
         this.parent = data.parent;
         this._log("Created. Model associated: " + this.model.id.substring(this.model.id.length - 2));
+        this.subscribe(this.sessionId, "game-over", this._gameOver);
         this._subscribeAll();   //Croquet subscription method
         this._initialize(data); //Variables init method
         this._initializeScene();//BABYLON scene init method
@@ -140,10 +141,17 @@ class BaseView extends Croquet.View {
 
     _update(data) {}
 
+    _endScene() {}
+
+    _gameOver(data) {
+        const timeToWait = this._endScene(data);
+        if (timeToWait !== undefined)  this.future(timeToWait).detach();
+        else this.detach();
+    }
 
     detach() {
         super.detach();
-        this.children.forEach(c => c.detach());
+        //this.children.forEach(c => c.detach());
         this.sceneObjects.forEach(o => o.dispose());
         this._log("detach");
     }

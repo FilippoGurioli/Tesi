@@ -15,22 +15,21 @@
 \contentsline {subsection}{\numberline {1.3.3}Applicazioni}{3}{}%
 \contentsline {paragraph}{Al giorno d'oggi}{3}{}%
 \contentsline {paragraph}{Web}{3}{}%
-\contentsline {chapter}{\numberline {2}Progettazione e tecnologie}{5}{}%
-\contentsline {section}{\numberline {2.1}Analisi dei requisiti}{5}{}%
-\contentsline {subsection}{\numberline {2.1.1}Requisiti funzionali}{5}{}%
-\contentsline {subsection}{\numberline {2.1.2}Requisiti non funzionali}{6}{}%
-\contentsline {section}{\numberline {2.2}Tecnologie}{7}{}%
-\contentsline {subsection}{\numberline {2.2.1}Hololens}{7}{}%
-\contentsline {subsection}{\numberline {2.2.2}WebXR}{7}{}%
-\contentsline {subsection}{\numberline {2.2.3}MRTK}{7}{}%
-\contentsline {subsection}{\numberline {2.2.4}NodeJS}{7}{}%
-\contentsline {subsection}{\numberline {2.2.5}BabylonJS}{7}{}%
-\contentsline {subsection}{\numberline {2.2.6}Croquet}{7}{}%
-\contentsline {chapter}{\numberline {3}Sviluppo}{9}{}%
-\contentsline {section}{\numberline {3.1}Design Architetturale}{9}{}%
-\contentsline {subsection}{\numberline {3.1.1}Back-end}{9}{}%
-\contentsline {subsection}{\numberline {3.1.2}Front-end}{9}{}%
-\contentsline {section}{\numberline {3.2}Progettazione dettagliata}{10}{}%
+\contentsline {chapter}{\numberline {2}Tecnologie}{5}{}%
+\contentsline {section}{\numberline {2.1}Hololens}{5}{}%
+\contentsline {section}{\numberline {2.2}MRTK}{5}{}%
+\contentsline {section}{\numberline {2.3}WebXR}{5}{}%
+\contentsline {section}{\numberline {2.4}NodeJS}{5}{}%
+\contentsline {section}{\numberline {2.5}BabylonJS}{5}{}%
+\contentsline {section}{\numberline {2.6}Croquet}{5}{}%
+\contentsline {chapter}{\numberline {3}Sviluppo}{7}{}%
+\contentsline {section}{\numberline {3.1}Analisi dei requisiti}{7}{}%
+\contentsline {subsection}{\numberline {3.1.1}Requisiti funzionali}{7}{}%
+\contentsline {subsection}{\numberline {3.1.2}Requisiti non funzionali}{8}{}%
+\contentsline {section}{\numberline {3.2}Design Architetturale}{9}{}%
+\contentsline {subsection}{\numberline {3.2.1}Back-end}{9}{}%
+\contentsline {subsection}{\numberline {3.2.2}Front-end}{9}{}%
+\contentsline {section}{\numberline {3.3}Progettazione dettagliata}{10}{}%
 \contentsline {chapter}{Conclusioni}{11}{}%
 \contentsline {chapter}{Ringraziamenti}{13}{}%
 \contentsline {chapter}{Bibliografia}{15}{}%

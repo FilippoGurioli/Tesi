@@ -3,14 +3,15 @@ import { GameModel } from "./GameModel.js";
 
 class RootModel extends BaseModel {
 
-    _initialize() {
-        this.linkedViews = [];
-        this.gameModel = null;
-    }
-
     _subscribeAll() {
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
+    }
+
+    _initialize() {
+        this.linkedViews = [];
+        this.gameModel = null;
+        this._log("This model is " + this.id.substring(0, this.id.length - 2));
     }
 
     /**
@@ -34,9 +35,8 @@ class RootModel extends BaseModel {
         this.linkedViews.splice(this.linkedViews.indexOf(viewId),1);
     }
 
-    destroyGameModel() {
+    _gameOver() {
         this._log("Restarting game model");
-        this.gameModel?.destroy();
         this.gameModel = GameModel.create({parent: this}); //for testing, probably has to be changed with an if
     }
 }

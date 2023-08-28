@@ -9,10 +9,6 @@ class RootView extends BaseView {
         this._log("This view is " + this.viewId);
     }
 
-    _subscribeAll() {
-        this.subscribe(this.viewId, "reload", this._initializeScene);
-    }
-
     _initializeScene() {
         //ENGINE
         this.engine = new BABYLON.Engine(canvas, true);
@@ -50,6 +46,10 @@ class RootView extends BaseView {
 
         //XR
         this.activateRenderLoop();
+    }
+
+    _gameOver() {
+        this.future(5000)._initializeScene();
     }
 
     activateRenderLoop() {

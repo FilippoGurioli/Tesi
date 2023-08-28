@@ -16,7 +16,6 @@ class GameView extends BaseView {
         this.subscribe(this.viewId, "join-response", this.setPosition);
         this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
         this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true);
-        this.subscribe(this.model.id, "disconnection", () => this.gameOver("Player disconnected"));
     }
     
     _initialize() {
@@ -57,21 +56,13 @@ class GameView extends BaseView {
         this.future(500).waiting(finalSentence);
     }
 
-    gameOver(data) {
+    _endScene(data) {
         this.emergencyExit = true; //exit from waiting
-        this.turnView.displaySpecialMessage("Game Over\n" + data.reason);
-        this.endScene();
-    }
-
-    endScene() {
-        //this.BFView.plane.visibility -= 0.01;
-        //if (this.BFView.plane.visibility > 0) this.future(100).endScene();
-        this.counter++;
-        if (this.counter < 60) this.future(100).endScene();
-        else {
-            this.publish(this.viewId, "reload"); //reload the first scene
-            this.detach();
-        }
+        let winner;
+        if (data.winner === this.model.playersInfo.p1.viewId) winner = "Player 1";
+        else if (data.winner === this.model.playersInfo.p2.viewId) winner = "Player 2";
+        this.turnView.displaySpecialMessage("Game Over\n" + winner + " wins!");
+        return 6000;
     }
 
     #gameStart() {
