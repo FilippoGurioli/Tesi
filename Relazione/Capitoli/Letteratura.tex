@@ -56,33 +56,58 @@ sottolineando l'importanza del web al giorno d'oggi.
             \img{ARvsMR}{Gerarchia tra AR e MR - \textit{`The mixed reality continuum'}.}
             
     \subsection{Applicazioni}\label{subsec:XRTipologie}
-        Come già accennato prima il mondo della Extended Reality non si ferma al solo utilizzo di visori,
-        nella storia esistono esempi di applicazioni di AR e VR molto particolari e interessanti. Si presenteranno
-        di seguito alcuni di questi esempi, con particolare attenzione su quelli che riguardano maggiormente
-        il caso di studio di questa tesi.
-        \paragraph{La spada di Damocle} (figura \ref{fig:SpadaDiDamocle}) è considerato il primo prototipo di visore VR mai costruito nella storia e,
-        come tale, ha diritto di essere citato come primo elemento di questa sezione. Il visore è stato costruito
-        da Ivan Sutherland nel 1968 ed era pesante al punto da dover essere fissato al soffito per essere sorretto,
-        da questo il suo nome. Il visore era in grado di mostrare all'utente un cubo tridimensionale, che poteva
-        essere osservato da diverse angolazioni semplicemente muovendo la testa, era infatti già presente, seppur
-        in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un
-        controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo
-        verso la realizzazione di visori VR, ma non è stato mai commercializzato.
-        \img{SpadaDiDamocle}{La spada di Damocle, primo prototipo di visore VR.}
+        Come già accennato prima, il mondo della Extended Reality non si ferma al solo utilizzo di visori.
+        Nella storia esistono esempi di applicazioni di AR e VR molto particolari e interessanti. Si presenteranno
+        di seguito alcuni di questi esempi, cercando di esplorare le scelte architetturali più interessanti.
+        \paragraph{La spada di Damocle} (figura\ref{fig:SpadaDiDamocle}) è considerato il primo prototipo di visore VR mai costruito nella storia e,
+            come tale, ha diritto di essere citato come primo elemento di questa sezione. Il visore è stato costruito
+            da Ivan Sutherland nel 1968 ed era pesante al punto da dover essere fissato al soffito per essere sorretto,
+            da questo il suo nome. Il visore era in grado di mostrare all'utente un cubo tridimensionale, che poteva
+            essere osservato da diverse angolazioni semplicemente muovendo la testa, era infatti già presente, seppur
+            in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un
+            controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo
+            verso la realizzazione di visori VR, ma non è stato mai commercializzato.
+            \img{SpadaDiDamocle}{La spada di Damocle, primo prototipo di visore VR.}
 
-        \paragraph{Sensorama} (figura \ref{fig:Sensorama}) è un dispositivo che permette di immergere l'utente in un
-        ambiente virtuale, mostrando un video stereoscopico a 3 dimensioni e riproducendo suoni e odori. Il dispositivo è stato
-        progettato per essere utilizzato in sale cinematografiche, in modo da coinvolgere lo spettatore con tutti e 5 i sensi.
-        La macchina di Morton Heilig era però troppo costosa, questo unito alle dimensioni della macchina e alla scarsa qualità
-        dei video, ha portato al fallimento del progetto.
+        \paragraph{Sensorama} (figura\ref{fig:Sensorama}) è un dispositivo che permette di immergere l'utente in un
+            ambiente virtuale, mostrando un video stereoscopico a 3 dimensioni e riproducendo suoni e odori. Il dispositivo è stato
+            progettato per essere utilizzato in sale cinematografiche, in modo da coinvolgere lo spettatore con tutti e 5 i sensi.
+            La macchina di Morton Heilig era però troppo costosa, e questo, unito alle dimensioni della macchina e alla scarsa qualità
+            dei video, ha portato al fallimento del progetto.
+            \img{Sensorama}{Sensorama, dispositivo fornito di: immagini stereo 3D, vibrazioni, vento, emettitore di odori e audio stereo.\cite{wikiSensorama}}
 
-        \img{Sensorama}{Sensorama, dispositivo fornito di: immagini stereo 3D, vibrazioni, vento, emettitore di odori e audio stereo.\cite{wikiSensorama}}
-
-        \paragraph{HTC Vive}
-
-        \paragraph{IllumiRoom}
+        \paragraph{IllumiRoom} è una tecnologia Microsoft che punta a creare un'esperienza AR estendendo la realtà di gioco
+            normale, composta dallo schermo e dal controller, all'intera stanza. Questa tecnologia è stata presentata nel 2013
+            e permette di proiettare sulle pareti della stanza in cui si gioca le immagini del gioco, in modo da estendere
+            l'ambiente virtuale a quello reale. Questa tecnologia è stata sviluppata per la console Xbox One, ma non è mai
+            stata commercializzata.\cite{Schmalstieg2016}
+            \img{IllumiRoom.png}{IllumiRoom, prodotto capace di estendere l'ambiente di gioco all'intera stanza.}
         
-        \paragraph{Dispositivi mobili}
+        \paragraph{L'HTC Vive} è uno dei più famosi visori VR, è stato sviluppato da HTC e Valve Corporation ed è
+            rilasciato nel 2016. L' \textit{Head Mounted Display} (HDM) è dotato di due schermi OLED da $1080\times1200$ pixel, 
+            con un refresh rate di 90Hz\cite{Vive}. Questo visore è uno dei più conosciuti sul mercato, 
+            e tra le altre cose, deve anche la sua fama alla tecnologia di tracciamento dei movimenti chiamata Lighthouse, che permette di tracciare
+            i movimenti dell'utente in modo preciso e affidabile. Questa tecnologia è stata sviluppata dalla Valve
+            e consiste di due stazioni base che emettono dei segnali infrarossi che vengono rilevati da sensori posti 
+            sulle periferiche. Queste stazioni base vengono poste alle estremità della stanza, in modo tale da circoscrivere
+            un'area entro la quale l'utente è libero di muoversi.
+            \img{HTCVive.jpg}{HTC Vive, da sinistra a destra: stazioni base, controller e visore.}
+
+        \paragraph{I dispositivi mobili} sono alla base della maggior parte delle applicazioni di AR. Questi dispositivi
+            sono dotati di fotocamera, accelerometro, giroscopio, magnetometro e geolocalizzazione che permettono di rilevare i movimenti
+            dell'utente e di orientare la fotocamera. Questi dispositivi sono inoltre dotati di schermo, che permette di
+            visualizzare l'ambiente virtuale. I cellulari sono molto utilizzati per applicazioni di Augmented Reality, in quanto
+            sono dispositivi che tutti possiedono e che sono in grado di fornire un'esperienza soddisfacente.
+            Attualmente sul mercato è esploso il fenomeno degli \textit{AR advertising}, ovvero applicazioni che permettono
+            di visualizzare i prodotti venduti dalle aziende in modo virtuale direttamente nello spazio reale. Queste applicazioni
+            sono molto utilizzate per la vendita di mobili, in quanto permettono di proiettare il prodotto in modo realistico
+            e di valutare se questo si adatta all'ambiente in cui si vuole inserire. Anche il settore videoludico non ha 
+            perso l'occasione di sfruttare questa tecnologia, infatti sono state sviluppate applicazioni che permettono di
+            visualizzare i personaggi dei propri giochi preferiti direttamente nella propria stanza. Un esempio di questo
+            tipo di applicazioni è \textit{Pokémon GO}, gioco sviluppato da Niantic nel 2016, che permette di catturare i
+            Pokémon direttamente nella propria città.
+            \img{PokemonGo.png}{Pokémon GO, applicazione di AR per dispositivi mobili.}
+            
 
         \paragraph{Hololens}
 
