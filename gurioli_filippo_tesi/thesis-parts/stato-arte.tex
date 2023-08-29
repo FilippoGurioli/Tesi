@@ -1,33 +1,49 @@
 \chapter{Stato dell'arte}\label{chap:Letteratura}
-Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante la Extended Reality, in particolare, si toccherà il tema dello sviluppo di videogiochi in ambito Augmented Reality e Virtual Reality. Successivamente si analizzerà la letteratura riguardante il tema del multiplayer e come questo sia attualmente 
-realizzato nei software comuni, sottolineando l'importanza del web al giorno d'oggi.
+Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante la Extended Reality, in particolare, si toccherà il tema dello sviluppo di videogiochi in ambito 
+Augmented Reality e Virtual Reality. Successivamente si analizzerà la letteratura riguardante il tema del multiplayer e come questo sia attualmente realizzato nei software comuni,
+sottolineando l'importanza del web al giorno d'oggi.
 
 \section{Extended Reality}\label{sec:XR}
-    La Extended Reality è un campo molto vasto che comprende diverse tecnologie ed è in continua evoluzione. Talvolta non è possibile fornire una definizione univoca dei vari concetti per via delle diverse visioni che gli esperti in materia hanno.
-    Lo scopo della sezione seguente è quindi quello di chiarire i concetti fondamentali riguardanti questa tecnologia, esplorare le diverse accezioni e presentare alcuni esempi di utilizzo.
+    La Extended Reality è un campo molto vasto che comprende diverse tecnologie ed è in continua evoluzione. Talvolta non è possibile fornire una definizione univoca dei vari 
+    concetti per via delle diverse visioni che gli esperti in materia hanno. Lo scopo della sezione seguente è quindi quello di chiarire i concetti fondamentali riguardanti
+    questa tecnologia, esplorare le diverse accezioni e presentare alcuni esempi di utilizzo.
     \subsection{Definizione}\label{subsec:XRDef}
-        Con il termine Extended Reality (abbreviato in XR) si intende un insieme di tecnologie che permettono di estendere la realtà, ovvero di aggiungere informazioni al mondo reale. Sotto questa macro definizione rientrano le tecnologie di realtà aumentata (AR), realtà virtuale (VR) e realtà mista (MR). Per AR si intende la tecnologia che permette di sovrapporre informazioni digitali al mondo reale, mentre per VR si intende la tecnologia che permette
-        di immergere l'utente in un ambiente virtuale. La MR è una tecnologia che permette di conciliare il mondo reale con quello virtuale in modo totalmente trasparente per l'utente. Come ogni calcolatore, queste tecnologie prevedono dispositivi di input e di output per l'interazione tra macchina e utente. Venendo completamente immersi in queste realtà virtuali, l'utilizzo di una tastiera o un mouse risulterebbe inefficace, si sono quindi progettati dispositivi ad hoc per l'interazione (input) e per la ricezione delle informazioni (output). Per quanto riguarda l'input, si possono utilizzare
-        dei controller, dei guanti o il proprio corpo, mentre per l'output domina l'utilizzo di visori. Questi dispositivi sono in grado di rilevare i movimenti dell'utente e di trasmetterli al sistema, che li elabora e li utilizza per modificare l'ambiente virtuale. Questo ambiente virtuale può essere visualizzato dall'utente tramite un visore, che può essere un visore VR, un visore AR o un visore MR.
-        \paragraph{Augmented Reality e Mixed Reality} sono due concetti molto simili,      dei quali si trovano definizioni ambigue, talvolta discordanti. La             definizione più comunemente accettata per Augmented Reality è quella           fornita da Azuma\cite{Azuma1997}:
+        Con il termine Extended Reality (abbreviato in XR) si intende un insieme di tecnologie che permettono di estendere la realtà, ovvero di aggiungere informazioni al mondo 
+        reale. Sotto questa macro definizione rientrano le tecnologie di realtà aumentata (AR), realtà virtuale (VR) e realtà mista (MR). Per AR si intende la tecnologia che permette 
+        di sovrapporre informazioni digitali al mondo reale, mentre per VR si intende la tecnologia che permette di immergere l'utente in un ambiente virtuale. La MR è una tecnologia
+        che permette di conciliare il mondo reale con quello virtuale in modo totalmente trasparente per l'utente. Come ogni calcolatore, queste tecnologie prevedono dispositivi 
+        di input e di output per l'interazione tra macchina e utente. Venendo completamente immersi in queste realtà virtuali, l'utilizzo di una tastiera o un mouse risulterebbe
+        inefficace, si sono quindi progettati dispositivi ad hoc per l'interazione (input) e per la ricezione delle informazioni (output). Per quanto riguarda l'input, si possono
+        utilizzare dei controller, dei guanti o il proprio corpo, mentre per l'output domina l'utilizzo di visori. Questi dispositivi sono in grado di rilevare i movimenti 
+        dell'utente e di trasmetterli al sistema, che li elabora e li utilizza per modificare l'ambiente virtuale. Questo ambiente virtuale può essere visualizzato dall'utente 
+        tramite un visore, che può essere un visore VR, un visore AR o un visore MR.
+        \paragraph{Augmented Reality e Mixed Reality} sono due concetti molto simili, dei quali si trovano definizioni ambigue, talvolta discordanti. La definizione più comunemente
+        accettata per Augmented Reality è quella fornita da Azuma\cite{Azuma1997}:
             \begin{quote}
                 \textit{AR systems have the following three characteristics: (1) combine real and virtual, (2) are interactive in real time, and (3) are registered in 3D.}
             \end{quote}
-            Si noti che non è specificato nessun tipo di dispositivo di output, potrebbero essere  AR anche dispositivi che forniscono informazioni tattili, gustative o olfattive, benchè la loro implementazione è di fatto un settore tutt'ora nascente (motivo per il quale nella sezione
-            precedente non li si è menzionati). La definizione formale di Mixed Reality è invece fornita da Milgram\cite{Milgram1994}:
+            Si noti che non è specificato nessun tipo di dispositivo di output, potrebbero essere  AR anche dispositivi che forniscono informazioni tattili, gustative o olfattive,
+            benchè la loro implementazione è di fatto un settore tutt'ora nascente (motivo per il quale nella sezione precedente non li si è menzionati). La definizione formale di 
+            Mixed Reality è invece fornita da Milgram\cite{Milgram1994}:
             \begin{quote}
                 \textit{A mixed reality (MR) system is one that combines real and virtual environments seamlessly.}
             \end{quote}
-            Questa definizione è molto simile a quella di Azuma, ma non è specificato il fatto che l'ambiente virtuale debba essere tridimensionale. La definizione di Milgram non specifica, inoltre, che l'ambiente virtuale debba essere sovrapposto a quello reale, ma che i due ambienti debbano essere combinati in modo da risultare indistinguibili. In quest'ottica 
-            si può quindi affermare che la AR è un caso particolare di MR, in cui l'ambiente virtuale è sovrapposto a quello reale. \\
-            Il libro di Schmalstieg e Höllerer \textit{Augmented Reality: Principles and Practice}\cite{Schmalstieg2016} fornisce una schematizzazione della gerarchia tra AR e MR mostrata in figura\ref{fig:ARvsMR} che permette di comprendere meglio la relazione tra le due tecnologie. 
+            Questa definizione è molto simile a quella di Azuma, ma non è specificato il fatto che l'ambiente virtuale debba essere tridimensionale. La definizione di Milgram non
+            specifica, inoltre, che l'ambiente virtuale debba essere sovrapposto a quello reale, ma che i due ambienti debbano essere combinati in modo da risultare indistinguibili. 
+            In quest'ottica si può quindi affermare che la AR è un caso particolare di MR, in cui l'ambiente virtuale è sovrapposto a quello reale.\\
+            Il libro di Schmalstieg e Höllerer \textit{Augmented Reality: Principles and Practice}\cite{Schmalstieg2016} fornisce una schematizzazione della gerarchia tra AR e MR
+            mostrata in figura\ref{fig:ARvsMR} che permette di comprendere meglio la relazione tra le due tecnologie. 
             \img{ARvsMR}{Gerarchia tra AR e MR - \textit{`The mixed reality continuum'}.}
             
     \subsection{Storiografia}\label{subsec:XRTipologie}
-        Come già accennato prima, il mondo della Extended Reality non si ferma al solo utilizzo di visori. Nella storia esistono esempi di applicazioni di AR e VR molto particolari e interessanti. Si presenteranno di seguito alcuni di questi esempi, cercando di esplorare le scelte architetturali più interessanti.
-        \paragraph{La spada di Damocle} (figura\ref{fig:SpadaDiDamocle}) è considerato     il primo prototipo di visore VR mai costruito nella storia e, come tale,       ha diritto di essere citato come primo elemento di questa sezione. Il          visore è stato costruito da Ivan Sutherland nel 1968 ed era pesante al         punto da dover essere fissato al soffito per essere sorretto, da questo il     suo nome. Il visore era in grado di mostrare all'utente un cubo                tridimensionale, che poteva essere osservato da diverse angolazioni            semplicemente muovendo la testa, era infatti già presente, seppur
-            in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo
-            verso la realizzazione di visori VR, ma non è stato mai commercializzato.
+        Come già accennato prima, il mondo della Extended Reality non si ferma al solo utilizzo di visori. Nella storia esistono esempi di applicazioni di AR e VR molto particolari 
+        e interessanti. Si presenteranno di seguito alcuni di questi esempi, cercando di esplorare le scelte architetturali più interessanti.
+        \paragraph{La spada di Damocle} (figura\ref{fig:SpadaDiDamocle}) è considerato  il primo prototipo di visore VR mai costruito nella storia e, come tale, ha diritto di essere
+            citato come primo elemento di questa sezione. Il visore è stato costruito da Ivan Sutherland nel 1968 ed era pesante al punto da dover essere fissato al soffito per
+            essere sorretto, da questo il suo nome. Il visore era in grado di mostrare all'utente un cubo tridimensionale, che poteva essere osservato da diverse angolazioni 
+            semplicemente muovendo la testa, era infatti già presente, seppur in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un 
+            controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo verso la realizzazione di visori VR, ma non è stato
+            mai commercializzato.
             \img{SpadaDiDamocle}{La spada di Damocle, primo prototipo di visore VR.}
 
         \paragraph{Sensorama} (figura\ref{fig:Sensorama}) è un dispositivo che permette di immergere l'utente in un
@@ -69,7 +85,6 @@ realizzato nei software comuni, sottolineando l'importanza del web al giorno d'o
             Pokémon direttamente nella propria città.
             \img{PokemonGo.png}{Pokémon GO, applicazione di AR per dispositivi mobili.}
             
-
         \paragraph{Hololens} è il dispositivo Microsoft rilasciato nel 2016 che ha portato il mondo delle tecnologie 
             AR e MR a un livello superiore. Questo HMD è dotato di un processore di fascia alta, una GPU per il calcolo
             di immagini ed una Holographic Processing Unit (HPU) che permette di elaborare i dati provenienti dai sensori
@@ -96,6 +111,30 @@ realizzato nei software comuni, sottolineando l'importanza del web al giorno d'o
             \img{Hololens.png}{Hololens, visore AR/MR di Microsoft.}
 
     \subsection{Applicazioni}\label{subsec:XRapplicazioni}
+        Le applicazioni di Extended Reality sono molteplici e vanno dai videogiochi, all'industria, alla medicina. In questa sezione si analizzeranno alcune applicazioni di AR e VR, 
+        cercando di capire quali sono le scelte architetturali più interessanti.
+        \paragraph{L'industria} sta utilizzando queste nuove tecnologie per migliorare la produttività e la qualità dei prodotti. Un esempio di questo utilizzo è quello già
+            accennato di AR Ads per la vendita di mobili, vestiti e altre merci, di cui i principali esempi sono:
+            \begin{itemize}
+                \item American Apparel che ha sviluppato un'applicazione in grado di mostrare i vestiti in modo realistico sul proprio corpo;
+                \item IKEA che ha sviluppato un'applicazione che permette di visualizzare i propri mobili direttamente nella propria casa;
+                \item De Beers che ha sviluppato un'applicazione che permette di provare gli anelli direttamente sul proprio dito.
+            \end{itemize} 
+            Un altro esempio di utilizzo di AR in ambito industriale è quello di \textit{Remote Assistance}, ovvero l'assistenza remota. Questa tecnologia permette di fornire 
+            assistenza a distanza, dando la possibilità di vedere ologrammi illustrativi direttamente nello spazio reale, facilitando il lavoro dei tecnici e permettendo di 
+            ridurre i costi di formazione.\\
+
+        \paragraph{Augmented Medicine} è il termine che è stato coniato per indicare l'utilizzo di dispositivi AR in ambito medico. Tra queste applicazioni si possono citare:
+            \begin{itemize}
+                \item \textbf{Formazione di chirurghi}: in quanto permette di visualizzare in modo realistico gli organi 
+                    interni del paziente, permettendo di eseguire operazioni in modo virtuale e di simulare interventi chirurgici.
+                \item \textbf{Progettazione di protesi}: in quanto permette di visualizzare in modo realistico le protesi 
+                    direttamente sul paziente, permettendo di valutare se la protesi si adatta al corpo del paziente.
+                \item \textbf{Vista in profondità}: l'AR ha permesso a chirurghi di vedere in tempo reale tumori, fratture e aneurismi direttamente sul paziente, in modo da poter 
+                    agire in modo più preciso e sicuro.
+            \end{itemize}
+            \img{ARMedicine.png}{Esempio di applicazione di AR in ambito medico.}
+        \paragraph{Videogiochi}
 
 \section{Videogiochi}\label{sec:Videogiochi}
 In questa sezione si parlerà di videogiochi, in particolare si analizzeranno le varie tipologie di Videogiochi
