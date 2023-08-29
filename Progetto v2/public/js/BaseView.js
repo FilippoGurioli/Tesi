@@ -4,12 +4,29 @@
  */
 class SharedComponents {
 
+    #engine = null;
     #scene = null;
     #camera = null;
     #xrHelper = null;
     #light = null;
     #GUIManager = null;
-    #tokens = {scene: true, camera: true, xr: true, light: true, GUIManager: true };
+    #tokens = { engine: true, scene: true, camera: true, xr: true, light: true, GUIManager: true };
+
+    /**
+         * @param {BABYLON.Engine} value, the engine to set.
+         */
+    set engine(value) {
+        if (this.#tokens.engine) {
+            this.#engine = value;
+            this.#tokens.engine = false;
+        } else {
+            throw new Error("Engine already initialized");
+        }
+    }
+
+    get engine() {
+        return this.#engine;
+    }
 
     /**
      * @param {BABYLON.Scene} value, the scene to set.

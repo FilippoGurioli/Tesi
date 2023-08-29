@@ -11,10 +11,10 @@ class RootView extends BaseView {
 
     _initializeScene() {
         //ENGINE
-        this.engine = new BABYLON.Engine(canvas, true);
+        if (this.sharedComponents.engine === null) this.sharedComponents.engine = new BABYLON.Engine(canvas, true);
 
         //SCENE
-        if (this.sharedComponents.scene === null) this.sharedComponents.scene = new BABYLON.Scene(this.engine);
+        if (this.sharedComponents.scene === null) this.sharedComponents.scene = new BABYLON.Scene(this.sharedComponents.engine);
         this.sharedComponents.scene.clearColor = new BABYLON.Color3.Black;
         
         //CAMERA
@@ -37,24 +37,31 @@ class RootView extends BaseView {
         button.onPointerDownObservable.add(() => {
             nearMenu.removeControl(button);
             this.sharedComponents.GUIManager.removeControl(nearMenu);
-            this.gameView = new GameView({model: this.model.gameModel, parent: this});
-            this.children.push(this.gameView);
+            // this.gameView = new GameView({model: this.model.gameModel, parent: this});
+            // this.children.push(this.gameView);
+            this._log("Creating GAME VIEW");
+            this.isSceneSet = false;
         });
         this.sharedComponents.GUIManager.addControl(nearMenu);
         nearMenu.addButton(button);
         this.sceneObjects.push(nearMenu);
+        this.isSceneSet = true;
 
         //XR
-        this.activateRenderLoop();
+        if (!this.sharedComponents.engine.isRunning) {
+            this.sharedComponents.engine.isRunning = true;
+            this._log("activating render loop");
+            this.activateRenderLoop();
+        }
     }
 
     _gameOver() {
-        this.future(5000)._initializeScene();
+        if (!this.isSceneSet) this.future(5000)._initializeScene();
     }
 
     activateRenderLoop() {
         this.createWebXRExperience().then(sceneToRender => {
-            this.engine.runRenderLoop(() => sceneToRender.render());
+            this.sharedComponents.engine.runRenderLoop(() => sceneToRender.render());
         });
     }
 

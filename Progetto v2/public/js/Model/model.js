@@ -3,6 +3,8 @@ import { GameModel } from "./GameModel.js";
 
 class RootModel extends BaseModel {
 
+    counter = 0;
+
     _subscribeAll() {
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
@@ -11,7 +13,23 @@ class RootModel extends BaseModel {
     _initialize() {
         this.linkedViews = [];
         this.gameModel = null;
-        this._log("This model is " + this.id.substring(0, this.id.length - 2));
+        this._log("This model is " + this.id.substring(0, this.id.length - 3)); 
+        this.gameOverTest();
+    }
+
+    gameOverTest() {
+        this.counter++;
+        if (this.counter > 14 || this.counter === 10) {
+            this._log("Counter: " + this.counter + "/20");
+        } 
+        if (this.counter < 20) {
+            this.future(1000).gameOverTest();
+        } else {
+            this._log("LAUNCHING GAME OVER");
+            this.publish(this.sessionId, "game-over");
+            this.counter = 0;
+            this.future(1000).gameOverTest();
+        }
     }
 
     /**
