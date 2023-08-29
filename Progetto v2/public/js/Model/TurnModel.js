@@ -8,13 +8,6 @@ class TurnModel extends BaseModel {
 
     _subscribeAll() {
         this.subscribe(this.id, "nextPhase", this.nextPhase);
-        this.subscribe(this.sessionId, "game-over", () => console.log("GAME OVER RECEIVED BY TURN MODEL"));
-        this.test();
-    }
-
-    test() {
-        this._log("test");
-        this.future(1000).test();
     }
 
     nextPhase() {

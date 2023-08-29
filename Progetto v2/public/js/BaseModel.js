@@ -24,7 +24,7 @@ class BaseModel extends Croquet.Model {
 
     _gameOver() {
         this._log("Destroy");
-        this.future(100).destroy();
+        this.future(100).destroy(); //! needed to make the call asynchronous
     }
 
 }
