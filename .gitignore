@@ -1,0 +1,25 @@
+# LaTeX generated files
+*.aux
+*.log
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+
+# LaTex pdf
+*.pdf
+
+# OpenSSL keys
+*.pem
+
+# NodeJS
+node_modules/
+
+# Visual Studio Code
+.vscode/
