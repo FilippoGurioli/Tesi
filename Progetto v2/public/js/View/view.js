@@ -37,9 +37,8 @@ class RootView extends BaseView {
         button.onPointerDownObservable.add(() => {
             nearMenu.removeControl(button);
             this.sharedComponents.GUIManager.removeControl(nearMenu);
-            // this.gameView = new GameView({model: this.model.gameModel, parent: this});
-            // this.children.push(this.gameView);
-            this._log("Creating GAME VIEW");
+            this.gameView = new GameView({model: this.model.gameModel, parent: this});
+            this.children.push(this.gameView);
             this.isSceneSet = false;
         });
         this.sharedComponents.GUIManager.addControl(nearMenu);
