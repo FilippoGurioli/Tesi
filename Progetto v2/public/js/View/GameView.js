@@ -67,15 +67,15 @@ class GameView extends BaseView {
 
     #gameStart() {
         this.turnView = new TurnView({model: this.model.turnModel, parent: this, role: this.#role});
-        this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
-        this.children.push(this.turnView, this.BFView);
-        if (this.viewId === this.model.playersInfo.p1.viewId) {
-            this.playerView = new PlayerView({model: this.model.player1, parent: this});
-            this.children.push(this.playerView);
-        } else if (this.viewId === this.model.playersInfo.p2.viewId) {
-            this.playerView = new PlayerView({model: this.model.player2, parent: this});
-            this.children.push(this.playerView);
-        }
+        // this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
+        this.children.push(this.turnView/*, this.BFView*/);
+        // if (this.viewId === this.model.playersInfo.p1.viewId) {
+        //     this.playerView = new PlayerView({model: this.model.player1, parent: this});
+        //     this.children.push(this.playerView);
+        // } else if (this.viewId === this.model.playersInfo.p2.viewId) {
+        //     this.playerView = new PlayerView({model: this.model.player2, parent: this});
+        //     this.children.push(this.playerView);
+        // }
     }
 
 }

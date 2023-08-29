@@ -49,7 +49,6 @@ class RootView extends BaseView {
         //XR
         if (!this.sharedComponents.engine.isRunning) {
             this.sharedComponents.engine.isRunning = true;
-            this._log("activating render loop");
             this.activateRenderLoop();
         }
     }

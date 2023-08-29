@@ -58,13 +58,15 @@ class TurnView extends BaseView {
         slate.content = contentGrid;
 
         //TURN MENU
-        if (this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeature(BABYLON.WebXRFeatureName.HAND_TRACKING)) this.turnMenu = new BABYLON.GUI.HandMenu("Turn Menu");
-        else                                           this.turnMenu = new BABYLON.GUI.NearMenu("Turn Menu");
+        if (this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeature(BABYLON.WebXRFeatureName.HAND_TRACKING)) 
+                this.turnMenu = new BABYLON.GUI.HandMenu("Turn Menu");
+        else    this.turnMenu = new BABYLON.GUI.NearMenu("Turn Menu");
         this.button = new BABYLON.GUI.TouchHolographicButton("Next Phase");
         this.button.text = "Next Phase";
         this.button.onPointerDownObservable.add(() => {
-            this._log("sending to " + this.model.id);
-            if (!this.standby)   this.publish(this.model.id, "nextPhase");
+            if (!this.standby) {
+                this.publish(this.model.id, "nextPhase");
+            }
         });
         this.sharedComponents.GUIManager.addControl(this.turnMenu);
         this.turnMenu.addButton(this.button);

@@ -23,7 +23,8 @@ class BaseModel extends Croquet.Model {
     }
 
     _gameOver() {
-        this.destroy();
+        this._log("Destroy");
+        this.future(100).destroy();
     }
 
 }

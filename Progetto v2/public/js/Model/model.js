@@ -13,7 +13,7 @@ class RootModel extends BaseModel {
     _initialize() {
         this.linkedViews = [];
         this.gameModel = null;
-        this._log("This model is " + this.id.substring(0, this.id.length - 3)); 
+        this._log("This session id is " + this.sessionId); 
     }
 
     /**
@@ -21,7 +21,6 @@ class RootModel extends BaseModel {
      * @param {any} viewId the id of the new view connected.
      */
     viewJoin(viewId){
-        this._log("received view join " + viewId);
         this.linkedViews.push(viewId);
         if (this.gameModel === null) {
             this.gameModel = GameModel.create({parent: this});
@@ -33,13 +32,16 @@ class RootModel extends BaseModel {
      * @param {any} viewId the id of the outgoing view.
      */
     viewDrop(viewId){
-        this._log("received view left " + viewId);
         this.linkedViews.splice(this.linkedViews.indexOf(viewId),1);
     }
 
     _gameOver() {
-        this._log("Restarting game model");
-        this.gameModel = GameModel.create({parent: this}); //for testing, probably has to be changed with an if
+        this._log("Game over: restarting game model");
+        this.future(2000).restart(); //safe time to be sure that all models have been destroyed
+    }
+
+    restart() {
+        this.gameModel = GameModel.create({parent: this});
     }
 }
 
