@@ -5,12 +5,8 @@ import { BattleFieldView } from "./BattleFieldView.js";
 import { PlayerView } from "./PlayerView.js";
 
 class GameView extends BaseView {
-    
-    #opponentRecovered = false;
 
     #role = "";
-
-    counter = 0;
     
     _subscribeAll() {
         this.subscribe(this.viewId, "join-response", this.setPosition);
@@ -18,10 +14,6 @@ class GameView extends BaseView {
     
     _initialize() {
         this.publish(this.model.id, "join", {view: this.viewId});
-    }
-
-    _update() {
-
     }
 
     setPosition(data) {
