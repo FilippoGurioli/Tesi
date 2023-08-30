@@ -168,7 +168,7 @@ class BaseView extends Croquet.View {
 
     detach() {
         super.detach();
-        //this.children.forEach(c => c.detach());
+        this.children.forEach(c => c.detach());
         this.sceneObjects.forEach(o => o.dispose());
         this._log("detach");
     }

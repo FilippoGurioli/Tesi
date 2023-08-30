@@ -14,12 +14,14 @@ class GameView extends BaseView {
     
     _subscribeAll() {
         this.subscribe(this.viewId, "join-response", this.setPosition);
-        this.subscribe(this.viewId, "opponent-left", () => this.wait("Opponent disconnected...", "Opponent reconnected!"));
-        this.subscribe(this.viewId, "opponent-recover", () => this.#opponentRecovered = true);
     }
     
     _initialize() {
         this.publish(this.model.id, "join", {view: this.viewId});
+    }
+
+    _update() {
+
     }
 
     setPosition(data) {
@@ -34,48 +36,19 @@ class GameView extends BaseView {
         this.sharedComponents.camera.setTarget(new BABYLON.Vector3(0, 0, 0));
         this.sharedComponents.xrHelper.baseExperience.camera.setTransformationFromNonVRCamera(this.sharedComponents.camera);
         this.#gameStart();
-        if (!this.model.playersInfo.p2.isConnected) {
-            this.wait("Waiting for Player 2...", "");
-        }
-    }
-
-    wait(reason, finalSentence) {
-        this.turnView.displaySpecialMessage(reason);
-        this.waiting(finalSentence);
-    }
-
-    waiting(finalSentence) {
-        if (this.#opponentRecovered) {
-            this.#opponentRecovered = false;
-            this.turnView.resume();
-            return;
-        } else if (this.emergencyExit) {
-            this.emergencyExit = false;
-            return;
-        }
-        this.future(500).waiting(finalSentence);
-    }
-
-    _endScene(data) {
-        this.emergencyExit = true; //exit from waiting
-        let winner;
-        if (data.winner === this.model.playersInfo.p1.viewId) winner = "Player 1";
-        else if (data.winner === this.model.playersInfo.p2.viewId) winner = "Player 2";
-        this.turnView.displaySpecialMessage("Game Over\n" + winner + " wins!");
-        return 6000;
     }
 
     #gameStart() {
         this.turnView = new TurnView({model: this.model.turnModel, parent: this, role: this.#role});
-        // this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
-        this.children.push(this.turnView/*, this.BFView*/);
-        // if (this.viewId === this.model.playersInfo.p1.viewId) {
-        //     this.playerView = new PlayerView({model: this.model.player1, parent: this});
-        //     this.children.push(this.playerView);
-        // } else if (this.viewId === this.model.playersInfo.p2.viewId) {
-        //     this.playerView = new PlayerView({model: this.model.player2, parent: this});
-        //     this.children.push(this.playerView);
-        // }
+        this.BFView = new BattleFieldView({model: this.model.battleFieldModel, parent: this});
+        this.children.push(this.turnView, this.BFView);
+        if (this.viewId === this.model.playersInfo.p1.viewId) {
+            this.playerView = new PlayerView({model: this.model.player1, parent: this});
+            this.children.push(this.playerView);
+        } else if (this.viewId === this.model.playersInfo.p2.viewId) {
+            this.playerView = new PlayerView({model: this.model.player2, parent: this});
+            this.children.push(this.playerView);
+        }
     }
 
 }

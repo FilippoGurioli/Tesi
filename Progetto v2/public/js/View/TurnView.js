@@ -9,6 +9,11 @@ class TurnView extends BaseView {
         this.standby = false;
     }
 
+    _subscribeAll() {
+        this.subscribe(this.viewId, "opponent-left", () => this.displaySpecialMessage("Opponent disconnected..."));
+        this.subscribe(this.viewId, "opponent-recover", () => this.resume());
+    }
+
     _initializeScene() {
 
         //SLATE
@@ -17,17 +22,6 @@ class TurnView extends BaseView {
         this.sharedComponents.GUIManager.addControl(slate);
         slate.dimensions = new BABYLON.Vector2(15, 11);
         slate.node.position = new BABYLON.Vector3(-8, 8, 0);
-        switch(this.role) {
-            case "Player 1":
-                slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-                break;
-            case "Player 2":
-                slate.node.rotation = new BABYLON.Vector3(0, 0, 0);
-                break;
-            default:
-                slate.node.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
-                break;
-        }
         
         const title = new BABYLON.GUI.TextBlock("title");
         title.height = 0.2;
@@ -50,7 +44,6 @@ class TurnView extends BaseView {
         this.text.fontSize = 50;
         this.text.text = "TURN\nPHASE";
         
-        
         const contentGrid = new BABYLON.GUI.Grid("grid");
         contentGrid.addControl(title);
         contentGrid.addControl(this.text);
@@ -71,6 +64,20 @@ class TurnView extends BaseView {
         this.sharedComponents.GUIManager.addControl(this.turnMenu);
         this.turnMenu.addButton(this.button);
         this.turnMenu.isVisible = false;
+
+        switch(this.role) {
+            case "Player 1":
+                slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+                this.displaySpecialMessage("Waiting for player 2...");
+                break;
+            case "Player 2":
+                slate.node.rotation = new BABYLON.Vector3(0, 0, 0);
+                break;
+            default:
+                slate.node.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
+                break;
+        }
+
         this.sceneObjects.push(slate, contentGrid, this.text, title, this.turnMenu, this.button);
     }
 
@@ -100,23 +107,19 @@ class TurnView extends BaseView {
         this.resumeInfo = this.text.text;
     }
 
-    // _endScene(data) {
-    //     let message = "";
-    //     if (data.winner === this.viewId) message = "You won!";
-    //     else                             message = "You lost!";
-    //     if (this.role === "a Spectator") {
-    //         if (data.winner === this.model.parent.playersInfo.p1.viewId)
-    //             message = "Player 1 won!";
-    //         else
-    //             message = "Player 2 won!";
-    //     }
-    //     this.displaySpecialMessage(message);
-    //     return 6000;
-    // }
-    _endScene() {
-        return 5000;
+    _endScene(data) {
+        let message = "";
+        if (data.winner === this.viewId) message = "You won!";
+        else                             message = "You lost!";
+        if (this.role === "a Spectator") {
+            if (data.winner === this.model.parent.playersInfo.p1.viewId)
+                message = "Player 1 won!";
+            else
+                message = "Player 2 won!";
+        }
+        this.displaySpecialMessage(message);
+        return 6000;
     }
-
 
     displaySpecialMessage(message) {
         this.resumeInfo = this.text.text;

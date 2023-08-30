@@ -23,10 +23,10 @@ class GameModel extends BaseModel {
 
         this.battleFieldModel = BattleFieldModel.create({parent: this});
         this.turnModel = TurnModel.create({parent: this});
-        // this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
-        // this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
-        // this.player1.opponent = this.player2;
-        // this.player2.opponent = this.player1;
+        this.player1 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player2 = PlayerModel.create({parent: this, battleField: this.battleFieldModel});
+        this.player1.opponent = this.player2;
+        this.player2.opponent = this.player1;
     }
 
     _subscribeAll() {
