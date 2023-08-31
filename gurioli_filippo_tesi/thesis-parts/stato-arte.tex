@@ -44,14 +44,14 @@ sottolineando l'importanza del web al giorno d'oggi.
             semplicemente muovendo la testa, era infatti già presente, seppur in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un 
             controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo verso la realizzazione di visori VR, ma non è stato
             mai commercializzato.
-            \img{SpadaDiDamocle}{La spada di Damocle, primo prototipo di visore VR.}
+            \img[0.5]{SpadaDiDamocle}{La spada di Damocle, primo prototipo di visore VR.}
 
         \paragraph{Sensorama} (figura\ref{fig:Sensorama}) è un dispositivo che permette di immergere l'utente in un
             ambiente virtuale, mostrando un video stereoscopico a 3 dimensioni e riproducendo suoni e odori. Il dispositivo è stato
             progettato per essere utilizzato in sale cinematografiche, in modo da coinvolgere lo spettatore con tutti e 5 i sensi.
             La macchina di Morton Heilig era però troppo costosa, e questo, unito alle dimensioni della macchina e alla scarsa qualità
             video, ha portato al fallimento del progetto.
-            \img{Sensorama}{Sensorama, dispositivo fornito di: immagini stereo 3D, vibrazioni, vento, emettitore di odori e audio stereo.\cite{wikiSensorama}}
+            \img[0.5]{Sensorama}{Sensorama, dispositivo fornito di: immagini stereo 3D, vibrazioni, vento, emettitore di odori e audio stereo.\cite{wikiSensorama}}
 
         \paragraph{IllumiRoom} è una tecnologia Microsoft che punta a creare un'esperienza AR estendendo la realtà di gioco
             normale, composta dallo schermo e dal controller, all'intera stanza. Questa tecnologia è stata presentata nel 2013
@@ -230,9 +230,80 @@ sottolineando l'importanza del web al giorno d'oggi.
         \end{itemize}
 
 \section{Multigiocatore}\label{sec:Multigiocatore}
+    Se si vuole trovare un caposaldo all'interno di tutta la trattazione che è stata fatta precedentemente sulla definizione di gioco, questo è sicuramente la condivisione dell'esperienza
+    di gioco. Il gioco è tale solo se c'è una o più persone con cui condividerlo, si può quasi affermare che sia intrisenco dentro la natura umana. Questa volontà di condivisione 
+    non poteva quindi mancare anche nel mondo dei videogiochi, che ha espresso questa volontà nelle forme più disparate. In questa sezione si parlerà di multigiocatore, passando per 
+    i punti salienti della sua storia e per le sue applicazioni più famose.
     \subsection{Definizione}\label{subsec:MultiDef}
-    \subsection{Tipologie}\label{subsec:MultiTipologie}
-    Qui si parlerà delle varie tipologie di multiplayer, facendo riferimento anche al libro Multiplayer Game Programming.
-    \subsection{Applicazioni}\label{subsec:CoopApplicazioni}
-        \paragraph{Al giorno d'oggi}\label{par:MultiOggi}
-        \paragraph{Web}\label{par:CoopWeb}
+        Il significato di multigiocatore è derivabile direttamente dalla parola stessa, è un gioco a cui può giocare più di un giocatore contemporaneamente. Questo termine è divenuto 
+        di uso comune solo con l'avvento dei videogiochi ma rientrano in questa categoria anche i normali giochi da tavolo, i giochi di carte, gli sport etc.\\
+        Nel contesto videoludico il termine sta a significare che nello stesso mondo virtuale, nella stessa sessione di gioco, possono partecipare più persone, le quali posso interagire
+        tra loro e con l'ambiente circostante. Si noti che in questa definizione non è specificato il fatto che i giocatori debbano essere fisicamente vicini, tanto meno che ci 
+        debba essere una connessione internet a collegarli. Questo è dovuto al fatto che lungo il corso della storia si sono realizzate le più disparate tecnologie per permettere la
+        condivisione di gioco, alcune delle quali poi abbandonate, mentre altre valide tutt'ora. Si va quindi ad analizzare la storia del multigiocatore, con particolare attenzione 
+        alle tecnologie adottate per realizzarlo.\\
+    \subsection{Storiografia}\label{subsec:MultiStoriografia}
+        Questa trattazione storica fa principalmente riferimento al libro \textit{Multiplayer Game Programming:  architecting networked games} di Joshua Glazer e Sanjay Madhav\cite{glazer2015}.
+        \paragraph{Il Multigiocatore locale} caratterizza i primi anni in cui il concetto è stato introdotto (1960). Questa tecnologia consiste nello sviluppare un programma che sia
+            capace di ricevere due input dall'untente, o con la condivisione del dispositivo di input o con l'utilizzo di due dispositivi di input diversi, e, nel caso
+            fosse necessario, mostrare due schermate distinte (nasce il concetto di \textit{split screen}). I videogiochi così costruiti sono quindi sviluppati sulla stessa macchina 
+            e non differiscono troppo da un gioco a giocatore singolo. I primi esempi creati sono stati \textit{Pong} e \textit{Spacewar!}, entrambi giochi arcade che permettevano di 
+            giocare in due giocatori.
+
+        \paragraph{\textit{Networked multiplayer}} è la tecnologia che ha permesso di far comunicare due o più macchine tra loro, permettendo di giocare a distanza. Queste macchine
+            erano in realtà ancora dei mainframe, ma si stavano gettando le basi per quello che sarebbe diventato poi internet. Al momento in cui i personal computer diventano
+            accessibili al pubblico, questa tecnologia viene utilizzata per permettere a due o più giocatori di connettersi insieme, sfruttando le porte seriali dei computer. 
+            Allora ogni pc aveva solo 2 porte seriali permettendo una solo topologia di rete: la \textit{daisy chain} (figura\ref{fig:DaisyChain.png}).
+            \img{DaisyChain.png}{Topologia di rete \textit{daisy chain}.}
+ 
+        \paragraph{\textit{Local Area Network Games}} sono una tipologia di giochi, venuti alla luce intorno agli anni '90, in cui i giocatori possono giocare insieme se connessi alla stessa
+            rete locale (Local Area Network o LAN). Questo tipo di video game è esplosa grazie all'allora nuova tecnologia, l'Ethernet. Le topologie di rete potevano variare,
+            la daisy chain menzionata prima è già un LAN, ma quelle più diffuse furono le connessioni a stella (figura\ref{fig:StarNetwork.png}) grazie alla grande proliferazione
+            dei modem. Il gioco più famoso di questo genere è \textit{Doom}, che permetteva di giocare in multiplayer fino a 4 giocatori.
+            \img[0.5]{StarNetwork.png}{Topologia di rete a stella.}
+
+        \paragraph{Il multigiocatore online} è forse la tecnologia più comune al giorno d'oggi ed identifica una connessione tra giocatori a livello globale (spesso si usa il termine
+            Wide Area Network o WAN). Questa nuova tecnologia, seppur possa sembrare semplicemente un'estensione di quella precedente, porta con sè una serie di problematiche
+            che prima non esistevano, prima tra tutte la latenza. La latenza è il tempo che intercorre tra l'invio di un messaggio in rete e la ricezione dello stesso. In una rete
+            LAN questo tempo è trascurabile, ma quando ci si sposta ad un contesto globale assume importanza prioritaria (nell'ordine di qualche secondo). In questo periodo diventano
+            mutliplayer online anche le console che, grazie a servizi creati ad hoc, permettono di giocare con giocatori di tutto il mondo. 
+        
+        \paragraph{\textit{Massively Multiplayer Online}} o MMO, sono giochi online che permettono di giocare con un numero elevato di giocatori, nell'ordine delle centinaia. Questi
+            giochi sono stati resi possibili grazie all'avvento di internet e sono stati resi popolari grazie a \textit{World of Warcraft}, che ha raggiunto il picco di 12 milioni di
+            giocatori attivi nel 2010 acquisendo il titolo di MMORPG più giocato al mondo. Le sfide che caratterizzano questo tipo di videogiochi sono molteplici: gestione server, 
+            caching, bilanciamento del carico e tanti altri, ognuno dei quali deve essere gestito con la massima attenzione per la riuscita del videogioco.
+
+        \paragraph{\textit{Mobile Networked Multiplayer}} è l'ultima frontiera del multigiocatore, ovvero la possibilità di connetere più dispositivi mobili alla stessa sessione di 
+            gioco. Data le limitazioni di batteria (e in generale di hardware) che questi dispositivi hanno, si è dovuto trovare un modo per ridurre al minimo il consumo di dati,
+            portando alla creazione di giochi turn-based asincroni, ovvero dei giochi a turni in cui ogni giocatore ha a disposizione molto tempo per fare la sua mossa e viene
+            notificato quando l'avversario ha compiuto la sua.\\
+            Con la crescita esponenziale di questo settore, sono diventati sempre più comuni anche i giochi in tempo reale, alcuni di questi con supporto anche di un numero cospiquo
+            di utenti (nell'ordine delle decine).
+        
+    \subsection{Applicazioni}\label{subsec:MultiApplicazioni}
+        In questa utlima sezione del capitolo si introdurranno le architetture più comuni per la realizzazione di un videogioco multiplayer, analizzando i pro e i contro di ognuna.
+        \paragraph{L'architettura client-server} consiste nella costruzione di un server, ovvero un computer che si occupa di gestire la sessione di gioco, e di più client, ovvero
+            dispositivi che si connettono al server per poter giocare. Questa è la più comunemente diffusa nell'ambito videoludico, in quanto permette di gestire al meglio la
+            sessione di gioco e di bilanciare il carico di lavoro tra i vari client. In questo scenario chi detiene la verità (intesa come stato del gioco) è il server, mentre
+            i client hanno solo il software che permette di visualizzare i dati contenuti all'interno del server. Già dai primi giochi che hanno utilizzato questa architettura
+            si è riscontrata la necessità di efficientare le informazioni che vengono passate in rete, per permettere un'esperienza piacevole e coinvolgente. Per fare ciò i 
+            programmatori hanno creato varie infrastrutture che permettono di inviare solo le informazioni necessarie, esempi di queste infrastrutture sono: \textit{delta encoding},
+            \textit{event management} e \textit{interest management}.\\
+            Il \textit{delta encoding} consiste nel trasmettere solo le informazioni che sono cambiate rispetto all'ultimo aggiornamento, questo garantisce comunque che tutti
+            i client siano allineati con il server, ma permette di ridurre il carico di lavoro.\\
+            L'\textit{event management} consiste nel trasformare le interazioni dell'utente in eventi. Questi eventi vengono quindi messi in una coda gestita da un 
+            \textit{event manager}, che, quando può, invia questi eventi al server. In questo modo si possono gestire in modo efficiente le interazioni dell'utente inviando
+            solo gli eventi che sono rilevanti per il giocatore. Successivamente l'evento sarà gestito dal server e il risultato sarà inviato a tutti i client.\\
+            L'\textit{interest management} consiste nel trasmettere solo le informazioni che sono rilevanti per il giocatore, ovvero solo le informazioni che sono vicine al suo 
+            personaggio. Questa accortezza permette anche, a chi dispone di un pc più avanzato, di avere un'esperienza di gioco più immersiva e completa e, al contempo, permettere 
+            a chi ha un computer dalle prestazioni basse di partecipare alla stessa sessione fornendogli comunque le informazioni necessarie per giocare. Questo meccanismo è stato
+            determinante per la scalabilità di certi videogiochi come \textit{Starsiege: Tribes}.\\
+
+        \paragraph{L'architettura peer-to-peer} è una sorta di daisy chain online. È la versione serverless in cui tutti gli utenti sono connessi tra di loro e si scambiano le informazioni
+            direttamente. Il server, avendo il duplice compito di calcolare lo stato di gioco e di gestire le connessioni, deve essere obbligatoriamente una macchina dalle prestazioni
+            molto elevate, e, conseguentemente, molto costosa. Il peer-to-peer permette di svincolare dall'acquisto di un server garantendo anche un miglioramento delle prestazioni,
+            lasciando però il compito di mantenere uno stato di gioco coerente agli utenti.\\
+            Per gestire lo stato di gioco è stato progettato un \textit{turn timer}, ovvero un timer durante il quale vengono registrate tutte le interazioni che il giocatore compie.
+            Insieme alla durata del turn timer viene anche stabilito un \textit{execution delay}, ovvero il numero di turni da aspettare prima di poter eseguire le istruzioni (generando
+            però \textit{input lag}). Allo scadere del timer quindi, questa serie di interazioni viene inviata in rete a tutti gli altri giocatori. Dopo l'attesa dell'execution delay,
+            si avrà la garanzia che tutti i giocatori abbiano ricevuto le istruzioni, le quali potranno essere eseguire contemporaneamente.\\
