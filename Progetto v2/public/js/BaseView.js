@@ -162,13 +162,14 @@ class BaseView extends Croquet.View {
 
     _gameOver(data) {
         const timeToWait = this._endScene(data);
+        this._log("game-over, ttw: " + timeToWait);
         if (timeToWait !== undefined)  this.future(timeToWait).detach();
-        else this.detach();
+        else this.detach(true);
     }
 
-    detach() {
+    detach(skipForwarding = false) {
         super.detach();
-        this.children.forEach(c => c.detach());
+        if (!skipForwarding) this.children.forEach(c => c.detach()); //the if is used to forward only if is croquet who calls detach
         this.sceneObjects.forEach(o => o.dispose());
         this._log("detach");
     }
