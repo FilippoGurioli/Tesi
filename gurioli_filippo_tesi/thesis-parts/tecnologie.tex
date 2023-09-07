@@ -1,13 +1,13 @@
 \chapter{Tecnologie}\label{chap:Tecnologie}
 L'obiettivo del seguente capitolo è introdurre le tecnologie software utilizzate per lo sviluppo del progetto. Si parlerà dei principali framework attualmente utilizzati per sviluppare
 applicazioni XR, di quelli utilizzati per lo sviluppo di applicazioni web e di quelli impiegati per lo sviluppo di applicazioni condivise. Durante la trattazione saranno fatti anche
-confronti tra framework simili motivando la scelta intrapresa per questo progetto, analizzando i vari aspetti che hanno portato a questa decisione.
+confronti tra framework simili motivando la scelta intrapresa per questo progetto, analizzando anche i vari aspetti che hanno portato a questa decisione.
 
 \section{MRTK}\label{sec:MRTK}
 MRTK (acronimo per Mixed Reality Toolkit) è un framework open source sviluppato da Microsoft per Unity che permette di sviluppare applicazioni per HoloLens e Windows Mixed Reality\cite{MRTK}.\\
 Dopo la nascita del dispositivo HoloLens mancavano ancora tutta una serie di API che permettessero al programmatore di svincolarsi dalle basi tecniche, principalmente legate 
 alla gestione degli input e della spazialità, e di concentrarsi sulla creazione di applicazioni.
-Questo framework è stato quindi sviluppato per creare un insieme di componenti riutilizzabili che permettano di sviluppare applicazioni per la realtà mista in modo più semplice e 
+Questo framework è stato quindi sviluppato per creare un insieme di componenti riutilizzabili, che permettano di sviluppare applicazioni per la realtà mista in modo più semplice e 
 veloce. Le principali componenti sono:
 \begin{itemize}
     \item \textit{boundary system}, utilizzato nelle applicazioni VR per definire il confine fisico in cui l'utente può muoversi;
@@ -15,10 +15,11 @@ veloce. Le principali componenti sono:
     \item \textit{input system}, utilizzato per gestire ogni tipo di input utente, dal touchscreen ai controller, dal mouse e tastiera all'\textit{air tap};
     \item \textit{scene system}, creato per gestire le varie scene Unity e come queste interagiscono tra loro nel contesto XR;
     \item \textit{spatial awareness system}, utilizzato per gestire la posizione e l'orientamento dell'utente all'interno della scena;
-    \item \textit{rendering system}, utilizzato nel rendering della scena virtuale, sfruttando funzioni avanzate come il \textit{clipping}, \textit{pulse shaders} e \textit{materials}.
+    \item \textit{rendering system}, utilizzato nel rendering della scena virtuale, sfruttando funzioni avanzate come \textit{clipping}, \textit{pulse shaders} e \textit{materials}.
 \end{itemize}
 Il framework è stato sviluppato per essere utilizzato con Unity, un motore di gioco multipiattaforma che permette di creare applicazioni 2D e 3D. In quanto tale, supporta tutta
-l'infrastruttura di Unity dei prefab, dei componenti e del game loop, questi però non verranno approfonditi per non allontanarsi troppo dallo scopo di questo lavoro. Essendo 
+l'infrastruttura di Unity dei prefab, dei componenti e del game loop. Questi non verranno approfonditi per non allontanarsi troppo dallo scopo di questo lavoro tuttavia, per 
+approfondire, si faccia riferimento al testo \textit{`Unity in Action'} di Joe Hocking\cite{hocking2018}. Essendo 
 l'applicazione del progetto sviluppata per HoloLens 2 (di casa Microsoft), MRTK è stata quasi una scelta obbligata per poter creare ologrammi in modo nativo per questo dispositivo.\\
 Si noti che il Mixed Reality Toolkit è stato prodotto in supporto del motore di gioco Unity ma è stato recentemente portato anche per Unreal Engine 4, BabylonJS e OpenXR. Nello 
 specifico, BabylonJS è stata una delle tecnologie utilizzate nella tesi, motivo per il quale, nella sezione~\ref{sec:BabylonJS}, verrà approfondito il porting per BabylonJS.
@@ -36,7 +37,7 @@ dell'utente e di gestire la visualizzazione della scena virtuale con funzionalit
 \newline \newline
 In questo progetto le API fornite da WebXR non sono state usate direttamente, nonostante ciò era importante conoscere questa tecnologia per poter comprendere il funzionamento
 di BabylonJS, che è stato utilizzato per la creazione dell'applicazione web. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, in quanto
-l'accesso alle pagine che la utilizzano è permesso solo tramite HTTPS.
+l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo HTTPS.
 
 \section{NodeJS}\label{sec:NodeJS}
 NodeJS è un runtime JavaScript open source che permette di eseguire codice JavaScript al di fuori di un browser\cite{NodeJS}. Un runtime JavaScript è un ambiente di esecuzione
@@ -46,15 +47,15 @@ le stesse funzionalità JavaScript sia lato client che lato server, creando un a
 di NodeJS sono due, la gestione degli eventi asincrona e il \textit{Node Package Manager} o NPM.
 \begin{itemize}
     \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per gestire un elevato numero di connessioni simultanee, per questo motivo è stato progettato con un
-    modello di gestione degli eventi asincrono. Questo permette di gestire un elevato numero di richieste senza dover creare un thread per ogni richiesta, ma gestendo ogni richiesta
-    come un evento asincrono. Questa tecnica è anche utilizzata per la gestione degli I/O in modo tale da non bloccare l'unico thread disponibile.
+    modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un thread per ognuna di queste.
+    Questa tecnica è anche utilizzata per la gestione degli I/O in modo tale da non bloccare l'unico thread disponibile.
     \item \textit{NPM}: NPM è un gestore di pacchetti per NodeJS che permette di installare e gestire le dipendenze di un progetto. Questo permette di creare un ecosistema di
     librerie e framework che possono essere utilizzati per lo sviluppo di applicazioni web. NPM è il più grande ecosistema di librerie open source al mondo, con oltre 1 milione
     di pacchetti disponibili.
 \end{itemize}
 L'\textit{event loop} di NodeJS è il cuore di questo runtime e fulcro della sua grande diffusione. Si riporta la sua descrizione dal sito ufficiale\cite{NodeJS}:
 \begin{quote}
-    In altri sistemi, c'è sempre una chiamata bloccante per avviare il ciclo degli eventi. Tipicamente, il comportamento è definito attraverso i callback all'inizio di uno script, 
+    [...] In altri sistemi, c'è sempre una chiamata bloccante per avviare il ciclo degli eventi. Tipicamente, il comportamento è definito attraverso i callback all'inizio di uno script, 
     e alla fine un server viene avviato attraverso una chiamata bloccante come \texttt{EventMachine::run()}. In Node.js, non c'è una tale chiamata per avviare il ciclo degli eventi. Node.js 
     entra semplicemente nel ciclo degli eventi dopo l'esecuzione dello script di input. Node.js esce dal ciclo degli eventi quando non ci sono più callback da eseguire.
 \end{quote}
@@ -62,27 +63,55 @@ Nel progetto di questa tesi NodeJS è stato utilizzato per creare un server in u
 accessibili. Il server avrà il compito anche di eseguire l'applicazione web creata con Croquet.
 
 \section{BabylonJS}\label{sec:BabylonJS}
-BabylonJS è un framework open source per la creazione di applicazioni web 3D e XR. Questo framework è stato sviluppato per essere utilizzato con NodeJS e permette di creare
-applicazioni web in modo semplice e veloce\cite{BabylonJS}.\\
-La scelta di BabylonJS come tutte le principali feature di questo framework sono un argomento molto ampio di questa tesi, motivo per il quale si analizzeranno una alla volta di seguito.
+BabylonJS è un framework open source per la creazione di applicazioni web 3D e XR\cite{BabylonJS}.\\
+La scelta di BabylonJS, come tutte le principali feature di questo framework, sono un argomento molto ampio di questa tesi, motivo per il quale si analizzeranno una alla volta di seguito.
 
-\subsection{Motivazioni e principali concorrenti}
+\subsection{Motivazioni e principali concorrenti}\label{subsec:BabylonJS_motivazioni}
 La scelta di BabylonJS è stata dettata da una serie di motivazioni. In primo luogo, come già accennato, questo framework integra (anche se solo in parte) il Mixed Reality
 Toolkit, dando accesso a molti componenti comuni a questo framework come \textit{Holographic Button}, \textit{Near Menu}, \textit{Hand Menu}, \textit{Holographic Slate} e altri 
-ancora e incorporando anche molte funzionalità come il \textit{followBehaviour}, l'\textit{eye tracking} e l'\textit{hand tracking}.\\
+ancora, incorporando anche molte funzionalità come il \textit{follow behaviour}, l'\textit{eye tracking} e l'\textit{hand tracking}.\\
 In secondo luogo, BabylonJS supporta compleatamente WebXR, facendo da intermediario tra le API fornite da WebXR e il programmatore. Questo permette di creare applicazioni web
 che possono essere eseguite su qualsiasi dispositivo XR, tramite l'utilizzo di interfacce semplici e intuitive.\\
 In ultima istanza BabylonJS è stato scelto per la vasta gamma di funzionalità native che offre, insieme alla valida e completa documentazione relativa alle funzionalità. BabylonJS
-può essere definito a tutti gli effetti un motore di gioco in quanto fornisce un game loop, la gestione delle scene, delle luci, delle ombre, dei materiali, delle mesh e 
+può essere definito a tutti gli effetti un motore di gioco, in quanto fornisce un game loop, la gestione delle scene, delle luci, delle ombre, dei materiali, delle mesh e 
 delle animazioni.
 \newline \newline
 I principali concorrenti di BabylonJS sono due: A-Frame e Unity. A-Frame si appoggia su ThreeJS che è un framework per la creazione di applicazioni web 3D. Per capire il motivo per
 cui si è preferito scegliere BabylonJS bisogna prima sottolineare che ogni framework utilizzato nel videogioco è in JavaScript, questo permette di creare un ecosistema di librerie
 e framework che possono essere utilizzati in modo omogeneo. ThreeJS è un framework scritto in JavaScript, ma A-Frame è scritto in HTML, questo crea un problema di omogeneità
-e di gestione delle dipendenze che seppur gestibile, non è ottimale. A questo bisogna anche aggiungere che BabylonJS è un framework più completo e più performante di A-Frame, che
+e di gestione delle dipendenze che, seppur gestibile, non è ottimale. A questo bisogna anche aggiungere che BabylonJS è un framework più completo e più performante di A-Frame che,
 tra le altre cose, non supporta MRTK.\\
 Unity è forse il \textit{game engine} più famoso e utilizzato al giorno d'oggi, questo permette di creare applicazioni 2D e 3D per qualsiasi piattaforma. È stato valutato come
 alternativa a BabylonJS per la creazione dell'applicazione web, ma in conclusione si è deciso di scartarlo per due motivi. In primo luogo, Unity, essendo scritto in C\#, avrebbe
-comportato non poche difficoltà nell'integrazione con il resto della codebase. In aggiunta a questo, Unity non supporta nativamente WebXR, seppur esistano plug in che permettono
+comportato non poche difficoltà nell'integrazione con il resto della codebase. In aggiunta a questo, Unity non supporta nativamente WebXR, seppur esistano \textit{plug-in} che permettono
 di utilizzare WebXR, questi sono comunque meno performanti e meno stabili rispetto a BabylonJS.\\
+
+\subsection{Caratteristiche principali}\label{subsec:BabylonJS_caratteristiche}
+Le caratteristiche principali che BabylonJS offre, in relazione anche al loro impiego nell'elaborato, sono:
+\begin{itemize}
+    \item \textit{WebXR}: come già accennato, BabylonJS supporta nativamente WebXR, permettendo di creare applicazioni web che possono essere eseguite su qualsiasi dispositivo XR, 
+    accedendo semplicemente ad un indirizzo web. 
+    \item \textit{MRTK}: BabylonJS supporta MRTK, permettendo di utilizzare molti i componenti di questo framework. Come già dichiarato, i più importanti sono
+    bottoni, menù e pannelli. Insieme a questi componenti vengono fornite tutta una serie di funzionalità come il \textit{follow behaviour}, ovvero la capacità di un oggetto di 
+    seguire l'orientamento della telecamera, rimanendo sempre visibile per l'utente, l'\textit{hand tracking}, ovvero la capacità di riconoscere le mani dell'utente e di 
+    carpire le sue interazioni, e l'\textit{hand constraint behaviour}, ovvero la capacità di un oggetto di seguire il movimento della mano dell'utente, affinchè l'utente possa
+    usufruire dell'oggetto ogni qual volta rivolga il suo sguardo sulle proprie mani.
+    \item \textit{game engine}: BabylonJS è un motore di gioco completo, questo fornisce un insieme di funzionalità che permettono di creare applicazioni complesse molto più rapidamente.
+    Tra le funzionalità più importanti si possono citare la creazione di un \textit{engine} per il rendering delle scene, la gestione delle varie scene, la gestione delle telecamere,
+    la presenza di un motore fisico, la gestione di luci, ombre, materiali, mesh e animazioni, la gestione di eventi e la gestione di input.
+    \begin{itemize}
+        \item L'engine deve essere unico per tutta l'applicazione, fornisce utility di base come gli FPS, la dimensione della finestra e la possibilità di creare un ciclo di rendering.
+        \item Le scene sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti che possono essere mesh, luci, telecamere, materiali, ecc. Ogni scena
+        può essere vista come un livello di un videogioco, in quanto può essere caricata e scaricata in qualsiasi momento.
+        \item Le telecamere sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
+        la telecamera sferica e la telecamera cilindrica.
+        \item Il motore fisico è un componente che permette di gestire la fisica all'interno della scena, permettendo di gestire la gravità, le collisioni e le forze.
+        \item Le luci sono un componente che permette di illuminare la scena, BabylonJS supporta diversi tipi di luci come la luce direzionale, la luce puntiforme, la luce spot e la luce
+        emisferica.
+        \item Gli eventi rappresentano un qualsiasi avvenimento all'interno della scena, esiste una rete di \textit{subject-observer} creata ad hoc per osservare e gestire ogni tipo
+        di evento che possa verificarsi nella scena.
+        \item Gli input rappresentano una qualsiasi interazione dell'utente con la scena, BabylonJS supporta diversi tipi di input e li gestisce con eventi specifici.
+    \end{itemize}
+\end{itemize}
+
 \section{Croquet}\label{sec:Croquet}
