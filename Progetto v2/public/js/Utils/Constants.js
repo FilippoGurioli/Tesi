@@ -6,6 +6,7 @@ const Constants = {
 };
 
 let Cards;
+
 fetch('./js/Utils/Cards.json')
     .then((response) => response.json())
     .then((json) => {

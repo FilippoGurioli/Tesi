@@ -44,7 +44,7 @@ app.get("/", function (req, res) {
 //-------------------------------------------------------------------
 const axios = require('axios');
 
-fs.readFile('./public/js/Utils/Cards.json', 'utf8', (err, data) => {
+fs.readFile('./public/js/Utils/Cards1.json', 'utf8', (err, data) => {
 	if (err) {
 	  console.error('Errore nella lettura del file JSON:', err);
 	  return;
@@ -59,8 +59,8 @@ fs.readFile('./public/js/Utils/Cards.json', 'utf8', (err, data) => {
 		  })
 			.then(function (response) {
 				const parts = card.image.split("/");
-				const fileName = "public/img/" + parts[parts.length - 1];
-				response.data.pipe(fs.createWriteStream(fileName));
+				const fileName = "img/" + parts[parts.length - 1];
+				response.data.pipe(fs.createWriteStream("public/" + fileName));
 				card.image = fileName;
 				fs.writeFile("./public/js/Utils/Cards.json", JSON.stringify(json), function(err) {
 					if(err) {
