@@ -5,7 +5,7 @@ import { HandModel } from "./HandModel.js";
 class PlayerModel extends BaseModel {
 
     _initialize(data) {
-
+        
         this.lifePoints = LifePointsModel.create({parent: this});
 
         this.hand = HandModel.create({parent: this, battleField: data.battleField, hand: [46986414]});

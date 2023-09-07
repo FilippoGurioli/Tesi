@@ -6,12 +6,11 @@ const Constants = {
 };
 
 let Cards;
-
 fetch('./js/Utils/Cards.json')
     .then((response) => response.json())
     .then((json) => {
         Cards = json; 
         Cards = Object.freeze(Cards);
-    });
+});
 
 export { Constants, Cards };
