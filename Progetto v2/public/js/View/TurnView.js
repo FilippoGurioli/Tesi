@@ -68,7 +68,7 @@ class TurnView extends BaseView {
         switch(this.role) {
             case "Player 1":
                 slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-                if (this.model.parent.playersInfo.p2.viewId === null)  this.displaySpecialMessage("Waiting for player 2...");
+                if (this.model.parent.playersInfo.p2.viewId === "")  this.displaySpecialMessage("Waiting for player 2...");
                 break;
             case "Player 2":
                 slate.node.rotation = new BABYLON.Vector3(0, 0, 0);
