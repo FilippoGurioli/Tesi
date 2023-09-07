@@ -89,9 +89,10 @@ di utilizzare WebXR, questi sono comunque meno performanti e meno stabili rispet
 \subsection{Caratteristiche principali}\label{subsec:BabylonJS_caratteristiche}
 Le caratteristiche principali che BabylonJS offre, in relazione anche al loro impiego nell'elaborato, sono:
 \begin{itemize}
-    \item \textit{WebXR}: come già accennato, BabylonJS supporta nativamente WebXR, permettendo di creare applicazioni web che possono essere eseguite su qualsiasi dispositivo XR, 
-    accedendo semplicemente ad un indirizzo web. 
-    \item \textit{MRTK}: BabylonJS supporta MRTK, permettendo di utilizzare molti i componenti di questo framework. Come già dichiarato, i più importanti sono
+    \item \textit{WebXR}: come già accennato, BabylonJS supporta nativamente WebXR, permettendo di creare applicazioni web in Extended Reality molto velocemente. Gli strumenti principali
+    a supporto di WebXR sono l'\textit{XR experience helper}, che permette di gestire la sessione XR, e il \textit{WebXR default experience}, che permette di creare un'esperienza
+    XR di base abilitando e disabilitando feature specifiche.
+    \item \textit{MRTK}: BabylonJS supporta MRTK, permettendo di utilizzare molti componenti di questo framework. Come già dichiarato, i più importanti sono
     bottoni, menù e pannelli. Insieme a questi componenti vengono fornite tutta una serie di funzionalità come il \textit{follow behaviour}, ovvero la capacità di un oggetto di 
     seguire l'orientamento della telecamera, rimanendo sempre visibile per l'utente, l'\textit{hand tracking}, ovvero la capacità di riconoscere le mani dell'utente e di 
     carpire le sue interazioni, e l'\textit{hand constraint behaviour}, ovvero la capacità di un oggetto di seguire il movimento della mano dell'utente, affinchè l'utente possa
@@ -100,17 +101,17 @@ Le caratteristiche principali che BabylonJS offre, in relazione anche al loro im
     Tra le funzionalità più importanti si possono citare la creazione di un \textit{engine} per il rendering delle scene, la gestione delle varie scene, la gestione delle telecamere,
     la presenza di un motore fisico, la gestione di luci, ombre, materiali, mesh e animazioni, la gestione di eventi e la gestione di input.
     \begin{itemize}
-        \item L'engine deve essere unico per tutta l'applicazione, fornisce utility di base come gli FPS, la dimensione della finestra e la possibilità di creare un ciclo di rendering.
-        \item Le scene sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti che possono essere mesh, luci, telecamere, materiali, ecc. Ogni scena
+        \item L'\textbf{engine} deve essere unico per tutta l'applicazione, fornisce utility di base come gli FPS, la dimensione della finestra e la possibilità di creare un ciclo di rendering.
+        \item Le \textbf{scene} sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti che possono essere mesh, luci, telecamere, materiali, ecc. Ogni scena
         può essere vista come un livello di un videogioco, in quanto può essere caricata e scaricata in qualsiasi momento.
-        \item Le telecamere sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
+        \item Le \textbf{telecamere} sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
         la telecamera sferica e la telecamera cilindrica.
-        \item Il motore fisico è un componente che permette di gestire la fisica all'interno della scena, permettendo di gestire la gravità, le collisioni e le forze.
-        \item Le luci sono un componente che permette di illuminare la scena, BabylonJS supporta diversi tipi di luci come la luce direzionale, la luce puntiforme, la luce spot e la luce
+        \item Il \textbf{motore fisico} è un componente che permette di gestire la fisica all'interno della scena, permettendo di gestire la gravità, le collisioni e le forze.
+        \item Le \textbf{luci} sono un componente che permette di illuminare la scena, BabylonJS supporta diversi tipi di luci come la luce direzionale, la luce puntiforme, la luce spot e la luce
         emisferica.
-        \item Gli eventi rappresentano un qualsiasi avvenimento all'interno della scena, esiste una rete di \textit{subject-observer} creata ad hoc per osservare e gestire ogni tipo
+        \item Gli \textbf{eventi} rappresentano un qualsiasi avvenimento all'interno della scena, esiste una rete di \textit{subject-observer} creata ad hoc per osservare e gestire ogni tipo
         di evento che possa verificarsi nella scena.
-        \item Gli input rappresentano una qualsiasi interazione dell'utente con la scena, BabylonJS supporta diversi tipi di input e li gestisce con eventi specifici.
+        \item Gli \textbf{input} rappresentano una qualsiasi interazione dell'utente con la scena, BabylonJS supporta diversi tipi di input e li gestisce con eventi specifici.
     \end{itemize}
 \end{itemize}
 
