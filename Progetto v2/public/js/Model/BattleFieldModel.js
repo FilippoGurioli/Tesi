@@ -1,12 +1,13 @@
 import { BaseModel } from "../BaseModel.js";
 import { BattleField } from "../MyModels/BattleField.js";
+import { Cards } from "../Utils/Constants.js";
 
 class BattleFieldModel extends BaseModel {
 
     #battleField = new BattleField();
 
-    _subscribeAll() {
-        //something...
+    placeCard(player, cardId) {
+        this.#battleField.place(Cards.find(c => c.id === cardId), player === 1);
     }
 
     getBattleFieldOf(p1 = true) {

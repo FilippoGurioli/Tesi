@@ -8,7 +8,6 @@ class RootModel extends BaseModel {
     _subscribeAll() {
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);
-        this.subscribe(this.id, "info", (data) => console.log(data));
     }
 
     _initialize() {

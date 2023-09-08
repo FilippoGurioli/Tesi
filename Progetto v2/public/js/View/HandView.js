@@ -13,7 +13,7 @@ class HandView extends BaseView {
     }
 
     _subscribeAll() {
-        this.subscribe(this.parent.model.id, "place card", (data) => this.hand.forEach(card => {
+        this.subscribe(this.model.id, "removeCard", (data) => this.hand.forEach(card => {
             if (card.material.diffuseTexture.url === Cards.find(c => c.id === data.id).image) {
                 this.hand.splice(this.hand.indexOf(card),1);
                 card.dispose();
@@ -23,9 +23,7 @@ class HandView extends BaseView {
     }
 
     spawnCard(cardId) {
-        const infos = Cards.find(function(card) {
-            return card.id === cardId; 
-        });
+        const infos = Cards.find(card => card.id === cardId);
         const card = BABYLON.MeshBuilder.CreatePlane("card", {size: 0.1, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.sharedComponents.scene);  //TODO
         const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
         const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);

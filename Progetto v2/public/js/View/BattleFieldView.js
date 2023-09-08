@@ -2,6 +2,10 @@ import { BaseView } from "../BaseView.js";
 
 class BattleFieldView extends BaseView {
 
+    _subscribeAll() {
+        this.subscribe(this.model.id, "placeCard", this.placeCard);
+    }
+
     _initializeScene() {
         this.plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, this.sharedComponents.scene);
         const material = new BABYLON.StandardMaterial("planeMaterial", this.sharedComponents.scene);
@@ -49,6 +53,10 @@ class BattleFieldView extends BaseView {
         this.sharedComponents.scene.beginAnimation(this.plane, 0, 60, false);
 
         return 5000;
+    }
+
+    placeCard(data) {
+        //TODO: spawnare la carta
     }
 }
 

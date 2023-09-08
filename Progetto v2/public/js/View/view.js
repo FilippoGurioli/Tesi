@@ -66,8 +66,6 @@ class RootView extends BaseView {
     async createWebXRExperience() {
         const supported = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-ar');
         const tmp = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-vr');
-        this.publish(this.model.id, "info", "ar support: " + supported);
-        this.publish(this.model.id, "info", "vr support: " + tmp);
         let xrHelper;
         if (supported) {
             console.log("IMMERSIVE AR SUPPORTED");
