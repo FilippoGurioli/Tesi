@@ -12,10 +12,51 @@ class HandView extends BaseView {
         });
     }
 
-    spawnCard(cardId) { //TODO
-        // const infos = Cards.find(function(card) {
-        //     return card.id === cardId; 
-        // });
+    _subscribeAll() {
+        this.subscribe(this.parent.model.id, "place card", (data) => this.hand.forEach(card => {
+            if (card.material.diffuseTexture.url === Cards.find(c => c.id === data.id).image) {
+                this.hand.splice(this.hand.indexOf(card),1);
+                card.dispose();
+                return;
+            }
+        }));
+    }
+
+    spawnCard(cardId) {
+        const infos = Cards.find(function(card) {
+            return card.id === cardId; 
+        });
+        const card = BABYLON.MeshBuilder.CreatePlane("card", {size: 0.1, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.sharedComponents.scene);  //TODO
+        const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
+        const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);
+        material.diffuseTexture = front;
+
+        card.material = material;
+        const behaviour = new BABYLON.FollowBehavior();
+        behaviour.followHeightOffset = 0.5;
+        behaviour.followLerpSpeed = 0.1;
+        behaviour.target = this.sharedComponents.camera;
+        behaviour.attach(card);
+
+        const pointerDragBehavior = new BABYLON.PointerDragBehavior();
+        pointerDragBehavior.useObjectOrientationForDragging = false;
+        this.isFirstClick = true;
+        pointerDragBehavior.onDragStartObservable.add((event)=>{
+            if (this.isFirstClick) {
+                this.isFirstClick = false;
+                setTimeout(() => {
+                    this.isFirstClick = true;
+                }, 200);
+            } else { //double click case
+                this.publish(this.model.id, "play card", {id: cardId});
+            }
+        });
+        pointerDragBehavior.attach(card);
+        this.hand.push(card);
+        this.sceneObjects.push(card);
+
+
+        //________________________________________________________________________________________________
         // const card = BABYLON.MeshBuilder.CreatePlane("card", { size: 1 }, this.sharedComponents.scene);
         // const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
         // const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);

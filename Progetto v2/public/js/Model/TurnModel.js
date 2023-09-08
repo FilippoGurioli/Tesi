@@ -1,5 +1,5 @@
 import { BaseModel } from "../BaseModel.js";
-import { Turn, Phase } from "../MyModels/Turn.js";
+import { Turn } from "../MyModels/Turn.js";
 
 
 class TurnModel extends BaseModel {
@@ -24,6 +24,10 @@ class TurnModel extends BaseModel {
 
     get isPlayer1Turn() {
         return this.#turn.isPlayer1Turn;
+    }
+
+    isTurnOf(role) {
+        return role === 1 && this.#turn.isPlayer1Turn || role === 2 && !this.#turn.isPlayer1Turn;
     }
 }
 

@@ -1,18 +1,18 @@
 import { BaseView } from "../BaseView.js";
 
-//!dovrà gestire due oggetti: un hand menu che ti fa vedere sempre la vita corrente di entrambi e una slate che compare e scompare quando viene modificata la health
 class LifePointsView extends BaseView { 
 
     _initializeScene() {
 
-        //PERSONAL SLATE (ALWAYS ON)
         const handSlate = new BABYLON.GUI.HolographicSlate("hand slate");
         handSlate.titleBarHeight = 0;
         this.sharedComponents.GUIManager.addControl(handSlate);
-        handSlate.dimensions = new BABYLON.Vector2(1, 0.5);
+        handSlate.dimensions = new BABYLON.Vector2(15, 11);
         handSlate.minDimensions = new BABYLON.Vector2(0.5, 0.25);
+        handSlate.position = new BABYLON.Vector3(-8, 7.5, 0);
         
         this.text = new BABYLON.GUI.TextBlock("text");
+        this.text.height = 0.8;
         this.text.color = "white";
         this.text.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
         this.text.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
@@ -26,24 +26,15 @@ class LifePointsView extends BaseView {
         contentGrid.background = "#000080";
         handSlate.content = contentGrid;
 
-        let behaviour;
-        const enabledFeatures = this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeatures();
-        this.publish(this.model.id, "info", {info: enabledFeatures});
-        this.publish(this.model.id, "info", {string: enabledFeatures.indexOf(BABYLON.WebXRFeatureName.HAND_TRACKING) !== -1});
-
-        if (enabledFeatures.indexOf(BABYLON.WebXRFeatureName.HAND_TRACKING) !== -1) { //TODO: solve, does not work
-            behaviour = new BABYLON.HandConstraintBehaviour();
+        if (this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeatures().indexOf(BABYLON.WebXRFeatureName.HAND_TRACKING) !== -1) {
+            handSlate.dimensions = new BABYLON.Vector2(1, 0.5);
+            const behaviour = new BABYLON.HandConstraintBehaviour();
             behaviour.targetZone = BABYLON.HandContraintsZone.BELOW_WRIST;
-            behaviour.attach(handSlate.node);
-        } else {
-            behaviour = new BABYLON.FollowBehavior();
-            behaviour.followHeightOffset = 0.5;
-            behaviour.followLerpSpeed = 0.1;
-            behaviour.target = this.sharedComponents.camera;
             behaviour.attach(handSlate.node);
         }
         
         this.sceneObjects.push(handSlate, contentGrid, this.text);
+        
     }
 
     _update() {
