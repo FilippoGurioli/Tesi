@@ -27,7 +27,11 @@ class LifePointsView extends BaseView {
         handSlate.content = contentGrid;
 
         let behaviour;
-        if (this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeature(BABYLON.WebXRFeatureName.HAND_TRACKING)) { //TODO: test
+        const enabledFeatures = this.sharedComponents.xrHelper.baseExperience.featuresManager.getEnabledFeatures();
+        this.publish(this.model.id, "info", {info: enabledFeatures});
+        this.publish(this.model.id, "info", {string: enabledFeatures.indexOf(BABYLON.WebXRFeatureName.HAND_TRACKING) !== -1});
+
+        if (enabledFeatures.indexOf(BABYLON.WebXRFeatureName.HAND_TRACKING) !== -1) { //TODO: solve, does not work
             behaviour = new BABYLON.HandConstraintBehaviour();
             behaviour.targetZone = BABYLON.HandContraintsZone.BELOW_WRIST;
             behaviour.attach(handSlate.node);

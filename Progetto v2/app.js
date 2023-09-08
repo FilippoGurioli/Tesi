@@ -40,36 +40,3 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get("/", function (req, res) {
 	res.sendFile(path.join(__dirname, 'public/html/index.html'));
 });
-
-//-------------------------------------------------------------------
-const axios = require('axios');
-
-fs.readFile('./public/js/Utils/Cards1.json', 'utf8', (err, data) => {
-	if (err) {
-	  console.error('Errore nella lettura del file JSON:', err);
-	  return;
-	}
-  
-	const json = JSON.parse(data);
-	json.forEach(card => {
-		axios({
-			method: 'get',
-			url: card.image,
-			responseType: 'stream',
-		  })
-			.then(function (response) {
-				const parts = card.image.split("/");
-				const fileName = "img/" + parts[parts.length - 1];
-				response.data.pipe(fs.createWriteStream("public/" + fileName));
-				card.image = fileName;
-				fs.writeFile("./public/js/Utils/Cards.json", JSON.stringify(json), function(err) {
-					if(err) {
-						return console.log(err);
-					}
-				});
-			})
-			.catch(function (error) {
-			  console.log('Errore durante il download dell\'immagine:', error);
-			});
-	});
-  });

@@ -65,6 +65,9 @@ class RootView extends BaseView {
 
     async createWebXRExperience() {
         const supported = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-ar');
+        const tmp = await BABYLON.WebXRSessionManager.IsSessionSupportedAsync('immersive-vr');
+        this.publish(this.model.id, "info", "ar support: " + supported);
+        this.publish(this.model.id, "info", "vr support: " + tmp);
         let xrHelper;
         if (supported) {
             console.log("IMMERSIVE AR SUPPORTED");
@@ -84,9 +87,9 @@ class RootView extends BaseView {
         }
         if (this.sharedComponents.xrHelper === null) this.sharedComponents.xrHelper = xrHelper;
         try {
-            this.sharedComponents.xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: xr.input });
+            this.sharedComponents.xrHelper.baseExperience.featuresManager.enableFeature(BABYLON.WebXRFeatureName.HAND_TRACKING, "latest", { xrInput: this.sharedComponents.xrHelper.input });
         } catch (err) {
-            console.log("Articulated hand tracking not supported in this browser.");
+            this._log("articulated hand tracking not supported");
         }
         this.sharedComponents.xrHelper.baseExperience.camera.setTransformationFromNonVRCamera();
         return this.sharedComponents.scene;

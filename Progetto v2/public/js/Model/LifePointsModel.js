@@ -10,6 +10,7 @@ class LifePointsModel extends BaseModel {
     _subscribeAll() {
         this.subscribe(this.id, "heal", this.heal);
         this.subscribe(this.id, "damage", this.damage);
+        this.subscribe(this.id, "info", (data) => {console.log("Broadcast from LPView: "); console.log(data)});
     }
 
     heal(data) {
