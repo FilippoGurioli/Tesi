@@ -1,7 +1,24 @@
 \chapter{Tecnologie}\label{chap:Tecnologie}
-L'obiettivo del seguente capitolo è introdurre le tecnologie software utilizzate per lo sviluppo del progetto. Si parlerà dei principali framework attualmente utilizzati per sviluppare
-applicazioni XR, di quelli utilizzati per lo sviluppo di applicazioni web e di quelli impiegati per lo sviluppo di applicazioni condivise. Durante la trattazione saranno fatti anche
-confronti tra framework simili motivando la scelta intrapresa per questo progetto, analizzando anche i vari aspetti che hanno portato a questa decisione.
+L'obiettivo del seguente capitolo è introdurre le tecnologie software utilizzate per lo sviluppo del progetto. Essendo questo un videogioco in XR sul web, si affronteranno i framework
+più utilizzati in questi campi. Le analisi seguiranno un flusso che parte dal \textit{front end}, ovvero tutta la parte visibile all'utente, per poi passare al \textit{back end}, ovvero
+l'architettura invisibile all'utente ma che svolge comunque un ruolo fondamentale per il funzionamento dell'applicazione. Durante la trattazione saranno fatti anche confronti tra
+framework simili motivando la scelta intrapresa per questo progetto, analizzandone gli aspetti che hanno portato a questa decisione. Si partirà quindi definendo le API WebXR, per poi
+passare al Mixed Reality Toolkit e terminare il front end con BabylonJS. Si passerà quindi al back end con NodeJS e Croquet. 
+
+\section{WebXR}\label{sec:WebXR}
+WebXR è un insieme di specifiche web che permettono di creare applicazioni XR per il web. Questo permette di creare applicazioni che possono essere eseguite su qualsiasi dispositivo
+che disponga di un browser, senza dover installare alcuna applicazione\cite{WebXR}.\\
+WebXR crea una struttura capace di interagire con tutta la gamma di dispositivi XR, creando una \textit{session mode} diversa in base a quale dispositivo si collega. 
+In base al sistema collegato vengono anche rese accessibili le funzionalità specifiche di quell'hardware.\\
+Questa tecnologia permette anche una gestione capillare della sessione, organizzando i vari eventi che possono verificarsi durante l'esecuzione dell'applicazione, gestendo tutti
+gli untenti collegati e fornendo anche un sistema per la gestione della disconnessione.\\
+WebXR fornisce anche delle API per la creazione di un \textit{XR loop}, ovvero un ciclo di esecuzione che permette di gestire la scena virtuale e la sua interazione con l'utente.\\
+In ultima istanza, questa tecnologia permette di gestire tutte le informazioni riguardanti la spazialità, ovvero la posizione e l'orientamento dell'utente, di gestire l'input 
+dell'utente e di gestire la visualizzazione della scena virtuale con funzionalità avanzate come il \textit{XREye}, le \textit{primary} e \textit{secondary views} e la \textit{viewport}.
+\newline \newline
+In questo progetto le API fornite da WebXR non sono state usate direttamente, nonostante ciò era importante conoscere questa tecnologia per poter comprendere il funzionamento
+di BabylonJS, che è stato utilizzato per la creazione dell'applicazione web. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, in quanto
+l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo HTTPS.
 
 \section{MRTK}\label{sec:MRTK}
 MRTK (acronimo per Mixed Reality Toolkit) è un framework open source sviluppato da Microsoft per Unity che permette di sviluppare applicazioni per HoloLens e Windows Mixed Reality\cite{MRTK}.\\
@@ -23,44 +40,6 @@ approfondire, si faccia riferimento al testo \textit{`Unity in Action'} di Joe H
 l'applicazione del progetto sviluppata per HoloLens 2 (di casa Microsoft), MRTK è stata quasi una scelta obbligata per poter creare ologrammi in modo nativo per questo dispositivo.\\
 Si noti che il Mixed Reality Toolkit è stato prodotto in supporto del motore di gioco Unity ma è stato recentemente portato anche per Unreal Engine 4, BabylonJS e OpenXR. Nello 
 specifico, BabylonJS è stata una delle tecnologie utilizzate nella tesi, motivo per il quale, nella sezione~\ref{sec:BabylonJS}, verrà approfondito il porting per BabylonJS.
-
-\section{WebXR}\label{sec:WebXR}
-WebXR è un insieme di specifiche web che permettono di creare applicazioni XR per il web. Questo permette di creare applicazioni che possono essere eseguite su qualsiasi dispositivo
-che disponga di un browser, senza dover installare alcuna applicazione\cite{WebXR}.\\
-WebXR crea una struttura capace di interagire con tutta la gamma di dispositivi XR, creando una \textit{session mode} diversa in base a quale dispositivo si collega. 
-In base al sistema collegato vengono anche rese accessibili le funzionalità specifiche di quell'hardware.\\
-Questa tecnologia permette anche una gestione capillare della sessione, organizzando i vari eventi che possono verificarsi durante l'esecuzione dell'applicazione, gestendo tutti
-gli untenti collegati e fornendo anche un sistema per la gestione della disconnessione.\\
-WebXR fornisce anche delle API per la creazione di un \textit{XR loop}, ovvero un ciclo di esecuzione che permette di gestire la scena virtuale e la sua interazione con l'utente.\\
-In ultima istanza, questa tecnologia permette di gestire tutte le informazioni riguardanti la spazialità, ovvero la posizione e l'orientamento dell'utente, di gestire l'input 
-dell'utente e di gestire la visualizzazione della scena virtuale con funzionalità avanzate come il \textit{XREye}, le \textit{primary} e \textit{secondary views} e la \textit{viewport}.
-\newline \newline
-In questo progetto le API fornite da WebXR non sono state usate direttamente, nonostante ciò era importante conoscere questa tecnologia per poter comprendere il funzionamento
-di BabylonJS, che è stato utilizzato per la creazione dell'applicazione web. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, in quanto
-l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo HTTPS.
-
-\section{NodeJS}\label{sec:NodeJS}
-NodeJS è un runtime JavaScript open source che permette di eseguire codice JavaScript al di fuori di un browser\cite{NodeJS}. Un runtime JavaScript è un ambiente di esecuzione
-in cui il codice JavaScript viene eseguito, in questo caso, NodeJS permette di eseguire codice JavaScript su un server.\\
-NodeJS è stato sviluppato per essere utilizzato con il motore JavaScript V8 di Google, che è anche il motore JavaScript utilizzato da Google Chrome. Questo permette di utilizzare
-le stesse funzionalità JavaScript sia lato client che lato server, creando un ambiente di sviluppo omogeneo e omnicomprensivo di tutte le funzionalità. Le feature più importanti
-di NodeJS sono due, la gestione degli eventi asincrona e il \textit{Node Package Manager} o NPM.
-\begin{itemize}
-    \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per gestire un elevato numero di connessioni simultanee, per questo motivo è stato progettato con un
-    modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un thread per ognuna di queste.
-    Questa tecnica è anche utilizzata per la gestione degli I/O in modo tale da non bloccare l'unico thread disponibile.
-    \item \textit{NPM}: NPM è un gestore di pacchetti per NodeJS che permette di installare e gestire le dipendenze di un progetto. Questo permette di creare un ecosistema di
-    librerie e framework che possono essere utilizzati per lo sviluppo di applicazioni web. NPM è il più grande ecosistema di librerie open source al mondo, con oltre 1 milione
-    di pacchetti disponibili.
-\end{itemize}
-L'\textit{event loop} di NodeJS è il cuore di questo runtime e fulcro della sua grande diffusione. Si riporta la sua descrizione dal sito ufficiale\cite{NodeJS}:
-\begin{quote}
-    [...] In altri sistemi, c'è sempre una chiamata bloccante per avviare il ciclo degli eventi. Tipicamente, il comportamento è definito attraverso i callback all'inizio di uno script, 
-    e alla fine un server viene avviato attraverso una chiamata bloccante come \texttt{EventMachine::run()}. In Node.js, non c'è una tale chiamata per avviare il ciclo degli eventi. Node.js 
-    entra semplicemente nel ciclo degli eventi dopo l'esecuzione dello script di input. Node.js esce dal ciclo degli eventi quando non ci sono più callback da eseguire.
-\end{quote}
-Nel progetto di questa tesi NodeJS è stato utilizzato per creare un server in un indirizzo IP locale su cui utilizzare il protocollo HTTPS affinchè le funzionalità di WebXR fossero
-accessibili. Il server avrà il compito anche di eseguire l'applicazione web creata con Croquet.
 
 \section{BabylonJS}\label{sec:BabylonJS}
 BabylonJS è un framework open source per la creazione di applicazioni web 3D e XR\cite{BabylonJS}.\\
@@ -114,5 +93,29 @@ Le caratteristiche principali che BabylonJS offre, in relazione anche al loro im
         \item Gli \textbf{input} rappresentano una qualsiasi interazione dell'utente con la scena, BabylonJS supporta diversi tipi di input e li gestisce con eventi specifici.
     \end{itemize}
 \end{itemize}
+
+\section{NodeJS}\label{sec:NodeJS}
+NodeJS è un runtime JavaScript open source che permette di eseguire codice JavaScript al di fuori di un browser\cite{NodeJS}. Un runtime JavaScript è un ambiente di esecuzione
+in cui il codice JavaScript viene eseguito, in questo caso, NodeJS permette di eseguire codice JavaScript su un server.\\
+NodeJS è stato sviluppato per essere utilizzato con il motore JavaScript V8 di Google, che è anche il motore JavaScript utilizzato da Google Chrome. Questo permette di utilizzare
+le stesse funzionalità JavaScript sia lato client che lato server, creando un ambiente di sviluppo omogeneo e omnicomprensivo di tutte le funzionalità. Le feature più importanti
+di NodeJS sono due, la gestione degli eventi asincrona e il \textit{Node Package Manager} o NPM.
+\begin{itemize}
+    \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per gestire un elevato numero di connessioni simultanee, per questo motivo è stato progettato con un
+    modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un thread per ognuna di queste.
+    Questa tecnica è anche utilizzata per la gestione degli I/O in modo tale da non bloccare l'unico thread disponibile.
+    \item \textit{NPM}: NPM è un gestore di pacchetti per NodeJS che permette di installare e gestire le dipendenze di un progetto. Questo permette di creare un ecosistema di
+    librerie e framework che possono essere utilizzati per lo sviluppo di applicazioni web. NPM è il più grande ecosistema di librerie open source al mondo, con oltre 1 milione
+    di pacchetti disponibili.
+\end{itemize}
+L'\textit{event loop} di NodeJS è il cuore di questo runtime e fulcro della sua grande diffusione. Si riporta la sua descrizione dal sito ufficiale\cite{NodeJS}:
+\begin{quote}
+    [...] In altri sistemi, c'è sempre una chiamata bloccante per avviare il ciclo degli eventi. Tipicamente, il comportamento è definito attraverso i callback all'inizio di uno script, 
+    e alla fine un server viene avviato attraverso una chiamata bloccante come \texttt{EventMachine::run()}. In Node.js, non c'è una tale chiamata per avviare il ciclo degli eventi. Node.js 
+    entra semplicemente nel ciclo degli eventi dopo l'esecuzione dello script di input. Node.js esce dal ciclo degli eventi quando non ci sono più callback da eseguire.
+\end{quote}
+Nel progetto di questa tesi NodeJS è stato utilizzato per creare un server in un indirizzo IP locale su cui utilizzare il protocollo HTTPS affinchè le funzionalità di WebXR fossero
+accessibili. Il server avrà il compito anche di eseguire l'applicazione web creata con Croquet.
+
 
 \section{Croquet}\label{sec:Croquet}

@@ -291,62 +291,45 @@ sottolineando l'importanza del web al giorno d'oggi.
     Se si vuole trovare un caposaldo all'interno di tutta la trattazione che è stata fatta precedentemente sulla definizione di gioco, questo è sicuramente la condivisione dell'esperienza. 
     Il gioco è tale solo se ci sono una o più persone con cui condividerlo, si può quasi affermare che sia intrisenco dentro la natura umana. Questa volontà di condivisione 
     non poteva quindi mancare anche nel mondo dei videogiochi, che ha espresso questa volontà nelle forme più disparate. In questa sezione si parlerà di multigiocatore, passando per 
-    i punti salienti della sua storia e per le sue applicazioni più famose.
+    i principali metodi per attuarlo e per le sue architetture più famose.
     \subsection{Definizione}\label{subsec:MultiDef}
         Il significato di multigiocatore è derivabile direttamente dalla parola stessa, è un gioco a cui può giocare più di un giocatore contemporaneamente. Questo termine è divenuto 
         di uso comune solo con l'avvento dei videogiochi ma rientrano in questa categoria anche i normali giochi da tavolo, i giochi di carte, gli sport etc.\\
         Nel contesto videoludico il termine sta a significare che nello stesso mondo virtuale, nella stessa sessione di gioco, possono partecipare più persone, le quali posso interagire
         tra loro e con l'ambiente circostante. Si noti che in questa definizione non è specificato il fatto che i giocatori debbano essere fisicamente vicini, tanto meno che ci 
         debba essere una connessione Internet a collegarli. Questo è dovuto al fatto che lungo il corso della storia si sono realizzate le più disparate tecnologie per permettere la
-        condivisione di gioco, alcune delle quali poi abbandonate, mentre altre valide tutt'ora. Si va quindi ad analizzare la storia del multigiocatore, con particolare attenzione 
-        alle tecnologie adottate per realizzarlo.\\
+        condivisione di gioco. Si vanno quindi ad analizzare quelle che hanno avuto maggior successo e come sono utilizzate al giorno d'oggi.
 
-    \subsection{Storiografia}\label{subsec:MultiStoriografia}
-        Questa trattazione storica fa principalmente riferimento al libro \textit{Multiplayer Game Programming:  architecting networked games} di Joshua Glazer e Sanjay Madhav\cite{glazer2015}.
-        \paragraph{Il Multigiocatore locale} caratterizza i primi anni in cui il concetto è stato introdotto (1960). Questa tecnologia consiste nello sviluppare un programma che sia
+    \subsection{Categorie}\label{subsec:MultiCategorie}
+        In questa sezione si categorizzeranno le varie forme di multiplayer suddividendoli per macrocategorie (similmente a come è stato fatto per i videogiochi nella sezione\ref{subsec:VideogiochiCategorie}).
+
+        \paragraph{Il multigiocatore locale} è la prima forma di multigiocatore mai realizzata. Questa tecnologia consiste nello sviluppare un programma che sia
             capace di ricevere input da due utenti, o con la condivisione del dispositivo di input o con l'utilizzo di due dispositivi di input diversi, e, nel caso
             fosse necessario, mostrare due schermate distinte (nasce il concetto di \textit{split screen}). I videogiochi così costruiti sono quindi sviluppati sulla stessa macchina 
-            e non differiscono troppo da un gioco a giocatore singolo. I primi esempi creati sono stati \textit{Pong} e \textit{Spacewar!}, entrambi giochi arcade che permettevano di 
-            giocare in due giocatori.
+            e non differiscono troppo da un gioco a giocatore singolo\cite{glazer2015}. Gli esempi più iconici sono \textit{Pong} e \textit{Call of Duty}, il primo già trattato precedentemente (\ref{subsec:VideogiochiStoriografia})
+            mentre l'ultimo è un famoso FPS che permette di giocare in locale fino a quattro giocatori sfruttando appunto la tecnica dello split screen (figura\ref{fig:CallOfDuty.jpg}).
+            \img{CallOfDuty.jpg}{Call of Duty, FPS che permette di giocare in locale fino a 4 giocatori.}
 
-        \paragraph{\textit{Networked multiplayer}} è la prima tecnologia che ha permesso di far comunicare due o più macchine tra loro con lo scopo di giocare su dispositivi separati. 
-            Queste macchine erano in realtà ancora dei mainframe, ma si stavano gettando le basi per quello che sarebbe diventato poi Internet. Nel momento in cui i personal computer
-            diventano accessibili al pubblico, questa tecnologia viene utilizzata per permettere a due o più giocatori di connettersi insieme, sfruttando le porte seriali dei computer. 
-            Allora ogni pc aveva solo 2 porte seriali permettendo una solo topologia di rete: la \textit{daisy chain} (figura\ref{fig:DaisyChain.png}).
-            \img{DaisyChain.png}{Topologia di rete \textit{daisy chain}.}
- 
-        \paragraph{\textit{Local Area Network Games}} sono una tipologia di giochi, venuti alla luce intorno agli anni '90, in cui i giocatori possono giocare insieme se connessi alla stessa
-            rete locale (Local Area Network o LAN). Questo tipo di video game è esploso grazie alla nuova tecnologia del tempo, l'Ethernet. Le topologie di rete potevano variare,
-            la daisy chain menzionata prima è intrinsecamente già una LAN, ma quelle più diffuse furono le connessioni a stella (figura\ref{fig:StarNetwork.png}) grazie alla grande 
-            proliferazione dei modem. Il gioco più famoso di questo genere era \textit{Doom}, che permetteva di giocare in multiplayer fino a 4 giocatori.
-            \img[0.5]{StarNetwork.png}{Topologia di rete a stella.}
+        \paragraph{Il multigiocatore online} è forse la tecnologia più comune al giorno d'oggi permettendo di connettere i giocatori a livello globale (spesso si usa il termine
+            Wide Area Network o WAN). Questa tecnologia è stata resa possibile grazie alla nascita di Internet, che ha permesso di connettere tra loro tutti i computer del mondo.
+            Una delle sue versioni più avanzate è il \textit{Massively Multiplayer Online} (MMO), che permette di connettere un numero elevato di giocatori (nell'ordine delle centinaia)
+            alla stessa sessione di gioco. Esempi noti di questo tipo di giochi sono \textit{World of Warcraft} e \textit{The Lord of The Ring Online}.\\
 
-        \paragraph{Il multigiocatore online} è forse la tecnologia più comune al giorno d'oggi ed identifica una connessione tra giocatori a livello globale (spesso si usa il termine
-            Wide Area Network o WAN). Questa nuova tecnologia, seppur possa sembrare semplicemente un'estensione di quella precedente, porta con sè una serie di problematiche
-            che prima non esistevano, prima tra tutte la latenza. La latenza è il tempo che intercorre tra l'invio di un messaggio in rete e la ricezione dello stesso. In una rete
-            LAN questo tempo è trascurabile, ma quando ci si sposta ad un contesto globale assume importanza prioritaria (nell'ordine di qualche secondo). Questa problematica, insieme
-            ad altre, porterà alla creazione di nuove infrastrutture fondate proprio per la loro gestione e risoluzione.\\
-            In questo periodo diventano multiplayer online anche le console che, grazie a servizi creati ad hoc, permettono di giocare con giocatori di tutto il mondo.
-        
-        \paragraph{\textit{Massively Multiplayer Online}} o MMO, sono giochi online che permettono di giocare con un numero elevato di giocatori, nell'ordine delle centinaia. Questi
-            giochi sono stati resi possibili grazie all'avvento di Internet e sono stati resi popolari grazie al titolo \textit{World of Warcraft}, che ha raggiunto il picco di 12 milioni di
-            giocatori attivi nel 2010 acquisendo la fama di MMORPG più giocato al mondo. Le sfide che caratterizzano questo tipo di videogiochi sono molteplici: gestione server, 
-            caching, bilanciamento del carico e tanti altri, ognuno dei quali deve essere gestito con la massima attenzione per la riuscita del videogioco.
+        Oltre queste due macrocategorie ne esistono altre che derivano dallo stile di gioco che si vuole ottenere.
 
-        \paragraph{\textit{Mobile Networked Multiplayer}} è l'ultima frontiera del multigiocatore, ovvero la possibilità di connetere più dispositivi mobili alla stessa sessione di 
-            gioco. Date le limitazioni di batteria (e in generale di hardware) che questi dispositivi hanno, si è dovuto trovare un modo per ridurre al minimo il consumo di dati,
-            portando alla creazione di giochi turn-based asincroni, ovvero dei giochi a turni in cui ogni giocatore ha a disposizione molto tempo per fare la propria mossa e viene
-            notificato quando l'avversario ha compiuto la sua.\\
-            Con la crescita esponenziale di questo settore, sono diventati sempre più comuni anche i giochi in tempo reale, alcuni di questi con supporto anche di un numero cospiquo
-            di utenti (nell'ordine delle decine).
+        \paragraph{La cooperativa} è uno stile di gioco in cui i giocatori connessi si aiutano a vicenda per raggiungere uno scopo comune. L'esempio più semplice a cui si può pensare
+            è di dover sconfiggere un nemico comune, come succede in \textit{Doom}, ma esistono anche altre versioni del gioco co-op per esempio \textit{Portal 2} che permette di
+            risolvere enigmi in cooperativa, o \textit{Super Mario Bros.} che permette di giocare in cooperativa per superare i livelli.\\
         
-        \paragraph{I \textit{web games}}, come già accennato prima, rappresentano il settore più in voga al giorno d'oggi. Dalla loro nascita non è stato più necessario creare un
-            file sorgente da far scaricare a tutti i giocatori, bensì è sufficiente creare un sito web che permetta di giocare direttamente dal browser. Una rivoluzione del genere
-            è stata resa possibile grazie alla nascita di nuove tecnologie, come HTML5, CSS3 e JavaScript, che hanno portato il web programming al livello successivo. Queste tre 
-            tecnologie nello specifico hanno dato accesso a funzionalità prima disponibili solo su applicazioni desktop, come l'accesso ai file system, la possibilità di creare
-            animazioni e la creazione di applicazioni interattive. Negli ultimi anni si sono anche sviluppati strumenti \textit{WebXR}, ovvero strumenti che consentono di trasportare
-            la tecnologia XR sul web. I più famosi strumenti WebXR sono \textit{A-Frame}, \textit{Babylon.js} e \textit{Three.js}.\\
+        \paragraph{La competitiva} è invece quello stile in cui i giocatori devono prevalere sugli altri per raggiungere il prioprio obiettivo. In base al modo in cui si affrontano
+            gli avversari si categorizzano altri sottogeneri, come il \textit{deathmatch} in cui i giocatori si alleano in team e devono uccidersi a vicenda, o i \textit{battle royale}
+            in cui i player si affrontano in un'arena e l'ultimo sopravvissuto vince.\\    
         
+        Si specifica che le categorie precedentemente definite non sono mutualmente esclusive: un gioco può essere sia cooperativo che competitivo, come nel caso di un team deathmatch
+        in cui cooperi con la squadra e competi con gli avversari, sia locale che online, come nel caso di \textit{Call of Duty} in cui dalla stessa macchina si può giocare in più giocatori
+        i quali possono seguentemente partecipare ad una sessione di gioco online con altri.\\
+        Fino ad ora si è esposto come viene visto il videogioco dal lato dell'utente, scandendo generi e sottogeneri che caratterizzano i videogiochi multiplayer. Con la prossima sezione
+        ci sarà un cambio di prospettiva, introducendo il lettore alle architetture software più utilizzate per sviluppare un videogioco multiplayer.
     \subsection{Architetture}\label{subsec:MultiArchitetture}
         In quest'utlima sezione del capitolo si introdurranno le architetture più comuni per la realizzazione di un videogioco multiplayer, analizzando i pro e i contro di ognuna.
         \paragraph{L'architettura client-server} consiste nella costruzione di un server, ovvero un computer che si occupa di gestire la sessione di gioco, e di più client, ovvero
@@ -366,10 +349,10 @@ sottolineando l'importanza del web al giorno d'oggi.
             a chi ha un computer dalle prestazioni basse di partecipare alla stessa sessione fornendogli comunque le informazioni necessarie per giocare. Questo meccanismo è stato
             determinante per la scalabilità di certi videogiochi come \textit{Starsiege: Tribes}.\\
 
-        \paragraph{L'architettura peer-to-peer} o p2p è una sorta di daisy chain online. È la versione serverless in cui tutti gli utenti sono connessi tra di loro e si scambiano le 
-            informazioni direttamente. Il server, avendo il duplice compito di calcolare lo stato di gioco e di gestire le connessioni, deve essere obbligatoriamente una macchina 
+        \paragraph{L'architettura peer-to-peer} o p2p è la versione serverless in cui tutti gli utenti sono connessi tra di loro e si scambiano le 
+            informazioni direttamente. Il server, avendo il duplice compito di calcolare lo stato di gioco e di gestire le connessioni, deve essere necessariamente una macchina 
             dalle prestazioni molto elevate, e, conseguentemente, molto costosa. Il peer-to-peer permette di svincolare dall'acquisto di un server, garantendo anche un miglioramento 
-            delle prestazioni, lasciando però il compito di mantenere uno stato di gioco coerente agli utenti.\\
+            delle prestazioni. Il rovescio della medaglia è però il compito di dover mantenere uno stato di gioco coerente tra gli utenti.\\
             Per gestire lo stato di gioco sono stati progettati due algoritmi: \textit{lockstep} e \textit{event synchronization}.\\
             L'algoritmo \textit{lockstep} consiste nel far partire la sessione di gioco solo quando tutti i giocatori sono pronti. Questo permette di avere un'esperienza di gioco
             fluida e coerente, ma ha il difetto di non poter gestire bene i giocatori che hanno una connessione lenta, in quanto il gioco non può procedere finchè tutti i giocatori
