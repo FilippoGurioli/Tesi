@@ -8,7 +8,7 @@ class PlayerModel extends BaseModel {
 
         this.lifePoints = LifePointsModel.create({parent: this});
 
-        this.hand = HandModel.create({parent: this, battleField: data.battleField, turnModel: data.turnModel, hand: [46986414]});
+        this.hand = HandModel.create({parent: this, battleField: data.battleField, turnModel: data.turnModel, hand: [83968380]});
         //this.deck.addCardOnTop(CardModel.create({parent: this, cardId: 83968380}));
         this.role = data.role;
     }

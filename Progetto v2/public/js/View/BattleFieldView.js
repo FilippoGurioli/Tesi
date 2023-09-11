@@ -1,4 +1,5 @@
 import { BaseView } from "../BaseView.js";
+import { Cards, Constants } from "../Utils/Constants.js";
 
 class BattleFieldView extends BaseView {
 
@@ -56,7 +57,22 @@ class BattleFieldView extends BaseView {
     }
 
     placeCard(data) {
-        //TODO: spawnare la carta
+        const card = Cards.find(c => c.id === data.id);
+        if (!card) throw Error("Card not found");
+        if (data.player === 1) {
+            switch(data.position) {
+                case 0:
+                    if (card.type === "monster") {
+                        console.log(Constants.P1_BF_MONSTER1);
+                    } else {
+                        console.log(Constants.P1_BF_SPELL1);
+                    }
+                case 1:
+                case 2:
+                case 3:
+                case 4:    
+            }
+        }
     }
 }
 

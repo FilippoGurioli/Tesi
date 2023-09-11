@@ -4,7 +4,7 @@
       "name": "Dark Magician",
       "type": "monster",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150795373032505396/carta_dark_magician_completa.png",
-      "imageOnBF": "img/dark-magician-bf.jpg",
+      "imageOnBF": "https://cdn.discordapp.com/attachments/1150769991902314589/1150770532569071646/dark-magician-bf.jpg",
       "effect": "The ultimate wizard in terms of attack and defence.",
       "description": "The ultimate wizard in terms of attack and defence."
     },
@@ -12,7 +12,7 @@
       "id": 83968380,
       "name": "Pot of Greed",
       "type": "spell",
-      "image": "img/pot-of-greed.jpg",
+      "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150799750233346078/carta_pot_of_greed_completa.png",
       "effect": "Draw one card from your deck.",
       "description": "Draw one card from your deck."
     },
@@ -20,7 +20,7 @@
       "id": 4031928,
       "name": "mirror-force",
       "type": "trap",
-      "image": "img/mirror-force.jpg",
+      "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150798775460298752/carta_mirror_force_completa.png",
       "effect": "Target 1 monster your opponent controls; take control of it until the End Phase.",
       "description": "Target 1 monster your opponent controls; take control of it until the End Phase."
     }

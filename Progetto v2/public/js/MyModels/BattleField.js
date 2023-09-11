@@ -48,6 +48,7 @@ class BattleField {
 
         if (position >= 0 && position <= 5) {
             field[position] = card;
+            return position;
         } else {
             const emptyIndex = field.indexOf(null);
             if (emptyIndex === -1) {
@@ -55,15 +56,8 @@ class BattleField {
             } else {
                 field[emptyIndex] = card;
             }
+            return emptyIndex;
         }
-        this.publish(this.id, "placeCard", {
-            player: p1 ? 1 : 2,
-            position: {
-                x: position >= 0 && position <= 5 ? position : emptyIndex,
-                y: card.type === "monster" ? 1 : 2
-            },
-            id: card.id
-        });
     }
 
     remove(card) {

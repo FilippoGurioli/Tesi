@@ -7,7 +7,13 @@ class BattleFieldModel extends BaseModel {
     #battleField = new BattleField();
 
     placeCard(player, cardId) {
-        this.#battleField.place(Cards.find(c => c.id === cardId), player === 1);
+        const p = this.#battleField.place(Cards.find(c => c.id === cardId), player === 1);
+        
+        this.publish(this.id, "placeCard", {
+            player: player,
+            position: p,
+            id: cardId
+        });
     }
 
     getBattleFieldOf(p1 = true) {
