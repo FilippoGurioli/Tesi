@@ -24,22 +24,27 @@ class HandView extends BaseView {
 
     spawnCard(cardId) {
         const infos = Cards.find(card => card.id === cardId);
-        const card = BABYLON.MeshBuilder.CreatePlane("card", {size: 0.1, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.sharedComponents.scene);  //TODO
         const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
         const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);
+        const f = new BABYLON.Vector4(0,0,0.5,1);
+        const b = new BABYLON.Vector4(0.5,0,1,1);
         material.diffuseTexture = front;
-
+        const card = BABYLON.MeshBuilder.CreatePlane("card", {frontUVs: f, backUVs: b, size: 0.1, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.sharedComponents.scene);
         card.material = material;
-        const behaviour = new BABYLON.FollowBehavior();
-        behaviour.followHeightOffset = 0.5;
-        behaviour.followLerpSpeed = 0.1;
-        behaviour.target = this.sharedComponents.camera;
-        behaviour.attach(card);
 
-        const pointerDragBehavior = new BABYLON.PointerDragBehavior();
-        pointerDragBehavior.useObjectOrientationForDragging = false;
+        // const behaviour = new BABYLON.FollowBehavior();
+        // behaviour.followHeightOffset = 0.5;
+        // behaviour.followLerpSpeed = 0.1;
+        // behaviour.target = this.sharedComponents.camera;
+        // behaviour.attach(card);
+        card.position = new BABYLON.Vector3(0,2,2.2);
+
+        const behavior = new BABYLON.SixDofDragBehavior();
+        behavior.dragDeltaRatio = 0.2;
+        behavior.zDragFactor = 0.2;
+        //pointerDragBehavior.useObjectOrientationForDragging = false;
         this.isFirstClick = true;
-        pointerDragBehavior.onDragStartObservable.add((event)=>{
+        behavior.onDragStartObservable.add((event)=>{
             if (this.isFirstClick) {
                 this.isFirstClick = false;
                 setTimeout(() => {
@@ -49,7 +54,7 @@ class HandView extends BaseView {
                 this.publish(this.model.id, "play card", {id: cardId});
             }
         });
-        pointerDragBehavior.attach(card);
+        behavior.attach(card);
         this.hand.push(card);
         this.sceneObjects.push(card);
 

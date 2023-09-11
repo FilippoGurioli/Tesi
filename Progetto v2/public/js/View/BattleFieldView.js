@@ -9,7 +9,7 @@ class BattleFieldView extends BaseView {
     _initializeScene() {
         this.plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, this.sharedComponents.scene);
         const material = new BABYLON.StandardMaterial("planeMaterial", this.sharedComponents.scene);
-        material.diffuseTexture = new BABYLON.Texture("img/battlefield.png", this.sharedComponents.scene);
+        material.diffuseTexture = new BABYLON.Texture("https://cdn.discordapp.com/attachments/1150769991902314589/1150770531814096936/battlefield.png", this.sharedComponents.scene);
         material.diffuseTexture.hasAlpha = true;
         this.plane.material = material;
         this.plane.position.y = -1;
