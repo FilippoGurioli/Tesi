@@ -118,7 +118,9 @@ NodeJS è un runtime JavaScript open source che permette di eseguire codice Java
 in cui il codice JavaScript viene eseguito, in questo caso, NodeJS permette di eseguire codice JavaScript su un server.\\
 NodeJS è stato sviluppato per essere utilizzato con il motore JavaScript V8 di Google, che è anche il motore JavaScript utilizzato da Google Chrome. Questo permette di utilizzare
 le stesse funzionalità JavaScript sia lato client che lato server, creando un ambiente di sviluppo omogeneo e omnicomprensivo di tutte le funzionalità. Le feature più importanti
-di NodeJS sono due, la gestione degli eventi asincrona e il \textit{Node Package Manager} o NPM.
+di NodeJS sono due, la gestione degli eventi asincrona\footnote{Asincrono: in informatica asincrono e sincrono assumono un'accezione leggermente diversa da quella 
+naturale della parola. In questo contesto si definisce sincrona un'operazione che viene eseguita all'istante in cui viene chiamata e asincrona un'operazione che viene eseguita
+più avanti nel tempo.} e il \textit{Node Package Manager} o NPM.
 \begin{itemize}
     \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per gestire un elevato numero di connessioni simultanee, per questo motivo è stato progettato con un
     modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un thread per ognuna di queste.
@@ -144,16 +146,51 @@ accessibili. Il server avrà il compito anche di eseguire l'applicazione web cre
 \end{quote}
 Questa è la prima definizione che compare sul sito ufficiale di Croquet. Croquet è un framework open source per la creazione di applicazioni collaborative e 
 multiplayer. Nato con l'idea di creare un ambiente di sviluppo per videogiochi, questo framework si è poi espanso a tutti i campi in cui la collaborazione e la condivisione
-di informazioni sono fondamentali. Nel sito ufficiale si possono trovare molti esempi di applicazioni create con Croquet, tra cui un contatore, una chat e vari esempi di mini-giochi, tutti
+di informazioni sono fondamentali. Nel sito ufficiale si possono trovare molti esempi di applicazioni create con questo framework, tra cui un contatore, una chat e vari esempi di mini-giochi, tutti
 perfettamente sincronizzati tra i vari utenti.\\
-Croquet porta con sè una serie di garanzie che permettono di creare applicazioni multiplayer semplici e performanti. In tutte le simulazioni create con Croquet, ad ogni utente
+Croquet porta con sè una serie di garanzie che permettono di creare applicazioni multiplayer semplici e performanti. In tutte le simulazioni, ad ogni utente
 è garantito di essere \textit{bit-identical} con tutti gli altri connessi alla stessa sessione. Inoltre, come viene anche citato nella definizione, Croquet elimina il concetto
-di server e client, svincolando completamente lo sviluppatore dal produrre \textit{netcode}, ovvero il codice che permette di gestire la comunicazione tra gli utenti, la gestione della 
-latenza, la sincronizzazione dei dati etc.\\ 
+di server e client, svincolando completamente lo sviluppatore dal produrre \textit{netcode}, ovvero il codice che permette di gestire principalmente la comunicazione tra gli utenti,
+la gestione della latenza e la sincronizzazione dei dati.\\ 
 Nella prossima sezione si andrà ad esplorare l'architettura specifica di Croquet per poi passare ad un'analisi più approfondita delle sue funzionalità. Si terminerà quindi il capitolo
-con una breve analisi delle tecnologie concorrenti e delle motivazioni che hanno portato alla scelta di Croquet.\\
+con una breve analisi delle tecnologie concorrenti e delle motivazioni che hanno portato alla scelta di questa infrastruttura.\\
 
 \subsection{Architettura}\label{subsec:Croquet_architettura}
-https://croquet.io/docs/croquet/
+Come già anticipato Croquet si pone l'obiettivo di creare un'infrastruttura che permetta di creare applicazioni condivise senza la necessità di scrivere netcode. La veridicità di
+questa affermazione la si può subito notare dal fatto che Croquet è sviluppato interamente su JavaScript, noto linguaggio client-side, che non richiede l'installazione di alcun server. 
+Se questo non dovesse bastare, nel sito ufficiale si può leggere la struttura fondamentale di Croquet che si divide in tre componenti principali: la \textit{view}, il \textit{model}
+e il \textit{reflector}.
+\begin{itemize}
+    \item \textbf{View}: la view è il componente che si occupa di gestire l'interfaccia utente, ovvero gli input che l'utente da all'applicazione e la visualizzazione di ciò che
+    l'applicazione produce. 
+    \item \textbf{Model}: il model è quella parte dell'applicazione in cui i calcoli vengono eseguiti, non contiene informazioni riguardanti visualizzazione ma piuttosto dati e 
+    funzionalità condivise.
+    \item \textbf{Reflector}: il reflector non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, message-passing service
+    all'interno del cloud che permette di tenere aggiornate le applicazioni tra i vari utenti.
+\end{itemize}
+Per garantire una sincronizzazione \textit{bit-identical} tra tutti gli utenti, Croquet utilizza un \textit{time-based, optimistic, lockstep protocol}. Questo protocollo si basa
+sull'idea che tutti gli utenti siano sincronizzati in base al tempo che è trascorso dall'inizio della sessione. In questo modo, ogni utente può eseguire le proprie azioni in modo
+ottimistico, senza dover aspettare che tutti gli altri utenti abbiano eseguito le proprie. A tale scopo Croquet utilizza un clock esterno alle macchine degli utenti, che però
+permette di tenerle sincronizzate, questo clock è poi condiviso tramite i reflector ai model che sono quindi temporizzati perfettamente.\\
+\newline
+Per eseguire un'azione all'interno della struttura vengono utilizzati degli eventi. Essi sono il modo in cui Croquet permette di comunicare tra i vari componenti, in particolare
+tra view e model. In base a chi invia e chi riceve si distinguono quattro tipi di eventi diversi:
+\begin{itemize}
+    \item \textbf{input event}: eventi inviati dalla view al model. Questi eventi devono poter aggiornare lo stato del model di tutti gli utenti connessi alla stessa sessione. Per 
+    questo motivo, questi eventi vengono asincronicamente inviati al reflector che poi li condivide con tutti gli utenti;
+    \item \textbf{output event}: eventi inviati dal model alla view. Dato che tutte le macchine eseguono lo stesso codice, questo evento non è altro che una chiamata di funzione
+    che viene eseguita in modo sincrono da tutti gli utenti;
+    \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view, ancora una volta, eseguendo lo stesso codice,
+    ciò corrisponde ad una semplice chiamata a funzione (sincrona);
+    \item \textbf{model event}: eventi inviati dal model al model. Questi eventi sono utilizzati per comunicare tra i vari model. Essendo tutti sincronizzati, anche in questo caso
+    riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo.
+\end{itemize}
+Una raffigurazione semplice ma efficace viene fornita nell'immagine~\ref{fig:CroquetArchi.png}.
+\img{CroquetArchi.png}{Architettura di Croquet\cite{CroquetArchi}}
+Per comprendere completamente la struttura di Croquet bisogna ancora definire un ultimo concetto: lo \textit{snapshot}. Lo snapshot è una copia del model che viene salvata nel cloud.
+Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente dice al model di eseguire uno snapshot: questo permette agli utenti di connettersi a delle sessioni che 
+sono già in corso d'opera. Quando un utente si connette ad una sessione, il reflector invia al model l'ultimo snapshot disponibile, il model viene quindi istanziato con le ultime
+informazioni disponibili, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model.\\
+
 \subsection{Funzionalità}\label{subsec:Croquet_funzionalita}
 \subsection{Motivazioni}\label{subsec:Croquet_motivazioni}
