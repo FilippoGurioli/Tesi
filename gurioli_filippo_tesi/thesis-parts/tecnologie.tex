@@ -144,16 +144,16 @@ accessibili. Il server avrà il compito anche di eseguire l'applicazione web cre
     \textit{Croquet removes the complexity of traditional client/server systems and eliminates netcode, enabling synchronized simulations and gameplay that have simply not been 
     possible.}\cite{Croquet}
 \end{quote}
-Questa è la prima definizione che compare sul sito ufficiale di Croquet. Croquet è un framework open source per la creazione di applicazioni collaborative e 
-multiplayer. Nato con l'idea di creare un ambiente di sviluppo per videogiochi, questo framework si è poi espanso a tutti i campi in cui la collaborazione e la condivisione
+La menzione che si è fatta sopra riporta la prima definizione che compare sul sito ufficiale di Croquet. Questo è un framework open source per la creazione di applicazioni 
+collaborative e multiplayer. Nato con l'idea di creare un ambiente di sviluppo per videogiochi, questo framework si è poi espanso a tutti i campi in cui la collaborazione e la condivisione
 di informazioni sono fondamentali. Nel sito ufficiale si possono trovare molti esempi di applicazioni create con questo framework, tra cui un contatore, una chat e vari esempi di mini-giochi, tutti
 perfettamente sincronizzati tra i vari utenti.\\
-Croquet porta con sè una serie di garanzie che permettono di creare applicazioni multiplayer semplici e performanti. In tutte le simulazioni, ad ogni utente
+Croquet porta con sè una serie di garanzie che permettono di creare applicazioni multiplayer semplici e performanti. Ad ogni utente
 è garantito di essere \textit{bit-identical} con tutti gli altri connessi alla stessa sessione. Inoltre, come viene anche citato nella definizione, Croquet elimina il concetto
-di server e client, svincolando completamente lo sviluppatore dal produrre \textit{netcode}, ovvero il codice che permette di gestire principalmente la comunicazione tra gli utenti,
-la gestione della latenza e la sincronizzazione dei dati.\\ 
+di server e client, svincolando completamente lo sviluppatore dal produrre \textit{netcode}, ovvero il codice che si concentra principalmente sulla comunicazione tra gli utenti,
+sulla gestione della latenza e sulla sincronizzazione dei dati.\\ 
 Nella prossima sezione si andrà ad esplorare l'architettura specifica di Croquet per poi passare ad un'analisi più approfondita delle sue funzionalità. Si terminerà quindi il capitolo
-con una breve analisi delle tecnologie concorrenti e delle motivazioni che hanno portato alla scelta di questa infrastruttura.\\
+con una breve analisi delle motivazioni che hanno portato alla scelta di questa infrastruttura.\\
 
 \subsection{Architettura}\label{subsec:Croquet_architettura}
 Come già anticipato Croquet si pone l'obiettivo di creare un'infrastruttura che permetta di creare applicazioni condivise senza la necessità di scrivere netcode. La veridicità di
@@ -161,62 +161,91 @@ questa affermazione la si può subito notare dal fatto che Croquet è sviluppato
 Se questo non dovesse bastare, nel sito ufficiale si può leggere la struttura fondamentale di Croquet che si divide in tre componenti principali: la \textit{view}, il \textit{model}
 e il \textit{reflector}.
 \begin{itemize}
-    \item \textbf{View}: la view è il componente che si occupa di gestire l'interfaccia utente, ovvero gli input che l'utente da all'applicazione e la visualizzazione di ciò che
+    \item \textbf{View}: è il componente che si occupa di gestire l'interfaccia utente, ovvero gli input che l'utente da all'applicazione e la visualizzazione di ciò che
     l'applicazione produce. 
-    \item \textbf{Model}: il model è quella parte dell'applicazione in cui i calcoli vengono eseguiti, non contiene informazioni riguardanti visualizzazione ma piuttosto dati e 
+    \item \textbf{Model}: è quella parte dell'applicazione in cui i calcoli vengono eseguiti, non contiene informazioni riguardanti la visualizzazione ma dati e 
     funzionalità condivise.
-    \item \textbf{Reflector}: il reflector non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, message-passing service
+    \item \textbf{Reflector}: non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, message-passing service
     all'interno del cloud che permette di tenere aggiornate le applicazioni tra i vari utenti.
 \end{itemize}
+Si precisa che un progetto Croquet può essere composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tanto meno di
+scrivere tutta la parte di grafica in un singolo file `view'.\\
 Per garantire una sincronizzazione \textit{bit-identical} tra tutti gli utenti, Croquet utilizza un \textit{time-based, optimistic, lockstep protocol}. Questo protocollo si basa
 sull'idea che tutti gli utenti siano sincronizzati in base al tempo che è trascorso dall'inizio della sessione. In questo modo, ogni utente può eseguire le proprie azioni in modo
 ottimistico, senza dover aspettare che tutti gli altri utenti abbiano eseguito le proprie. A tale scopo Croquet utilizza un clock esterno alle macchine degli utenti, che però
-permette di tenerle sincronizzate, questo clock è poi condiviso tramite i reflector ai model che sono quindi temporizzati perfettamente.\\
+permette di tenerle sincronizzate. Questo clock è poi condiviso tramite i reflector ai model che sono quindi temporizzati perfettamente.\\
 \newline
 Per eseguire un'azione all'interno della struttura vengono utilizzati degli eventi. Essi sono il modo in cui Croquet permette di comunicare tra i vari componenti, in particolare
 tra view e model. In base a chi invia e chi riceve si distinguono quattro tipi di eventi diversi:
 \begin{itemize}
     \item \textbf{input event}: eventi inviati dalla view al model. Questi eventi devono poter aggiornare lo stato del model di tutti gli utenti connessi alla stessa sessione. Per 
-    questo motivo, questi eventi vengono asincronicamente inviati al reflector che poi li condivide con tutti gli utenti;
+    questo motivo, essi vengono asincronicamente inviati al reflector che poi li condivide con tutti gli utenti;
     \item \textbf{output event}: eventi inviati dal model alla view. Dato che tutte le macchine eseguono lo stesso codice, questo evento non è altro che una chiamata di funzione
     che viene eseguita in modo sincrono da tutti gli utenti;
-    \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view, ancora una volta, eseguendo lo stesso codice,
+    \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view e, ancora una volta, eseguendo lo stesso codice,
     ciò corrisponde ad una semplice chiamata a funzione (sincrona);
     \item \textbf{model event}: eventi inviati dal model al model. Questi eventi sono utilizzati per comunicare tra i vari model. Essendo tutti sincronizzati, anche in questo caso
-    riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo.
+    riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo gestendolo completamente in locale.
 \end{itemize}
-Una raffigurazione semplice ma efficace viene fornita nell'immagine~\ref{fig:CroquetArchi.png}.
+Una raffigurazione semplice ma efficace viene fornita nell'immagine~\ref{fig:CroquetArchi.png}.\\
+\newline
 \img{CroquetArchi.png}{Architettura di Croquet\cite{CroquetArchi}}
 Per comprendere completamente la struttura di Croquet bisogna ancora definire un ultimo concetto: lo \textit{snapshot}. Lo snapshot è una copia del model che viene salvata nel cloud.
-Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente dice al model di eseguire uno snapshot: questo permette agli utenti di connettersi a delle sessioni che 
+Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente comunica al model di eseguire uno snapshot: questo permette agli utenti di connettersi a delle sessioni che 
 sono già in corso d'opera. Quando un utente si connette ad una sessione, il reflector invia al model l'ultimo snapshot disponibile, il model viene quindi istanziato con le ultime
-informazioni disponibili, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model. Si anticipa che un progetto Croquet può essere 
-composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tanto meno di scrivere tutta la parte di grafica in un singolo
-file `view'.\\
-
+informazioni salvate, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model.\\
+\newline
+Affinchè una sessione di Croquet inizi bisogna richiamare una funzione apposita: la \texttt{Croquet.Session.join}. Questa funzione avvia una sessione di Croquet, se ancora non esistente,
+oppure istanzia model e view aggiornandoli all'ultimo snapshot. Al lancio del comando viene generato un \textit{session ID} che identifica univocamente la sessione. L'ID viene 
+creato partendo dal nome dell'applicazione (passato come parametro) e dal codice di tutti i modelli registrati in quell'applicazione. Questo garantisce che solo chi sta eseguendo lo
+stesso codice potrà connettersi alla stessa sessione evitando qualsiasi problema di sincronizzazione in tal senso.
 \subsection{Funzionalità}\label{subsec:Croquet_funzionalita}
 In questa sezione si parlerà di come l'architettura sopra descritta viene effettivamente implementata in Croquet. Si divide la sezione in due parti, una dedicata al model ed una alla
 view. Si noti che il reflector non è un componente implementabile dallo sviluppatore, motivo per il quale non verrà trattato in questa sezione.\\
 \subsubsection{Model}\label{subsubsec:Croquet_model}
 Il model è il componente che si occupa di gestire i dati e le funzionalità condivise tra tutti gli utenti. In Croquet esso è una classe standard di JavaScript con la differenza
-che al posto del costruttore bisogna definire un metodo chiamato \texttt{init()} che viene eseguito all'istanziazione del model, a sua volta attuata chiamato \texttt{ModelName.create()}
-e non con la classica \texttt{new}. Questo è dovuto al fatto che il model viene istanziato in modo diverso in base alla sessione: se la sessione è appena stata istanziata, la create
-corrisponde ad una semplice new, ma se fosse già in esecuzione, Croquet usa lo snapshot per portare quel model all'ultimo aggiornamento.\\
+che al posto del costruttore bisogna definire un metodo chiamato \texttt{init} che viene eseguito all'istanziamento del model, a sua volta attuata chiamato \texttt{ModelName.create}
+e non con la classica \texttt{new}. Questo è dovuto al fatto che il model viene istanziato in modo diverso in base alla sessione: se la sessione è appena stata creata la \texttt{create}
+corrisponde ad una semplice \texttt{new} ma, se fosse già in esecuzione, Croquet usa lo snapshot per portare quel model all'ultimo aggiornamento.\\
 \newline
 Dato che il model è temporizzato secondo un clock definito esternamente, Croquet fornisce in questa classe anche delle variabili e dei metodi per conoscere il tempo trascorso e 
-sfruttarlo. In particolare, il model dispone di una variabile \texttt{now} che rappresenta il tempo trascorso dall'inizio della sessione, inoltre dispone di un metodo \texttt{future}
+sfruttarlo. In particolare, il model dispone di una variabile \texttt{now} che rappresenta il tempo trascorso dall'inizio della sessione. Inoltre viene fornito un metodo \texttt{future}
 che permette di eseguire una funzione ad un certo istante di tempo nel futuro.\\
 \newline
 Come già anticipato, il model e la view comunicano tramite eventi. Per inviare e ricevere questi eventi vengono utilizzate due funzioni \texttt{publish} e \texttt{subscribe}. La prima
-viene utilizzata per inviare un evento, la seconda per riceverlo. Entrambe queste funzioni prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
-evento ed una stringa che identifica l'evento stesso. Il terzo parametro per la \texttt{subscribe} corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre per la
-\texttt{publish} corrisponde ai parametri da passare al destinatario (volendo anche nulla).\\
-Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare si consiglia di non creare mai una concatenazione di eventi in cui si susseguono uno
+viene impiegata per l'invio di un evento, la seconda per la ricezione. Entrambe queste funzioni prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
+evento ed una stringa che identifica l'evento stesso. Il terzo parametro, per la \texttt{subscribe}, corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre
+equivale ai parametri da passare al destinatario (volendo anche nulla) per la \texttt{publish}.
+Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare, consiglia di non creare mai una concatenazione di eventi in cui si susseguono uno
 che va da view a model e uno che va da model a view. Questo perchè, come verrà specificato nella sezione~\ref{subsubsec:Croquet_view}, alla view viene passato direttamente il riferimento
-al model rendendo inutile la risposta del model via evento.\\
+al model rendendo inutile e pesante la risposta del model via evento.\\
 \newline
-La funzione speculare alla create è la \texttt{destroy}. Essa deve essere chiamata ogni qual volta si voglia terminare l'esistenza di quel model in tutti gli utenti connessi alla
+La funzione speculare alla \texttt{create} è la \texttt{destroy}. Essa deve essere chiamata ogni qual volta si voglia terminare l'esistenza del model in tutti gli utenti connessi alla
 sessione. Vengono rimosse tutte le chiamate a \texttt{future} in attesa e tutte le \texttt{subscribe} ad eventi che sono state fatte.\\
 
 \subsubsection{View}\label{subsubsec:Croquet_view}
+La view è la parte del software responsabile di intercettare l'input utente e di mostrargli l'output generato dal model. Le view nei vari utenti possono essere
+diverse, mostrare certe informazioni e nasconderne altre, in modo da avere esperienze diverse da utente a utente. In Croquet essa è una classe standard di JavaScript.
+Al costruttore verrà passata una variabile \texttt{model} che rappresenta il riferimento al model. Croquet mette una grande enfasi su come gestire questa variabile, nella fattispecie
+sottolinea come questa debba essere usata solo in lettura e mai in scrittura. Questa regola è dettata dal fatto che se si scrivesse direttamente sul model lo si farebbe solo 
+localmente, rompendo la sincronizzazione. Tramite la \texttt{publish} si innesca invece tutto il meccanismo di condivisione via reflector spiegato prima, mantenendo i model
+sincronizzati.\\
+\newline
+La view dispone anch'essa dei metodi \texttt{publish}, \texttt{subscribe} e \texttt{future}. Non ci si soffermerà sulla descrizione dei primi due inquanto già definiti
+nella sezione precedente. Per quanto possa sembrare simile alla corrispettiva model, la \texttt{future} all'interno della view corrisponde semplicemente alla chiamata della 
+funzione nativa JavaScript \texttt{setTimeout}, che esegue il codice passato alla fine del tempo specificato. Questa somiglianza è stata implementata al solo scopo di mantenere uno stile
+coerente tra le due componenti anche se non vi è alcuna relazione.\\
+\newline
+In questa classe viene fornito un metodo chiamato \texttt{update} per permettere di fare polling degli input, rendering e aggiornamenti della UI. Questa procedura viene chiamata
+automaticamente in ogni frame passandogli come parametro il tempo trascorso dalla creazione della view. Questa funzione viene chiamata unicamente nella prima
+view istanziata (nominata da Croquet \textit{root view}), di tutte le view figlie bisognerà richiamare esplicitamente il metodo affinchè l'effetto si perpetui.\\
+\newline
+In ultima istanza si vuole parlare della funzione \texttt{detach} che consiste nella distruzione della view. Nella documentazione viene specificato che questa funzione deve essere
+sovrascritta dalla \textit{root view} affichè richiami \texttt{detach} in tutte le view ausialirie per poi usare la \texttt{super.detach}. La principale funzione di questo metodo
+è di rimuovere tutti gli eventi che sono stati sottoscritti tramite \texttt{subscribe}, lasciando al programmatore il compito di eliminare tutti gli elementi visivi che sono stati
+creati.\\
 \subsection{Motivazioni}\label{subsec:Croquet_motivazioni}
+Le motivazioni che hanno spinto a scegliere Croquet come framework per il supporto multiplayer sono molteplici. In primo luogo, Croquet è stato sviluppato per essere interamente
+in JavaScript, questo permette di creare un ecosistema di librerie e framework che possono essere utilizzati in modo omogeneo. In aggiunta le garanzie che Croquet fornisce sono
+molto ricercate in questo settore, in particolare la sincronizzazione \textit{bit-identical} e la gestione degli eventi. Per ultimo si vuole ricordare ancora una volta che
+questo framework svincola dal netcode, altra feature importante che ha portato a questa scelta.\\ 
