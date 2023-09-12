@@ -190,7 +190,33 @@ Una raffigurazione semplice ma efficace viene fornita nell'immagine~\ref{fig:Cro
 Per comprendere completamente la struttura di Croquet bisogna ancora definire un ultimo concetto: lo \textit{snapshot}. Lo snapshot è una copia del model che viene salvata nel cloud.
 Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente dice al model di eseguire uno snapshot: questo permette agli utenti di connettersi a delle sessioni che 
 sono già in corso d'opera. Quando un utente si connette ad una sessione, il reflector invia al model l'ultimo snapshot disponibile, il model viene quindi istanziato con le ultime
-informazioni disponibili, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model.\\
+informazioni disponibili, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model. Si anticipa che un progetto Croquet può essere 
+composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tanto meno di scrivere tutta la parte di grafica in un singolo
+file `view'.\\
 
 \subsection{Funzionalità}\label{subsec:Croquet_funzionalita}
+In questa sezione si parlerà di come l'architettura sopra descritta viene effettivamente implementata in Croquet. Si divide la sezione in due parti, una dedicata al model ed una alla
+view. Si noti che il reflector non è un componente implementabile dallo sviluppatore, motivo per il quale non verrà trattato in questa sezione.\\
+\subsubsection{Model}\label{subsubsec:Croquet_model}
+Il model è il componente che si occupa di gestire i dati e le funzionalità condivise tra tutti gli utenti. In Croquet esso è una classe standard di JavaScript con la differenza
+che al posto del costruttore bisogna definire un metodo chiamato \texttt{init()} che viene eseguito all'istanziazione del model, a sua volta attuata chiamato \texttt{ModelName.create()}
+e non con la classica \texttt{new}. Questo è dovuto al fatto che il model viene istanziato in modo diverso in base alla sessione: se la sessione è appena stata istanziata, la create
+corrisponde ad una semplice new, ma se fosse già in esecuzione, Croquet usa lo snapshot per portare quel model all'ultimo aggiornamento.\\
+\newline
+Dato che il model è temporizzato secondo un clock definito esternamente, Croquet fornisce in questa classe anche delle variabili e dei metodi per conoscere il tempo trascorso e 
+sfruttarlo. In particolare, il model dispone di una variabile \texttt{now} che rappresenta il tempo trascorso dall'inizio della sessione, inoltre dispone di un metodo \texttt{future}
+che permette di eseguire una funzione ad un certo istante di tempo nel futuro.\\
+\newline
+Come già anticipato, il model e la view comunicano tramite eventi. Per inviare e ricevere questi eventi vengono utilizzate due funzioni \texttt{publish} e \texttt{subscribe}. La prima
+viene utilizzata per inviare un evento, la seconda per riceverlo. Entrambe queste funzioni prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
+evento ed una stringa che identifica l'evento stesso. Il terzo parametro per la \texttt{subscribe} corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre per la
+\texttt{publish} corrisponde ai parametri da passare al destinatario (volendo anche nulla).\\
+Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare si consiglia di non creare mai una concatenazione di eventi in cui si susseguono uno
+che va da view a model e uno che va da model a view. Questo perchè, come verrà specificato nella sezione~\ref{subsubsec:Croquet_view}, alla view viene passato direttamente il riferimento
+al model rendendo inutile la risposta del model via evento.\\
+\newline
+La funzione speculare alla create è la \texttt{destroy}. Essa deve essere chiamata ogni qual volta si voglia terminare l'esistenza di quel model in tutti gli utenti connessi alla
+sessione. Vengono rimosse tutte le chiamate a \texttt{future} in attesa e tutte le \texttt{subscribe} ad eventi che sono state fatte.\\
+
+\subsubsection{View}\label{subsubsec:Croquet_view}
 \subsection{Motivazioni}\label{subsec:Croquet_motivazioni}
