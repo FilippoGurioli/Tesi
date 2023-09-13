@@ -159,13 +159,13 @@ con una breve analisi delle motivazioni che hanno portato alla scelta di questa 
 Come già anticipato Croquet si pone l'obiettivo di creare un'infrastruttura che permetta di creare applicazioni condivise senza la necessità di scrivere netcode. La veridicità di
 questa affermazione la si può subito notare dal fatto che Croquet è sviluppato interamente su JavaScript, noto linguaggio client-side, che non richiede l'installazione di alcun server. 
 Se questo non dovesse bastare, nel sito ufficiale si può leggere la struttura fondamentale di Croquet che si divide in tre componenti principali: la \textit{view}, il \textit{model}
-e il \textit{reflector}.
+ed il \textit{reflector}.
 \begin{itemize}
     \item \textbf{View}: è il componente che si occupa di gestire l'interfaccia utente, ovvero gli input che l'utente da all'applicazione e la visualizzazione di ciò che
     l'applicazione produce. 
     \item \textbf{Model}: è quella parte dell'applicazione in cui i calcoli vengono eseguiti, non contiene informazioni riguardanti la visualizzazione ma dati e 
     funzionalità condivise.
-    \item \textbf{Reflector}: non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, message-passing service
+    \item \textbf{Reflector}: non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, \textit{message-passing service}
     all'interno del cloud che permette di tenere aggiornate le applicazioni tra i vari utenti.
 \end{itemize}
 Si precisa che un progetto Croquet può essere composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tanto meno di
@@ -182,7 +182,7 @@ tra view e model. In base a chi invia e chi riceve si distinguono quattro tipi d
     questo motivo, essi vengono asincronicamente inviati al reflector che poi li condivide con tutti gli utenti;
     \item \textbf{output event}: eventi inviati dal model alla view. Dato che tutte le macchine eseguono lo stesso codice, questo evento non è altro che una chiamata di funzione
     che viene eseguita in modo sincrono da tutti gli utenti;
-    \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view e, ancora una volta, eseguendo lo stesso codice,
+    \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view e, grazie ancora al fatto che eseguono lo stesso codice,
     ciò corrisponde ad una semplice chiamata a funzione (sincrona);
     \item \textbf{model event}: eventi inviati dal model al model. Questi eventi sono utilizzati per comunicare tra i vari model. Essendo tutti sincronizzati, anche in questo caso
     riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo gestendolo completamente in locale.
@@ -216,16 +216,16 @@ Come già anticipato, il model e la view comunicano tramite eventi. Per inviare 
 viene impiegata per l'invio di un evento, la seconda per la ricezione. Entrambe queste funzioni prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
 evento ed una stringa che identifica l'evento stesso. Il terzo parametro, per la \texttt{subscribe}, corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre
 equivale ai parametri da passare al destinatario (volendo anche nulla) per la \texttt{publish}.
-Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare, consiglia di non creare mai una concatenazione di eventi in cui si susseguono uno
-che va da view a model e uno che va da model a view. Questo perchè, come verrà specificato nella sezione~\ref{subsubsec:Croquet_view}, alla view viene passato direttamente il riferimento
+Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare, consiglia di non creare mai una concatenazione di eventi in cui se ne susseguono uno
+da view a model e uno da model a view. Questo perchè, come verrà specificato nella sezione~\ref{subsubsec:Croquet_view}, alla view viene passato direttamente il riferimento
 al model rendendo inutile e pesante la risposta del model via evento.\\
 \newline
 La funzione speculare alla \texttt{create} è la \texttt{destroy}. Essa deve essere chiamata ogni qual volta si voglia terminare l'esistenza del model in tutti gli utenti connessi alla
 sessione. Vengono rimosse tutte le chiamate a \texttt{future} in attesa e tutte le \texttt{subscribe} ad eventi che sono state fatte.\\
 
 \subsubsection{View}\label{subsubsec:Croquet_view}
-La view è la parte del software responsabile di intercettare l'input utente e di mostrargli l'output generato dal model. Le view nei vari utenti possono essere
-diverse, mostrare certe informazioni e nasconderne altre, in modo da avere esperienze diverse da utente a utente. In Croquet essa è una classe standard di JavaScript.
+La view è la parte del software responsabile di intercettare l'input utente e di mostrargli l'output generato dal model. I vari utenti possono avere view 
+diverse, mostrando certe informazioni e nascondendone altre, in modo da avere esperienze diversificate. In Croquet essa è una classe standard di JavaScript.
 Al costruttore verrà passata una variabile \texttt{model} che rappresenta il riferimento al model. Croquet mette una grande enfasi su come gestire questa variabile, nella fattispecie
 sottolinea come questa debba essere usata solo in lettura e mai in scrittura. Questa regola è dettata dal fatto che se si scrivesse direttamente sul model lo si farebbe solo 
 localmente, rompendo la sincronizzazione. Tramite la \texttt{publish} si innesca invece tutto il meccanismo di condivisione via reflector spiegato prima, mantenendo i model

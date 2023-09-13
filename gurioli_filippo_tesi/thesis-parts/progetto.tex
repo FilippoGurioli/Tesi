@@ -1,23 +1,26 @@
-\chapter{Progetto}\label{chap:progetto}
+\chapter{Progetto}\label{chap:Progetto}
 Questo capitolo si pone l'obiettivo di introdurre il lettore agli argomenti trattati nei capitoli successivi, dove vengono affrontati dettagli tecnici del progetto. Qui si esporranno
 in maniera generale l'idea alla base del progetto, le sue sfide principali e il traguardo che si pone di conseguire.\\
 \newline
 Il software che si è sviluppato consiste in una rivisitazione del gioco \textit{Yu-Gi-Oh!} trasportato in realtà aumentata. \textit{Yu-Gi-Oh!} è un gioco di 
 carte collezionabili in cui due giocatori si sfidano in un duello nel quale devono cercare di ridurre i punti vita dell'avversario a zero. Per fare ciò, i duellanti sono dotati di un
 mazzo di carte composto da mostri, magie e trappole. I mostri rappresentano delle truppe schierabili dalla parte del giocatore che possono attaccare l'avversario o difendere il
-giocatore stesso. Le magie e le trappole sono carte che possono influenzare lo svolgimento del gioco tramite i loro effetti. Il gioco è a turni e ogni turno è diviso in fasi. Le 
+giocatore stesso, mentre le magie e le trappole sono carte che possono influenzare lo svolgimento del gioco tramite i loro effetti. Il gioco è a turni e ogni turno è diviso in fasi. Le 
 fasi contraddistinguono le azioni che il giocatore può intraprendere durante quel periodo di tempo.\\
 \newline
-Esiste anche una serie animata basata su questo gioco di carte ed è proprio da questa che nasce l'idea del progetto. Nella serie animata, quando il protagonista gioca una carta mostro, 
-viene proiettato un ologramma del mostro stesso che si materializza sul campo di gioco. Questo ologramma è visibile a tutti i giocatori e può essere interagito da chiunque.\\
-Dopo essere venuti a conoscenza dell'esistenza di HMD come HoloLens, si è pensato di realizzare un gioco in realtà aumentata che permettesse di riprodurre quanto più fedelmente
-l'esperienza di gioco riportata nella serie.\\
-
-
-
-% Come si evince dal titolo della tesi, il progetto consiste nella realizzazione di un gioco in realtà aumentata condivisa, ovvero un gioco che permetta a più utenti di interagire
-% tra loro in un ambiente virtuale condiviso. In aggiunta ci si è posti sin da subito l'obiettivo di realizzare il gioco tramite una \textit{web app}, ovvero un'applicazione web
-% che può essere eseguita da un browser. In questo modo non ci sarebbero stati problemi di portabilità, rendendo accessibile a chiunque l'esperienza di gioco.\\
-% La tecnologia più utilizzata in ambito web per la realizzazione di applicazioni AR è WebXR. WebXR permette di creare realtà aumentate eseguibili su browser in cui ogni utente
-% vive la stessa esperienza ma in maniera indipendente. Bisogna quindi ancora trovare un modo per sincronizzare i vari utenti in modo da condividere l'esperienza. A supporto di ciò 
-% si è utilizzato Croquet, framework che sopperisce esattamente il requisito posto. 
+Esiste anche una serie animata basata su questo gioco di carte ed è proprio da questa che nasce l'idea del progetto. In questa serie, quando il protagonista gioca una carta mostro, 
+viene proiettato un ologramma del mostro stesso che si materializza sul campo di battaglia. L'ologramma è visibile a tutti i giocatori e può essere interagito da chiunque.\\
+Venuti a conoscenza dell'esistenza di un HMD come HoloLens, si è pensato di realizzare uno \textit{strategy-game} in realtà aumentata e \textit{real-time} che permettesse di riprodurre 
+quanto più fedelmente l'esperienza riportata nella serie.
+\newline
+Il progetto consiste quindi nella realizzazione di un video game distribuito, ovvero un gioco che permetta a più utenti di interagire tra loro in un ambiente virtuale condiviso. 
+Si è posto sin da subito l'obiettivo di realizzare il gioco tramite una \textit{web app}, ovvero un'applicazione web
+che può essere eseguita da un browser. In questo modo non ci sarebbero stati problemi di portabilità, rendendolo accessibile a chiunque. In aggiunta, 
+lo sviluppo web è ormai dominante nel settore informatico e permette di raggiungere un pubblico più vasto oltre che comunità più grandi e attive.\\
+La tecnologia più utilizzata in ambito web per la realizzazione di applicazioni AR è WebXR. WebXR permette di creare realtà aumentate eseguibili su browser in cui ogni utente
+vive la stessa esperienza ma in maniera indipendente. Bisognava quindi ancora trovare uno strumento per sincronizzare i vari utenti in modo da condividere l'esperienza. A supporto 
+di ciò si è utilizzato Croquet, framework che sopperisce esattamente il requisito posto. Si noti che tutta la sezione riguardante il supporto all'esperienza distribuita è un tema
+non trattato nel corso di studi e che è stato affrontato autonomamente. Questo ha portato però a dei tagli sulla realizzazione delle funzionalità di gioco, che sono state ridotte
+al minimo indispensabile per poter concentrare gli sforzi sullo sviluppo dell'architettura generale del sistema.\\
+\newline
+Per conoscere nel dettaglio quali tecnologie si è utilizzato, come funzionano e perchè sono state scelte si rimanda al capitolo \ref{chap:Tecnologie}.
