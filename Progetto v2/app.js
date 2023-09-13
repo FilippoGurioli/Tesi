@@ -22,18 +22,21 @@ var path = require("path");
 const app = express();
 const port = 3000;
 //const host = '192.168.40.100';//unibo
-const host = ipv4Addresses[2]; //portatile
-//const host = ipv4Addresses.find(addr => addr.startsWith('192.168.')); //fisso
+//const host = ipv4Addresses[2];
+const host = ipv4Addresses.filter(addr => addr.startsWith('192.168.'));
 
-https.createServer(
-	{
-		key: fs.readFileSync("private_key.pem"),
-		cert: fs.readFileSync("cert.pem"),
-	}
-	, app)
-	.listen(port, host, () => {
-		console.log('Server started at https://' + host + ':' + port);
-	});
+//ipv4Addresses.forEach(h => {
+	https.createServer(
+		{
+			key: fs.readFileSync("private_key.pem"),
+			cert: fs.readFileSync("cert.pem"),
+		}
+		, app)
+		.listen(port, host[1], () => {
+			console.log('Server started at https://' + host[1] + ':' + port);
+		});
+//});
+
 
 app.use(express.static(path.join(__dirname, '/public')));
 

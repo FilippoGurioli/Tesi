@@ -37,12 +37,14 @@ class HandView extends BaseView {
         // behaviour.followLerpSpeed = 0.1;
         // behaviour.target = this.sharedComponents.camera;
         // behaviour.attach(card);
-        card.position = new BABYLON.Vector3(0,2,2.2);
+        card.position = this.sharedComponents.camera.position.clone();
+        if (card.position.z < 0) card.position.z += 0.8;
+        else                     card.position.z -= 0.8;
+        card.lookAt(this.sharedComponents.camera.position);
 
         const behavior = new BABYLON.SixDofDragBehavior();
         behavior.dragDeltaRatio = 0.2;
         behavior.zDragFactor = 0.2;
-        //pointerDragBehavior.useObjectOrientationForDragging = false;
         this.isFirstClick = true;
         behavior.onDragStartObservable.add((event)=>{
             if (this.isFirstClick) {
@@ -51,7 +53,7 @@ class HandView extends BaseView {
                     this.isFirstClick = true;
                 }, 200);
             } else { //double click case
-                this.publish(this.model.id, "play card", {id: cardId});
+                this.publish(this.model.id, "playCard", {id: cardId});
             }
         });
         behavior.attach(card);

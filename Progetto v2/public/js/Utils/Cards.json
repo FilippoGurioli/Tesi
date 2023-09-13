@@ -13,6 +13,7 @@
       "name": "Pot of Greed",
       "type": "spell",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150799750233346078/carta_pot_of_greed_completa.png",
+      "imageOnBF":"https://cdn.discordapp.com/attachments/1150769991902314589/1151573998354845716/pot-of-greed-bf.png",
       "effect": "Draw one card from your deck.",
       "description": "Draw one card from your deck."
     },

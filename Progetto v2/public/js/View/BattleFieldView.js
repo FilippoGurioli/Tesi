@@ -13,7 +13,6 @@ class BattleFieldView extends BaseView {
         material.diffuseTexture = new BABYLON.Texture("https://cdn.discordapp.com/attachments/1150769991902314589/1150770531814096936/battlefield.png", this.sharedComponents.scene);
         material.diffuseTexture.hasAlpha = true;
         this.plane.material = material;
-        this.plane.position.y = -1;
         this.plane.rotation.x = Math.PI / 2;
 
         //Fade in animation
@@ -59,13 +58,25 @@ class BattleFieldView extends BaseView {
     placeCard(data) {
         const card = Cards.find(c => c.id === data.id);
         if (!card) throw Error("Card not found");
+        const mesh = BABYLON.MeshBuilder.CreatePlane("card", { size: 0.8 }, this.sharedComponents.scene);
+        const material = new BABYLON.StandardMaterial("cardMaterial", this.sharedComponents.scene);
+        material.diffuseTexture = new BABYLON.Texture(card.imageOnBF, this.sharedComponents.scene);
+        material.diffuseTexture.hasAlpha = true;
+        mesh.material = material;
+        mesh.rotation.x = Math.PI / 2;
+
+        mesh.position.y = 0.04;
+        
         if (data.player === 1) {
+            mesh.rotation.y = Math.PI;
             switch(data.position) {
                 case 0:
                     if (card.type === "monster") {
-                        console.log(Constants.P1_BF_MONSTER1);
+                        mesh.position.x = Constants.P1_BF_MONSTER1.x;
+                        mesh.position.z = Constants.P1_BF_MONSTER1.y;
                     } else {
-                        console.log(Constants.P1_BF_SPELL1);
+                        mesh.position.x = Constants.P1_BF_SPELL1.x;
+                        mesh.position.z = Constants.P1_BF_SPELL1.y;
                     }
                 case 1:
                 case 2:
@@ -73,6 +84,7 @@ class BattleFieldView extends BaseView {
                 case 4:    
             }
         }
+        this.sceneObjects.push(mesh);
     }
 }
 

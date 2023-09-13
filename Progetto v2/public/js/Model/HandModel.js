@@ -13,7 +13,7 @@ class HandModel extends BaseModel {
     }
 
     _subscribeAll() {
-        this.subscribe(this.id, "play card", this.tryPlayCard);
+        this.subscribe(this.id, "playCard", this.tryPlayCard);
     }
 
     get hand() {
