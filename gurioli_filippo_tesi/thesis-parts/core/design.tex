@@ -1,6 +1,38 @@
 \section{Design architetturale}\label{sec:design}
-llustra l'architettura generale del software, includendo diagrammi e spiegazioni delle componenti principali e delle interazioni tra di esse. Se c'è la possibilità tratta anche la 
-scelta di come gestire ologrammi condvisi.
+In questo paragrafo si scenderà nel dettaglio dell'architettura del sistema, descrivendo le scelte progettuali effettuate per il corretto funzionamento delle tecnologie adottate.
+\newline
+Il framework di base da cui si è sviluppato il progetto è Croquet. La documentazione cita che per una buona realizzazione di un progetto Croquet bisogna cercare di mantenere una 
+struttura speculare tra model e view. Nel primo vengono immagazzinate le informazioni e nella seconda vengono visualizzati i dati in base al tipo di utente che ci vuole accedere.
+Ogni \texttt{Croquet.Model} dovrà essere completamente indipendente dal framework di visualizzazione, in modo da poter essere utilizzato in qualsiasi contesto. Al contrario, nelle
+\texttt{Croquet.View} si dovranno trovare solo componenti visibili all'utente, senza alcuna logica di business.\\
+Croquet gestisce i dati condivisi creando una loro istanza all'interno di ogni client e sincronizzandoli tramite l'utilizzo dei reflector. Per comprendere meglio il funzionamento
+dei passaggi successivi, si consiglia di immaginare questi dati come all'interno di un server fittizio a cui ogni client ha accesso come mostrato in figura~\ref{fig:CroquetServer.png}.\\
+\img{CroquetServer.png}{In alto la vera struttura di Croquet, in basso una rappresentazione semplificata.}
+Al contrario del model, ogni view va vista come una istanza di realtà aumentata unica per ogni utente. Ogni giocatore è immerso nella propria simulazione BabylonJS con un proprio engine,
+una priopria camera e i propri oggetti di scena. Queste simulazioni interagiscono tra loro grazie agli eventi: all'interazione dell'utente con gli oggetti di scena, la view invia un
+evento al model che lo elabora, modifica il proprio stato e aggiorna le view degli altri utenti come mostrato in figura~\ref{fig:MultiUserBABYLON.png}.\\
+\img{MultiUserBABYLON.png}{Ogni utente ha la propria istanza di BabylonJS.}
+Si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da tenere separati i compiti e mantenere una
+gerarchia ordinata e intuitiva.\\
 
-\subsection{Back-end}\label{subsec:be}
-\subsection{Front-end}\label{subsec:fe}
+
+
+Cose da dire:
+\begin{itemize}
+\item Lungo tutta la \textit{codebase} si è deciso di non utilizzare ereditarietà, preferendo la composizione in quanto ritenuta più flessibile e meno vincolante. La struttura si può
+raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio.\\
+
+\item Definiti questi princìpi cardine si sono quindi costruite le fondamenta su cui basare il video game. La classe più importante, da cui poi si sviluppa tutta la struttura, è 
+\texttt{GameModel}. Questa classe di fatto non gestisce una struttura dati ma fa da contenitore per tutti i modelli del gioco. Qui si trovano i riferimenti ai modelli dei giocatori,
+del turno e del campo di battaglia.\\
+Altra funzionalità importante per questa classe è di gestire le connessioni e i ruoli. All'avvio, in base al numero di partecipanti già presenti, questa classe avrà il compito di 
+assegnare un ruolo al nuovo utente connesso scegliendo tra \textit{player 1}, \textit{player 2} e \textit{spettatore}. Inoltre, se un utente dovesse disconnettersi, questa classe
+dovrà gestire una sua possibile riconnessione come anche prevedere una sequenza di terminazione nel caso in cui l'utente non dovesse riconnettersi.\\
+Nella controparte \texttt{GameView} si possono trovare gli stessi riferimenti alle view corrispondenti dei modelli citati. Si noti che, dato che il model non contiene una struttura
+dati, la \texttt{GameView} non crea alcun componente visibile all'utente, mantenendo coerenza con il principio di specularità tra model e view.\\
+
+\item Il back-end nel progetto è rappresentato da un insieme di \texttt{Croquet.Model} che si occupano di gestire i dati e di fornire le funzionalità base per interagirci. Spesso vengono
+anche utilizzate classi standard JavaScript contenute all'interno dei model che fungano da supporto per gestire le strutture dati. Si è deciso di non utilizzare ereditarietà 
+all'interno del progetto, preferendo la composizione, in quanto si è ritenuto che non fosse necessario avere una gerarchia di classi. 
+La prima classe model creata, nonchè quella passata 
+\end{itemize}
