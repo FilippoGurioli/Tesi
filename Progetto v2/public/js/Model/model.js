@@ -37,7 +37,7 @@ class RootModel extends BaseModel {
 
     _gameOver() {
         this._log("Game over: restarting game model");
-        this.future(2000).restart(); //safe time to be sure that all models have been destroyed
+        this.future(1000).restart(); //safe time to be sure that all models have been destroyed
     }
 
     restart() {

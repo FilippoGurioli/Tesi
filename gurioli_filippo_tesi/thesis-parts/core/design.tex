@@ -13,13 +13,10 @@ una priopria camera e i propri oggetti di scena. Queste simulazioni interagiscon
 evento al model che lo elabora, modifica il proprio stato e aggiorna le view degli altri utenti come mostrato in figura~\ref{fig:MultiUserBABYLON.png}.\\
 \img{MultiUserBABYLON.png}{Ogni utente ha la propria istanza di BabylonJS.}
 \newline
-In ausilio all'architettura di Croquet sono state anche progettate classi Javascript standard che fungono da supporto per la gestione dei dati. Queste classi sono state create per 
-racchiudere al loro interno le caratteristiche più importanti dei concetti da modellare e quindi facilitare la manutenzione e migliorare la leggibilità del codice.\\
-\newline
 Un ultimo aspetto dell'architettura da considerare è la creazione di una API che adattasse le classi \textit{general-purpose} di Croquet alle specifiche del progetto. Queste classi si pongono
 in mezzo tra i model e le view utilizzate nell'elaborato e quelle di Croquet, modificando e riadattando le feature già presenti nel framework e aggiungendone di nuove. Nello specifico
 si è deciso di implementare una \texttt{BaseView} ed un \texttt{BaseModel} che ereditassero rispettivamente da \texttt{Croquet.View} e \texttt{Croquet.Model}, dai quali poi estenderanno
-tutte le altre view e i modelli del progetto.\\
+tutte le altre viste e i modelli del progetto.\\
 Il \texttt{BaseModel} riporta le seguenti feature:
 \begin{itemize}
     \item \textbf{automatizzazione della parentela}: ogni modello creato con queste classe avrà un riferimento al modello padre;
@@ -38,13 +35,13 @@ oggetti diversi (si faccia riferimento alla figura\ref{fig:MultiViews.png}).\\
 Le feature che presenta la \texttt{BaseView} sono:
 \begin{itemize}
     \item \textbf{automatizzazione della parentela}: ogni view creata con questa classe avrà un riferimento alla view padre;
-    \item \textbf{automatizzazione del riferimento al model}: ogni view creata con questa classe avrà un riferimento al model corrispettivo;
+    \item \textbf{automatizzazione del riferimento al model}: ogni vista creata con questa classe avrà un riferimento al model corrispettivo;
     \item \textbf{creazione di un log personalizzato}: ogni view avrà un log personalizzato con il proprio nome, utile per il debug;
     \item \textbf{nuova inizializzazione}: ogni view disporrà di tre metodi da definire, \texttt{\_initialize} che fa le veci del vecchio \texttt{init}, ora utilizzato per il funzionamento
     della \texttt{BaseView}, \texttt{\_subscribeAll} in cui vanno inserite tutte le sottoscrizioni che quella view deve effettuare e \texttt{\_initializeScene} che deve contenere tutte le
     inizializzazioni relative ad oggetti di scena;
     \item \textbf{automatizzazione dell'aggiornamento}: un punto cieco dell'architettura di Croquet è che la chiamata del metodo \texttt{update} non viene perpetrata da una view all'altra.
-    Fornendo una lista \texttt{children} riempita con i riferimenti a tutte le view figlie, la \texttt{BaseView} potrà accedere a tutte le view dalle quali poi richiamare i rispettivi
+    Fornendo una lista \texttt{children} riempita con i riferimenti a tutte le view figlie, la \texttt{BaseView} potrà accedere a tutte le viste dalle quali poi richiamare i rispettivi
     \texttt{update} così da sopperire alla mancanza di Croquet. Viene fornito anche un metodo \texttt{\_update} da sovrascrivere per aggiungere funzionalità all'aggiornamento;
     \item \textbf{gestione della distruzione}: ogni view ascolterà l'evento `game-over' avente come \textit{scope} il \textit{session ID} di modo che, se venisse lanciato, la view
     si distrugga automaticamente. Per attuare ciò viene lasciata una lista \texttt{sceneObjects} da riempire con tutte le \textit{mesh}\footnote{Mesh: è un insieme di vertici, spigoli e 
