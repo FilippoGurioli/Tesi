@@ -1,5 +1,24 @@
 \chapter*{Conclusioni}
 \addcontentsline{toc}{chapter}{Conclusioni}
 \markboth{CONCLUSIONI}{CONCLUSIONI}
-
-Qui il testo delle conclusioni alla tesi. Non deve essere un riepilogo di quanto fatto nella tesi ma piuttosto le conclusioni raggiunte relative al lavoro svolto.
+I concetti fondamentali su cui si basa questo elaborato sono tre: XR, il videogame e le applicazioni distribuite.\\
+\newline
+In primo luogo, la combinazione delle varie tecnologie all'interno di un singolo progetto è considerabile un risultato di per sè. La sfida di integrare un sistema di distribuzione
+come Croquet con un sistema di simulazione come WebXR ha portato a problematiche complesse e mai affrontate prima. Ancora prima della loro integrazione, c'è stata tutta una fase 
+dedicata allo studio dei framework e alla scelta di quale fosse il più adatto per il progetto. Dopodichè è stato necessario esplorare operativamente le infrastrutture scelte 
+applicandole ad un prototipo del sistema. Infine si è passati alla fase di integrazione vera e propria, che ha portato, tra le altre cose, problemi di comunicazione tra i vari 
+componenti e di sincronizzazione tra i vari utenti.\\
+Si vuole espandere quest'ultima problematica relativa alla sincronizzazione inquanto è stata una delle più complesse e che ha richiesto più tempo per essere risolta. Per venirne a 
+capo sono state create strutture \textit{ad-hoc} come la \texttt{Root} e la \texttt{Game} in modo da poter gestire al meglio ogni caso di connessione, disconnessione e riconnessione 
+che gli utenti potessero fare.\\
+Un'ultima sfida che si è affrontata è stata cercare di rendere il sistema il più generico ed esetendibile possibile. Per quanto si sia cercato di lavorare in tal senso, tutt'ora vi sono
+componenti, metodi e interazioni che avrebbero bisogno di essere riorganizzati e ristrutturati per rendere il progetto più modulare. Al netto di questo, il software fornisce comunque
+dei pattern di base che possono essere utilizzati per creare applicazioni in realtà aumentata distribuite.\\
+\newline
+I piani futuri per questo elaborato sono molteplici. Si potrebbe pensare ad una standardizzazione delle classi di model e view e delle loro comunicazioni, in modo da poter creare
+un framework che permetta di creare applicazioni di realtà aumentata distribuite in maniera più semplice. Si potrebbero revisionare ed espandere la struttura di \texttt{BaseModel} e
+\texttt{BaseView}, in modo da fornire un'interfaccia più completa e più semplice da utilizzare.\\
+Si è pensato anche alla continuazione del progetto per la conclusione delle \textit{feature} secondarie che lo riguardano come gli effetti delle carte, la possibilità di giocare
+mostri tramite sequenze complicate tipo le evocazioni\footnote{Evocazione: nel gioco di carte questo termine è sinonimo di giocare sul campo un mostro.} speciali e le evocazioni 
+\textit{Xyz}, e la possibilità di giocare magie \textit{terreno}\footnote{Magia terreno: carta magia che nella serie animata modificavano l'ambiente circostante.} che, nel contesto di
+un applicativo XR, riscontrerebbero ancora più successo.\\

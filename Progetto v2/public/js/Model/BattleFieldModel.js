@@ -6,7 +6,7 @@ class BattleFieldModel extends BaseModel {
 
     #battleField = new BattleField();
 
-    placeCard(player, cardId) {
+    place(player, cardId) {
         const p = this.#battleField.place(Cards.find(c => c.id === cardId), player === 1);
         
         this.publish(this.id, "placeCard", {
@@ -30,10 +30,6 @@ class BattleFieldModel extends BaseModel {
 
     getSpells() {
         return { p1: this.#battleField.p1SpellField, p2: this.#battleField.p2SpellField };
-    }
-
-    place(card, p1 = true, position = -1) {
-        this.#battleField.place(card, p1, position);
     }
 
     remove(card) {

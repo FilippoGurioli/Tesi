@@ -51,6 +51,40 @@ La \texttt{LifePointsView} si occupa di creare un \textit{holographic slate}, ov
 Questo pannello sarà personale di ogni giocatore e mostrerà a sinistra i punti vita del proprietario mentre a destra quelli dell'avversario. Si è anche prevista la possibilità che il
 pannello fosse ancorato al braccio nel qual caso l'\textit{hand tracking feature} fosse disponibile.\\
 
+\subsection{Card}\label{subsec:card}
+La struttura che modella le carte del gioco è un file JSON che contiene tutte le informazioni necessarie per creare una carta. Si è deciso di uscire dalla classica struttura model-view
+in questo caso per il fatto che, per come era stato modellato il dominio, le carte non presentassero alcuna funzione di business. Il modo per rappresentare meglio una carta è quindi
+una struttura che ti permetta di immagazzinare tutte le informazioni che la compongono, in questo caso un file JSON. Le informazioni salvate sono: ID (univoco), nome, tipo e descrizione,
+e attacco e difesa solo per le carte di tipo mostro. Questa deve essere vista come una struttura provvisoria al solo scopo dimostrativo dell'applicazione, in una versione commerciale
+questa struttura dati dovrebbe essere sostituita da un database.\\
+
 \subsection{Hand}\label{subsec:hand}
+Le classi che gestiscono la mano del giocatore (intesa come insieme di carte visibili) prendono il nome di \texttt{HandModel} e \texttt{HandView}.\\
+Dato che una carta è identificata univocamente dal suo ID si è deciso di gestire la mano come una lista di ID. Questa lista è contenuta e gestita all'interno del 
+\texttt{HandModel} che fornisce anche i metodi per aggiungere, rimuovere e giocare carte dalla mano. In quest'ultimo caso si avvia una procedura speciale che comprende la rimozione
+della carta dalla mano e la creazione della stessa all'interno del campo di battaglia.\\
+La \texttt{HandView} per ogni ID presente nella lista all'interno del corrispettivo modello, genera nello spazio personale del giocatore la carta corrispondente. Queste carte sono 
+afferrabili e possono essere giocate sul campo di battaglia.\\
+
 \subsection{Turn}\label{subsec:turn}
+Per la gestione del concetto di turno si è applicato lo stesso pattern dei \textit{life points}, ovvero una classe ausiliaria chiamata \texttt{Turn} che contiene tutte le funzioni e
+informazioni necessarie per gestire il turno di un giocatore, una classe \texttt{TurnModel} che mappa l'API di \texttt{Turn} e una classe \texttt{TurnView} che crea un
+\textit{holographic slate} che mostra al giocatore il turno e la fase corrente. Altre funzionalità importanti sono la possibilità di avanzare di fase e, se si è all'ultima fase, di
+passare il turno. Per permettere all'utente di avanzare di fase si è disposto un \textit{near menu}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in 
+BabylonJS) che, se interagito, fa passare alla fase successiva.
+
 \subsection{Battlefield}\label{subsec:battlefield}
+Il campo di battaglia è il punto focale in cui l'interazione tra i due utenti si concretizza. Tutte le \textit{mesh} create all'interno di queste classi dovranno essere condivise
+tra tutti gli utenti connessi alla sessione. Per supportare lo sviluppo del concetto di campo da gioco si sono utilizzate le classi \texttt{Battlefield}, \texttt{BattlefieldModel} e
+\texttt{BattlefieldView}.\\
+Nella classe JavaScript \texttt{Battlefield} viene inserita tutta la struttura dati che serve a gestire il campo di battaglia. Sono presenti quattro liste: una per i mostri e una per
+le carte magia e trappola, entrambe ripetute per ogni giocatore. La classe, infine, fornisce metodi per inserire e rimuovere carte dalle liste sopra menzionate.\\
+La classe \texttt{BattlefieldModel}, oltre che incapsulare la classe \texttt{Battlefield} mappando la sua API, fornisce anche metodi unici per l'accesso alla struttura dati affinchè
+si renda più facile ma anche più sicura la lettura dei dati condivisi.\\
+Per ultima, la classe \texttt{BattlefieldView} si occupa di mostrare agli utenti il campo e le carte giocate. In un primo momento crea solo un piano, corrispondente al campo da gioco. 
+All'avvento dell'interazione utente per il posizionamento di una carta, la \texttt{BattlefieldView} crea la carta in corrispondenza della sua posizione nella struttura
+dati nel model.\\
+\newline
+Si vuole terminare questo capitolo dicendo che l'infrastruttura creata con le classi esposte non è da ritenersi conclusa. Come già specificato, data l'ambizione della tesi di 
+trattare argomenti nuovi per il corso di laurea, non si è potuta esplorare la realizzazione di tutti i requisiti del progetto. Ciò nonostante si è cercato di raggiungere un 
+prodotto minimo funzionante che racchiudesse le dinamiche principali del gioco e che, per quanto semplice, potesse essere giocato dall'inizio alla fine.
