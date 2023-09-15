@@ -27,20 +27,30 @@ con una schermata vuota e dovrebbe ricaricare la pagina per avviare una nuova se
 termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero.\\
 
 \subsection{Game}\label{subsec:game}
+Le classi \texttt{GameModel} e \texttt{GameView} sono le classi principali del progetto e fungono da raccordo tra le tutte le altre. Il loro principale compito è quello di creare
+tutti i tasselli che compongono il videogioco e svolgere funzionalità ad alto livello come l'assegnazione del ruolo e la gestione delle connessioni.\\
+Il \texttt{GameModel} ha il compito di assegnare un ruolo all'utente che si connette alla sessione. Questo ruolo può essere di \textit{player 1}, \textit{player 2} o \textit{spettatore} in 
+base al numero di utenti già connessi. Inoltre, se un utente dovesse disconnettersi, questa classe gestisce una sua possibile riconnessione come anche una sequenza di terminazione nel
+caso in cui l'utente non dovesse riconnettersi in breve. Come già detto il \texttt{GameModel} ha anche il compito di istanziare tutti i modelli del gioco, ovvero: \texttt{Player},
+\texttt{LifePoints}, \texttt{Hand}, \texttt{Turn} e \texttt{Battlefield}.\\
+La \texttt{GameView} non crea nessun tipo di oggetto di scena bensì si limita a riposizionare la telecamera dell'utente in base al ruolo che gli è stato assegnato. Successivamente istanzia
+tutte le view corrispondenti ai model citati in precedenza.\\
+
 \subsection{Player}\label{subsec:player}
+Le classi \texttt{PlayerModel} e \texttt{PlayerView}, similmente alle classi `Game', sono classi che fanno da centro per tutte le altre che gestiscono un aspetto particolare del giocatore.
+Queste classi non hanno nessuna funzione di business, il loro impiego è stato voluto per mantenere organizzato il codice. Da queste classi si sviluppano quindi \texttt{LifePoints} e
+\texttt{Hand}.\\
+
 \subsection{LifePoints}\label{subsec:lifepoints}
+Le classi che modellano i \textit{lifepoints}, ovvero i punti vita dei giocatori, sono \texttt{LifePointsModel} e \texttt{LifePointsView}.\\
+Il \texttt{LifePointsModel} sfrutta una classe ausiliaria chiamata \texttt{LifePoints} che racchiude tutte le funzioni e informazioni necessarie per gestire i punti vita di un giocatore.
+Seguendo il regolamento, ogni giocatore inizia con 8000 punti vita, può guadagnarne all'infinito e perderne fino ad arrivare a 0. Il \texttt{LifePointsModel} mappa tutta l'API creata
+in \texttt{LifePoints} e la rende disponibile alle view con la \textit{feature} in più di lanciare l'evento `game-over' quando un giocatore perde tutti i punti vita. Dato che possono
+esserci vari modi per perdere e guadagnare punti vita si è deciso di mappare questi metodi ad eventi correlati.\\
+La \texttt{LifePointsView} si occupa di creare un \textit{holographic slate}, ovvero un pannello nativo dell'MRTK framework integrato in BabylonJS, che mostra i punti vita dei giocatori.
+Questo pannello sarà personale di ogni giocatore e mostrerà a sinistra i punti vita del proprietario mentre a destra quelli dell'avversario. Si è anche prevista la possibilità che il
+pannello fosse ancorato al braccio nel qual caso l'\textit{hand tracking feature} fosse disponibile.\\
+
 \subsection{Hand}\label{subsec:hand}
 \subsection{Turn}\label{subsec:turn}
 \subsection{Battlefield}\label{subsec:battlefield}
-
-Cose da dire:
-\begin{itemize}
-\item Definiti questi princìpi cardine si sono quindi costruite le fondamenta su cui basare il video game. La classe più importante, da cui poi si sviluppa tutta la struttura, è 
-\texttt{GameModel}. Questa classe di fatto non gestisce una struttura dati ma fa da contenitore per tutti i modelli del gioco. Qui si trovano i riferimenti ai modelli dei giocatori,
-del turno e del campo di battaglia.\\
-Altra funzionalità importante per questa classe è di gestire le connessioni e i ruoli. All'avvio, in base al numero di partecipanti già presenti, questa classe avrà il compito di 
-assegnare un ruolo al nuovo utente connesso scegliendo tra \textit{player 1}, \textit{player 2} e \textit{spettatore}. Inoltre, se un utente dovesse disconnettersi, questa classe
-dovrà gestire una sua possibile riconnessione come anche prevedere una sequenza di terminazione nel caso in cui l'utente non dovesse riconnettersi.\\
-Nella controparte \texttt{GameView} si possono trovare gli stessi riferimenti alle view corrispondenti dei modelli citati. Si noti che, dato che il model non contiene una struttura
-dati, la \texttt{GameView} non crea alcun componente visibile all'utente, mantenendo coerenza con il principio di specularità tra model e view.\\
-\end{itemize}
