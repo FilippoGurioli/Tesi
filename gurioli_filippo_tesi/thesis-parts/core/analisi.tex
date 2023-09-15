@@ -1,38 +1,55 @@
 \section{Analisi dei requisiti}\label{sec:Analisi}
-    L'obiettivo del progetto è creare un ambiente di realtà aumentata condivisa
-    in cui l'utente possa giocare contro un altro al gioco di carte \textit{Yu-Gi-Oh!}. L'esperienza che il giocatore proverà dovrà essere quanto più simile alla versione
-    proposta nella serie animata omonima.\\
+    Questa sezione si pone l'obiettivo di introdurre il lettore agli argomenti trattati nelle sezioni successive, dove vengono affrontati dettagli tecnici del progetto. Qui si esporranno
+    in maniera generale l'idea alla base del progetto, le sue sfide principali e il traguardo che si vuole conseguire.\\
     \newline
-    Al momento dell'avvio l'utente dovrà affrontare un duello contro un'altra persona a \textit{Yu-Gi-Oh!}. Per la decisione del regolamento da seguire si è optato per
-    una versione semplificata del gioco. Il giocatore potrà giocare carte mostro che
-    rappresentano delle truppe schierate dalla parte del possessore. Queste truppe
-    potranno quindi attaccare l'avversario per ridurne i punti vita e difendere il proprio controllore dagli attacchi avversari. Saranno presenti anche carte magia e trappola che,
-    tra i vari effetti, potranno modificare i punti vita, l'ambiete di gioco in cui gli utenti giocano o anche l'attacco e
-    la difesa dei mostri propri e avversari. L'obiettivo del gioco consiste quindi
-    nell'azzerare i punti vita dell'avversario, che comporterà anche la conclusione della
-    simulazione.
+    Il software che si vuole sviluppare consiste in una rivisitazione del gioco \textit{Yu-Gi-Oh!} trasportato in realtà aumentata. \textit{Yu-Gi-Oh!} è un gioco di 
+    carte collezionabili composto da due giocatori che si sfidano in un duello in cui devono cercare di ridurre i punti vita dell'avversario a zero. Per fare ciò, i duellanti sono dotati di un
+    mazzo di carte composto da mostri, magie e trappole. I mostri rappresentano delle truppe schierabili dalla parte del giocatore che possono attaccare l'avversario o difendere il
+    giocatore stesso, mentre le magie e le trappole sono carte che possono influenzare lo svolgimento del gioco tramite i loro effetti. Il gioco è a turni e ogni turno è diviso in fasi. Le 
+    fasi contraddistinguono le azioni che il giocatore può intraprendere durante quel periodo di tempo.\\
+    \newline
+    Esiste una serie animata basata su \textit{Yu-Gi-Oh!} ed è proprio da questa che nasce l'idea del progetto. Nella serie, quando il protagonista gioca una carta mostro, 
+    viene proiettato un ologramma del mostro stesso, in modo che si materializzi sul campo di battaglia. L'ologramma è visibile a tutti i giocatori e può essere interagito da chiunque.\\
+    Venuti a conoscenza dell'esistenza di un HMD come HoloLens, si è pensato di realizzare uno \textit{strategy-game} in realtà aumentata e \textit{real-time} che permettesse di riprodurre 
+    quanto più fedelmente l'esperienza riportata nella serie.\\
+    \newline
+    Il progetto consiste quindi nella realizzazione di un video game distribuito, ovvero un gioco che permetta a più utenti di interagire tra loro in un ambiente virtuale condiviso. 
+    Si è posto sin da subito l'obiettivo di realizzare il gioco tramite una \textit{web app}, ovvero un'applicazione che possa essere eseguita da un browser. In questo modo non ci 
+    sarebbero stati problemi di portabilità, rendendolo accessibile a chiunque. In aggiunta, lo sviluppo web è ormai dominante nel settore informatico e permette di raggiungere un pubblico
+    più vasto oltre che comunità più grandi e attive.\\
+    La tecnologia più utilizzata in ambito web per la realizzazione di applicazioni AR è WebXR. WebXR permette di creare realtà aumentate eseguibili su browser in cui ogni utente
+    vive la stessa esperienza ma in maniera indipendente. Bisognava quindi ancora trovare uno strumento per sincronizzare i vari utenti in modo da condividere l'esperienza. A supporto 
+    di ciò si è utilizzato Croquet, framework che sopperisce esattamente al requisito richiesto. Si noti che tutta la sezione riguardante il supporto all'esperienza distribuita è un tema
+    non trattato nel corso di studi e che è stato affrontato autonomamente. Questo ha portato però a dei tagli sulla realizzazione delle funzionalità di gioco, che sono state ridotte
+    al minimo indispensabile per poter concentrare gli sforzi sullo sviluppo dell'architettura generale del sistema.\\
+    \newline
+    \paragraph{Al momento dell'avvio} l'utente dovrà affrontare un duello contro un'altra persona a \textit{Yu-Gi-Oh!}. Per la decisione del regolamento da seguire si è optato per
+    una versione semplificata del gioco. Il giocatore potrà pescare dal mazzo una carta per turno. Nella fase appropriata, il player potrà giocare carte mostro che saranno in grado di 
+    attaccare l'avversario, riducendone i punti vita, e difendere il proprio controllore dagli attacchi nemici. Saranno presenti anche carte magia e trappola con gli effetti più disparati.
+    L'obiettivo del gioco consiste quindi nell'azzerare i punti vita dell'avversario, che comporterà anche la conclusione della simulazione.
 
     \subsection{Requisiti funzionali}\label{subsec:requisitiFunzionali}
         \begin{itemize}
-            \item Il giocatore sarà in grado di vedere gli ologrammi personali e condivisi in tempo reale;
-            \item il giocatore potrà interagire con un mazzo di carte virtuale pescando la prima carta;
-            \item il giocatore potrà posizionare le carte che ha in mano sul campo e di conseguenza far apparire la corrispondente carta nello spazio di gioco condiviso;
-            \item il giocatore potrà avanzare di fase, come ordinare l'attacco di un mostro tramite un menù apposito;
-            \item ad ogni danno (o cura) inflitto (o subito) verrà visualizzato un ologramma condiviso che mostra i punti vita rimanenti.
+            \item Il giocatore sarà in grado di vedere gli ologrammi personali e condivisi in tempo reale.
+            \item Sarà visualizzato un ologramma personale che mostra i punti vita rimanenti nonchè la fase e il turno attuali.
+            \item Il giocatore potrà interagire con un mazzo di carte virtuale pescando la prima carta.
+            \item Il player potrà posizionare le carte che ha in mano sul campo e di conseguenza far apparire la corrispondente carta nello spazio di gioco condiviso.
+            \item Il giocatore potrà avanzare di fase, come ordinare l'attacco di un mostro tramite un menù apposito.
         \end{itemize}
     \subsection{Requisiti non funzionali}\label{subsec:requisitiNonFunzionali}
         \begin{itemize}
-            \item L'applicazione dovrà sfruttare la tecnologia WebXR per rendere fruibile, tramite un qualsiasi browser compatibile, l'esperienza di gioco.
+            \item L'applicazione dovrà essere una \textit{web app} per rendere fruibile, tramite un qualsiasi browser compatibile, l'esperienza di gioco.
             \item L'applicazione dovrà essere in grado di gestire momentanee disconnessioni da parte di tutti gli utenti.
             \item L'applicazione dovrà prevedere l'ingresso anche di più di due giocatori alla sessione, mostrando ai giocatori inattivi il duello in atto.
         \end{itemize}
 
     \subsection{Modello del dominio}
-        Il videogioco \textit{Yu-Gi-Oh!} dovrà modellare i concetti di giocatore, carta, campo di gioco e turno. Ognuno di questi concetti rappresenta un tassello fondamentale
+        Il videogioco \textit{Yu-Gi-Oh!} dovrà modellare i concetti di giocatore, carta, campo di gioco, turno, mazzo e mano. Ognuno di questi concetti rappresenta un tassello fondamentale
         della struttura del video game. Il giocatore corrisponde all'utente che sta giocando, verrà fornito di un \textit{mazzo} di carte impilate e coperte e di una \textit{mano} di
         carte visibili che potrà giocare sul campo di gioco. Il campo di gioco è composto da due aree speculari, una per ogni giocatore, in cui verranno posizionate le carte giocate
         dai duellanti. Il turno rappresenta l'unità di tempo in cui un giocatore può eseguire delle azioni, come pescare una carta dal mazzo, giocare una carta dalla mano o attaccare
         con un mostro. Si noti che ognuna di queste azioni sarà eseguibile in una \textit{fase} precisa del turno, si potrà pescare una carta dal mazzo nella \textit{draw phase} ma
         non si potranno posizionare carte nel campo, si potrà attaccare con un mostro nella \textit{battle phase} ma non si potrà pescare e così via.\\
-        \img{ModelloDominio.png}{Schema UML del modello del dominio}
+        Uno diagramma delle classi riassuntivo della trattazione appena fatta è riportato in figura~\ref{fig:ModelloDominio.png}.\\
+        \img[1]{ModelloDominio.png}{Schema UML del modello del dominio.}
     

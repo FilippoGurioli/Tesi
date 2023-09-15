@@ -70,7 +70,7 @@ ancora, incorporando anche molte funzionalità come il \textit{follow behaviour}
 In secondo luogo, BabylonJS supporta compleatamente WebXR, facendo da intermediario tra le API fornite da WebXR e il programmatore. Questo permette di creare applicazioni web
 che possono essere eseguite su qualsiasi dispositivo XR, tramite l'utilizzo di interfacce semplici e intuitive.\\
 In ultima istanza BabylonJS è stato scelto per la vasta gamma di funzionalità native che offre, insieme alla valida e completa documentazione relativa alle funzionalità. BabylonJS
-può essere definito a tutti gli effetti un motore di gioco, in quanto fornisce un game loop, la gestione delle scene, delle luci, delle ombre, dei materiali, delle mesh e 
+può essere definito a tutti gli effetti un motore di gioco, in quanto fornisce un game loop, la gestione delle scene, delle luci, delle ombre, dei materiali e 
 delle animazioni.
 \newline \newline
 I principali concorrenti di BabylonJS sono due: A-Frame e Unity. A-Frame si appoggia su ThreeJS che è un framework per la creazione di applicazioni web 3D. Per capire il motivo per
@@ -96,10 +96,11 @@ Le caratteristiche principali che BabylonJS offre, in relazione anche al loro im
     usufruire dell'oggetto ogni qual volta rivolga il suo sguardo sulle proprie mani.
     \item \textit{game engine}: BabylonJS è un motore di gioco completo, questo fornisce un insieme di funzionalità che permettono di creare applicazioni complesse molto più rapidamente.
     Tra le funzionalità più importanti si possono citare la creazione di un \textit{engine} per il rendering delle scene, la gestione delle varie scene, la gestione delle telecamere,
-    la presenza di un motore fisico, la gestione di luci, ombre, materiali, mesh e animazioni, la gestione di eventi e la gestione di input.
+    la presenza di un motore fisico, la gestione di luci, ombre, materiali, \textit{mesh}\footnote{Mesh: è un insieme di vertici, spigoli e poligoni che formano un modello tridimensionale.}
+    e animazioni, la gestione di eventi e la gestione di input.
     \begin{itemize}
         \item L'\textbf{engine} deve essere unico per tutta l'applicazione, fornisce utility di base come gli FPS, la dimensione della finestra e la possibilità di creare un ciclo di rendering.
-        \item Le \textbf{scene} sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti che possono essere mesh, luci, telecamere, materiali, ecc. Ogni scena
+        \item Le \textbf{scene} sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti come, ad esempio, \textit{mesh}, luci, telecamere e materiali. Ogni scena
         può essere vista come un livello di un videogioco, in quanto può essere caricata e scaricata in qualsiasi momento.
         \item Le \textbf{telecamere} sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
         la telecamera sferica e la telecamera cilindrica.

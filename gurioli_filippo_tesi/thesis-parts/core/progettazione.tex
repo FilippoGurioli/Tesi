@@ -1,17 +1,31 @@
 \section{Progettazione dettagliata}\label{sec:progettazione}
-In quest'ultima sezione si affronteranno le strutture del progetto nello specifico, analizzando le classi e le loro funzionalità. La trattazione verrà affrontata in ordine di 
-creazione delle classi, in modo da collegare questa discussione al \textit{gameplay} del progetto.\\
+In quest'ultima sezione si affronteranno le strutture del progetto nello specifico, analizzando i requisiti del progetto e come questi siano stati implementati nel concreto.\\
 \newline
-Prima di iniziare con la descrizione delle classi, si vuole esporre dei punti chiave comuni lungo tutto il progetto.\\
+Prima di iniziare con la descrizione, si vuole esporre dei punti chiave comuni lungo tutto il progetto.\\
 Seguendo la logica del \textit{single-responsibility principle}\footnote{Single responsibility principle: principio di progettazione software che afferma che ogni modulo o classe deve
-essere responsabile di una singola funzionalità.}, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da tenere separati i compiti e mantenere una
-gerarchia ordinata e intuitiva.\\
+essere responsabile di una singola funzionalità.}, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da 
+tenere separati i compiti e mantenere una gerarchia ordinata e intuitiva.\\
 Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione in quanto ritenuta più flessibile e meno vincolante. La struttura si può
 raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio.\\
 In ultima istanza si sono create delle classi JavaScript ausiliarie all'architettura di Croquet che fungono da supporto per la gestione dei dati. Queste classi sono state create per 
 racchiudere al loro interno le caratteristiche più importanti dei concetti da modellare e quindi facilitare la manutenzione e migliorare la leggibilità del codice.\\
 
-\subsection{Root}\label{subsec:rootclass}
+\subsection{Visualizzazione degli ologrammi personali e condivisi in tempo reale}
+Si definisce ologramma condiviso un ologramma che è visibile da tutti gli utenti connessi alla sessione. Al contrario, un ologramma personale è un oggetto di scena che può essere diverso
+da utente a utente e talvolta anche non esserci.\\
+Per realizzare un ologramma condiviso basterà creare nella view un oggetto di scena con coordinate assolute. Visto che tutti gli utenti eseguono lo stesso codice, quando
+dovranno istanziare l'ologramma condiviso lo faranno tutti allo stesso modo. Per il medesimo motivo, quando il model lancia un evento per comunicare l'aggiornamento dello stato, tutte le 
+view lo riceveranno aggiornando l'ologramma alla stessa maniera.\\
+Per creare un ologramma personale si è ricorsi all'istanziamento degli oggetti in modo condizionale. Questo significa che, in base a certe condizioni, vengono creati oggetti di scena 
+diversi. Nel caso particolare del videogioco, in base al ruolo che ricopre l'utente si istanzieranno viste diverse. Ad esempio, se l'utente è un player ed è il suo turno verrà mostrato un
+\textit{near menù}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario non verrà mostrato nulla. Si fornisce il 
+codice~\ref{lst:ologrammi.js} come esempio. 
+\code{ologrammi.js}{Esempio di istanziazione di ologrammi personali e condivisi.}
+
+
+
+%________________________________________________________________________________________________________________________________________________________________________________________
+\subsection{Root}\label{subsec:root}
 Il \texttt{RootModel} e la \texttt{RootView} sono le prime classi create nel progetto. Queste classi sono state create con la funzione di modellare una scena di base da cui far
 partitre l'utente, per creare una separazione tra il collegamento alla sessione e l'inzio del gioco vero e proprio. L'obiettivo era infatti quello di rendere la gestione delle
 connessioni più semplice e logico.\\
