@@ -17,9 +17,7 @@ class HandView extends BaseView {
     spawnCard(cardId) {
         const card = BABYLON.MeshBuilder.CreatePlane("card", {size: 0.1}, this.sharedComponents.scene);
         const behavior = new BABYLON.SixDofDragBehavior();
-        behavior.onDragStartObservable.add(()=>{
-            this.publish(this.model.id, "playCard", {id: cardId});
-        });
+        behavior.onDragStartObservable.add(() => this.publish(this.model.id, "playCard", {id: cardId}));
         behavior.attach(card);
         this.hand.push(card);
         this.sceneObjects.push(card);

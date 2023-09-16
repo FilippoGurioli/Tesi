@@ -28,10 +28,13 @@ Il \texttt{BaseModel} riporta le seguenti feature:
 \end{itemize}
 Si noti che la separazione tra \texttt{\_initialize} e \texttt{\_subscribeAll} è solo a scopo di leggibilità del codice. Queste funzioni vengono chiamate entrambe all'avvio del modello, per
 tanto non risulterebbe un problema se si facesse una sottoscrizione in \texttt{\_intialize} piuttosto che una inizializzazione di variabile in \texttt{\_subscribeAll}.\\
+Si riporta il codice della classe \texttt{BaseModel} nel listato~\ref{lst:BaseModel.js}.
+\code{BaseModel.js}{Classe \texttt{BaseModel}.}
+
 Prima di procedere con l'elenco delle funzionalità della \texttt{BaseView} si vuole sottolineare che quando si parlerà di molteplici view, non si farà riferimento ad esse in senso
 \textit{orizzontale}, ovvero che ogni view contraddistingua un utente diverso, bensì in senso \textit{verticale}, ovvero che ogni utente disponga di più view, ognuna delle quali mostra
 oggetti diversi (si faccia riferimento alla figura\ref{fig:MultiViews.png}).\\
-\img{MultiViews.png}{Visione \textit{verticale} e \textit{orizzontale} delle view a confronto.}
+\img[0.6]{MultiViews.png}{Visione \textit{verticale} e \textit{orizzontale} delle view a confronto.}
 Le feature che presenta la \texttt{BaseView} sono:
 \begin{itemize}
     \item \textbf{automatizzazione della parentela}: ogni view creata con questa classe avrà un riferimento alla view padre;
@@ -52,5 +55,7 @@ Le feature che presenta la \texttt{BaseView} sono:
     \item \textbf{informazioni condivise}: si è creata una struttura dati che fosse accessibile da tutte le viste e che racchiudesse le informazioni univoche per ogni partita come una sorta
     di \textit{singleton pattern}. Qui si possono trovare informazioni come il riferimento all'\textit{engine} di BabylonJS utilizzato, alla scena o alla telecamera.
 \end{itemize}
-Fino ad ora si sono esposte le scelte progettuali effettuate per la realizzazione del progetto. Nel prossimo capitolo si vedranno più nel dettaglio le funzionalità implementate in ogni
-classe che compone il progetto.
+Anche in questo caso, si lascia il sorgente della classe \texttt{BaseView} nel listato~\ref{lst:BaseView.js}.
+\code{BaseView.js}{Classe \texttt{BaseView}.}
+Fino ad ora si sono esposte le scelte progettuali effettuate per la realizzazione del progetto. Nel prossimo capitolo si vedranno più nel dettaglio le funzionalità implementate
+al progetto.

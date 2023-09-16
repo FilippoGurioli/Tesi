@@ -1,9 +1,9 @@
 \section{Progettazione dettagliata}\label{sec:progettazione}
 In quest'ultima sezione si affronteranno le strutture del progetto nello specifico, analizzando i requisiti del progetto e come questi siano stati implementati nel concreto.\\
 \newline
-Prima di iniziare con la descrizione, si vuole esporre dei punti chiave comuni lungo tutto il progetto.\\
-Seguendo la logica del \textit{single-responsibility principle}\footnote{Single responsibility principle: principio di progettazione software che afferma che ogni modulo o classe deve
-essere responsabile di una singola funzionalità.}, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da 
+Prima di iniziare con la descrizione, si vuole esporre dei punti chiave comuni lungo tutto il progetto. Seguendo la logica del \textit{single-responsibility principle}\footnote{
+    Single responsibility principle: principio di progettazione software che afferma che ogni modulo o classe deve essere responsabile di una singola funzionalità.
+}, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da 
 tenere separati i compiti e mantenere una gerarchia ordinata e intuitiva.\\
 Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione in quanto ritenuta più flessibile e meno vincolante. La struttura si può
 raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio.\\
@@ -18,7 +18,7 @@ dovranno istanziare l'ologramma condiviso lo faranno tutti allo stesso modo. Per
 view lo riceveranno aggiornando l'ologramma alla stessa maniera.\\
 Per creare un ologramma personale si è ricorsi all'istanziamento degli oggetti in modo condizionale. Questo significa che, in base a certe condizioni, vengono creati oggetti di scena 
 diversi. Nel caso particolare del videogioco, in base al ruolo che ricopre l'utente si istanzieranno viste diverse. Ad esempio, se l'utente è un player ed è il suo turno verrà mostrato un
-\textit{near menù}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario non verrà mostrato nulla. Si fornisce il 
+\textit{near menu}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario non verrà mostrato nulla. Si fornisce il 
 codice~\ref{lst:ologrammi.js} come esempio. 
 \code{ologrammi.js}{Esempio di istanziazione di ologrammi personali e condivisi.}
 
@@ -28,15 +28,26 @@ Per tutte le interazioni del giocatore lungo tutto il corso del progetto si è s
     \item l'utente interagisce con un oggetto di scena;
     \item l'oggetto di scena lancia un evento;
     \item il model riceve l'evento e aggiorna lo stato;
-    \item il model lancia un evento per comunicare l'aggiornamento dello stato;
-    \item la view riceve l'evento e aggiorna la scena.
-\end{enumerate}
+    \item in base a come è costruita la view:
+    \begin{enumerate} 
+        \item se la view utilizza il metodo \texttt{\_update} per aggiornare la scena, il model a questo punto non fa nulla;
+        \item altrimenti il model lancia un evento per comunicare l'aggiornamento dello stato alla view;
+    \end{enumerate} 
+    \item la view aggiorna la scena.
+\end{enumerate} 
 Si prenda d'esempio l'interazione con la mano del giocatore. L'utente interagisce con una carta tra quelle presenti nello spazio personale, la carta lancia un evento \textit{`playCard'}
 che viene intercettato del model corrispondente \texttt{HandModel}. Questo verifica che ci siano le condizioni adatte per poter giocare la carta e, se così fosse, aggiorna lo stato
 rimuovendo la carta dalla mano e aggiungendola al campo di battaglia. Il model quindi lancia due eventi: uno per rimuovere la carta dalla mano ed uno per aggiungere la carta al
 campo di battaglia. La view \texttt{HandView} riceve l'evento \textit{`removeCard'} e rimuove la carta dallo spazio personale, mentre la view \texttt{BattlefieldView} riceve l'evento
-\textit{`placeCard'} e crea la carta nel campo di battaglia. Si lascia il codice~\ref{lst:interazioni.js} come esempio.
-\code{interazioni.js}{Esempio di interazione tra utente e oggetto di scena e conseguente aggiornamento dello stato.}
+\textit{`placeCard'} e crea la carta nel campo di battaglia. Si riporta il codice~\ref{lst:interazioni.js} che illustra quanto detto.
+\code{interazioni.js}{Esempio di interazione tra utente e oggetto di scena con conseguente aggiornamento dello stato tramite eventi.}
+
+Per lasciare un esempio anche delle interazioni che coinvolgono l'utilizzo della \texttt{\_udpdate}, si prenda in considerazione l'interazione che l'utente svolge per cambiare la 
+fase di gioco. All'utente viene fornito un \textit{near menu} che contiene un pulsante per avanzare di fase. L'utente interagisce con il bottone che lancia un evento 
+\textit{`nextPhase'} intercettato dal model \texttt{TurnModel} che aggiorna lo stato. Tornando alla \texttt{TurnView}, nel suo metodo \texttt{\_update}, controlla se lo stato sia
+cambiata e, in caso affermativo, aggiorna la scena. Si faccia riferimento al listato~\ref{lst:ologrammi.js} precedentemente mostrato per capire come è stato implementata questa
+interazione.
+
 
 \subsection{Gestione delle connessioni}
 Nel progetto si è dato un peso rilevante a tutta la parte di gestione delle connessioni e disconnessioni degli utenti. Si sono create infrastrutture apposite che sapessero controllare
@@ -56,81 +67,12 @@ gioco, l'utente si ritroverebbe con una schermata vuota e dovrebbe ricaricare la
 comportamento che hanno le \textit{root class} al termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero come mostrato nel codice~\ref{lst:root.js}.
 \code{root.js}{Creazione e riavvio della simulazione.}
 
-%________________________________________________________________________________________________________________________________________________________________________________________
-\subsection{Root}\label{subsec:root}
-Il \texttt{RootModel} e la \texttt{RootView} sono le prime classi create nel progetto. Queste classi sono state create con la funzione di modellare una scena di base da cui far
-partitre l'utente, per creare una separazione tra il collegamento alla sessione e l'inzio del gioco vero e proprio. L'obiettivo era infatti quello di rendere la gestione delle
-connessioni più semplice e logico.\\
-Il \texttt{RootModel} nello specifico tiene traccia di tutte le view che si collegano alla sessione, in modo da creare un'istanza del gioco all'avvento della prima view collegata e 
-distruggere il gioco alla disconnessione dell'utlima view. Fornisce anche il metodo \texttt{restart} che consente di riavviare la simulazione in caso di fine gioco ma ancora utenti 
-connessi.\\
-La classe \texttt{RootView} si occupa di creare la scena di base, ovvero quella che l'utente vede prima di iniziare il gioco. Questa consiste semplicemente di un bottone che, se 
-premuto, avvia la simulazione vera e propria. Seppur possa sembrare abbasta inutile, la parte più importante di questa classe risiede nel \textit{dietro alle quinte} della scena. 
-Qui infatti si crea e avvia un \textit{rendering-loop}, ovvero un ciclo infinito che aggiorna la scena ad ogni frame, l'\textit{engine}, la scena, la telecamera, la luce e tutta
-una serie di funzionalità dedite al corretto avvio di una scena XR (se è stato rilevato un dispositivo affine).\\
-Queste due classi sono le uniche in tutta la \textit{codebase} a non autodistruggersi all'avvento del `game over'. Se così non fosse, al termine della partita l'utente si ritroverebbe
-con una schermata vuota e dovrebbe ricaricare la pagina per avviare una nuova sessione. Per aggirare il problema si è deciso di cambiare il comportamento che hanno queste classi al 
-termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero.\\
-
-\subsection{Game}\label{subsec:game}
-Le classi \texttt{GameModel} e \texttt{GameView} sono le classi principali del progetto e fungono da raccordo tra le tutte le altre. Il loro principale compito è quello di creare
-tutti i tasselli che compongono il videogioco e svolgere funzionalità ad alto livello come l'assegnazione del ruolo e la gestione delle connessioni.\\
-Il \texttt{GameModel} ha il compito di assegnare un ruolo all'utente che si connette alla sessione. Questo ruolo può essere di \textit{player 1}, \textit{player 2} o \textit{spettatore} in 
-base al numero di utenti già connessi. Inoltre, se un utente dovesse disconnettersi, questa classe gestisce una sua possibile riconnessione come anche una sequenza di terminazione nel
-caso in cui l'utente non dovesse riconnettersi in breve. Come già detto il \texttt{GameModel} ha anche il compito di istanziare tutti i modelli del gioco, ovvero: \texttt{Player},
-\texttt{LifePoints}, \texttt{Hand}, \texttt{Turn} e \texttt{Battlefield}.\\
-La \texttt{GameView} non crea nessun tipo di oggetto di scena bensì si limita a riposizionare la telecamera dell'utente in base al ruolo che gli è stato assegnato. Successivamente istanzia
-tutte le view corrispondenti ai model citati in precedenza.\\
-
-\subsection{Player}\label{subsec:player}
-Le classi \texttt{PlayerModel} e \texttt{PlayerView}, similmente alle classi `Game', sono classi che fanno da centro per tutte le altre che gestiscono un aspetto particolare del giocatore.
-Queste classi non hanno nessuna funzione di business, il loro impiego è stato voluto per mantenere organizzato il codice. Da queste classi si sviluppano quindi \texttt{LifePoints} e
-\texttt{Hand}.\\
-
-\subsection{LifePoints}\label{subsec:lifepoints}
-Le classi che modellano i \textit{lifepoints}, ovvero i punti vita dei giocatori, sono \texttt{LifePointsModel} e \texttt{LifePointsView}.\\
-Il \texttt{LifePointsModel} sfrutta una classe ausiliaria chiamata \texttt{LifePoints} che racchiude tutte le funzioni e informazioni necessarie per gestire i punti vita di un giocatore.
-Seguendo il regolamento, ogni giocatore inizia con 8000 punti vita, può guadagnarne all'infinito e perderne fino ad arrivare a 0. Il \texttt{LifePointsModel} mappa tutta l'API creata
-in \texttt{LifePoints} e la rende disponibile alle view con la \textit{feature} in più di lanciare l'evento `game-over' quando un giocatore perde tutti i punti vita. Dato che possono
-esserci vari modi per perdere e guadagnare punti vita si è deciso di mappare questi metodi ad eventi correlati.\\
-La \texttt{LifePointsView} si occupa di creare un \textit{holographic slate}, ovvero un pannello nativo dell'MRTK framework integrato in BabylonJS, che mostra i punti vita dei giocatori.
-Questo pannello sarà personale di ogni giocatore e mostrerà a sinistra i punti vita del proprietario mentre a destra quelli dell'avversario. Si è anche prevista la possibilità che il
-pannello fosse ancorato al braccio nel qual caso l'\textit{hand tracking feature} fosse disponibile.\\
-
-\subsection{Card}\label{subsec:card}
-La struttura che modella le carte del gioco è un file JSON che contiene tutte le informazioni necessarie per creare una carta. Si è deciso di uscire dalla classica struttura model-view
-in questo caso per il fatto che, per come era stato modellato il dominio, le carte non presentassero alcuna funzione di business. Il modo per rappresentare meglio una carta è quindi
-una struttura che ti permetta di immagazzinare tutte le informazioni che la compongono, in questo caso un file JSON. Le informazioni salvate sono: ID (univoco), nome, tipo e descrizione,
-e attacco e difesa solo per le carte di tipo mostro. Questa deve essere vista come una struttura provvisoria al solo scopo dimostrativo dell'applicazione, in una versione commerciale
-questa struttura dati dovrebbe essere sostituita da un database.\\
-
-\subsection{Hand}\label{subsec:hand}
-Le classi che gestiscono la mano del giocatore (intesa come insieme di carte visibili) prendono il nome di \texttt{HandModel} e \texttt{HandView}.\\
-Dato che una carta è identificata univocamente dal suo ID si è deciso di gestire la mano come una lista di ID. Questa lista è contenuta e gestita all'interno del 
-\texttt{HandModel} che fornisce anche i metodi per aggiungere, rimuovere e giocare carte dalla mano. In quest'ultimo caso si avvia una procedura speciale che comprende la rimozione
-della carta dalla mano e la creazione della stessa all'interno del campo di battaglia.\\
-La \texttt{HandView} per ogni ID presente nella lista all'interno del corrispettivo modello, genera nello spazio personale del giocatore la carta corrispondente. Queste carte sono 
-afferrabili e possono essere giocate sul campo di battaglia.\\
-
-\subsection{Turn}\label{subsec:turn}
-Per la gestione del concetto di turno si è applicato lo stesso pattern dei \textit{life points}, ovvero una classe ausiliaria chiamata \texttt{Turn} che contiene tutte le funzioni e
-informazioni necessarie per gestire il turno di un giocatore, una classe \texttt{TurnModel} che mappa l'API di \texttt{Turn} e una classe \texttt{TurnView} che crea un
-\textit{holographic slate} che mostra al giocatore il turno e la fase corrente. Altre funzionalità importanti sono la possibilità di avanzare di fase e, se si è all'ultima fase, di
-passare il turno. Per permettere all'utente di avanzare di fase si è disposto un \textit{near menu}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in 
-BabylonJS) che, se interagito, fa passare alla fase successiva.
-
-\subsection{Battlefield}\label{subsec:battlefield}
-Il campo di battaglia è il punto focale in cui l'interazione tra i due utenti si concretizza. Tutte le \textit{mesh} create all'interno di queste classi dovranno essere condivise
-tra tutti gli utenti connessi alla sessione. Per supportare lo sviluppo del concetto di campo da gioco si sono utilizzate le classi \texttt{Battlefield}, \texttt{BattlefieldModel} e
-\texttt{BattlefieldView}.\\
-Nella classe JavaScript \texttt{Battlefield} viene inserita tutta la struttura dati che serve a gestire il campo di battaglia. Sono presenti quattro liste: una per i mostri e una per
-le carte magia e trappola, entrambe ripetute per ogni giocatore. La classe, infine, fornisce metodi per inserire e rimuovere carte dalle liste sopra menzionate.\\
-La classe \texttt{BattlefieldModel}, oltre che incapsulare la classe \texttt{Battlefield} mappando la sua API, fornisce anche metodi unici per l'accesso alla struttura dati affinchè
-si renda più facile ma anche più sicura la lettura dei dati condivisi.\\
-Per ultima, la classe \texttt{BattlefieldView} si occupa di mostrare agli utenti il campo e le carte giocate. In un primo momento crea solo un piano, corrispondente al campo da gioco. 
-All'avvento dell'interazione utente per il posizionamento di una carta, la \texttt{BattlefieldView} crea la carta in corrispondenza della sua posizione nella struttura
-dati nel model.\\
-\newline
-Si vuole terminare questo capitolo dicendo che l'infrastruttura creata con le classi esposte non è da ritenersi conclusa. Come già specificato, data l'ambizione della tesi di 
-trattare argomenti nuovi per il corso di laurea, non si è potuta esplorare la realizzazione di tutti i requisiti del progetto. Ciò nonostante si è cercato di raggiungere un 
-prodotto minimo funzionante che racchiudesse le dinamiche principali del gioco e che, per quanto semplice, potesse essere giocato dall'inizio alla fine.
+\subsection{Estendibilità nelle parti critiche}
+Si è fatta particolare attenzione anche al trovare un modo per rendere il più facilmente estendible parti critiche del progetto. L'area che necessitava di più attenzione era quella
+relativa alle carte da gioco. Si voleva rendere l'aggiunta, la modifica e la rimozione delle carte il più semplice possibile, a tal punto che anche un non programmatore potesse 
+metterci mano. Trattandosi di carte collezionabili, ovvero un insieme di carte in continua produzione e sempre diverse, non si poteva pensare ad una struttura dati statica, come si 
+farebbe per un normale mazzo di carte francesi. Si è quindi pensato di creare un file JSON che contenesse tutte le informazioni necessarie per creare una carta. Questo file è stato
+poi letto e mappato in una struttura dati JavaScript che potesse essere utilizzata dal resto del progetto. Si è scelto di utilizzare un file JSON per la sua semplicità di lettura e
+modifica. Anche un non programmatore potrebbe essere in grado, una volta letti i primi esempi presenti nel file, di aggiungere, modificare o rimuovere carte. Si lascia il
+file sorgente utilizzato anche nell'elaborato al listato~\ref{lst:card.json}.
+\code{card.json}{Esempio di file JSON contenente le informazioni di carte \textit{Yu-Gi-Oh!}.}

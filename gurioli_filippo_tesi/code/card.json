@@ -1,0 +1,18 @@
+[
+    {
+      "id": 46986414,
+      "name": "Dark Magician",
+      "type": "monster",
+      "image": "link/to/image.png",
+      "description": "The ultimate wizard in terms of attack and defence.",
+      "ATK": 2500,
+      "DEF": 2100
+    },
+    {
+      "id": 83968380,
+      "name": "Pot of Greed",
+      "type": "spell",
+      "image": "link/to/image.png",
+      "description": "Draw one card from your deck."
+    }
+]
