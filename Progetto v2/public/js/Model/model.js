@@ -2,9 +2,7 @@ import { BaseModel } from "../BaseModel.js";
 import { GameModel } from "./GameModel.js";
 
 class RootModel extends BaseModel {
-
-    counter = 0;
-
+    
     _subscribeAll() {
         this.subscribe(this.sessionId, "view-join", this.viewJoin);
         this.subscribe(this.sessionId, "view-exit", this.viewDrop);

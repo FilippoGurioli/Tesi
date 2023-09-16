@@ -34,6 +34,8 @@ class BattleFieldModel extends BaseModel {
 
     remove(card) {
         this.#battleField.remove(card);
+
+        this.publish(this.id, "removeCard", card);
     }
 
 }

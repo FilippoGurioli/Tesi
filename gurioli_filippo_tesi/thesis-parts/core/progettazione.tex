@@ -22,7 +22,39 @@ diversi. Nel caso particolare del videogioco, in base al ruolo che ricopre l'ute
 codice~\ref{lst:ologrammi.js} come esempio. 
 \code{ologrammi.js}{Esempio di istanziazione di ologrammi personali e condivisi.}
 
+\subsection{Interazioni del giocatore}
+Per tutte le interazioni del giocatore lungo tutto il corso del progetto si è seguito sempre lo stesso pattern:
+\begin{enumerate}
+    \item l'utente interagisce con un oggetto di scena;
+    \item l'oggetto di scena lancia un evento;
+    \item il model riceve l'evento e aggiorna lo stato;
+    \item il model lancia un evento per comunicare l'aggiornamento dello stato;
+    \item la view riceve l'evento e aggiorna la scena.
+\end{enumerate}
+Si prenda d'esempio l'interazione con la mano del giocatore. L'utente interagisce con una carta tra quelle presenti nello spazio personale, la carta lancia un evento \textit{`playCard'}
+che viene intercettato del model corrispondente \texttt{HandModel}. Questo verifica che ci siano le condizioni adatte per poter giocare la carta e, se così fosse, aggiorna lo stato
+rimuovendo la carta dalla mano e aggiungendola al campo di battaglia. Il model quindi lancia due eventi: uno per rimuovere la carta dalla mano ed uno per aggiungere la carta al
+campo di battaglia. La view \texttt{HandView} riceve l'evento \textit{`removeCard'} e rimuove la carta dallo spazio personale, mentre la view \texttt{BattlefieldView} riceve l'evento
+\textit{`placeCard'} e crea la carta nel campo di battaglia. Si lascia il codice~\ref{lst:interazioni.js} come esempio.
+\code{interazioni.js}{Esempio di interazione tra utente e oggetto di scena e conseguente aggiornamento dello stato.}
 
+\subsection{Gestione delle connessioni}
+Nel progetto si è dato un peso rilevante a tutta la parte di gestione delle connessioni e disconnessioni degli utenti. Si sono create infrastrutture apposite che sapessero controllare
+e mantenere in uno stato coerente le connessioni di tutti i giocatori.\\
+Questo compito lo si è affidato alle classi \texttt{GameModel} e \texttt{GameView}, figlie dirette delle \textit{root class}, ovvero le prime classi create nel progetto.
+Queste classi hanno il compito di gestire le comunicazioni e di istanziare tutti i modelli e le viste del gioco. Si sono dovute gestire tutte le casistiche possibili, come la 
+connessione di un nuovo giocatore, la disconnessione temporanea di un giocatore, la riconnessione di un giocatore e la disconnessione definitiva di un giocatore. 
+Per dare una panoramica generale di come si è risolto il problema si lascia il codice~\ref{lst:connessioni.js} d'esempio. Nel listato è stata omessa la classe \texttt{GameView} per 
+brevità, preferendo una spiegazione discorsiva delle funzionalità.\\
+La classe \texttt{GameView} si occupa di istanziare la scena di gioco e di posizionare la telecamera dell'utente in base al ruolo che gli è stato assegnato.
+In aggiunta, alla ricezione dell'evento `opponent-left', interromperà il normale flusso di gioco, mostrando agli utenti rimasti una schermata d'attesa. Scatenando l'evento 
+`opponent-recover' invece, farà riprendere la scena da dove era stata interrotta. Infine, all'avvento del `game-over', la \texttt{GameView} distruggerà la scena e ricreerà la scena
+di base.\\
+\code{connessioni.js}{Infrastruttura per la gestione delle connessioni.}
+Un altro aspetto importante che è stato gestito è la possibilità di riavviare la simulazione senza dover ricaricare la pagina. Se tutte le classi si autodistruggessero alla fine del
+gioco, l'utente si ritroverebbe con una schermata vuota e dovrebbe ricaricare la pagina per avviare una nuova sessione. Per aggirare il problema si è deciso di cambiare il 
+comportamento che hanno le \textit{root class} al termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero come mostrato nel codice~\ref{lst:root.js}.
+\code{root.js}{Creazione e riavvio della simulazione.}
 
 %________________________________________________________________________________________________________________________________________________________________________________________
 \subsection{Root}\label{subsec:root}
