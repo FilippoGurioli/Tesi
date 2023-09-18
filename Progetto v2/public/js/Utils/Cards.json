@@ -5,7 +5,6 @@
       "type": "monster",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150795373032505396/carta_dark_magician_completa.png",
       "imageOnBF": "https://cdn.discordapp.com/attachments/1150769991902314589/1150770532569071646/dark-magician-bf.jpg",
-      "effect": "The ultimate wizard in terms of attack and defence.",
       "description": "The ultimate wizard in terms of attack and defence.",
       "ATK": 2500,
       "DEF": 2100
@@ -16,7 +15,6 @@
       "type": "spell",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150799750233346078/carta_pot_of_greed_completa.png",
       "imageOnBF":"https://cdn.discordapp.com/attachments/1150769991902314589/1151573998354845716/pot-of-greed-bf.png",
-      "effect": "Draw one card from your deck.",
       "description": "Draw one card from your deck."
     },
     {
@@ -24,7 +22,7 @@
       "name": "mirror-force",
       "type": "trap",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150798775460298752/carta_mirror_force_completa.png",
-      "effect": "Target 1 monster your opponent controls; take control of it until the End Phase.",
+      "imageOnBF": "https://cdn.discordapp.com/attachments/1150769991902314589/1153301155930181664/mirror-force.png",
       "description": "Target 1 monster your opponent controls; take control of it until the End Phase."
     }
 ]

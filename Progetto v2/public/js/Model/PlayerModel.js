@@ -1,15 +1,15 @@
 import { BaseModel } from "../BaseModel.js";
 import { LifePointsModel } from "./LifePointsModel.js";
 import { HandModel } from "./HandModel.js";
+import { DeckModel } from "./DeckModel.js";
 
 class PlayerModel extends BaseModel {
 
     _initialize(data) {
 
         this.lifePoints = LifePointsModel.create({parent: this});
-
-        this.hand = HandModel.create({parent: this, battleField: data.battleField, turnModel: data.turnModel, hand: [83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414]});
-        //this.deck.addCardOnTop(CardModel.create({parent: this, cardId: 83968380, 46986414}));
+        this.hand = HandModel.create({parent: this, turnModel: data.turnModel, battleField: data.battleField/*, hand: [83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414]*/});
+        this.deck = DeckModel.create({parent: this, turnModel: data.turnModel, handModel: this.hand});
         this.role = data.role;
     }
 
