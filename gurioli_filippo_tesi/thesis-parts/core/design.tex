@@ -2,27 +2,27 @@
 In questo paragrafo si scenderà nel dettaglio dell'architettura del sistema, descrivendo le scelte progettuali effettuate per il corretto funzionamento delle tecnologie adottate.\\
 \newline
 Il framework di base da cui si è sviluppato il progetto è Croquet. La documentazione cita che per una buona realizzazione di un progetto Croquet bisogna cercare di mantenere una 
-struttura speculare tra model e view. Nel primo vengono immagazzinate le informazioni e nella seconda vengono visualizzati i dati in base al tipo di utente che ci vuole accedere.
-Ogni \texttt{Croquet.Model} dovrà essere completamente indipendente dal framework di visualizzazione, in modo da poter essere utilizzato in qualsiasi contesto. Al contrario, nelle
+struttura speculare tra model e view. Nel primo vengono immagazzinate le informazioni e nella seconda vengono visualizzati i dati. Il \texttt{Croquet.Model} dovrà essere 
+completamente indipendente dal framework di visualizzazione, in modo da poter essere utilizzato in qualsiasi contesto. Al contrario, nelle
 \texttt{Croquet.View} si dovranno trovare solo componenti visibili all'utente, senza alcuna logica di business.\\
 Croquet gestisce i dati condivisi creando una loro istanza all'interno di ogni client e sincronizzandoli tramite l'utilizzo dei reflector. Per comprendere meglio il funzionamento
 dei passaggi successivi, si consiglia di immaginare questi dati come all'interno di un server fittizio a cui ogni client ha accesso come mostrato in figura~\ref{fig:CroquetServer.png}.\\
 \img{CroquetServer.png}{In alto la vera struttura di Croquet, in basso una rappresentazione semplificata.}
-Al contrario del model, ogni view va vista come una istanza di realtà aumentata unica per ogni utente. Ogni giocatore è immerso nella propria simulazione WebXR con un proprio engine,
-una priopria camera e i propri oggetti di scena. Queste simulazioni interagiscono tra loro grazie agli eventi: all'interazione dell'utente con gli oggetti di scena, la view invia un
-evento al model che lo elabora, modifica il proprio stato e aggiorna le view degli altri utenti come mostrato in figura~\ref{fig:MultiUserBABYLON.png}.\\
+Al contrario del model, ogni view va vista come una istanza di realtà aumentata unica per ogni utente. Ogni giocatore è immerso nella propria simulazione WebXR con un proprio 
+\textit{engine}, una priopria telecamera e i propri oggetti di scena. Queste simulazioni interagiscono tra loro grazie agli eventi: all'interazione dell'utente con gli oggetti di scena,
+la view invia un evento al model, che lo elabora, modifica il proprio stato e aggiorna le view degli altri utenti come mostrato in figura~\ref{fig:MultiUserBABYLON.png}.\\
 \img[1]{MultiUserBABYLON.png}{Ogni utente ha la propria istanza di BabylonJS.}
 \newline
 Un ultimo aspetto dell'architettura da considerare è la creazione di una API che adattasse le classi \textit{general-purpose} di Croquet alle specifiche del progetto. Queste classi si pongono
-in mezzo tra i model e le view utilizzate nell'elaborato e quelle di Croquet, modificando e riadattando le feature già presenti nel framework e aggiungendone di nuove. Nello specifico
-si è deciso di implementare una \texttt{BaseView} ed un \texttt{BaseModel} che ereditassero rispettivamente da \texttt{Croquet.View} e \texttt{Croquet.Model}, dai quali poi estenderanno
-tutte le altre viste e i modelli del progetto.\\
-Il \texttt{BaseModel} riporta le seguenti feature:
+in mezzo tra i model e le view utilizzate nell'elaborato e quelle di Croquet, modificando e riadattando le \textit{feature} già presenti nel framework e aggiungendone di nuove. 
+Nello specifico si è deciso di implementare una \texttt{BaseView} ed un \texttt{BaseModel} che ereditassero rispettivamente da \texttt{Croquet.View} e \texttt{Croquet.Model}, dai 
+quali poi estenderanno tutte le altre viste e i modelli del progetto.\\
+Il \texttt{BaseModel} riporta le seguenti \textit{feature}:
 \begin{itemize}
     \item \textbf{automatizzazione della parentela}: ogni modello creato con queste classe avrà un riferimento al modello padre;
     \item \textbf{creazione di un log personalizzato}: ogni modello avrà un log personalizzato con il proprio nome, utile per il debug;
-    \item \textbf{gestione della distruzione}: ogni modello ascolterà l'evento `game-over' avente come \textit{scope} il \textit{session ID} di modo che, in qualunque momento, in qualsiasi
-    punto del codice, se il componente valuta che la partita sia terminata, può lanciare questo evento e distruggere il modello;
+    \item \textbf{gestione della distruzione}: ogni modello ascolterà l'evento \textit{`game-over'} avente come \textit{scope} il \textit{session ID} di modo che, in qualunque momento, in qualsiasi
+    punto del codice, se il componente valuta che la partita sia terminata, può lanciare questo evento e distruggere tutti i modelli;
     \item \textbf{nuova inizializzazione}: ogni modello disporrà di due metodi da definire, \texttt{\_initialize} che fa le veci del vecchio \texttt{init}, ora utilizzato per il funzionamento
     del \texttt{BaseModel}, e \texttt{\_subscribeAll} in cui vanno inserite tutte le sottoscrizioni che quel modello deve effettuare.
 \end{itemize}
@@ -46,7 +46,7 @@ Le feature che presenta la \texttt{BaseView} sono:
     \item \textbf{automatizzazione dell'aggiornamento}: un punto cieco dell'architettura di Croquet è che la chiamata del metodo \texttt{update} non viene perpetrata da una view all'altra.
     Fornendo una lista \texttt{children} riempita con i riferimenti a tutte le view figlie, la \texttt{BaseView} potrà accedere a tutte le viste dalle quali poi richiamare i rispettivi
     \texttt{update} così da sopperire alla mancanza di Croquet. Viene fornito anche un metodo \texttt{\_update} da sovrascrivere per aggiungere funzionalità all'aggiornamento;
-    \item \textbf{gestione della distruzione}: ogni view ascolterà l'evento `game-over' avente come \textit{scope} il \textit{session ID} di modo che, se venisse lanciato, la view
+    \item \textbf{gestione della distruzione}: ogni view ascolterà l'evento \textit{`game-over'} avente come \textit{scope} il \textit{session ID} di modo che, se venisse lanciato, la view
     si distrugga automaticamente. Per attuare ciò viene lasciata una lista \texttt{sceneObjects} da riempire con tutte le \textit{mesh} di BabylonJS istanziate in modo tale che,
     alla chiamata di distruzione, la \texttt{BaseView} possa distruggere anch'essi. Inoltre, essendo una UI, si è previsto che le view avessero bisogno di un tempo d'attesa prima di 
     cancellare tutta la scena, affinchè ogni oggetto faccia la sua uscita di scena e/o mostri informazioni riguardanti il termine del gioco. Per realizzare ciò si è costruito un metodo 
@@ -55,7 +55,9 @@ Le feature che presenta la \texttt{BaseView} sono:
     \item \textbf{informazioni condivise}: si è creata una struttura dati che fosse accessibile da tutte le viste e che racchiudesse le informazioni univoche per ogni partita come una sorta
     di \textit{singleton pattern}. Qui si possono trovare informazioni come il riferimento all'\textit{engine} di BabylonJS utilizzato, alla scena o alla telecamera.
 \end{itemize}
+Si noti che, per quanto possa essere richiamata da qualsiasi punto del codice, la \textit{`game-over'} venga lanciata solo dal modello. Questo perchè, essendo il modello l'unico 
+componente che conosce lo stato della partita, è l'unico che può valutare se la partita sia terminata o meno.\\
 Anche in questo caso, si lascia il sorgente della classe \texttt{BaseView} nel listato~\ref{lst:BaseView.js}.
 \code{BaseView.js}{Classe \texttt{BaseView}.}
-Fino ad ora si sono esposte le scelte progettuali effettuate per la realizzazione del progetto. Nel prossimo capitolo si vedranno più nel dettaglio le funzionalità implementate
-al progetto.
+Fino ad ora si sono esposte le scelte progettuali effettuate per la realizzazione del progetto. Nella prossima sezione si vedranno più nel dettaglio le funzionalità implementate
+nel progetto.

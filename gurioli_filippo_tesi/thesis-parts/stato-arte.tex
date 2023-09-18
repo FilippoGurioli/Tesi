@@ -11,8 +11,9 @@ sottolineando l'importanza del web al giorno d'oggi.
         Con il termine Extended Reality (abbreviato in XR) si intende un insieme di tecnologie che permettono di estendere la realtà, ovvero di aggiungere informazioni al mondo 
         reale. Sotto questa macro definizione rientrano le tecnologie di realtà aumentata (AR), realtà virtuale (VR) e realtà mista (MR). Per AR si intende la tecnologia che permette 
         di sovrapporre informazioni digitali al mondo reale, mentre per VR si intende la tecnologia che permette di immergere l'utente in un ambiente virtuale. La MR è una tecnologia
-        che permette di conciliare il mondo reale con quello virtuale in modo totalmente trasparente per l'utente. Come ogni calcolatore, queste tecnologie prevedono dispositivi 
-        di input e di output per l'interazione tra macchina e utente. Venendo completamente immersi in queste realtà virtuali, l'utilizzo di una tastiera o un mouse risulterebbe
+        che permette di conciliare il mondo reale con quello virtuale in modo totalmente trasparente per l'utente. \\
+        Come ogni dispositivo, queste tecnologie prevedono sistemi di input e di output per l'interazione tra macchina e utente. Venendo completamente immersi in queste realtà 
+        virtuali, l'utilizzo di una tastiera o un mouse risulterebbe
         inefficace, si sono quindi progettati dispositivi ad hoc per l'interazione (input) e per la ricezione delle informazioni (output). Per quanto riguarda l'input, si possono
         utilizzare dei controller, dei guanti o il proprio corpo, mentre per l'output domina l'utilizzo di visori. Questi dispositivi sono in grado di rilevare i movimenti 
         dell'utente e di trasmetterli al sistema, che li elabora e li utilizza per modificare l'ambiente virtuale. Questo ambiente virtuale può essere visualizzato dall'utente 
@@ -23,12 +24,12 @@ sottolineando l'importanza del web al giorno d'oggi.
                 \textit{AR systems have the following three characteristics: (1) combine real and virtual, (2) are interactive in real time, and (3) are registered in 3D.}
             \end{quote}
             Si noti che non è specificato nessun tipo di dispositivo di output, potrebbero essere  AR anche dispositivi che forniscono informazioni tattili, gustative o olfattive,
-            benchè la loro implementazione è di fatto un settore tutt'ora nascente (motivo per il quale nella sezione precedente non li si è menzionati). La definizione formale di 
+            benchè la loro implementazione è di fatto un settore tutt'ora nascente (motivo per il quale precedentemente non li si è menzionati). La definizione formale di 
             Mixed Reality è invece fornita da Milgram\cite{Milgram1994}:
             \begin{quote}
                 \textit{A mixed reality (MR) system is one that combines real and virtual environments seamlessly.}
             \end{quote}
-            Questa definizione è molto simile a quella di Azuma, ma non è specificato il fatto che l'ambiente virtuale debba essere tridimensionale. La definizione di Milgram non
+            Questa definizione è molto simile a quella di Azuma, ma non è precisato il fatto che l'ambiente virtuale debba essere tridimensionale. La definizione di Milgram non
             specifica, inoltre, che l'ambiente virtuale debba essere sovrapposto a quello reale, ma che i due ambienti debbano essere combinati in modo da risultare indistinguibili. 
             In quest'ottica si può quindi affermare che la AR è un caso particolare di MR, in cui l'ambiente virtuale è sovrapposto a quello reale.\\
             Il libro di Schmalstieg e Höllerer \textit{Augmented Reality: Principles and Practice}\cite{Schmalstieg2016} fornisce una schematizzazione della gerarchia tra AR e MR
@@ -40,7 +41,7 @@ sottolineando l'importanza del web al giorno d'oggi.
         e interessanti. Si presenteranno di seguito alcuni di questi esempi, cercando di esplorare le scelte architetturali più interessanti.
         \paragraph{La spada di Damocle} (figura\ref{fig:SpadaDiDamocle}) è considerato  il primo prototipo di visore VR mai costruito nella storia e, come tale, ha diritto di essere
             citato come primo elemento di questa sezione. Il visore è stato costruito da Ivan Sutherland nel 1968 ed era pesante al punto da dover essere fissato al soffito per
-            essere sorretto, da questo il suo nome. Il visore era in grado di mostrare all'utente un cubo tridimensionale, che poteva essere osservato da diverse angolazioni 
+            essere sorretto, da qui il suo nome. Il visore era in grado di mostrare all'utente un cubo tridimensionale, che poteva essere osservato da diverse angolazioni 
             semplicemente muovendo la testa, era infatti già presente, seppur in forma molto rudimentale, il concetto di \textit{head tracking}. Il visore era inoltre dotato di un 
             controller, che permetteva di interagire con l'ambiente virtuale. Questo prototipo è stato il primo passo verso la realizzazione di visori VR, ma non è stato
             mai commercializzato.
@@ -56,11 +57,11 @@ sottolineando l'importanza del web al giorno d'oggi.
         \paragraph{IllumiRoom} (figura\ref{fig:IllumiRoom.png}) è una tecnologia Microsoft che punta a creare un'esperienza AR estendendo la realtà di gioco
             normale, composta dallo schermo e dal controller, all'intera stanza. Questa tecnologia è stata presentata nel 2013
             e permette di proiettare sulle pareti della stanza in cui si gioca le immagini del gioco, in modo da estendere
-            l'ambiente virtuale a quello reale. Questa tecnologia è stata sviluppata per la console Xbox One, ma non è mai
+            l'ambiente virtuale a quello reale. Questa tecnologia è stata prodotta per la console Xbox One, ma non è mai
             stata commercializzata.\cite{Schmalstieg2016}
             \img{IllumiRoom.png}{IllumiRoom, prodotto capace di estendere l'ambiente di gioco all'intera stanza.}
         
-        \paragraph{L'HTC Vive} (figura\ref{fig:HTCVive.jpg}) è uno dei più famosi visori VR, è stato sviluppato da HTC e Valve Corporation ed è
+        \paragraph{L'HTC Vive} (figura\ref{fig:HTCVive.jpg}) è uno dei più famosi visori VR. È stato sviluppato da HTC e Valve Corporation ed è stato
             rilasciato nel 2016. L' \textit{Head Mounted Display} (HDM) è dotato di due schermi OLED da $1080\times1200$ pixel, 
             con un refresh rate di 90Hz\cite{Vive}. Questo visore è uno dei più conosciuti sul mercato, 
             e tra le altre cose, deve anche la sua fama alla tecnologia di tracciamento dei movimenti chiamata \textit{Lighthouse}, che permette di tracciare
@@ -72,24 +73,24 @@ sottolineando l'importanza del web al giorno d'oggi.
 
         \paragraph{I dispositivi mobili} sono alla base della maggior parte delle applicazioni di AR. Questi dispositivi
             sono dotati di fotocamera, accelerometro, giroscopio, magnetometro e geolocalizzazione che permettono di rilevare i movimenti
-            dell'utente e di orientare la fotocamera. Questi dispositivi sono inoltre dotati di schermo, che permette di
-            visualizzare l'ambiente virtuale. I cellulari sono molto utilizzati per applicazioni di Augmented Reality, in quanto
+            dell'utente e di orientare la fotocamera. Lo schermo di cui sono dotati funge da output per la simulazione AR.\\
+            I cellulari sono molto utilizzati per applicazioni di Augmented Reality, inquanto
             sono dispositivi che tutti possiedono e che sono in grado di fornire un'esperienza soddisfacente.
             Attualmente sul mercato è esploso il fenomeno degli \textit{AR advertising}, ovvero applicazioni che permettono
             di visualizzare i prodotti venduti dalle aziende in modo virtuale direttamente nello spazio reale. Queste applicazioni
-            sono molto utilizzate per la vendita di mobili, in quanto permettono di proiettare il prodotto in modo realistico
+            sono molto utilizzate per la vendita di mobili, inquanto permettono di proiettare il prodotto in modo realistico
             e di valutare se questo si adatta all'ambiente in cui si vuole inserire. Anche il settore videoludico non ha 
-            perso l'occasione di sfruttare questa tecnologia, infatti sono state sviluppate applicazioni che permettono di
+            perso l'occasione di sfruttare questa tecnologia, sviluppando applicazioni che permettono di
             visualizzare i personaggi dei propri giochi preferiti direttamente nella propria stanza. Un esempio di questo
             tipo di applicazioni è \textit{Pokémon GO}, gioco sviluppato da Niantic nel 2016, che permette di catturare i
             Pokémon direttamente nella propria città.
             %\img{PokemonGo.png}{Pokémon GO, applicazione di AR per dispositivi mobili.}
             
-        \paragraph{Hololens} (figura\ref{fig:Hololens.png}) è il dispositivo Microsoft rilasciato nel 2016 che ha portato il mondo delle tecnologie 
+        \paragraph{HoloLens} (figura\ref{fig:Hololens.png}) è il dispositivo Microsoft rilasciato nel 2016 che ha portato il mondo delle tecnologie 
             AR e MR a un livello superiore. Questo HMD è dotato di un processore di fascia alta, una GPU per il calcolo
             di immagini ed una Holographic Processing Unit (HPU) che permette di elaborare i dati provenienti dai sensori
             in tempo reale. Il visore monta anche una telecamera di profondità, sensori avanzati per il tracciamento dei
-            movimenti e un sistema di rilevamento del suono. Questo visore è in grado di proiettare immagini in modo
+            movimenti e un sistema di~\cite{HoloLens}. Questo visore è in grado di proiettare immagini in modo
             realistico sulle lenti con display ottico 3D, in modo da sembrare che l'immagine sia davanti all'utente.
             Il visore ha un costo ancora troppo elevato per essere utilizzato da un utente comune, ma è stato utilizzato
             in ambito industriale per la progettazione di automobili e per la formazione di chirurghi. \\
@@ -106,9 +107,9 @@ sottolineando l'importanza del web al giorno d'oggi.
                     \footnote{Computazione ubiqua: modello post-desktop di interazione uomo-macchina, in cui l'elaborazione
                     delle informazioni è stata interamente integrata all'interno di oggetti e attività di tutti i giorni.\cite{ubiCompWiki}}).
             \end{itemize}
-            In conclusione si noti che ogni sensore è completamente integrato nel visore, che non necessita quindi di
-            dispositivi esterni rendendolo completamente wireless.
-            \img{Hololens.png}{Hololens, visore AR/MR di Microsoft.}
+            In conclusione, si noti che ogni sensore è completamente integrato nel visore, che non necessita quindi di
+            dispositivi esterni per funzionare, rendendolo completamente wireless.
+            \img{Hololens.png}{HoloLens, visore AR/MR di Microsoft.}
 
     \subsection{Applicazioni}\label{subsec:XRapplicazioni}
         Le applicazioni di Extended Reality sono molteplici e vanno dai videogiochi, all'industria fino alla medicina. In questa sezione si analizzeranno alcune applicazioni di AR e VR, 
@@ -120,23 +121,23 @@ sottolineando l'importanza del web al giorno d'oggi.
                 \item IKEA che ha sviluppato un'applicazione che permette di visualizzare i propri mobili direttamente nella propria casa;
                 \item De Beers che ha sviluppato un'applicazione che permette di provare gli anelli direttamente sul proprio dito.
             \end{itemize} 
-            Un altro esempio di utilizzo di AR in ambito industriale è quello di \textit{Remote Assistance}, ovvero l'assistenza remota. Questa tecnologia permette di fornire 
+            Un altro esempio di utilizzo di AR in ambito industriale è quello di \textit{remote assistance}, ovvero l'assistenza remota. Questa tecnologia permette di fornire 
             assistenza a distanza, dando la possibilità di vedere ologrammi illustrativi direttamente nello spazio reale, facilitando il lavoro dei tecnici e permettendo di 
             ridurre i costi di formazione e di spostamento.\\
 
-        \paragraph{Augmented Medicine} è il termine che è stato coniato per indicare l'utilizzo di dispositivi AR in ambito medico. Tra queste applicazioni si possono citare:
+        \paragraph{Augmented Medicine} è il termine che è stato coniato per indicare l'utilizzo di dispositivi AR in ambito medico. Di questa branca fanno parte:
             \begin{itemize}
-                \item \textbf{Formazione di chirurghi}: in quanto permette di visualizzare in modo realistico gli organi 
+                \item \textbf{Formazione di chirurghi}: inquanto permette di visualizzare in modo realistico gli organi 
                     interni del paziente, permettendo di eseguire operazioni in modo virtuale e di simulare interventi chirurgici (figura\ref{fig:ARMedicine.png}).
-                \item \textbf{Progettazione di protesi}: in quanto permette di visualizzare in modo realistico le protesi 
+                \item \textbf{Progettazione di protesi}: inquanto permette di visualizzare in modo realistico le protesi 
                     direttamente sul paziente, permettendo di valutare se la protesi si adatta al corpo del paziente.
                 \item \textbf{Vista in profondità}: l'AR ha permesso a chirurghi di vedere in tempo reale tumori, fratture e aneurismi direttamente sul paziente, in modo da poter 
                     agire in modo più preciso e sicuro.
             \end{itemize}
             \img{ARMedicine.png}{Esempio di applicazione di AR in ambito medico.}
 
-        \paragraph{I videogiochi} rappresentano il settore che più di tutti ha sfruttato le potenzialità di queste tecnologie. I videogiochi sono stati sviluppati per essere giocati 
-            su schermi bidimensionali, ma con l'avvento di queste nuove tecnologie si è aperto un nuovo mondo di possibilità. Sin dagli inizi della realtà virtuale si possono notare
+        \paragraph{I videogiochi} rappresentano il settore che più di tutti ha sfruttato le potenzialità di queste tecnologie. Nati per essere giocati 
+            su schermi bidimensionali, con l'avvento di queste nuove tecnologie gli si è aperto un nuovo mondo di possibilità. Sin dagli inizi della realtà virtuale si possono notare
             i primi prodotti di successo come \textit{Virtuality}, \textit{BeatSaber} e \textit{Half-Life: Alyx}. Queste applicazioni hanno sfruttato le potenzialità di queste
             tecnologie per creare esperienze di gioco uniche, coinvolgenti e realistiche.\\
             Per avere una panoramica più dettagliata di queste applicazioni si rimanda alla sezione successiva (\ref{sec:Videogiochi}) dove verranno spiegati in dettaglio
@@ -148,12 +149,12 @@ sottolineando l'importanza del web al giorno d'oggi.
     
     \subsection{Definizione}\label{subsec:VideogiochiDef}
         Da quando il settore videoludico ha fatto la sua ascesa il termine `gioco' non ha più avuto lo stesso significato. La parola `gioco' viene utilizzata per indicare un'attività 
-        ludica, che ha come scopo il divertimento, la spensieratezza e il passatempo. Tra le varie attività ludiche si possono annoverare i giochi da tavolo (Monopoli, Risiko, etc.), i 
-        giochi di carte (scala quaranta, bridge, etc.), i giochi sportivi (frisbee, calcio, etc.) o i semplici giochi tradizionali per bambini (strega comanda colore, uno due tre stella, etc.).
-        È in questo contesto che il videogioco prende piede, mantenendo l'accezione comune di gioco come attività ludica con un regolamento e un'ambientazione, ma aggiungendo un elemento
-        che lo distingue da tutti gli altri giochi: l'interazione con un dispositivo elettronico. \\
+        ludica, che ha come scopo il divertimento, la spensieratezza e il passatempo. Tra le varie attività ludiche si possono annoverare i giochi da tavolo (come Monopoli e Risiko),
+        i giochi di carte (come scala quaranta e bridge), i giochi sportivi (come frisbee e calcio) o i semplici giochi tradizionali per bambini (come strega comanda colore e uno due 
+        tre stella). È in questo contesto che il videogioco prende piede, mantenendo l'accezione comune di gioco come attività ludica con un regolamento e un'ambientazione, ma 
+        aggiungendo un elemento che lo distingue da tutti gli altri giochi: l'interazione con un dispositivo elettronico. \\
         Il termine videogioco significa `gioco gestito da un dispositivo elettronico'. Sono videogiochi quindi i conosciutissimi giochi online, i giochi per cellulare, i giochi per console 
-        e i giochi per computer, ma anche i cabinati e le slot machine soddisfano questa definizione in quanto non solo hanno un software che gestisce il gioco, ma anche un hardware dedicato.\\
+        e i giochi per computer, ma anche i cabinati e le slot machine soddisfano questa definizione inquanto non solo hanno un software che gestisce il gioco, ma anche un hardware dedicato.\\
         Il termine `videogioco' è stato coniato da Ralph Baer nel 1966, utilizzato dall'ingegnere per descrivere il proprio progetto di gioco elettronico (di fatto la prima console della storia).
         Ai giorni d'oggi questo termine ha un significato quasi completamente distaccato dall'accezione generale di gioco, esistono comunità intere che fanno dei video games una professione,
         esistono competizioni internazionali e campionati mondiali e ci sono anche videogiochi che hanno un budget di produzione maggiore di quello di un film. In questo contesto anche l'utente
@@ -165,34 +166,39 @@ sottolineando l'importanza del web al giorno d'oggi.
         La storia dei videogiochi è molto lunga e complessa, in questa sezione si cercherà di riassumerne i punti salienti, passando per gli esempi più famosi e le
         innovazioni più importanti.
 
-        \paragraph{Pong} è il videogioco per antonomasia, precursore della storia dei video games. Questo gioco è stato sviluppato da Atari nel 1972 ed è stato il primo gioco arcade
-            \footnote{Arcade: è un tipo di videogioco che si gioca in una postazione pubblica apposita a gettoni o a monete come quelle presenti in sala giochi o casinò.}
+        \paragraph{Pong} è il videogioco per antonomasia, precursore della storia dei video games. Questo gioco è stato sviluppato da Atari nel 1972 ed è stato il primo gioco 
+            \textit{arcade}\footnote{Arcade: è un tipo di videogioco che si gioca in una postazione pubblica apposita a gettoni o a monete come quelle presenti in sala giochi o casinò.}
             di successo. Il gioco consiste in una simulazione di ping pong in cui due giocatori si sfidano a colpi di palla (figura\ref{fig:Pong2.png}). In questo semplice esempio si concretizza già il primo 
             multigiocatore, Pong è infatti giocabile sia in singolo, contro il computer, che in due giocatori, mostrando sin da subito che un gioco ha più valore se giocato in compagnia. 
             Bisogna ricordare Pong anche come uno dei primi \textit{coin-op} della storia, ovvero uno dei primi giochi che richiedevano l'inserimento di una moneta per poter 
             essere giocati.
-            \img{Pong2.png}{Pong, il primo videogioco arcade di successo.}
+            \img{Pong2.png}{Pong, il primo videogioco \textit{arcade} di successo.}
 
         \paragraph{Pac-Man} è il gioco ideato da Toru Iwatani, prodotto dalla Namco, che ha appassionato molti nelle sale giochi degli anni '80. Il gioco è composto da un personaggio giallo,
             comandato dal giocatore, che ha lo scopo di mangiare tutti i puntini presenti nel labirinto, evitando di essere mangiato dai fantasmi (figura\ref{fig:PacMan.png}). Esistono 
             anche delle `pillole speciali' ai lati del labirinto che permettono al giocatore di diventare immune ai fantasmi per 10 secondi. Infine, se il giocatore riesce a mangiare tutti
             i puntini del labirinto, viene mostrato un intermezzo, per poi far ricominciare il gioco da capo (mantenendo il punteggio). Il gioco deve il suo successo a diversi fattori tra cui: 
-            essere uno dei pochi giochi non violenti in un mercato dominato da giochi di guerra, avere dei comandi semplici e intuitivi e avere un gameplay basato più sulla tattica 
+            essere uno dei pochi giochi non violenti in un mercato dominato da giochi di guerra, avere dei comandi semplici e intuitivi e avere uno stile di gioco basato più sulla tattica 
             che sui riflessi\cite{Uston1982}.
-            \img[0.5]{PacMan.png}{Pac-Man, gioco arcade in cui controlli pacman (personaggio giallo) e sei inseguito dai fantasmi (colorati in diversi colori).}
+            \img[0.5]{PacMan.png}{Pac-Man, gioco \textit{arcade} in cui controlli Pacman (personaggio giallo) e sei inseguito dai fantasmi (colorati in diversi colori).}
 
         \paragraph{Super Mario Bros.} è la punta di diamante della Nintendo che pur non essendo il primo Mario creato, rimane comunque il più celebre. Questo gioco ha gettato le fondamenta
-            per tutti i giochi platform che si sarebbero creati negli anni successivi. Questo consiste in un platform a scorrimento orizzontale in cui il giocatore controlla Mario, 
-            un idraulico che deve salvare la principessa Peach dal malvagio Bowser. È presente anche la possibilità di giocare in cooperativa con un altro giocatore, che controllerà
-            Luigi, il fratello di Mario. Il video game di Miyamoto ha portato un vento di innovazione nel settore, portando a fama mondiale il concetto di livelli non lineari, ovvero
-            livelli in cui il giocatore può scegliere il percorso da seguire, e il concetto di power-up, ovvero oggetti che permettono al giocatore di ottenere abilità speciali.\cite{ryan2011}
+            per tutti i giochi platform che si sarebbero creati negli anni successivi. Il gioco consiste in un \textit{platform}\footnote{Platform: sottogenere dei videogiochi d'azione
+            dove la meccanica di gioco implica principalmente l'attraversamento di livelli costituiti da piattaforme, spesso disposte su più piani.} a scorrimento orizzontale in cui 
+            il giocatore controlla Mario, un idraulico che deve salvare la principessa Peach dal malvagio Bowser. È presente anche la possibilità di giocare in cooperativa con un altro 
+            giocatore, che controllerà Luigi, il fratello di Mario. Il video game di Miyamoto ha portato un vento di innovazione nel settore, portando a fama mondiale il concetto
+            di \textit{livelli non lineari}, ovvero livelli in cui il giocatore può scegliere il percorso da seguire, e il concetto di \textit{power-up}, ovvero oggetti che 
+            permettono al giocatore di ottenere abilità speciali\cite{ryan2011}.
             %\img{SuperMarioBros.jpg}{Super Mario Bros., platform che ha rivoluzionato il settore videoludico.}
             
-        \paragraph{Doom} è stato il primo \textit{First Person Shooter} (FPS) mai creato. Il gioco, in sè semplice, consiste in un marine, controllato dal giocatore, che deve sopravvivere
-            all'invasione di demoni provenienti dall'inferno (figura\ref{fig:Doom.png}). Questo gioco è stato sviluppato da id Software nel 1993 ed è stato il primo a utilizzare la tecnologia \textit{ray casting} 
-            per la generazione di ambienti tridimensionali. Per la prima volta si riuscì a creare un ambiente tridimensionale partendo da un piano bidimensionale. La tridimensionalità era
-            però solo apparente, la vera struttura del livello era bidimensionale, non permettendo di sviluppare ambienti sul terzo asse. Queste limitazioni non hanno
-            però impedito al videogioco di avere successo a livello globale, portando alla creazione di un genere di giochi che ancora oggi è molto popolare.\\
+        \paragraph{Doom} è stato il primo \textit{First Person Shooter} (FPS)\footnote{FPS: sottogenere dei videogiochi di tipo sparatutto che adottano una visuale in prima persona, ossia il giocatore vede 
+            sullo schermo la simulazione di ciò che vedrebbe se si trovasse veramente nei panni del proprio personaggio} mai creato. Il gioco, in sè semplice, consiste in un marine,
+            controllato dal giocatore, che deve sopravvivere all'invasione di demoni provenienti dall'inferno (figura\ref{fig:Doom.png}). Questo gioco è stato sviluppato da id Software
+            nel 1993 ed è stato il primo a utilizzare la tecnologia del \textit{ray cast}, cioè quella tecnica utilizzata per `sparare' (\textit{cast}) raggi in un ambiente 3D e controllare
+            le collisioni risultanti, per la generazione di ambienti tridimensionali. Per la prima volta si riuscì a creare un ambiente tridimensionale partendo da un piano 
+            bidimensionale con visuale dall'alto. La tridimensionalità era però solo apparente, la vera struttura del livello era bidimensionale, non permettendo di
+            sviluppare ambienti sull'asse verticale. Queste limitazioni non hanno però impedito al videogioco di avere successo a livello globale, portando alla creazione di un 
+            genere di giochi che ancora oggi è molto popolare: gli FPS.\\
             Altra caratteristica innovativa di Doom è la possibilità di giocare in multiplayer online, permettendo a macchine diverse di collegarsi alla stessa sessione di gioco
             se connesse alla stessa rete locale, lasciando agli utenti anche la scelta tra un gioco cooperativo (\textit{co-op}) o competitivo (\textit{deathmatch}).
             \img{Doom.png}{Doom, primo FPS della storia.}
@@ -204,32 +210,32 @@ sottolineando l'importanza del web al giorno d'oggi.
             può costruire e distruggere blocchi di vario tipo. Il gioco è stato sviluppato interamente in Java permettendo così agli utenti di creare mod e plugin per modificarlo
             a proprio piacimento. Questo video game è supportato su tutte le piattaforme principali: da Windows a Linux, dalle console al cellulare rendendolo accessibile ad un grande
             numero di utenti. Minecraft ha avuto anche un grande impatto sul gioco online, portando alla creazione di server dedicati (i \textit{Realms}), in cui gli utenti possono 
-            giocare insieme, rendendo disponibile anche la possibilità del cross-platform all'interno di questi server. Questo titolo ha avuto anche una certa rilevanza nel mondo
-            dell'Extended Reality, essendo stato uno dei primi giochi VR ad avere successo.
+            giocare insieme, permettendo anche a utenti con macchine diverse di incontrarsi all'interno di questi server (il \textit{cross-platform}). Questo titolo ha avuto una 
+            certa rilevanza nel mondo dell'Extended Reality, essendo stato uno dei primi giochi VR ad avere successo.
             %\img{Minecraft.png}{Minecraft, sandbox multiplayer campione di incassi.}
 
     \subsection{Categorie}\label{subsec:VideogiochiCategorie}
-        I videogiochi si possono analizzare secondo diversi criteri, ognuno di questi criteri identifica un insieme di categorie da cui derivano i vari generi e sottogeneri.
+        I videogiochi si possono analizzare secondo diversi criteri, ognuno dei quali identifica un insieme di categorie da cui, a loro volta, si derivano i vari generi e sottogeneri.
         Di seguito si analizzeranno i criteri più importanti per la classificazione dei videogiochi, cercando di identificare le categorie principali e le loro caratteristiche.
 
         \subsubsection{Gameplay}
             La parola \textit{gameplay} sta ad indicare l'esperienza di gioco che l'utente ha durante la partita. In base al tipo di mondo in cui ci si trova, al tipo di interazione
-            che si ha con esso e al tipo di obiettivo che si deve perseguire, si caratterizzano le varie categorie di gameplay. Tra tutti, questo è il criterio che raggruppa 
-            il maggior numero di categorie, in quanto l'unica limitazione in questo campo è la fantasia dei designer dei giochi. Tra le categorie principali di gameplay si possono
+            che si ha con esso e al tipo di obiettivo che si deve perseguire, si caratterizzano le varie categorie di \textit{gameplay}. Tra tutti, questo è il criterio che raggruppa 
+            il maggior numero di categorie, inquanto l'unica limitazione in questo campo è la fantasia dei designer di giochi. Tra le categorie principali di \textit{gameplay} si possono
             annoverare:
             
             \begin{itemize}
                 \item \textbf{Avventura} - Questa categoria comprende tutti quei giochi in cui il giocatore deve esplorare un mondo virtuale, risolvere enigmi e interagire con gli NPC 
-                    (personaggi non giocanti). Questi giochi sono caratterizzati da una trama che si sviluppa nel corso del gioco, in cui il giocatore deve raggiungere degli obiettivi per 
-                    poter procedere. I sottogeneri principali sono: avventura testuale (di cui il gioco più famoso è \textit{Zork}), avventura grafica (di cui il gioco più famoso è
-                    \textit{Monkey Island}) e avventura dinamica (di cui il gioco più famoso è \textit{The Legend of Zelda}).
+                    (personaggi non giocanti). Questi giochi sono caratterizzati da una trama che si sviluppa nel corso del tempo. Il giocatore deve infatti raggiungere degli obiettivi per 
+                    poter proseguire nella storia. I sottogeneri principali sono: avventura testuale (di cui il gioco più famoso è \textit{Zork}), avventura grafica 
+                    (di cui il gioco più famoso è \textit{Monkey Island}) e avventura dinamica (di cui il gioco più famoso è \textit{The Legend of Zelda}).
                 \item \textbf{Azione} - Questo genere comprende videogiochi in cui riflessi e agilità nella combinazione di comandi sono determinanti per la vittoria. Questi giochi sono 
-                    infatti caratterizzati da un gameplay frenetico unito ad una difficoltà crescente. I sottogeneri principali sono: platform (con \textit{Super Mario Bros.} 
+                    infatti caratterizzati da un \textit{gameplay} frenetico unito ad una difficoltà crescente. I sottogeneri principali sono: platform (con \textit{Super Mario Bros.} 
                     come gioco rappresentativo), picchiaduro (con \textit{Street Fighter}), sparatutto (con \textit{Doom}) e battle royale (con \textit{Fortnite}).
-                \item \textbf{Di ruolo (RPG)} - Questo genere è caratterizzato da un gameplay in cui il giocatore controlla un personaggio che può essere personalizzato e che può 
+                \item \textbf{Di ruolo (RPG)} - Questo genere è caratterizzato da un \textit{gameplay} in cui il giocatore controlla un personaggio che può  
                     migliorare le proprie abilità nel corso del gioco. Fondante è anche la componente narrativa, i ruoli dei vari personaggi e le classi a cui appartengono. I sottogeneri
-                    principali sono: \textit{action RPG} (con \textit{Dark Souls} come capostipite), \textit{MMORPG}\footnote{MMORPG: massively multiplayer online RPG, RPG online che ammettono
-                    all'interno della stessa sessione un elevato numero di partecipanti, nell'ordine delle centinaia.} (con \textit{World of Warcraft}) e \textit{roguelike} (con \textit{The
+                    principali sono: action RPG (con \textit{Dark Souls} come capostipite), MMORPG\footnote{MMORPG: massively multiplayer online RPG, RPG online che ammettono
+                    all'interno della stessa sessione un elevato numero di partecipanti, nell'ordine delle centinaia.} (con \textit{World of Warcraft}) e roguelike (con \textit{The
                     Binding of Isaac}).
                 \item \textbf{Strategico} - Questa categoria comprende tutti quei giochi in cui le scelte che il giocatore prende hanno un impatto determinante sullo svolgimento del gioco.
                     I sottogeneri principali sono: strategia in tempo reale (con \textit{Age of Empires} come gioco rappresentativo), strategia a turni (con \textit{Civilization}) e 
@@ -242,9 +248,9 @@ sottolineando l'importanza del web al giorno d'oggi.
             \begin{itemize}
                 \item \textbf{Pc game} - Ne fanno parte tutti quei videogiochi che vengono distribuiti per computer sotto forma di file eseguibile. Questi giochi possono essere
                     scaricati da Internet o possono essere acquistati in negozio su supporto fisico (CD, DVD, etc.). Questa è la prima forma di diffusione dei videogiochi dopo la
-                    nascita dei personal computer, ed è tutt'ora una delle più diffuse. Al tempo della nascita dei pc game, i software che dovevano essere distribuiti, venivano dapprima
+                    nascita dei personal computer ed è tutt'ora una delle più diffuse. Al tempo della nascita dei pc game, i software che dovevano essere distribuiti, venivano dapprima
                     programmati su uno specifico hardware, per poi essere compilati e impressi su supporto fisico, che quindi veniva distribuito. Questo processo, oltre ad essere
-                    lungo e costoso, era anche limitante, in quanto gli unici a poter usufruire della risorsa erano coloro che possedevano lo stesso tipo di hardware su cui era
+                    lungo e costoso, era anche limitante, inquanto gli unici a poter usufruire della risorsa erano coloro che possedevano lo stesso tipo di hardware su cui era
                     stato programmato il gioco. Con il passare del tempo questo processo si è semplificato, specialmente con la nascita di internet e dei \textit{launcher}, ovvero
                     software che permettono di scaricare e installare i giochi in modo automatico.
                 \item \textbf{Console game} - Di questa categoria fanno parte tutti i videogiochi giocabili da una \textit{console}, ovvero un hardware concepito proprio allo scopo
@@ -256,23 +262,23 @@ sottolineando l'importanza del web al giorno d'oggi.
                     sono stati sviluppati per essere giocati su dispositivi con schermi di piccole dimensioni, con una potenza di calcolo limitata e con una connessione Internet
                     non sempre disponibile. Queste limitazioni hanno quindi generato un cambio di paradigma di gioco, dove il fulcro non era più immergere l'utente il più possibile
                     in un mondo fittizio, bensì permettere all'utente di giocare in qualsiasi momento ed in qualsiasi luogo. Il gioco, in quest'ottica, si avvicina più ad un passatempo
-                    che, in quanto tale, deve essere interrompibile in tempi brevi e deve richiedere uno sforzo cognitivo limitato. Con la grande espansione di questo mercato si è
-                    assistito alla realizzazione di tutto il panorama videoludico esistente, coprendo i \textit{light game} precedentemente menzionati ma lasciando spazio anche a
-                    una gamma di giochi più complessi e articolati.
+                    che, inquanto tale, deve essere interrompibile in tempi brevi e deve richiedere uno sforzo cognitivo limitato. Con la grande espansione di questo mercato però, si è
+                    assistito alla realizzazione di tutto il panorama videoludico esistente, coprendo dai \textit{light game} precedentemente menzionati a tutta la gamma di giochi 
+                    complessi e articolati.
                 \item \textbf{XR game} - Con la nascita dell'Extended Reality si è assistito anche alla nascita di un nuovo genere di videogiochi, i videogiochi in XR. All'avvento
                     dell'HTC Vive furono sviluppati video games che avrebbero fatto la storia di questo settore. Tra questi si possono trovare titoli come \textit{BeatSaber}, gioco
                     musicale in cui il giocatore deve colpire dei blocchi con delle spade laser (figura\ref{fig:BeatSaber.png}) o \textit{Minecraft}, il sandbox precedentemente 
                     discusso che ha trasportato il proprio gioco anche su questa piattaforma. Anche il settore AR ha prodotto marchi di successo tra cui \textit{Pokèmon GO} e 
                     \textit{Ingress}.
                     \img{BeatSaber.png}{BeatSaber, gioco musicale per VR.}
-                \item \textbf{Cross-platform} - Questa categoria non rappresenta direttamente una piattaforma specifica su cui le aziende videoludiche sviluppano il proprio prodotto,
-                    bensì caratterizza tutti quei videogiochi che permettono a utenti di più piattaforme di giocare insieme, ovvero di \textit{`incrociare le piattaforme'}, da qui
+                \item \textbf{Cross-platform} - Questa categoria non rappresenta direttamente una piattaforma specifica su cui le aziende videoludiche sviluppano il proprio prodotto.
+                    Al contrario, caratterizza tutti quei videogiochi che permettono a utenti di più piattaforme di giocare insieme, ovvero di \textit{`incrociare le piattaforme'}, da qui
                     il nome. La necessità di sviluppare videogiochi che siano indipendenti dalla piattaforma è nata da quando Internet ha fatto la sua ascesa. In quel periodo
                     i videogiocatori furono messi tutti in contatto, portando ad una consapevolezza reciproca prima inesistente. Quello che prima era un mercato di nicchia, in cui
                     ogni azienda sviluppava il proprio prodotto per la propria piattaforma, divenne un mercato globale, in cui le aziende si trovarono a competere tra loro. In questo
-                    scenario rendere il videogioco cross-platform risultava imperativo per una buona riuscita del prodotto stesso. 
+                    scenario rendere il videogioco \textit{cross-platform} risultava imperativo per una buona riuscita del prodotto stesso. 
                 \item \textbf{Web game} - Questa categoria, pur essendo la più recente, è quella che sta riscontrando maggior successo. I web games sono tutti quei videogiochi
-                    che non hanno bisogno dell'installazione di un software, infatti è possibile giocarci direttamente all'interno di un qualsiasi browser compatibile. Questi giochi 
+                    che non hanno bisogno dell'installazione di un software, perchè è possibile giocarci direttamente all'interno di un qualsiasi browser compatibile. Questi giochi 
                     sono stati sviluppati per essere giocati su qualsiasi dispositivo, da un computer ad uno smartphone, da una console ad un tablet. Questa caratteristica ha 
                     permesso a questi giochi di avere un bacino di utenza molto ampio, portando a un successo senza precedenti. Tra i giochi più famosi di questa categoria si contano: 
                     \textit{Agar.io}, \textit{Krunker.io} e \textit{Cookie Clicker}.
@@ -280,12 +286,12 @@ sottolineando l'importanza del web al giorno d'oggi.
 
         \subsubsection{Numero di giocatori}
             Questo criterio di classificazione si basa sul numero di giocatori che possono partecipare alla stessa sessione di gioco. Di fatto esistono due macrocategorie: i
-            giochi \textit{singleplayer} e i giochi \textit{multiplayer}. I giochi singleplayer sono quei giochi in cui il giocatore vive da solo l'esperienza, senza la 
-            possibilità di interagire con altri giocatori. Molto spesso una forma di interazione indiretta viene comunque inserita in questa categoria di video game, come l'impiego
+            giochi \textit{singleplayer} e i giochi \textit{multiplayer}. I giochi singleplayer sono quelli in cui il giocatore vive da solo l'esperienza, senza la 
+            possibilità di interagire con altri utenti. Molto spesso una forma di interazione indiretta viene comunque inserita in questa categoria, come l'impiego
             di una classifica online o la possibilità di condividere i propri risultati sui social. In questa categoria rientrano gran parte dei videogiochi sviluppati agli albori
             del settore videoludico, momento in cui Internet ancora non esisteva.\\
-            Il tema del multigiocatore per questo progetto di tesi ha una rilevanza maggiore, motivo per il quale verrà trattato più approfonditamente, dandone una prima definizione,
-            scandendone i principali momenti storici e concludendo con le architetture più utilizzate per realizzare questo tipo di giochi.
+            Il tema del multigiocatore per questo progetto di tesi ha una rilevanza maggiore, motivo per il quale verrà trattato più approfonditamente nella sezione successiva, 
+            dandone una prima definizione, scandendone le principali categorie e concludendo con le architetture più utilizzate per realizzare questo tipo di giochi.
 
 \section{Multigiocatore}\label{sec:Multigiocatore}
     Se si vuole trovare un caposaldo all'interno di tutta la trattazione che è stata fatta precedentemente sulla definizione di gioco, questo è sicuramente la condivisione dell'esperienza. 
@@ -294,79 +300,82 @@ sottolineando l'importanza del web al giorno d'oggi.
     i principali metodi per attuarlo e per le sue architetture più famose.
     \subsection{Definizione}\label{subsec:MultiDef}
         Il significato di multigiocatore è derivabile direttamente dalla parola stessa, è un gioco a cui può giocare più di un giocatore contemporaneamente. Questo termine è divenuto 
-        di uso comune solo con l'avvento dei videogiochi ma rientrano in questa categoria anche i normali giochi da tavolo, i giochi di carte, gli sport etc.\\
+        di uso comune solo con l'avvento dei videogiochi ma rientrano in questa categoria anche i normali giochi da tavolo, i giochi di carte o gli sport.\\
         Nel contesto videoludico il termine sta a significare che nello stesso mondo virtuale, nella stessa sessione di gioco, possono partecipare più persone, le quali posso interagire
         tra loro e con l'ambiente circostante. Si noti che in questa definizione non è specificato il fatto che i giocatori debbano essere fisicamente vicini, tanto meno che ci 
-        debba essere una connessione Internet a collegarli. Questo è dovuto al fatto che lungo il corso della storia si sono realizzate le più disparate tecnologie per permettere la
+        debba essere una connessione Internet a collegarli. Questo è dovuto al fatto che, lungo il corso della storia, si sono realizzate le più disparate tecnologie per permettere la
         condivisione di gioco. Si vanno quindi ad analizzare quelle che hanno avuto maggior successo e come sono utilizzate al giorno d'oggi.
 
     \subsection{Categorie}\label{subsec:MultiCategorie}
         In questa sezione si categorizzeranno le varie forme di multiplayer suddividendoli per macrocategorie (similmente a come è stato fatto per i videogiochi nella sezione\ref{subsec:VideogiochiCategorie}).
 
         \paragraph{Il multigiocatore locale} è la prima forma di multigiocatore mai realizzata. Questa tecnologia consiste nello sviluppare un programma che sia
-            capace di ricevere input da due utenti, o con la condivisione del dispositivo di input o con l'utilizzo di due dispositivi di input diversi, e, nel caso
-            fosse necessario, mostrare due schermate distinte (nasce il concetto di \textit{split screen}). I videogiochi così costruiti sono quindi sviluppati sulla stessa macchina 
+            capace di ricevere input da due utenti, o con la condivisione del dispositivo di input o con l'utilizzo di due dispositivi di input diversi e, nel caso
+            fosse necessario, mostrare due schermate distinte (nasce il concetto di \textit{split screen}). I videogiochi così costruiti sono sviluppati sulla stessa macchina 
             e non differiscono troppo da un gioco a giocatore singolo\cite{glazer2015}. Gli esempi più iconici sono \textit{Pong} e \textit{Call of Duty}, il primo già trattato precedentemente (\ref{subsec:VideogiochiStoriografia})
-            mentre l'ultimo è un famoso FPS che permette di giocare in locale fino a quattro giocatori sfruttando appunto la tecnica dello split screen (figura\ref{fig:CallOfDuty.jpg}).
+            mentre l'ultimo è un famoso FPS che permette di giocare in locale fino a quattro giocatori sfruttando, appunto, la tecnica dello \textit{split screen} 
+            (figura\ref{fig:CallOfDuty.jpg}). 
             \img{CallOfDuty.jpg}{Call of Duty, FPS che permette di giocare in locale fino a 4 giocatori.}
 
-        \paragraph{Il multigiocatore online} è forse la tecnologia più comune al giorno d'oggi permettendo di connettere i giocatori a livello globale (spesso si usa il termine
-            Wide Area Network o WAN). Questa tecnologia è stata resa possibile grazie alla nascita di Internet, che ha permesso di connettere tra loro tutti i computer del mondo.
-            Una delle sue versioni più avanzate è il \textit{Massively Multiplayer Online} (MMO), che permette di connettere un numero elevato di giocatori (nell'ordine delle centinaia)
-            alla stessa sessione di gioco. Esempi noti di questo tipo di giochi sono \textit{World of Warcraft} e \textit{The Lord of The Ring Online}.\\
+        \paragraph{Il multigiocatore online} è forse la tecnologia più comune al giorno d'oggi inquanto in grado di connettere i giocatori a livello globale (spesso si usa il termine
+            \textit{Wide Area Network} o WAN). Questa tecnologia è stata resa possibile grazie alla nascita di Internet, che ha permesso di connettere tra loro tutti i computer del 
+            mondo. Una delle sue versioni più avanzate è il \textit{Massively Multiplayer Online} (MMO), che permette di connettere un numero elevato di giocatori (nell'ordine delle
+            centinaia) alla stessa sessione di gioco. Esempi noti di questo tipo di giochi sono \textit{World of Warcraft} e \textit{The Lord of The Ring Online}.\\
 
-        Oltre queste due macrocategorie ne esistono altre che derivano dallo stile di gioco che si vuole ottenere.
+        Oltre queste due macrocategorie ne esistono altre che derivano dallo stile di gioco che si vuole ottenere. Le categorie così identificate sono: \textit{cooperativa} e
+        \textit{competitiva}.
 
         \paragraph{La cooperativa} è uno stile di gioco in cui i giocatori connessi si aiutano a vicenda per raggiungere uno scopo comune. L'esempio più semplice a cui si può pensare
-            è di dover sconfiggere un nemico comune, come succede in \textit{Doom}, ma esistono anche altre versioni del gioco co-op per esempio \textit{Portal 2} che permette di
-            risolvere enigmi in cooperativa, o \textit{Super Mario Bros.} che permette di giocare in cooperativa per superare i livelli.\\
+            è di dover sconfiggere un nemico comune, come succede in \textit{Doom}, ma esistono anche altre versioni del gioco co-op come \textit{Portal 2}, che permette di
+            risolvere enigmi in cooperativa, o \textit{Super Mario Bros.}, che permette di giocare in cooperativa per superare i livelli.\\
         
         \paragraph{La competitiva} è invece quello stile in cui i giocatori devono prevalere sugli altri per raggiungere il prioprio obiettivo. In base al modo in cui si affrontano
-            gli avversari si categorizzano altri sottogeneri, come il \textit{deathmatch} in cui i giocatori si alleano in team e devono uccidersi a vicenda, o i \textit{battle royale}
+            gli avversari si categorizzano altri sottogeneri come il \textit{deathmatch}, in cui i giocatori si alleano in team e devono uccidersi a vicenda, o i \textit{battle royale}
             in cui i player si affrontano in un'arena e l'ultimo sopravvissuto vince.\\    
         
-        Si specifica che le categorie precedentemente definite non sono mutualmente esclusive: un gioco può essere sia cooperativo che competitivo, come nel caso di un team deathmatch
-        in cui cooperi con la squadra e competi con gli avversari, sia locale che online, come nel caso di \textit{Call of Duty} in cui dalla stessa macchina si può giocare in più giocatori
-        i quali possono seguentemente partecipare ad una sessione di gioco online con altri.\\
-        Fino ad ora si è esposto come viene visto il videogioco dal lato dell'utente, scandendo generi e sottogeneri che caratterizzano i videogiochi multiplayer. Con la prossima sezione
-        ci sarà un cambio di prospettiva, introducendo il lettore alle architetture software più utilizzate per sviluppare un videogioco multiplayer.
+        Si specifica che le categorie precedentemente definite non sono mutualmente esclusive: un gioco può essere sia cooperativo che competitivo, come nel caso di un \textit{team 
+        deathmatch} in cui cooperi con la squadra e competi con gli avversari, sia locale che online, come nel caso di \textit{Call of Duty} in cui dalla stessa macchina si può 
+        giocare in più giocatori i quali possono seguentemente partecipare ad una sessione di gioco online con altri.\\
+        Fino ad ora si è esposto come viene visto il videogioco dal lato dell'utente, scandendo generi e sottogeneri che caratterizzano i multiplayer. Con la prossima sezione
+        si ribalterà la prospettiva, introducendo il lettore alle architetture software più utilizzate per sviluppare un videogioco multiplayer.
     \subsection{Architetture}\label{subsec:MultiArchitetture}
         In quest'utlima sezione del capitolo si introdurranno le architetture più comuni per la realizzazione di un videogioco multiplayer, analizzando i pro e i contro di ognuna.
-        \paragraph{L'architettura client-server} consiste nella costruzione di un server, ovvero un computer che si occupa di gestire la sessione di gioco, e di più client, ovvero
-            dispositivi che si connettono al server per poter giocare. Questa è la più comunemente diffusa nell'ambito videoludico, in quanto permette di gestire al meglio la
-            sessione di gioco e di bilanciare il carico di lavoro tra i vari client. In questo scenario chi detiene l'informazione (ovvero lo stato del gioco) è il server, mentre
-            i client hanno solo il compito di visualizzare i dati contenuti all'interno del server. Fin dai primi giochi che hanno utilizzato questa architettura
-            si è riscontrata la necessità di ottimizzare le informazioni che vengono passate in rete, per permettere un'esperienza piacevole e coinvolgente. Per fare ciò i 
+        \paragraph{L'architettura client-server} (figura~\ref{fig:clientServer.png}) consiste nella costruzione di un server, ovvero un computer che si occupa di gestire la sessione di 
+            gioco, e di più client, ovvero dispositivi che si connettono al server per poter giocare. Questa è la più comunemente diffusa nell'ambito videoludico inquanto permette 
+            di gestire al meglio la sessione di gioco e di bilanciare il carico di lavoro tra i vari client. In questo scenario chi detiene l'informazione (ovvero lo stato del gioco) 
+            è il server, mentre i client hanno solo il compito di visualizzare i dati contenuti all'interno del server.\\ 
+            Fin dai primi giochi che hanno utilizzato questa architettura
+            si è riscontrata la necessità di ottimizzare le informazioni che vengono passate in rete, al fine di garantire un'esperienza piacevole e coinvolgente. Per fare ciò i 
             programmatori hanno creato varie infrastrutture che permettono di inviare solo le informazioni necessarie. Alcuni esempi di queste infrastrutture sono: 
             \textit{delta encoding}, \textit{event management} e \textit{interest management}.\\
-            Il \textit{delta encoding} consiste nel trasmettere solo le informazioni che sono cambiate rispetto all'ultimo aggiornamento, questo garantisce comunque che tutti
+            Il \textit{delta encoding} consiste nel trasmettere solo le informazioni che sono cambiate rispetto all'ultimo aggiornamento. Questo garantisce comunque che tutti
             i client siano allineati con il server, ma permette di ridurre il carico di lavoro.\\
             L'\textit{event management} consiste nel trasformare le interazioni dell'utente in eventi. Questi eventi vengono quindi messi in una coda gestita da un 
-            \textit{event manager}, che, appena possibile, invia questi eventi al server. In questo modo si possono gestire in modo efficiente le interazioni dell'utente inviando
+            \textit{event manager}, che, appena possibile, invia questi eventi al server. Ciò permette di gestire in modo efficiente le interazioni dell'utente inviando
             solo gli eventi che sono rilevanti per il giocatore. Successivamente l'evento sarà gestito dal server e il risultato sarà inviato a tutti i client.\\
             L'\textit{interest management} consiste nel trasmettere solo le informazioni che sono rilevanti per il giocatore, ovvero solo le informazioni che sono vicine al suo 
-            personaggio. Questa accortezza permette anche, a chi dispone di un pc più prestante, di avere un'esperienza di gioco più immersiva e completa e, al contempo, permettere 
-            a chi ha un computer dalle prestazioni basse di partecipare alla stessa sessione fornendogli comunque le informazioni necessarie per giocare. Questo meccanismo è stato
+            personaggio. Questa accortezza permette anche, a chi dispone di un pc più prestante, di avere un'esperienza di gioco più immersiva e completa e, al contempo, concedere 
+            a chi ha un computer dalle prestazioni basse di partecipare alla stessa sessione, fornendogli comunque le informazioni base per giocare. Questo meccanismo è stato
             determinante per la scalabilità di certi videogiochi come \textit{Starsiege: Tribes}.\\
+            \img{clientServer.png}{Architettura client-server.}
 
-        \paragraph{L'architettura peer-to-peer} o p2p è la versione serverless in cui tutti gli utenti sono connessi tra di loro e si scambiano le 
+        \paragraph{L'architettura peer-to-peer} o p2p è la versione \textit{serverless} in cui tutti gli utenti sono connessi tra di loro e si scambiano le 
             informazioni direttamente. Il server, avendo il duplice compito di calcolare lo stato di gioco e di gestire le connessioni, deve essere necessariamente una macchina 
-            dalle prestazioni molto elevate, e, conseguentemente, molto costosa. Il peer-to-peer permette di svincolare dall'acquisto di un server, garantendo anche un miglioramento 
-            delle prestazioni. Il rovescio della medaglia è però il compito di dover mantenere uno stato di gioco coerente tra gli utenti.\\
-            Per gestire lo stato di gioco sono stati progettati due algoritmi: \textit{lockstep} e \textit{event synchronization}.\\
-            L'algoritmo \textit{lockstep} consiste nel far partire la sessione di gioco solo quando tutti i giocatori sono pronti. Questo permette di avere un'esperienza di gioco
-            fluida e coerente, ma ha il difetto di non poter gestire bene i giocatori che hanno una connessione lenta, in quanto il gioco non può procedere finchè tutti i giocatori
-            non hanno ricevuto le informazioni.\\
-            L'algoritmo \textit{event synchronization}, al contrario, consiste nel far partire la sessione di gioco non appena un giocatore è pronto. Questo permette di gestire meglio
-            i giocatori con connessioni lente, ma ha il difetto di non poter garantire un'esperienza di gioco fluida e coerente, in quanto i giocatori potrebbero ricevere informazioni 
-            in ritardo rispetto agli altri giocatori.\\
-            Altro aspetto fondamentale riguardante il p2p è la gestione della randomicità. Se prima nel cient-server quando bisognava generare un numero casuale si utilizzava il
-            generatore di numeri casuali del server, ora bisogna trovare un modo per generare un numero casuale che sia uguale per tutti i giocatori.
-            Per fare ciò si utilizza un algoritmo che prende in input un seme e genera un numero casuale. Questo seme viene generato dal primo giocatore che si connette alla sessione
-            di gioco e viene inviato a tutti gli altri giocatori. In questo modo tutti i giocatori genereranno gli stessi numeri casuali nello stesso ordine. Rimane imperativo 
-            che gli accessi fatti al generatore siano gli stessi per tutti i giocatori, lasciando quindi un margine di errore non ignorabile.
-    \newline \newline
+            dalle prestazioni molto elevate e, conseguentemente, molto costosa. Il peer-to-peer permette di svincolare dall'acquisto di un server, garantendo anche un miglioramento 
+            delle prestazioni. Il rovescio della medaglia è però il fardello di dover mantenere uno stato di gioco coerente tra gli utenti.\\
+            Per gestire lo stato di gioco sono stati progettati due algoritmi: \textit{lockstep} e \textit{event synchronization}. L'algoritmo \textit{lockstep} consiste nel far 
+            partire la sessione di gioco solo quando tutti i giocatori sono pronti. Questo permette di avere un'esperienza di gioco fluida e coerente, ma ha il difetto di non poter 
+            gestire bene i players che hanno una connessione lenta, inquanto il gioco non può procedere finchè tutti i giocatori
+            non hanno ricevuto le informazioni. L'algoritmo \textit{event synchronization}, al contrario, consiste nel far partire la sessione di gioco non appena un giocatore è
+            pronto. Questo permette di gestire meglio i videogiocatori con connessioni lente, ma ha il difetto di non poter garantire un'esperienza di gioco fluida e coerente, inquanto
+            i giocatori potrebbero ricevere informazioni in ritardo rispetto agli altri.\\
+            Un altro elemento cruciale nell'ambito delle reti peer-to-peer è la gestione della casualità. Se prima, nel client-server, quando bisognava generare un numero casuale, 
+            si utilizzava il generatore del server (da cui tutti leggevano il valore), ora bisogna trovare un modo per generare un numero casuale che sia uguale per tutti i giocatori.
+            Per fare ciò si utilizza un algoritmo che prende in input un seme e genera in output una serie di numeri casuali. Questo seme viene generato dal primo giocatore che si connette
+            alla sessione e viene condiviso a tutti gli altri. In questo modo, tutti i giocatori genereranno gli stessi numeri casuali nello stesso ordine. Rimane
+            imperativo che gli accessi fatti al generatore siano gli stessi per tutti gli utenti, lasciando quindi un margine di errore non ignorabile.\\
+    \newline
     In questo capitolo si sono affrontati i temi principali che verranno trattati nel resto della tesi. Arrivati a questo punto si conoscono i concetti fondamentali di 
-    Extended Reality, videogiochi, multigiocatore, la loro storia e le loro applicazioni. Se in questo capitolo si è cercato di spiegare `cosa' sono questi concetti, 
-    nei successivi si affronterà invece `come' questi concetti sono stati applicati al caso specifico del progetto di tesi. Si esporrà in primo luogo l'elaborato con i suoi obiettivi
-    e le sue sfide, per poi soffermarsi sulle tecnologie utilizzate e infine trattare nel dettaglio l'architettura e l'implementazione.
+    Extended Reality, videogiochi, multigiocatore, ne si conosce la storia e le applicazioni. Se in questo capitolo si è cercato di spiegare \textit{cosa} sono questi concetti, 
+    nei successivi si affronterà invece \textit{come} questi concetti sono stati applicati al caso specifico del progetto di tesi. Si esporranno in primis le tecnologie utilizzate, 
+    per poi passare alla definizione formale dell'elaborato, studiandone l'architettura e l'implementazione.

@@ -1,12 +1,12 @@
 \chapter{Tecnologie}\label{chap:Tecnologie}
 L'obiettivo del seguente capitolo è introdurre le tecnologie software utilizzate per lo sviluppo del progetto. Essendo questo un videogioco in XR sul web, si affronteranno i framework
 più utilizzati in questi campi. Le analisi seguiranno un flusso che parte dal \textit{front end}, ovvero tutta la parte visibile all'utente, per poi passare al \textit{back end}, ovvero
-l'architettura invisibile all'utente ma che svolge comunque un ruolo fondamentale per il funzionamento dell'applicazione. Durante la trattazione saranno fatti anche confronti tra
-framework simili motivando la scelta intrapresa per questo progetto, analizzandone gli aspetti che hanno portato a questa decisione. Si partirà quindi definendo le API WebXR, per poi
-passare al Mixed Reality Toolkit e terminare il front end con BabylonJS. Si passerà quindi al back end con NodeJS e Croquet. 
+l'architettura invisibile all'utente ma che svolge un ruolo fondamentale per il funzionamento dell'applicazione. Durante la trattazione saranno fatti anche confronti tra
+framework simili motivando la scelta intrapresa per questo progetto e analizzandone gli aspetti che hanno portato a questa decisione. Si partirà quindi definendo le API WebXR, per poi
+passare al Mixed Reality Toolkit e terminare il \textit{front end} con BabylonJS. Si sposterà l'attenzione quindi al \textit{back end} con NodeJS e Croquet. 
 
 \section{WebXR}\label{sec:WebXR}
-WebXR è un insieme di specifiche web che permettono di creare applicazioni XR per il web. Questo permette di creare applicazioni che possono essere eseguite su qualsiasi dispositivo
+WebXR è un insieme di specifiche web che permettono di creare applicazioni XR per il web. Queste permettono di creare software che possono essere eseguiti su qualsiasi dispositivo
 che disponga di un browser, senza dover installare alcuna applicazione\cite{WebXR}.\\
 WebXR si appoggia su un'altra libreria specifica per la gestione di grafica 3D sul web chiamata OpenGL. OpenGL, essendo nata nel 2011, dispone di una vasta gamma di funzionalità
 ed una comunità molto attiva.\\
@@ -15,82 +15,92 @@ della sessione XR, dei vari dispositivi connessi, della spazialità e dell'input
 WebXR crea una struttura capace di interagire con tutta la gamma di dispositivi XR e non, creando una \textit{session mode} diversa in base a quale dispositivo si collega. Questo
 framework identifica 3 \textit{session mode} diverse: `immersive-ar', `immersive-vr' e `inline'. La prima è utilizzata per dispositivi AR, la seconda per dispositivi VR e la terza
 per dispositivi non XR. In base al sistema collegato vengono anche rese accessibili le funzionalità specifiche di quell'hardware. Se a collegarsi alla pagina web è, ad esempio, un 
-dispositivo HoloLens saranno disponibili feature come l'hand tracking e l'eye tracking, se a collegarsi è un HTC Vive saranno accesibili sensori di movimento e audio stereoscopico, 
-infine, se a collegarsi è un qualsiasi pc fornito di monitor, saranno disponibili solo le funzioni base per creare l'esperienza 3D, molto simile a ciò che già fornisce OpenGL.\\
-Grazie a questa infrastruttura creata da WebXR è possibile creare applicazioni eseguibili su qualsiasi dispositivo XR, senza dover creare una versione specifica per ognuno di essi.\\
+dispositivo HoloLens saranno disponibili \textit{feature} come l'\textit{hand tracking} e l'\textit{eye tracking}; se a collegarsi è un HTC Vive saranno accesibili sensori di movimento
+e audio stereoscopico; infine, se a collegarsi è un qualsiasi pc fornito di monitor, saranno disponibili solo le funzioni base per creare l'esperienza 3D, molto simile a ciò che 
+già fornisce OpenGL.\\
+Grazie a questa infrastruttura creata da WebXR è possibile sviluppare applicazioni eseguibili su qualsiasi dispositivo XR, senza dover creare una versione specifica per ognuno di essi.\\
 \newline
-La tecnologia WebXR realizza, tra le altre cose, una gestione capillare della sessione, organizzando i vari eventi che possono verificarsi durante l'esecuzione dell'applicazione. Questi
-caratterizzano tutta la durata dell'applicazione con eventi \textit{general purpose} come gli \texttt{XRSessionEvent} e gli \texttt{XRInputSourceEvent} e eventi più specifici come
-gli \texttt{XRReferenceSpaceEvent} e gli \texttt{XREyeEvent}.\\
+La tecnologia WebXR realizza, tra le altre cose, una gestione capillare della sessione, organizzandola ad eventi. Questi caratterizzano tutta la durata dell'applicazione, a partire da
+eventi \textit{general purpose}\footnote{General purpose: nel settore informatico si riferisce a dispositivi, programmi o sistemi progettati per essere utilizzati in una vasta gamma 
+di applicazioni o per svolgere una varietà di compiti diversi, anziché essere specificamente ottimizzati o progettati per una singola funzione o scopo particolare.} come gli 
+\texttt{XRSessionEvent} e gli \texttt{XRInputSourceEvent}, fino a eventi molto specifici come gli \texttt{XRReferenceSpaceEvent} e gli \texttt{XREyeEvent}.\\
 WebXR fornisce anche delle API per la creazione di un \textit{XR Frame Loop}, ovvero un ciclo di esecuzione che permette di gestire la scena virtuale. Ogni
 ciclo del game loop viene creato un \texttt{XRFrame} che contiene tutte le informazioni riguardanti tutti gli oggetti in un preciso istante della sessione (di solito quello corrente).
-Successivamente, viene calcolato come renderizzare la scena per quello \textit{snapshot} in base alla telecamera utilizzata e alla posizione e orientamento dell'utente.\\
+Successivamente, viene calcolato come \textit{renderizzare}\footnote{Rendering: è il processo computazionale attraverso il quale viene creata un'immagine o un'animazione visuale a 
+partire da una descrizione tridimensionale di una scena virtuale.} la scena per quel frame in base alla telecamera utilizzata e alla posizione e orientamento dell'utente.\\
 \newline
 In ultima istanza, si vuole fare un approfondimento sulla gestione che WebXR fa dell'input. Questo framework fornisce una gestione completa di tutti i tipi di input che possono
-essere utilizzati in un'applicazione XR. In letteratura vengono definiti tre tipi diversi di input: \textit{primary input source}, \textit{auxiliary input source} e \textit{transient
+essere utilizzati in un'applicazione XR. In letteratura ne vengono definiti tre tipi diversi: \textit{primary input source}, \textit{auxiliary input source} e \textit{transient
 input source}. Il primo è l'input principale ed è \textit{platform-specific}, ovvero sono tutti quei comandi specifici di un determinato dispositivo come una \textit{hand gesture},
 un comando vocale o il touchpad. Questa categoria rappresenta il modo principale di interazione con l'applicazione, si assume infatti che ogni dispositivo abbia dei comandi specifici
-che possono essere utilizzati per interagire con l'applicazione. Il secondo viene definito come tutti quegli input che non sono input primari, raggruppando quindi tutti gli input
+che possono essere utilizzati per interagire con l'applicazione. Il secondo rappresenta tutti quegli input che non sono input primari, raggruppando quindi tutti gli input
 che non vengono riconosciuti come relativi ad un hardware specifico. Il \textit{transient input source} è un input che ha una durata di tempo limitato, in questo caso i comandi
-possono essere riconosciuti sia come input primari che ausiliari, ricorrendo però ad una gestione specifica e ottimizzata per questo caso.
+possono essere riconosciuti sia come input primari che ausiliari, ricorrendo però ad una gestione specifica e ottimizzata.
 \newline \newline
-In questo progetto le API fornite da WebXR non sono state usate direttamente, nonostante ciò era importante conoscere questa tecnologia per poter comprendere il funzionamento
-di BabylonJS, prodotto basato su WebXR che è stato utilizzato per la creazione del videogioco. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, in quanto
-l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo HTTPS, informazione che verrà approfondita nella sezione~\ref{sec:NodeJS}. 
+In questo progetto le API fornite da WebXR non sono state usate direttamente. Nonostante ciò, è importante conoscere questa tecnologia per poter comprendere il funzionamento
+di BabylonJS, prodotto basato su WebXR che è stato utilizzato per la creazione del videogioco. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, inquanto
+l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo \textit{HTTPS}, questione che verrà approfondita nella sezione~\ref{sec:NodeJS}. 
 
 \section{MRTK}\label{sec:MRTK}
 MRTK (acronimo per Mixed Reality Toolkit) è un framework open source sviluppato da Microsoft per Unity che permette di sviluppare applicazioni per HoloLens e Windows Mixed Reality\cite{MRTK}.\\
+Unity è un popolare motore di gioco multipiattaforma che permette di creare applicazioni 2D e 3D.
 Dopo la nascita del dispositivo HoloLens mancavano ancora tutta una serie di API che permettessero al programmatore di svincolarsi dalle basi tecniche, principalmente legate 
 alla gestione degli input e della spazialità, e di concentrarsi sulla creazione di applicazioni.
-Questo framework è stato quindi sviluppato per creare un insieme di componenti riutilizzabili, che permettano di sviluppare applicazioni per la realtà mista in modo più semplice e 
+Questo framework è stato quindi sviluppato per creare un insieme di componenti riutilizzabili, che permettano di sviluppare applicazioni per la realtà mista in modo semplice e 
 veloce. Le principali componenti sono:
 \begin{itemize}
     \item \textit{boundary system}, utilizzato nelle applicazioni VR per definire il confine fisico in cui l'utente può muoversi;
-    \item \textit{camera system}, utilizzato per gestire la camera in modo efficiente in entrambe le simulazioni AR e VR;
-    \item \textit{input system}, utilizzato per gestire ogni tipo di input utente, dal touchscreen ai controller, dal mouse e tastiera all'\textit{air tap};
+    \item \textit{camera system}, utilizzato per gestire la telecamera in modo efficiente in entrambe le simulazioni (AR e VR);
+    \item \textit{input system}, utilizzato per gestire ogni tipo di input utente, dal touchscreen ai controller, dal mouse alla tastiera;
     \item \textit{scene system}, creato per gestire le varie scene Unity e come queste interagiscono tra loro nel contesto XR;
     \item \textit{spatial awareness system}, utilizzato per gestire la posizione e l'orientamento dell'utente all'interno della scena;
     \item \textit{rendering system}, utilizzato nel rendering della scena virtuale, sfruttando funzioni avanzate come \textit{clipping}, \textit{pulse shaders} e \textit{materials}.
 \end{itemize}
-Il framework è stato sviluppato per essere utilizzato con Unity, un motore di gioco multipiattaforma che permette di creare applicazioni 2D e 3D. In quanto tale, supporta tutta
-l'infrastruttura di Unity dei prefab, dei componenti e del game loop. Questi non verranno approfonditi per non allontanarsi troppo dallo scopo di questo lavoro tuttavia, per 
-approfondire, si faccia riferimento al testo \textit{`Unity in Action'} di Joe Hocking\cite{hocking2018}. Essendo 
-l'applicazione del progetto sviluppata per HoloLens 2 (di casa Microsoft), MRTK è stata quasi una scelta obbligata per poter creare ologrammi in modo nativo per questo dispositivo.\\
-Si noti che il Mixed Reality Toolkit è stato prodotto in supporto del motore di gioco Unity ma è stato recentemente portato anche per Unreal Engine 4, BabylonJS e OpenXR. Nello 
-specifico, BabylonJS è stata una delle tecnologie utilizzate nella tesi, motivo per il quale, nella sezione~\ref{sec:BabylonJS}, verrà approfondito il porting per BabylonJS.
+Il framework è stato sviluppato per essere utilizzato con Unity. Esso supporta infatti tutta l'infrastruttura di Unity dei componenti e dei \textit{prefab}. Questi
+non verranno affrontati per non allontanarsi troppo dallo scopo di questo lavoro tuttavia, per approfondire, si faccia riferimento al testo \textit{`Unity in Action'} di Joe 
+Hocking\cite{hocking2018}. \\
+Essendo l'applicazione del progetto sviluppata per HoloLens 2 (di casa Microsoft), MRTK è stata quasi una scelta obbligata per poter creare ologrammi in modo nativo per questo dispositivo.\\
+Si noti che il Mixed Reality Toolkit è stato prodotto in supporto del motore di gioco Unity ma è stato recentemente portato anche per Unreal Engine 4, BabylonJS e OpenXR.
 
 \section{BabylonJS}\label{sec:BabylonJS}
 BabylonJS è un framework open source per la creazione di applicazioni web 3D e XR\cite{BabylonJS}.\\
-La scelta di BabylonJS, come tutte le principali feature di questo framework, sono un argomento molto ampio di questa tesi, motivo per il quale si analizzeranno una alla volta di seguito.
+Dato che BabylonJS ha un peso rilevante in questa tesi, si è deciso di affrontare la sua trattazione in modo più approfondito. Si inizia quindi con una breve introduzione, per poi
+passare alle motivazioni che hanno portato alla scelta di questo framework. Si termina con una descrizione delle sue principali caratteristiche.\\
 
 \subsection{Motivazioni e principali concorrenti}\label{subsec:BabylonJS_motivazioni}
 La scelta di BabylonJS è stata dettata da una serie di motivazioni. In primo luogo, come già accennato, questo framework integra (anche se solo in parte) il Mixed Reality
 Toolkit, dando accesso a molti componenti comuni a questo framework come \textit{Holographic Button}, \textit{Near Menu}, \textit{Hand Menu}, \textit{Holographic Slate} e altri 
 ancora, incorporando anche molte funzionalità come il \textit{follow behaviour}, l'\textit{eye tracking} e l'\textit{hand tracking}.\\
-In secondo luogo, BabylonJS supporta compleatamente WebXR, facendo da intermediario tra le API fornite da WebXR e il programmatore. Questo permette di creare applicazioni web
-che possono essere eseguite su qualsiasi dispositivo XR, tramite l'utilizzo di interfacce semplici e intuitive.\\
-In ultima istanza BabylonJS è stato scelto per la vasta gamma di funzionalità native che offre, insieme alla valida e completa documentazione relativa alle funzionalità. BabylonJS
-può essere definito a tutti gli effetti un motore di gioco, in quanto fornisce un game loop, la gestione delle scene, delle luci, delle ombre, dei materiali e 
+In secondo luogo, BabylonJS supporta compleatamente WebXR, facendo da intermediario tra le API fornite da WebXR e il programmatore. Ne consegue che le applicazioni web così
+create siano più semplici da programmare, tramite l'utilizzo di interfacce chiare e intuitive.\\
+In ultima istanza, BabylonJS è stato scelto per la vasta gamma di funzionalità native che offre, insieme alla valida e completa documentazione relativa alle funzionalità. BabylonJS
+può essere definito un motore di gioco a tutti gli effetti, inquanto fornisce un \textit{game loop}\footnote{
+    Game loop: è un ciclo continuo di istruzioni che gestisce la logica di gioco, l'aggiornamento degli elementi visivi e la gestione degli input dell'utente all'interno 
+    dell'applicazione. Il game loop è responsabile di mantenere il gioco in esecuzione, garantendo che gli eventi nel gioco si  susseguano in modo fluido e reattivo.
+}, la gestione delle scene, delle luci, delle ombre, dei materiali e 
 delle animazioni.
 \newline \newline
 I principali concorrenti di BabylonJS sono due: A-Frame e Unity. A-Frame si appoggia su ThreeJS che è un framework per la creazione di applicazioni web 3D. Per capire il motivo per
-cui si è preferito scegliere BabylonJS bisogna prima sottolineare che ogni framework utilizzato nel videogioco è in JavaScript, questo permette di creare un ecosistema di librerie
-e framework che possono essere utilizzati in modo omogeneo. ThreeJS è un framework scritto in JavaScript, ma A-Frame è scritto in HTML, questo crea un problema di omogeneità
+cui si è preferito scegliere BabylonJS bisogna prima sottolineare che ogni framework utilizzato nel videogioco si voleva fosse in JavaScript. Questo permette di creare un ecosistema
+di librerie e framework che possono essere utilizzati in modo omogeneo. ThreeJS è un framework scritto in JavaScript, ma A-Frame è scritto in HTML creando un problema di omogeneità
 e di gestione delle dipendenze che, seppur gestibile, non è ottimale. A questo bisogna anche aggiungere che BabylonJS è un framework più completo e più performante di A-Frame che,
 tra le altre cose, non supporta MRTK.\\
-Unity è forse il \textit{game engine} più famoso e utilizzato al giorno d'oggi, questo permette di creare applicazioni 2D e 3D per qualsiasi piattaforma. È stato valutato come
-alternativa a BabylonJS per la creazione dell'applicazione web, ma in conclusione si è deciso di scartarlo per due motivi. In primo luogo, Unity, essendo scritto in C\#, avrebbe
-comportato non poche difficoltà nell'integrazione con il resto della codebase. In aggiunta a questo, Unity non supporta nativamente WebXR, seppur esistano \textit{plug-in} che permettono
-di utilizzare WebXR, questi sono comunque meno performanti e meno stabili rispetto a BabylonJS.\\
+Unity è forse il \textit{game engine}\footnote{
+    Game engine: framework software progettato per la creazione e lo sviluppo di videogiochi. La caratteristica che lo distingue da un normale framework è la presenza di un
+    \textit{game loop} e di un \textit{rendering engine}.
+} più famoso e utilizzato al giorno d'oggi. Come già detto, permette di creare applicazioni 2D e 3D per qualsiasi piattaforma. È stato valutato come
+alternativa a BabylonJS per la creazione dell'applicazione web ma, in conclusione, si è deciso di scartarlo per due motivi. In primo luogo, Unity, essendo scritto in C\#, avrebbe
+comportato non poche difficoltà nell'integrazione con il resto della codebase. In aggiunta a questo, Unity non supporta nativamente WebXR e, seppur esistano \textit{plug-in} che permettono
+di utilizzarlo, questi sono comunque meno performanti e meno stabili rispetto a BabylonJS.\\
 
 \subsection{Caratteristiche principali}\label{subsec:BabylonJS_caratteristiche}
-Le caratteristiche principali che BabylonJS offre, in relazione anche al loro impiego nell'elaborato, sono:
+Le funzionalità principali che BabylonJS offre, in relazione anche al loro impiego nell'elaborato, sono:
 \begin{itemize}
     \item \textit{WebXR}: come già accennato, BabylonJS supporta nativamente WebXR, permettendo di creare applicazioni web in Extended Reality molto velocemente. Gli strumenti principali
     a supporto di WebXR sono l'\textit{XR experience helper}, che permette di gestire la sessione XR, e il \textit{WebXR default experience}, che permette di creare un'esperienza
-    XR di base abilitando e disabilitando feature specifiche.
-    \item \textit{MRTK}: BabylonJS supporta MRTK, permettendo di utilizzare molti componenti di questo framework. Come già dichiarato, i più importanti sono
-    bottoni, menù e pannelli. Insieme a questi componenti vengono fornite tutta una serie di funzionalità come il \textit{follow behaviour}, ovvero la capacità di un oggetto di 
+    XR di base abilitando e disabilitando \textit{feature} specifiche.
+    \item \textit{MRTK}: BabylonJS supporta MRTK, permettendo di utilizzare molti componenti di questo framework. Come già dichiarato alla sezione~\ref{sec:MRTK}, i più importanti 
+    sono bottoni, menù e pannelli. Insieme a questi componenti vengono fornite tutta una serie di funzionalità come il \textit{follow behaviour}, ovvero la capacità di un oggetto di 
     seguire l'orientamento della telecamera, rimanendo sempre visibile per l'utente, l'\textit{hand tracking}, ovvero la capacità di riconoscere le mani dell'utente e di 
     carpire le sue interazioni, e l'\textit{hand constraint behaviour}, ovvero la capacità di un oggetto di seguire il movimento della mano dell'utente, affinchè l'utente possa
     usufruire dell'oggetto ogni qual volta rivolga il suo sguardo sulle proprie mani.
@@ -99,44 +109,49 @@ Le caratteristiche principali che BabylonJS offre, in relazione anche al loro im
     la presenza di un motore fisico, la gestione di luci, ombre, materiali, \textit{mesh}\footnote{Mesh: è un insieme di vertici, spigoli e poligoni che formano un modello tridimensionale.}
     e animazioni, la gestione di eventi e la gestione di input.
     \begin{itemize}
-        \item L'\textbf{engine} deve essere unico per tutta l'applicazione, fornisce utility di base come gli FPS, la dimensione della finestra e la possibilità di creare un ciclo di rendering.
-        \item Le \textbf{scene} sono l'elemento principale di BabylonJS, ogni scena è composta da una serie di oggetti come, ad esempio, \textit{mesh}, luci, telecamere e materiali. Ogni scena
-        può essere vista come un livello di un videogioco, in quanto può essere caricata e scaricata in qualsiasi momento.
+        \item L'\textbf{engine} deve essere unico per tutta l'applicazione. Fornisce funzioni di base come gli FPS (Frame Per Second, quanti frame vengono visualizzati in un secondo,
+        di solito 60), la dimensione della finestra e la possibilità di creare un \textit{frame loop}.
+        \item Le \textbf{scene} sono l'elemento principale di BabylonJS. Ogni scena è composta da una serie di oggetti come, ad esempio, \textit{mesh}, luci, telecamere e materiali. Ogni scena
+        può essere vista come un livello di un videogioco, inquanto può essere caricata e scaricata in qualsiasi momento.
         \item Le \textbf{telecamere} sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
         la telecamera sferica e la telecamera cilindrica.
         \item Il \textbf{motore fisico} è un componente che permette di gestire la fisica all'interno della scena, permettendo di gestire la gravità, le collisioni e le forze.
-        \item Le \textbf{luci} sono un componente che permette di illuminare la scena, BabylonJS supporta diversi tipi di luci come la luce direzionale, la luce puntiforme, la luce spot e la luce
-        emisferica.
-        \item Gli \textbf{eventi} rappresentano un qualsiasi avvenimento all'interno della scena, esiste una rete di \textit{subject-observer} creata ad hoc per osservare e gestire ogni tipo
-        di evento che possa verificarsi nella scena.
+        \item Le \textbf{luci} sono un oggetto in grado di illuminare la scena, BabylonJS supporta diversi tipi di luci come la luce direzionale, la luce puntiforme, la luce 
+        \textit{spot} e la luce emisferica.
+        \item Gli \textbf{eventi} corrispondono ad un qualsiasi avvenimento all'interno della scena. Esiste una rete di \textit{subject-observer}\footnote{
+            Subject-observer: con questo termine si fa riferimento al design pattern \textit{observer}. Questo pattern permette di definire una dipendenza uno a molti tra oggetti,
+            in modo tale che quando un oggetto cambia stato, tutti gli oggetti dipendenti da esso vengono notificati e aggiornati automaticamente.
+        } creata ad hoc per osservare e gestire ogni tipo di evento che possa verificarsi nella scena.
         \item Gli \textbf{input} rappresentano una qualsiasi interazione dell'utente con la scena, BabylonJS supporta diversi tipi di input e li gestisce con eventi specifici.
     \end{itemize}
 \end{itemize}
-Con questo termina la trattazione riguardante il front end, si passa quindi alla descrizione delle tecnologie utilizzate nel back end: NodeJS e Croquet.
+Con questo termina la trattazione riguardante il \textit{front end}. Si passa quindi alla descrizione delle tecnologie utilizzate nel \textit{back end}: NodeJS e Croquet.
 
 \section{NodeJS}\label{sec:NodeJS}
-NodeJS è un runtime JavaScript open source che permette di eseguire codice JavaScript al di fuori di un browser\cite{NodeJS}. Un runtime JavaScript è un ambiente di esecuzione
-in cui il codice JavaScript viene eseguito, in questo caso, NodeJS permette di eseguire codice JavaScript su un server.\\
-NodeJS è stato sviluppato per essere utilizzato con il motore JavaScript V8 di Google, che è anche il motore JavaScript utilizzato da Google Chrome. Questo permette di utilizzare
-le stesse funzionalità JavaScript sia lato client che lato server, creando un ambiente di sviluppo omogeneo e omnicomprensivo di tutte le funzionalità. Le feature più importanti
-di NodeJS sono due, la gestione degli eventi asincrona\footnote{Asincrono: in informatica asincrono e sincrono assumono un'accezione leggermente diversa da quella 
-naturale della parola. In questo contesto si definisce sincrona un'operazione che viene eseguita all'istante in cui viene chiamata e asincrona un'operazione che viene eseguita
-più avanti nel tempo.} e il \textit{Node Package Manager} o NPM.
+NodeJS è un \textit{runtime JavaScript} open source che permette di eseguire codice JavaScript al di fuori di un browser\cite{NodeJS}. Un \textit{runtime JavaScript} è un ambiente
+di esecuzione in cui il codice JavaScript viene processato. In questo caso, NodeJS permette di eseguire codice JavaScript su un server.\\
+NodeJS è stato sviluppato per essere utilizzato con il motore JavaScript V8 di Google, che è anche il motore JavaScript utilizzato dal celebre browser Google Chrome. NodeJS permette 
+di utilizzare le stesse \textit{feature} JavaScript sia lato client che lato server, creando un ambiente di sviluppo omogeneo e omnicomprensivo di tutte le funzionalità. Le 
+\textit{feature} più importanti di NodeJS sono due, la gestione degli eventi asincrona\footnote{Asincrono: in informatica asincrono e sincrono assumono un'accezione leggermente 
+diversa da quella naturale della parola. In questo contesto si definisce sincrona un'operazione che viene eseguita all'istante in cui viene chiamata e asincrona un'operazione che 
+viene eseguita più avanti nel tempo.} e il \textit{Node Package Manager} o NPM.
 \begin{itemize}
-    \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per gestire un elevato numero di connessioni simultanee, per questo motivo è stato progettato con un
-    modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un thread per ognuna di queste.
-    Questa tecnica è anche utilizzata per la gestione degli I/O in modo tale da non bloccare l'unico thread disponibile.
-    \item \textit{NPM}: NPM è un gestore di pacchetti per NodeJS che permette di installare e gestire le dipendenze di un progetto. Questo permette di creare un ecosistema di
-    librerie e framework che possono essere utilizzati per lo sviluppo di applicazioni web. NPM è il più grande ecosistema di librerie open source al mondo, con oltre 1 milione
-    di pacchetti disponibili.
+    \item \textit{Gestione degli eventi asincrona}: NodeJS è stato sviluppato per essere in grado di controllare un elevato numero di connessioni simultanee, per questo motivo è 
+    stato progettato con un modello di gestione degli eventi asincrono. Questo permette di gestire le richieste in arrivo senza dover creare un \textit{thread}\footnote{
+        Thread: è una suddivisione di un processo in due o più filoni o sottoprocessi che vengono eseguiti concorrentemente da un sistema di elaborazione (CPU).
+    } per ognuna di queste. La tecnica appena descritta è anche utilizzata per la gestione degli input/output al fine di non bloccare l'unico \textit{thread} disponibile.
+    \item \textit{NPM}: è un gestore di pacchetti per NodeJS che permette di installare e gestire le dipendenze di un progetto. Questo da accesso ad un ecosistema di
+    librerie e framework che possono essere utilizzati per lo sviluppo di applicazioni web. NPM è, infatti, il più grande pacchetto di librerie open source al mondo, con oltre un 
+    milione di istanze disponibili.
 \end{itemize}
-L'\textit{event loop} di NodeJS è il cuore di questo runtime e fulcro della sua grande diffusione. Si riporta la sua descrizione dal sito ufficiale\cite{NodeJS}:
+L'\textit{event loop} di NodeJS è il cuore di questo \textit{runtime} e fulcro della sua grande diffusione. Si riporta la sua descrizione dal sito ufficiale\cite{NodeJS}:
 \begin{quote}
-    [...] In altri sistemi, c'è sempre una chiamata bloccante per avviare il ciclo degli eventi. Tipicamente, il comportamento è definito attraverso i callback all'inizio di uno script, 
-    e alla fine un server viene avviato attraverso una chiamata bloccante come \texttt{EventMachine::run()}. In Node.js, non c'è una tale chiamata per avviare il ciclo degli eventi. Node.js 
-    entra semplicemente nel ciclo degli eventi dopo l'esecuzione dello script di input. Node.js esce dal ciclo degli eventi quando non ci sono più callback da eseguire.
+    [...] In altri sistemi, c'è sempre una chiamata bloccante per avviare l'\textit{event loop}. Tipicamente, il comportamento è definito attraverso una funzione (o \textit{callback})
+    passata come paramentro all'inizio di un file, e alla fine un server viene avviato attraverso una chiamata bloccante come \texttt{EventMachine::run()}. In NodeJS, non c'è una tale 
+    chiamata per avviare il ciclo degli eventi. NodeJS entra semplicemente nel ciclo degli eventi dopo l'esecuzione dello script di input. NodeJS esce dall'\textit{event loop} quando 
+    non ci sono più \textit{callback} da eseguire.
 \end{quote}
-Nel progetto di questa tesi NodeJS è stato utilizzato per creare un server in un indirizzo IP locale su cui utilizzare il protocollo HTTPS affinchè le funzionalità di WebXR fossero
+Nel progetto di questa tesi, NodeJS è stato utilizzato per creare un server in un indirizzo IP locale su cui utilizzare il protocollo HTTPS affinchè le funzionalità di WebXR fossero
 accessibili. Il server avrà il compito anche di eseguire l'applicazione web creata con Croquet.
 
 
@@ -145,10 +160,11 @@ accessibili. Il server avrà il compito anche di eseguire l'applicazione web cre
     \textit{Croquet removes the complexity of traditional client/server systems and eliminates netcode, enabling synchronized simulations and gameplay that have simply not been 
     possible.}\cite{Croquet}
 \end{quote}
-La menzione che si è fatta sopra riporta la prima definizione che compare sul sito ufficiale di Croquet. Questo è un framework open source per la creazione di applicazioni 
-collaborative e multiplayer. Nato con l'idea di creare un ambiente di sviluppo per videogiochi, questo framework si è poi espanso a tutti i campi in cui la collaborazione e la condivisione
-di informazioni sono fondamentali. Nel sito ufficiale si possono trovare molti esempi di applicazioni create con questo framework, tra cui un contatore, una chat e vari esempi di mini-giochi, tutti
-perfettamente sincronizzati tra i vari utenti.\\
+Ciò che si è appena letto è la prima definizione che compare sul sito ufficiale di Croquet. Questo è un framework open source per la creazione di applicazioni 
+collaborative e multiplayer. Nato con l'idea di creare un ambiente di sviluppo per videogiochi, questo framework si è poi espanso a tutti i campi in cui la collaborazione e 
+la condivisione di informazioni sono fondamentali. Nel sito ufficiale si possono anche trovare molti esempi di applicazioni create con questo framework, tra cui un contatore, una 
+chat e vari esempi di mini-giochi, tutti perfettamente sincronizzati tra i vari utenti.\\
+\newline
 Croquet porta con sè una serie di garanzie che permettono di creare applicazioni multiplayer semplici e performanti. Ad ogni utente
 è garantito di essere \textit{bit-identical} con tutti gli altri connessi alla stessa sessione. Inoltre, come viene anche citato nella definizione, Croquet elimina il concetto
 di server e client, svincolando completamente lo sviluppatore dal produrre \textit{netcode}, ovvero il codice che si concentra principalmente sulla comunicazione tra gli utenti,
@@ -157,24 +173,25 @@ Nella prossima sezione si andrà ad esplorare l'architettura specifica di Croque
 con una breve analisi delle motivazioni che hanno portato alla scelta di questa infrastruttura.\\
 
 \subsection{Architettura}\label{subsec:Croquet_architettura}
-Come già anticipato Croquet si pone l'obiettivo di creare un'infrastruttura che permetta di creare applicazioni condivise senza la necessità di scrivere netcode. La veridicità di
-questa affermazione la si può subito notare dal fatto che Croquet è sviluppato interamente su JavaScript, noto linguaggio client-side, che non richiede l'installazione di alcun server. 
-Se questo non dovesse bastare, nel sito ufficiale si può leggere la struttura fondamentale di Croquet che si divide in tre componenti principali: la \textit{view}, il \textit{model}
-ed il \textit{reflector}.
+Come già anticipato Croquet si pone l'obiettivo di creare un'infrastruttura che permetta la costruzione di applicazioni condivise, senza la necessità di scrivere \textit{netcode}. La
+veridicità di questa affermazione la si può subito notare dal fatto che Croquet è sviluppato interamente su JavaScript, noto linguaggio client-side, che non richiede quindi 
+l'installazione di alcun server. Per realizzare un'architettura a supporto di applicazioni collaborative, Croquet si divide in tre componenti principali: 
+la \textit{view}, il \textit{model} e il \textit{reflector}.
 \begin{itemize}
     \item \textbf{View}: è il componente che si occupa di gestire l'interfaccia utente, ovvero gli input che l'utente da all'applicazione e la visualizzazione di ciò che
     l'applicazione produce. 
     \item \textbf{Model}: è quella parte dell'applicazione in cui i calcoli vengono eseguiti, non contiene informazioni riguardanti la visualizzazione ma dati e 
     funzionalità condivise.
-    \item \textbf{Reflector}: non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public}, \textit{message-passing service}
-    all'interno del cloud che permette di tenere aggiornate le applicazioni tra i vari utenti.
+    \item \textbf{Reflector}: non è un vero e proprio componente implementabile dallo sviluppatore, esso rappresenta uno \textit{stateless, public, message-passing service}
+    all'interno del \textit{cloud} che permette di tenere aggiornate le applicazioni tra i vari utenti. Ciò significa che il reflector non mantiene alcun dato in memoria (\textit{
+        stateless}), è accessibile da chiunque (\textit{public}) e permette di inviare messaggi tra gli utenti (\textit{message-passing service}) attraverso Internet.
 \end{itemize}
-Si precisa che un progetto Croquet può essere composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tanto meno di
+Si precisa che un progetto Croquet può essere composto da più view e più model, non vi è quindi la necessità di riportare tutta la logica in un singolo file `model', tantomeno di
 scrivere tutta la parte di grafica in un singolo file `view'.\\
 Per garantire una sincronizzazione \textit{bit-identical} tra tutti gli utenti, Croquet utilizza un \textit{time-based, optimistic, lockstep protocol}. Questo protocollo si basa
 sull'idea che tutti gli utenti siano sincronizzati in base al tempo che è trascorso dall'inizio della sessione. In questo modo, ogni utente può eseguire le proprie azioni in modo
-ottimistico, senza dover aspettare che tutti gli altri utenti abbiano eseguito le proprie. A tale scopo Croquet utilizza un clock esterno alle macchine degli utenti, che però
-permette di tenerle sincronizzate. Questo clock è poi condiviso tramite i reflector ai model che sono quindi temporizzati perfettamente.\\
+ottimistico, senza dover aspettare che tutti gli altri utenti abbiano eseguito le proprie. A tale scopo Croquet utilizza un orologio esterno alle macchine degli utenti, che
+permette di tenerle sincronizzate. Questo orologio è poi condiviso tramite i reflector ai model, che sono quindi temporizzati perfettamente.\\
 \newline
 Per eseguire un'azione all'interno della struttura vengono utilizzati degli eventi. Essi sono il modo in cui Croquet permette di comunicare tra i vari componenti, in particolare
 tra view e model. In base a chi invia e chi riceve si distinguono quattro tipi di eventi diversi:
@@ -186,68 +203,76 @@ tra view e model. In base a chi invia e chi riceve si distinguono quattro tipi d
     \item \textbf{view event}: eventi invaiti dalla view alla view. Questi eventi sono utilizzati per comunicare tra le varie view e, grazie ancora al fatto che eseguono lo stesso codice,
     ciò corrisponde ad una semplice chiamata a funzione (sincrona);
     \item \textbf{model event}: eventi inviati dal model al model. Questi eventi sono utilizzati per comunicare tra i vari model. Essendo tutti sincronizzati, anche in questo caso
-    riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo gestendolo completamente in locale.
+    riceveranno l'evento e lo eseguiranno esattamente allo stesso istante di tempo, gestendolo completamente in locale.
 \end{itemize}
 Una raffigurazione semplice ma efficace viene fornita nell'immagine~\ref{fig:CroquetArchi.png}.\\
 \newline
 \img{CroquetArchi.png}{Architettura di Croquet\cite{CroquetArchi}}
-Per comprendere completamente la struttura di Croquet bisogna ancora definire un ultimo concetto: lo \textit{snapshot}. Lo snapshot è una copia del model che viene salvata nel cloud.
-Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente comunica al model di eseguire uno snapshot: questo permette agli utenti di connettersi a delle sessioni che 
-sono già in corso d'opera. Quando un utente si connette ad una sessione, il reflector invia al model l'ultimo snapshot disponibile, il model viene quindi istanziato con le ultime
-informazioni salvate, successivamente la view viene istanziata aggiornando la UI con le informazioni presenti nel model.\\
-\newline
-Affinchè una sessione di Croquet inizi bisogna richiamare una funzione apposita: la \texttt{Croquet.Session.join}. Questa funzione avvia una sessione di Croquet, se ancora non esistente,
-oppure istanzia model e view aggiornandoli all'ultimo snapshot. Al lancio del comando viene generato un \textit{session ID} che identifica univocamente la sessione. L'ID viene 
-creato partendo dal nome dell'applicazione (passato come parametro) e dal codice di tutti i modelli registrati in quell'applicazione. Questo garantisce che solo chi sta eseguendo lo
-stesso codice potrà connettersi alla stessa sessione evitando qualsiasi problema di sincronizzazione in tal senso.
+Per comprendere completamente la struttura di Croquet bisogna ancora definire un ultimo concetto: lo \textit{snapshot}. Lo \textit{snapshot} è una copia del model che viene salvata 
+nel \textit{cloud}. Quando l'applicazione Croquet è in esecuzione, il reflector periodicamente comunica al model di eseguire uno \textit{snapshot}, per permettere agli utenti di 
+connettersi a delle sessioni che sono già in corso d'opera.\\
+Quando un utente si connette ad una sessione:
+\begin{enumerate}
+    \item il reflector invia al model l'ultimo \textit{snapshot} disponibile;
+    \item il model viene istanziato con le informazioni ricevute;
+    \item la view viene istanziata aggiornando la UI con le informazioni presenti nel model.
+\end{enumerate}
+Affinchè una sessione di Croquet inizi bisogna richiamare una funzione apposita: la \texttt{Croquet.Session.join}. Questa \textit{callback} avvia una sessione di Croquet, se ancora 
+non esistente, oppure istanzia model e view aggiornandoli all'ultimo \textit{snapshot}. Al lancio del comando viene generato un \textit{session ID} che identifica univocamente la 
+sessione. L'ID viene creato partendo dal nome dell'applicazione (passato come parametro) e dal codice di tutti i modelli registrati in quell'applicazione. Questo garantisce che solo
+chi sta eseguendo lo stesso codice potrà connettersi alla stessa sessione, evitando qualsiasi problema di sincronizzazione in tal senso.
 \subsection{Funzionalità}\label{subsec:Croquet_funzionalita}
 In questa sezione si parlerà di come l'architettura sopra descritta viene effettivamente implementata in Croquet. Si divide la sezione in due parti, una dedicata al model ed una alla
-view. Si noti che il reflector non è un componente implementabile dallo sviluppatore, motivo per il quale non verrà trattato in questa sezione.\\
+view. Si noti che il reflector non è un componente implementabile dallo sviluppatore, motivo per il quale non verrà trattato.\\
 \subsubsection{Model}\label{subsubsec:Croquet_model}
 Il model è il componente che si occupa di gestire i dati e le funzionalità condivise tra tutti gli utenti. In Croquet esso è una classe standard di JavaScript con la differenza
-che al posto del costruttore bisogna definire un metodo chiamato \texttt{init} che viene eseguito all'istanziamento del model, a sua volta attuata chiamato \texttt{ModelName.create}
-e non con la classica \texttt{new}. Questo è dovuto al fatto che il model viene istanziato in modo diverso in base alla sessione: se la sessione è appena stata creata la \texttt{create}
-corrisponde ad una semplice \texttt{new} ma, se fosse già in esecuzione, Croquet usa lo snapshot per portare quel model all'ultimo aggiornamento.\\
+che, al posto del costruttore, bisogna definire un metodo chiamato \texttt{init} che viene eseguito all'istanziamento del model. La creazione è a sua volta attuata chiamando
+\texttt{ModelName.create} e non con la classica \texttt{new}. Questo è dovuto al fatto che il model viene istanziato in modo diverso in base alla sessione: se la sessione è appena
+stata creata, la \texttt{create} corrisponde ad una semplice \texttt{new} ma, se fosse già in esecuzione, Croquet usa lo \textit{snapshot} per portare quel model all'ultimo 
+aggiornamento.\\
 \newline
-Dato che il model è temporizzato secondo un clock definito esternamente, Croquet fornisce in questa classe anche delle variabili e dei metodi per conoscere il tempo trascorso e 
+Dato che il model è temporizzato secondo un orologio definito esternamente, Croquet fornisce in questa classe anche delle variabili e dei metodi per conoscere il tempo trascorso e 
 sfruttarlo. In particolare, il model dispone di una variabile \texttt{now} che rappresenta il tempo trascorso dall'inizio della sessione. Inoltre viene fornito un metodo \texttt{future}
 che permette di eseguire una funzione ad un certo istante di tempo nel futuro.\\
 \newline
 Come già anticipato, il model e la view comunicano tramite eventi. Per inviare e ricevere questi eventi vengono utilizzate due funzioni \texttt{publish} e \texttt{subscribe}. La prima
-viene impiegata per l'invio di un evento, la seconda per la ricezione. Entrambe queste funzioni prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
-evento ed una stringa che identifica l'evento stesso. Il terzo parametro, per la \texttt{subscribe}, corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre
-equivale ai parametri da passare al destinatario (volendo anche nulla) per la \texttt{publish}.
-Croquet suggerisce delle \textit{best practice} per la gestione degli eventi, in particolare, consiglia di non creare mai una concatenazione di eventi in cui se ne susseguono uno
+viene impiegata per l'invio di un evento, la seconda per la ricezione. Entrambe prendono come parametri uno \textit{scope}, ovvero una stringa che identifica il tipo di
+evento, ed una stringa che identifica l'evento stesso. Il terzo parametro, per la \texttt{subscribe}, corrisponde al metodo da eseguire una volta che viene intercettato l'evento, mentre
+equivale ai parametri da passare al destinatario (volendo anche nulla) per la \texttt{publish}.\\
+Croquet suggerisce delle \textit{best practice} per la gestione degli eventi. In particolare, consiglia di non creare mai una concatenazione di eventi in cui se ne susseguono uno
 da view a model e uno da model a view. Questo perchè, come verrà specificato nella sezione~\ref{subsubsec:Croquet_view}, alla view viene passato direttamente il riferimento
-al model rendendo inutile e pesante la risposta del model via evento.\\
+al model, rendendo inutile e pesante la risposta del model via evento.\\
 \newline
 La funzione speculare alla \texttt{create} è la \texttt{destroy}. Essa deve essere chiamata ogni qual volta si voglia terminare l'esistenza del model in tutti gli utenti connessi alla
-sessione. Vengono rimosse tutte le chiamate a \texttt{future} in attesa e tutte le \texttt{subscribe} ad eventi che sono state fatte.\\
+sessione. Vengono quindi rimosse tutte le chiamate a \texttt{future} in attesa e tutte le \texttt{subscribe} ad eventi che sono state fatte.\\
 
 \subsubsection{View}\label{subsubsec:Croquet_view}
 La view è la parte del software responsabile di intercettare l'input utente e di mostrargli l'output generato dal model. I vari utenti possono avere view 
-diverse, mostrando certe informazioni e nascondendone altre, in modo da avere esperienze diversificate. In Croquet essa è una classe standard di JavaScript.
-Al costruttore verrà passata una variabile \texttt{model} che rappresenta il riferimento al model. Croquet mette una grande enfasi su come gestire questa variabile, nella fattispecie
-sottolinea come questa debba essere usata solo in lettura e mai in scrittura. Questa regola è dettata dal fatto che se si scrivesse direttamente sul model lo si farebbe solo 
+diverse, mostrando certe informazioni e nascondendone altre, in modo da avere esperienze diversificate. In Croquet, essa è una classe standard di JavaScript.
+Al costruttore viene passata una variabile \texttt{model} che rappresenta il riferimento al model. Croquet mette una grande enfasi su come gestire questa variabile, 
+sottolineando come questa debba essere usata solo in lettura e mai in scrittura. Questa regola è dettata dal fatto che, se si scrivesse direttamente sul model, lo si farebbe solo 
 localmente, rompendo la sincronizzazione. Tramite la \texttt{publish} si innesca invece tutto il meccanismo di condivisione via reflector spiegato prima, mantenendo i model
 sincronizzati.\\
 \newline
 La view dispone anch'essa dei metodi \texttt{publish}, \texttt{subscribe} e \texttt{future}. Non ci si soffermerà sulla descrizione dei primi due inquanto già definiti
 nella sezione precedente. Per quanto possa sembrare simile alla corrispettiva model, la \texttt{future} all'interno della view corrisponde semplicemente alla chiamata della 
-funzione nativa JavaScript \texttt{setTimeout}, che esegue il codice passato alla fine del tempo specificato. Questa somiglianza è stata implementata al solo scopo di mantenere uno stile
-coerente tra le due componenti anche se non vi è alcuna relazione.\\
+funzione nativa JavaScript \texttt{setTimeout}, che esegue il codice passato alla fine del tempo specificato (entrambi suoi parametri). Questa somiglianza è stata implementata al 
+solo scopo di mantenere uno stile coerente tra le due componenti anche se non vi è alcuna relazione.\\
 \newline
-In questa classe viene fornito un metodo chiamato \texttt{update} per permettere di fare polling degli input, rendering e aggiornamenti della UI. Questa procedura viene chiamata
-automaticamente in ogni frame passandogli come parametro il tempo trascorso dalla creazione della view. Questa funzione viene chiamata unicamente nella prima
-view istanziata (nominata da Croquet \textit{root view}), di tutte le view figlie bisognerà richiamare esplicitamente il metodo affinchè l'effetto si perpetui.\\
+In questa classe viene fornito un metodo chiamato \texttt{update} per permettere di fare \textit{polling}\footnote{
+    Polling: è una tecnica utilizzata in informatica per raccogliere dati o informazioni da dispositivi a intervalli regolari.
+
+} degli input, rendering e aggiornamenti della UI. Questa procedura viene chiamata
+automaticamente ad ogni frame, passandogli come parametro il tempo trascorso dalla creazione della view. Questa funzione viene chiamata unicamente nella prima
+view istanziata (nominata da Croquet \textit{root view}). Per tutte le altre view bisognerà richiamare esplicitamente il metodo affinchè l'effetto si perpetui.\\
 \newline
-In ultima istanza si vuole parlare della funzione \texttt{detach} che consiste nella distruzione della view. Nella documentazione viene specificato che questa funzione deve essere
-sovrascritta dalla \textit{root view} affichè richiami \texttt{detach} in tutte le view ausialirie per poi usare la \texttt{super.detach}. La principale funzione di questo metodo
+In ultima istanza, si vuole parlare della funzione \texttt{detach} che consiste nella distruzione della view. Nella documentazione viene specificato che questa funzione deve essere
+sovrascritta dalla \textit{root view} affichè richiami \texttt{detach} in tutte le view ausialirie, per poi usare la \texttt{super.detach}. La principale funzione di questo metodo
 è di rimuovere tutti gli eventi che sono stati sottoscritti tramite \texttt{subscribe}, lasciando al programmatore il compito di eliminare tutti gli elementi visivi che sono stati
 creati.\\
 \subsection{Motivazioni}\label{subsec:Croquet_motivazioni}
 Le motivazioni che hanno spinto a scegliere Croquet come framework per il supporto multiplayer sono molteplici. In primo luogo, Croquet è stato sviluppato per essere interamente
 in JavaScript, questo permette di creare un ecosistema di librerie e framework che possono essere utilizzati in modo omogeneo. In aggiunta, le garanzie che Croquet fornisce sono
-molto ricercate in questo settore, in particolare la sincronizzazione \textit{bit-identical} e la gestione degli eventi. Si vuole ricordare ancora una volta che
-questo framework svincola dal netcode, altra feature importante che ha portato a questa scelta. Per ultimo l'utilizzo dell'architettura MVC (Model-View-Controller) e 
-dell'\textit{Observer pattern}, seppur in maniera rivisitata, rende la curva di apprendimento più bassa portando ad una familiarizzazione col framework più rapida.\\
+molto ricercate in questo settore, in particolare la sincronizzazione \textit{bit-identical} e la gestione degli eventi. Si vuole ricordare, ancora una volta, che
+questo framework svincola dal \textit{netcode}, altra \textit{feature} importante che ha portato a questa scelta. Per ultimo l'utilizzo dell'architettura MVC (Model-View-Controller) 
+e dell'\textit{Observer pattern}, seppur in maniera rivisitata, rende la curva di apprendimento più bassa portando ad una familiarizzazione col framework più rapida.\\

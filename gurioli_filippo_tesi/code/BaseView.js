@@ -17,11 +17,10 @@ class BaseView extends Croquet.View {
     }
     _gameOver(data) {
         const timeToWait = this._endScene(data);
-        this._log("game-over, ttw: " + timeToWait);
         if (timeToWait !== undefined)  this.future(timeToWait).detach();
         else this.detach();
     }
-    detach(skipForwarding = false) {
+    detach() {
         super.detach();
         this.children.forEach(c => c.detach());
         this.sceneObjects.forEach(o => o.dispose());

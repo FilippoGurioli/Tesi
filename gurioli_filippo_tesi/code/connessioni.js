@@ -20,7 +20,6 @@ class GameModel extends BaseModel {
             this.playersInfo.p2.viewId = data.view;
             this.playersInfo.p2.isConnected = true;
             role = "Player 2";
-            this.publish(this.playersInfo.p1.viewId, "opponent-recover");
         } else if (this.playersInfo.p1.viewId === data.view) {
             this.playersInfo.p1.isConnected = true;
             role = "Player 1";

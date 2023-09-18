@@ -5,8 +5,9 @@ Prima di iniziare con la descrizione, si vuole esporre dei punti chiave comuni l
     Single responsibility principle: principio di progettazione software che afferma che ogni modulo o classe deve essere responsabile di una singola funzionalità.
 }, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da 
 tenere separati i compiti e mantenere una gerarchia ordinata e intuitiva.\\
-Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione in quanto ritenuta più flessibile e meno vincolante. La struttura si può
-raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio.\\
+Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione inquanto ritenuta più flessibile e meno vincolante. La struttura si può
+raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio. Si tenga presente che in questa
+valutazione non è stato preso in considerazione l'estensione di tutte le classi da \texttt{Croquet.Model} e \texttt{Croquet.View} inquanto obbligatorio per il funzionamento di Croquet.\\
 In ultima istanza si sono create delle classi JavaScript ausiliarie all'architettura di Croquet che fungono da supporto per la gestione dei dati. Queste classi sono state create per 
 racchiudere al loro interno le caratteristiche più importanti dei concetti da modellare e quindi facilitare la manutenzione e migliorare la leggibilità del codice.\\
 
@@ -17,9 +18,9 @@ Per realizzare un ologramma condiviso basterà creare nella view un oggetto di s
 dovranno istanziare l'ologramma condiviso lo faranno tutti allo stesso modo. Per il medesimo motivo, quando il model lancia un evento per comunicare l'aggiornamento dello stato, tutte le 
 view lo riceveranno aggiornando l'ologramma alla stessa maniera.\\
 Per creare un ologramma personale si è ricorsi all'istanziamento degli oggetti in modo condizionale. Questo significa che, in base a certe condizioni, vengono creati oggetti di scena 
-diversi. Nel caso particolare del videogioco, in base al ruolo che ricopre l'utente si istanzieranno viste diverse. Ad esempio, se l'utente è un player ed è il suo turno verrà mostrato un
-\textit{near menu}, ovvero un menu capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario non verrà mostrato nulla. Si fornisce il 
-codice~\ref{lst:ologrammi.js} come esempio. 
+diversi. Nel caso particolare del videogioco, ad esempio, se l'utente è un player ed è il suo turno verrà mostrato un
+\textit{near menu}, ovvero un menù capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario, se non è il suo turno o se non è un
+player, non verrà mostrato nulla. Si fornisce il codice~\ref{lst:ologrammi.js} come esempio. 
 \code{ologrammi.js}{Esempio di istanziazione di ologrammi personali e condivisi.}
 
 \subsection{Interazioni del giocatore}
@@ -30,7 +31,7 @@ Per tutte le interazioni del giocatore lungo tutto il corso del progetto si è s
     \item il model riceve l'evento e aggiorna lo stato;
     \item in base a come è costruita la view:
     \begin{enumerate} 
-        \item se la view utilizza il metodo \texttt{\_update} per aggiornare la scena, il model a questo punto non fa nulla;
+        \item se la view utilizza il metodo \texttt{\_update} per aggiornare la scena, il model non fa nulla;
         \item altrimenti il model lancia un evento per comunicare l'aggiornamento dello stato alla view;
     \end{enumerate} 
     \item la view aggiorna la scena.
@@ -52,19 +53,25 @@ interazione.
 \subsection{Gestione delle connessioni}
 Nel progetto si è dato un peso rilevante a tutta la parte di gestione delle connessioni e disconnessioni degli utenti. Si sono create infrastrutture apposite che sapessero controllare
 e mantenere in uno stato coerente le connessioni di tutti i giocatori.\\
-Questo compito lo si è affidato alle classi \texttt{GameModel} e \texttt{GameView}, figlie dirette delle \textit{root class}, ovvero le prime classi create nel progetto.
+Questo compito lo si è affidato alle classi \texttt{GameModel} e \texttt{GameView}, figlie dirette delle \textit{root classes}, ovvero le prime classi create nel progetto.
 Queste classi hanno il compito di gestire le comunicazioni e di istanziare tutti i modelli e le viste del gioco. Si sono dovute gestire tutte le casistiche possibili, come la 
 connessione di un nuovo giocatore, la disconnessione temporanea di un giocatore, la riconnessione di un giocatore e la disconnessione definitiva di un giocatore. 
 Per dare una panoramica generale di come si è risolto il problema si lascia il codice~\ref{lst:connessioni.js} d'esempio. Nel listato è stata omessa la classe \texttt{GameView} per 
 brevità, preferendo una spiegazione discorsiva delle funzionalità.\\
-La classe \texttt{GameView} si occupa di istanziare la scena di gioco e di posizionare la telecamera dell'utente in base al ruolo che gli è stato assegnato.
-In aggiunta, alla ricezione dell'evento `opponent-left', interromperà il normale flusso di gioco, mostrando agli utenti rimasti una schermata d'attesa. Scatenando l'evento 
-`opponent-recover' invece, farà riprendere la scena da dove era stata interrotta. Infine, all'avvento del `game-over', la \texttt{GameView} distruggerà la scena e ricreerà la scena
-di base.\\
+La classe \texttt{GameView} attua tutte le sue logiche attraverso l'utilizzo di quattro eventi diversi.
+\begin{itemize}
+    \item Ascolta l'evento \textit{`join-response'}: lanciato dopo che il model ha calcolato quale ruolo rappresenti la view appena connessa nella sessione in corso. In base al ruolo
+    assegnato, la view istanzierà le view corrispondenti e posizionerà la telecamera dell'utente in modo da avere una visione ottimale della scena.
+    \item Ascolta l'evento \textit{`opponent-left'}: lanciato quando un giocatore si disconnette temporaneamente dalla sessione. La view interromperà il normale flusso di gioco, 
+    mostrando agli utenti rimasti una schermata d'attesa.
+    \item Ascolta l'evento \textit{`opponent-recover'}: lanciato quando un giocatore si riconnette alla sessione. La view farà riprendere la scena da dove era stata interrotta.
+    \item Ascolta l'evento \textit{`game-over'}: lanciato quando un giocatore si disconnette definitivamente dalla sessione. La view distruggerà la scena e ricreerà quella di base.
+\end{itemize}
 \code{connessioni.js}{Infrastruttura per la gestione delle connessioni.}
 Un altro aspetto importante che è stato gestito è la possibilità di riavviare la simulazione senza dover ricaricare la pagina. Se tutte le classi si autodistruggessero alla fine del
 gioco, l'utente si ritroverebbe con una schermata vuota e dovrebbe ricaricare la pagina per avviare una nuova sessione. Per aggirare il problema si è deciso di cambiare il 
-comportamento che hanno le \textit{root class} al termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero come mostrato nel codice~\ref{lst:root.js}.
+comportamento che hanno le \textit{root classes} al termine della partita, facendo sì che ricreino la scena (e anche i dati) da zero anzichè distruggersi, come mostrato nel 
+codice~\ref{lst:root.js}.
 \code{root.js}{Creazione e riavvio della simulazione.}
 
 \subsection{Estendibilità nelle parti critiche}
@@ -74,5 +81,5 @@ metterci mano. Trattandosi di carte collezionabili, ovvero un insieme di carte i
 farebbe per un normale mazzo di carte francesi. Si è quindi pensato di creare un file JSON che contenesse tutte le informazioni necessarie per creare una carta. Questo file è stato
 poi letto e mappato in una struttura dati JavaScript che potesse essere utilizzata dal resto del progetto. Si è scelto di utilizzare un file JSON per la sua semplicità di lettura e
 modifica. Anche un non programmatore potrebbe essere in grado, una volta letti i primi esempi presenti nel file, di aggiungere, modificare o rimuovere carte. Si lascia il
-file sorgente utilizzato anche nell'elaborato al listato~\ref{lst:card.json}.
+file sorgente al listato~\ref{lst:card.json}.
 \code{card.json}{Esempio di file JSON contenente le informazioni di carte \textit{Yu-Gi-Oh!}.}

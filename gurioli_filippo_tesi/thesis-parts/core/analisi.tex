@@ -4,19 +4,19 @@
     \newline
     Il software che si vuole sviluppare consiste in una rivisitazione del gioco \textit{Yu-Gi-Oh!} trasportato in realtà aumentata. \textit{Yu-Gi-Oh!} è un gioco di 
     carte collezionabili composto da due giocatori che si sfidano in un duello in cui devono cercare di ridurre i punti vita dell'avversario a zero. Per fare ciò, i duellanti sono dotati di un
-    mazzo di carte composto da mostri, magie e trappole. I mostri rappresentano delle truppe schierabili dalla parte del giocatore che possono attaccare l'avversario o difendere il
+    mazzo di carte composto da mostri, magie e trappole. I mostri rappresentano delle truppe schierabili dalla parte del giocatore, che possono attaccare l'avversario o difendere il
     giocatore stesso, mentre le magie e le trappole sono carte che possono influenzare lo svolgimento del gioco tramite i loro effetti. Il gioco è a turni e ogni turno è diviso in fasi. Le 
     fasi contraddistinguono le azioni che il giocatore può intraprendere durante quel periodo di tempo.\\
     \newline
     Esiste una serie animata basata su \textit{Yu-Gi-Oh!} ed è proprio da questa che nasce l'idea del progetto. Nella serie, quando il protagonista gioca una carta mostro, 
     viene proiettato un ologramma del mostro stesso, in modo che si materializzi sul campo di battaglia. L'ologramma è visibile a tutti i giocatori e può essere interagito da chiunque.\\
-    Venuti a conoscenza dell'esistenza di un HMD come HoloLens, si è pensato di realizzare uno \textit{strategy-game} in realtà aumentata e \textit{real-time} che permettesse di riprodurre 
+    Venuti a conoscenza dell'esistenza di un HMD come HoloLens, si è pensato di realizzare uno \textit{strategy-game} in realtà aumentata e \textit{turn-based} che permettesse di riprodurre 
     quanto più fedelmente l'esperienza riportata nella serie.\\
     \newline
     Il progetto consiste quindi nella realizzazione di un video game distribuito, ovvero un gioco che permetta a più utenti di interagire tra loro in un ambiente virtuale condiviso. 
     Si è posto sin da subito l'obiettivo di realizzare il gioco tramite una \textit{web app}, ovvero un'applicazione che possa essere eseguita da un browser. In questo modo non ci 
     sarebbero stati problemi di portabilità, rendendolo accessibile a chiunque. In aggiunta, lo sviluppo web è ormai dominante nel settore informatico e permette di raggiungere un pubblico
-    più vasto oltre che comunità più grandi e attive.\\
+    più vasto, oltre che comunità più attive.\\
     La tecnologia più utilizzata in ambito web per la realizzazione di applicazioni AR è WebXR. WebXR permette di creare realtà aumentate eseguibili su browser in cui ogni utente
     vive la stessa esperienza ma in maniera indipendente. Bisognava quindi ancora trovare uno strumento per sincronizzare i vari utenti in modo da condividere l'esperienza. A supporto 
     di ciò si è utilizzato Croquet, framework che sopperisce esattamente al requisito richiesto. Si noti che tutta la sezione riguardante il supporto all'esperienza distribuita è un tema
@@ -26,7 +26,7 @@
     \paragraph{Al momento dell'avvio} l'utente dovrà affrontare un duello contro un'altra persona a \textit{Yu-Gi-Oh!}. Per la decisione del regolamento da seguire si è optato per
     una versione semplificata del gioco. Il giocatore potrà pescare dal mazzo una carta per turno. Nella fase appropriata, il player potrà giocare carte mostro che saranno in grado di 
     attaccare l'avversario, riducendone i punti vita, e difendere il proprio controllore dagli attacchi nemici. Saranno presenti anche carte magia e trappola con gli effetti più disparati.
-    L'obiettivo del gioco consiste quindi nell'azzerare i punti vita dell'avversario, che comporterà anche la conclusione della simulazione.
+    L'obiettivo del gioco consiste nell'azzerare i punti vita dell'avversario, che comporterà anche la conclusione della simulazione.
 
     \subsection{Requisiti funzionali}\label{subsec:requisitiFunzionali}
         \begin{itemize}
@@ -45,7 +45,7 @@
 
     \subsection{Modello del dominio}
         Il videogioco \textit{Yu-Gi-Oh!} dovrà modellare i concetti di giocatore, carta, campo di gioco, turno, mazzo e mano. Ognuno di questi concetti rappresenta un tassello fondamentale
-        della struttura del video game. Il giocatore corrisponde all'utente che sta giocando, verrà fornito di un \textit{mazzo} di carte impilate e coperte e di una \textit{mano} di
+        della struttura del video game. Il giocatore corrisponde all'utente che sta giocando, fornito di un \textit{mazzo} di carte impilate e coperte e di una \textit{mano} di
         carte visibili che potrà giocare sul campo di gioco. Il campo di gioco è composto da due aree speculari, una per ogni giocatore, in cui verranno posizionate le carte giocate
         dai duellanti. Il turno rappresenta l'unità di tempo in cui un giocatore può eseguire delle azioni, come pescare una carta dal mazzo, giocare una carta dalla mano o attaccare
         con un mostro. Si noti che ognuna di queste azioni sarà eseguibile in una \textit{fase} precisa del turno, si potrà pescare una carta dal mazzo nella \textit{draw phase} ma
