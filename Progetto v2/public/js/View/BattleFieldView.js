@@ -78,10 +78,91 @@ class BattleFieldView extends BaseView {
                         mesh.position.x = Constants.P1_BF_SPELL1.x;
                         mesh.position.z = Constants.P1_BF_SPELL1.y;
                     }
+                    break;
                 case 1:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P1_BF_MONSTER2.x;
+                        mesh.position.z = Constants.P1_BF_MONSTER2.y;
+                    } else {
+                        mesh.position.x = Constants.P1_BF_SPELL2.x;
+                        mesh.position.z = Constants.P1_BF_SPELL2.y;
+                    }
+                    break;
                 case 2:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P1_BF_MONSTER3.x;
+                        mesh.position.z = Constants.P1_BF_MONSTER3.y;
+                    } else {
+                        mesh.position.x = Constants.P1_BF_SPELL3.x;
+                        mesh.position.z = Constants.P1_BF_SPELL3.y;
+                    }
+                    break;
                 case 3:
-                case 4:    
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P1_BF_MONSTER4.x;
+                        mesh.position.z = Constants.P1_BF_MONSTER4.y;
+                    } else {
+                        mesh.position.x = Constants.P1_BF_SPELL4.x;
+                        mesh.position.z = Constants.P1_BF_SPELL4.y;
+                    }
+                    break;
+                case 4:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P1_BF_MONSTER5.x;
+                        mesh.position.z = Constants.P1_BF_MONSTER5.y;
+                    } else {
+                        mesh.position.x = Constants.P1_BF_SPELL5.x;
+                        mesh.position.z = Constants.P1_BF_SPELL5.y;
+                    }
+                    break;
+            }
+        } else {
+            switch(data.position) {
+                case 0:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P2_BF_MONSTER1.x;
+                        mesh.position.z = Constants.P2_BF_MONSTER1.y;
+                    } else {
+                        mesh.position.x = Constants.P2_BF_SPELL1.x;
+                        mesh.position.z = Constants.P2_BF_SPELL1.y;
+                    }
+                    break;
+                case 1:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P2_BF_MONSTER2.x;
+                        mesh.position.z = Constants.P2_BF_MONSTER2.y;
+                    } else {
+                        mesh.position.x = Constants.P2_BF_SPELL2.x;
+                        mesh.position.z = Constants.P2_BF_SPELL2.y;
+                    }
+                    break;
+                case 2:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P2_BF_MONSTER3.x;
+                        mesh.position.z = Constants.P2_BF_MONSTER3.y;
+                    } else {
+                        mesh.position.x = Constants.P2_BF_SPELL3.x;
+                        mesh.position.z = Constants.P2_BF_SPELL3.y;
+                    }
+                    break;
+                case 3:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P2_BF_MONSTER4.x;
+                        mesh.position.z = Constants.P2_BF_MONSTER4.y;
+                    } else {
+                        mesh.position.x = Constants.P2_BF_SPELL4.x;
+                        mesh.position.z = Constants.P2_BF_SPELL4.y;
+                    }
+                    break;
+                case 4:
+                    if (card.type === "monster") {
+                        mesh.position.x = Constants.P2_BF_MONSTER5.x;
+                        mesh.position.z = Constants.P2_BF_MONSTER5.y;
+                    } else {
+                        mesh.position.x = Constants.P2_BF_SPELL5.x;
+                        mesh.position.z = Constants.P2_BF_SPELL5.y;
+                    }
+                    break;
             }
         }
         this.sceneObjects.push(mesh);
