@@ -65,107 +65,20 @@ class BattleFieldView extends BaseView {
         mesh.material = material;
         mesh.rotation.x = Math.PI / 2;
 
-        mesh.position.y = 0.04;
-        
+        mesh.position.y = 0.04;        
         if (data.player === 1) {
             mesh.rotation.y = Math.PI;
-            switch(data.position) {
-                case 0:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P1_BF_MONSTER1.x;
-                        mesh.position.z = Constants.P1_BF_MONSTER1.y;
-                    } else {
-                        mesh.position.x = Constants.P1_BF_SPELL1.x;
-                        mesh.position.z = Constants.P1_BF_SPELL1.y;
-                    }
-                    break;
-                case 1:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P1_BF_MONSTER2.x;
-                        mesh.position.z = Constants.P1_BF_MONSTER2.y;
-                    } else {
-                        mesh.position.x = Constants.P1_BF_SPELL2.x;
-                        mesh.position.z = Constants.P1_BF_SPELL2.y;
-                    }
-                    break;
-                case 2:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P1_BF_MONSTER3.x;
-                        mesh.position.z = Constants.P1_BF_MONSTER3.y;
-                    } else {
-                        mesh.position.x = Constants.P1_BF_SPELL3.x;
-                        mesh.position.z = Constants.P1_BF_SPELL3.y;
-                    }
-                    break;
-                case 3:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P1_BF_MONSTER4.x;
-                        mesh.position.z = Constants.P1_BF_MONSTER4.y;
-                    } else {
-                        mesh.position.x = Constants.P1_BF_SPELL4.x;
-                        mesh.position.z = Constants.P1_BF_SPELL4.y;
-                    }
-                    break;
-                case 4:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P1_BF_MONSTER5.x;
-                        mesh.position.z = Constants.P1_BF_MONSTER5.y;
-                    } else {
-                        mesh.position.x = Constants.P1_BF_SPELL5.x;
-                        mesh.position.z = Constants.P1_BF_SPELL5.y;
-                    }
-                    break;
-            }
-        } else {
-            switch(data.position) {
-                case 0:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P2_BF_MONSTER1.x;
-                        mesh.position.z = Constants.P2_BF_MONSTER1.y;
-                    } else {
-                        mesh.position.x = Constants.P2_BF_SPELL1.x;
-                        mesh.position.z = Constants.P2_BF_SPELL1.y;
-                    }
-                    break;
-                case 1:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P2_BF_MONSTER2.x;
-                        mesh.position.z = Constants.P2_BF_MONSTER2.y;
-                    } else {
-                        mesh.position.x = Constants.P2_BF_SPELL2.x;
-                        mesh.position.z = Constants.P2_BF_SPELL2.y;
-                    }
-                    break;
-                case 2:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P2_BF_MONSTER3.x;
-                        mesh.position.z = Constants.P2_BF_MONSTER3.y;
-                    } else {
-                        mesh.position.x = Constants.P2_BF_SPELL3.x;
-                        mesh.position.z = Constants.P2_BF_SPELL3.y;
-                    }
-                    break;
-                case 3:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P2_BF_MONSTER4.x;
-                        mesh.position.z = Constants.P2_BF_MONSTER4.y;
-                    } else {
-                        mesh.position.x = Constants.P2_BF_SPELL4.x;
-                        mesh.position.z = Constants.P2_BF_SPELL4.y;
-                    }
-                    break;
-                case 4:
-                    if (card.type === "monster") {
-                        mesh.position.x = Constants.P2_BF_MONSTER5.x;
-                        mesh.position.z = Constants.P2_BF_MONSTER5.y;
-                    } else {
-                        mesh.position.x = Constants.P2_BF_SPELL5.x;
-                        mesh.position.z = Constants.P2_BF_SPELL5.y;
-                    }
-                    break;
-            }
         }
-        this.sceneObjects.push(mesh);
+        const playerConstants = data.player === 1 ? Constants.P1 : Constants.P2;
+        const monsterConstantPrefix = card.type === "monster" ? "MONSTER" : "SPELL";
+
+        const constantX = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].x;
+        const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
+        mesh.position.x = constantX;
+        mesh.position.z = constantZ;
+
+
+
     }
 }
 
