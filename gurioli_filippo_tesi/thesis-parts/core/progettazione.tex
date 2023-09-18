@@ -5,9 +5,9 @@ Prima di iniziare con la descrizione, si vuole esporre dei punti chiave comuni l
     Single responsibility principle: principio di progettazione software che afferma che ogni modulo o classe deve essere responsabile di una singola funzionalità.
 }, si è strutturata una rete di \texttt{Croquet.Model} che distribuisse ogni funzionalità del dominio ad un modello diverso, in modo da 
 tenere separati i compiti e mantenere una gerarchia ordinata e intuitiva.\\
-Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione inquanto ritenuta più flessibile e meno vincolante. La struttura si può
+Altro tassello importante è la decisione di non utilizzare ereditarietà, preferendo la composizione in quanto ritenuta più flessibile e meno vincolante. La struttura si può
 raffigurare comunque in una relazione padre-figlio in cui però non è il figlio a estendere il padre, bensì il padre a creare e contenere il figlio. Si tenga presente che in questa
-valutazione non è stato preso in considerazione l'estensione di tutte le classi da \texttt{Croquet.Model} e \texttt{Croquet.View} inquanto obbligatorio per il funzionamento di Croquet.\\
+valutazione non è stato preso in considerazione l'estensione di tutte le classi da \texttt{Croquet.Model} e \texttt{Croquet.View} in quanto obbligatorio per il funzionamento di Croquet.\\
 In ultima istanza si sono create delle classi JavaScript ausiliarie all'architettura di Croquet che fungono da supporto per la gestione dei dati. Queste classi sono state create per 
 racchiudere al loro interno le caratteristiche più importanti dei concetti da modellare e quindi facilitare la manutenzione e migliorare la leggibilità del codice.\\
 

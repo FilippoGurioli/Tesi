@@ -38,7 +38,7 @@ che non vengono riconosciuti come relativi ad un hardware specifico. Il \textit{
 possono essere riconosciuti sia come input primari che ausiliari, ricorrendo però ad una gestione specifica e ottimizzata.
 \newline \newline
 In questo progetto le API fornite da WebXR non sono state usate direttamente. Nonostante ciò, è importante conoscere questa tecnologia per poter comprendere il funzionamento
-di BabylonJS, prodotto basato su WebXR che è stato utilizzato per la creazione del videogioco. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, inquanto
+di BabylonJS, prodotto basato su WebXR che è stato utilizzato per la creazione del videogioco. Si noti infine che WebXR è una tecnologia che garantisce un alto grado di sicurezza, in quanto
 l'accesso alle pagine che la utilizzano è permesso solo tramite il protocollo \textit{HTTPS}, questione che verrà approfondita nella sezione~\ref{sec:NodeJS}. 
 
 \section{MRTK}\label{sec:MRTK}
@@ -74,7 +74,7 @@ ancora, incorporando anche molte funzionalità come il \textit{follow behaviour}
 In secondo luogo, BabylonJS supporta compleatamente WebXR, facendo da intermediario tra le API fornite da WebXR e il programmatore. Ne consegue che le applicazioni web così
 create siano più semplici da programmare, tramite l'utilizzo di interfacce chiare e intuitive.\\
 In ultima istanza, BabylonJS è stato scelto per la vasta gamma di funzionalità native che offre, insieme alla valida e completa documentazione relativa alle funzionalità. BabylonJS
-può essere definito un motore di gioco a tutti gli effetti, inquanto fornisce un \textit{game loop}\footnote{
+può essere definito un motore di gioco a tutti gli effetti, in quanto fornisce un \textit{game loop}\footnote{
     Game loop: è un ciclo continuo di istruzioni che gestisce la logica di gioco, l'aggiornamento degli elementi visivi e la gestione degli input dell'utente all'interno 
     dell'applicazione. Il game loop è responsabile di mantenere il gioco in esecuzione, garantendo che gli eventi nel gioco si  susseguano in modo fluido e reattivo.
 }, la gestione delle scene, delle luci, delle ombre, dei materiali e 
@@ -112,7 +112,7 @@ Le funzionalità principali che BabylonJS offre, in relazione anche al loro impi
         \item L'\textbf{engine} deve essere unico per tutta l'applicazione. Fornisce funzioni di base come gli FPS (Frame Per Second, quanti frame vengono visualizzati in un secondo,
         di solito 60), la dimensione della finestra e la possibilità di creare un \textit{frame loop}.
         \item Le \textbf{scene} sono l'elemento principale di BabylonJS. Ogni scena è composta da una serie di oggetti come, ad esempio, \textit{mesh}, luci, telecamere e materiali. Ogni scena
-        può essere vista come un livello di un videogioco, inquanto può essere caricata e scaricata in qualsiasi momento.
+        può essere vista come un livello di un videogioco, in quanto può essere caricata e scaricata in qualsiasi momento.
         \item Le \textbf{telecamere} sono un componente che permette di visualizzare la scena, BabylonJS supporta diversi tipi di telecamere come la telecamera prospettica, la telecamera ortografica,
         la telecamera sferica e la telecamera cilindrica.
         \item Il \textbf{motore fisico} è un componente che permette di gestire la fisica all'interno della scena, permettendo di gestire la gravità, le collisioni e le forze.
@@ -254,7 +254,7 @@ sottolineando come questa debba essere usata solo in lettura e mai in scrittura.
 localmente, rompendo la sincronizzazione. Tramite la \texttt{publish} si innesca invece tutto il meccanismo di condivisione via reflector spiegato prima, mantenendo i model
 sincronizzati.\\
 \newline
-La view dispone anch'essa dei metodi \texttt{publish}, \texttt{subscribe} e \texttt{future}. Non ci si soffermerà sulla descrizione dei primi due inquanto già definiti
+La view dispone anch'essa dei metodi \texttt{publish}, \texttt{subscribe} e \texttt{future}. Non ci si soffermerà sulla descrizione dei primi due in quanto già definiti
 nella sezione precedente. Per quanto possa sembrare simile alla corrispettiva model, la \texttt{future} all'interno della view corrisponde semplicemente alla chiamata della 
 funzione nativa JavaScript \texttt{setTimeout}, che esegue il codice passato alla fine del tempo specificato (entrambi suoi parametri). Questa somiglianza è stata implementata al 
 solo scopo di mantenere uno stile coerente tra le due componenti anche se non vi è alcuna relazione.\\
