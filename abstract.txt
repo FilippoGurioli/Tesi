@@ -1,0 +1,18 @@
+Questo progetto di tesi è stato sviluppato con l'obiettivo di esplorare le tecnologie più all'avanguardia nel settore della Extended 
+Reality. Si è voluto produrre un software in grando di funzionare sul nuovo visore AR di casa Microsoft, HoloLens 2, sfruttando le potenzialità 
+offerte dalla macchina in concomitanza delle librerie più recenti del settore.
+Come caso di studio si è scelto un videogioco in modo tale da rendere più stimolante l'apprendimento e l'utilizzo delle tecnologie. 
+Volendosi però concentrare più sull'architettura del sistema piuttosto che sulle meccaniche di gioco, si è deciso un titolo semplice e 
+conosciuto: Yu-Gi-Oh!. Il video game in questione rientra in nella branca dei giochi di carte collezionabili, in cui due giocatori si 
+sfidano a colpi di carte, ognuna con le proprie caratteristiche e abilità. Questo tipo di giochi si identificano in letteratura come
+giochi di strategia turn-based, caso di studio ideale per questo progetto di tesi.
+La grande svolta che si è voluta dare a questo progetto era quella di connettere più giocatori alla stessa partita. Anche in questo caso
+si può notare come Yu-Gi-Oh! sia perfetto per questo scopo, prevedendo il minimo numero di giocatori per considerare il prodotto 
+multiplayer (due). Seppure il gioco sia turn-based, si tenga presente che si è voluto realizzare un sistema real-time, cioè che aggiornasse 
+i vari utenti di ogni cambiamento in tempo reale. Questo tema assume un valore centrale lungo tutto lo svolgimento della tesi, lungo la 
+quale si potranno leggere le scelte attuate per realizzare un sistema di questo tipo.
+Un'ultima caratteristica fondante di questo elaborato è la scelta di realizzarlo sul web. Dall'esplosione di Internet, il web è diventato 
+il mezzo di comunicazione più utilizzato al mondo. Questo ha portato a una continua evoluzione delle tecnologie che lo compongono, 
+rendendolo sempre più potente e versatile. In particolare, la nascita di WebXR ha reso possibile di realizzare applicazioni di Extended 
+Reality direttamente sul web, senza la necessità di installare alcun software. Questo ha portato a una sempre maggiore diffusione di 
+applicazioni di questo tipo, rendendo il web un ambiente ideale per lo sviluppo di questo progetto.
