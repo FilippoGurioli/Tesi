@@ -77,8 +77,7 @@ class BattleFieldView extends BaseView {
         mesh.position.x = constantX;
         mesh.position.z = constantZ;
 
-
-
+        this.sceneObjects.push(mesh);
     }
 }
 

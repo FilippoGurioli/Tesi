@@ -8,7 +8,7 @@ class PlayerModel extends BaseModel {
     _initialize(data) {
 
         this.lifePoints = LifePointsModel.create({parent: this});
-        this.hand = HandModel.create({parent: this, turnModel: data.turnModel, battleField: data.battleField/*, hand: [83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414]*/});
+        this.hand = HandModel.create({parent: this, turnModel: data.turnModel, battleField: data.battleField, hand: [46986414]/*, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414, 83968380, 46986414]*/});
         this.deck = DeckModel.create({parent: this, turnModel: data.turnModel, handModel: this.hand});
         this.role = data.role;
     }

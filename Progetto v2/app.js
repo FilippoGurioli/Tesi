@@ -32,8 +32,8 @@ const host = ipv4Addresses.filter(addr => addr.startsWith('192.168.'));
 			cert: fs.readFileSync("cert.pem"),
 		}
 		, app)
-		.listen(port, host[1], () => {
-			console.log('Server started at https://' + host[1] + ':' + port);
+		.listen(port, host[0], () => {
+			console.log('Server started at https://' + host[0] + ':' + port);
 		});
 //});
 
