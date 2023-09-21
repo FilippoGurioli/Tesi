@@ -8,16 +8,20 @@ class HandView extends BaseView {
         this.hand = [];
 
         this.model.hand.forEach(cardId => {
-            this.spawnCard(cardId);
+            this.spawnCard({id: cardId});
         });
     }
 
     _subscribeAll() {
         this.subscribe(this.model.id, "removeCard", this.removeCard);
+        this.subscribe(this.model.id, "addCard", this.spawnCard);
     }
 
-    spawnCard(cardId) {
-        const infos = Cards.find(card => card.id === cardId);
+    spawnCard(data) {
+        console.log(data.id);
+        const infos = Cards.find(card => card.id === data.id);
+        this._log("new card: ");
+        console.log(infos);
         const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
         const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);
         const f = new BABYLON.Vector4(0,0,0.5,1);
@@ -38,14 +42,14 @@ class HandView extends BaseView {
         behavior.dragDeltaRatio = 0.2;
         behavior.zDragFactor = 0.2;
         this.isFirstClick = true;
-        behavior.onDragStartObservable.add((event)=>{
+        behavior.onDragStartObservable.add(_=>{
             if (this.isFirstClick) {
                 this.isFirstClick = false;
                 setTimeout(() => {
                     this.isFirstClick = true;
                 }, 200);
             } else { //double click case
-                this.publish(this.model.id, "playCard", {id: cardId});
+                this.publish(this.model.id, "playCard", data);
             }
         });
         behavior.attach(card);
@@ -58,6 +62,7 @@ class HandView extends BaseView {
             if (card.material.diffuseTexture.url === Cards.find(c => c.id === data.id).image) {
                 this.hand.splice(this.hand.indexOf(card),1);
                 card.dispose();
+                this.delta -= 0.1;
                 break;
             }
         }

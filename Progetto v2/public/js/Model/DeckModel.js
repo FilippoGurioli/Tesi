@@ -16,7 +16,6 @@ class DeckModel extends BaseModel {
                 this.#deck.push(Cards[Math.floor(Math.random() * Cards.length)].id);
             }
         }
-        console.log(this.#deck);
         this.turnModel = data.turnModel;
         this.handModel = data.handModel;
         this.subscribe(this.turnModel.id, "nextPhase", () => this.hasDrew = false); //! TMP
@@ -27,7 +26,7 @@ class DeckModel extends BaseModel {
     }
 
     tryDrawCard() {
-        if (this.turnModel.phase === Phase.DrawPhase && this.turnModel.isTurnOf(this.parent.role) && !this.hasDrew) {
+        if (this.#deck.length != 0 && this.turnModel.phase === Phase.DrawPhase && this.turnModel.isTurnOf(this.parent.role) && !this.hasDrew) {
             this.hasDrew = true;
             this.handModel.addCard(this.#deck.shift());
             if (this.#deck.length === 0)    this.publish(this.id, "emptyDeck");
