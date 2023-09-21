@@ -1,7 +1,7 @@
-\chapter{Definizione dei concetti di base}\label{chap:Letteratura}
+\chapter{Extended Reality e Videogiochi}\label{chap:Letteratura}
 Di seguito si riporteranno informazioni circa lo stato dell'arte riguardante la Extended Reality. In particolare, si toccherà il tema dello sviluppo di videogiochi in ambito 
 Augmented Reality e Virtual Reality. Successivamente si analizzerà la letteratura riguardante il tema del multiplayer e come questo sia attualmente realizzato nei software comuni,
-sottolineando l'importanza del web al giorno d'oggi.
+sottolineando l'importanza del Web al giorno d'oggi.
 
 \section{La Extended Reality}\label{sec:XR}
     La Extended Reality è un campo molto vasto che comprende diverse tecnologie ed è in continua evoluzione. Talvolta non è possibile fornire una definizione univoca dei vari 
@@ -277,7 +277,7 @@ sottolineando l'importanza del web al giorno d'oggi.
                     i videogiocatori furono messi tutti in contatto, portando ad una consapevolezza reciproca prima inesistente. Quello che prima era un mercato di nicchia, in cui
                     ogni azienda sviluppava il proprio prodotto per la propria piattaforma, divenne un mercato globale, in cui le aziende si trovarono a competere tra loro. In questo
                     scenario rendere il videogioco \textit{cross-platform} risultava imperativo per una buona riuscita del prodotto stesso. 
-                \item \textbf{Web game} - Questa categoria, pur essendo la più recente, è quella che sta riscontrando maggior successo. I web games sono tutti quei videogiochi
+                \item \textbf{Web game} - Questa categoria, pur essendo la più recente, è quella che sta riscontrando maggior successo. I Web games sono tutti quei videogiochi
                     che non hanno bisogno dell'installazione di un software, perchè è possibile giocarci direttamente all'interno di un qualsiasi browser compatibile. Questi giochi 
                     sono stati sviluppati per essere giocati su qualsiasi dispositivo, da un computer ad uno smartphone, da una console ad un tablet. Questa caratteristica ha 
                     permesso a questi giochi di avere un bacino di utenza molto ampio, portando a un successo senza precedenti. Tra i giochi più famosi di questa categoria si contano: 
@@ -375,7 +375,7 @@ sottolineando l'importanza del web al giorno d'oggi.
             alla sessione e viene condiviso a tutti gli altri. In questo modo, tutti i giocatori genereranno gli stessi numeri casuali nello stesso ordine. Rimane
             imperativo che gli accessi fatti al generatore siano gli stessi per tutti gli utenti, lasciando quindi un margine di errore non ignorabile.\\
     
-    \section{Il progetto}
+    \section{Realizzare un gioco multigiocatore in XR: obbiettivi}
         In questo capitolo si sono affrontati i temi principali di Extended Reality, videogiochi e multigiocatore, se ne conosce la storia e le applicazioni. Queste informazioni
         sono la base da cui si è poi prodotto il progetto di tesi.\\
         \newline
@@ -385,18 +385,11 @@ sottolineando l'importanza del web al giorno d'oggi.
         \begin{enumerate}
             \item trovare una tecnologia capace di supportare la modellazione 3D e la realtà aumentata;
             \item trovare una tecnologia che supporti l'esperienza distribuita in \textit{real-time};
-            \item fondere insieme queste tecnologie in un contesto web.
+            \item fondere insieme queste tecnologie in un contesto Web.
         \end{enumerate}
         I primi due punti dell'elenco sono la diretta conseguenza di ciò che si è affermato prima. Il terzo punto, invece, specifica una caratteristica ancora non espressa: l'applicativo
-        deve essere una web app. Questo è dovuto al fatto che il web è attualmente la piattaforma più diffusa e accessibile, permettendo di avere accesso a risorse avanzate e, talvolta,
+        deve essere una Web app. Questo è dovuto al fatto che il Web è attualmente la piattaforma più diffusa e accessibile, permettendo di avere accesso a risorse avanzate e, talvolta,
         ancora sperimentali.\\
-        \newline
-        Affinchè si potesse dedicare più tempo allo sviluppo dell'architettura del sistema, si è scelto un videogioco che avesse delle meccaniche semplici e facilmente implementabili.
-        Per venire incontro alle esigenze del progetto senza sacrificare troppo la parte di gioco, si è scelto di realizzare un video game di carte collezionabili, in cui i 
-        giocatori possono sfidarsi in un duello di \textit{Yu-Gi-Oh!}. Questo tipo di gioco è stato scelto per vari motivi: pur essendo un'applicazione \textit{real-time}, \textit{Yu-Gi-Oh!}
-        è uno strategico \textit{turn-based}, ciò permette di avere una gestione più semplice e logica delle tempistiche; inoltre, il dominio del modello non comprende troppi concetti,
-        la maggior parte della logica risiede dentro le carte, permettendo uno sviluppo rapido per tutto il resto della struttura; infine, essendo un gioco di carte, non è necessario
-        comporre interfacce grafiche complesse, tutta l'ambientazione può consistere in un tavolo da gioco e le carte.\\
         \newline
         L'utilizzo di tecnologie sperimentali porta sempre con sè problemi e sfide per i programmatori. Alcuni di questi già noti e affrontati in passato, altri
         invece sono specifici di questa configurazione e sono quelli che questa tesi si pone di risolvere. Come primo elemento di questa lista bisogna citare la gestione degli 
