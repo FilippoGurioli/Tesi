@@ -1,6 +1,6 @@
 # Corquet.io-examples
 
-This repository contains some examples of applications made using BABYLON.js and Croquet.io
+This repository contains a web app named Yu-Gi-Oh! - XR made using BABYLON.js and Croquet.io
 
 In detail the examples realized have as objective to create a collaborative XR experience thanks to the use of WebXR.
 
