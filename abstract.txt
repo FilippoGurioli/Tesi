@@ -1,4 +1,4 @@
-Come si progetta un videogioco in realtà aumentata distribuito usando WebXR
+Progettazione di un videogioco multigiocatore in Extended Reality sul Web
 
 Questo progetto di tesi è stato sviluppato con l'obiettivo di esplorare le tecnologie più all'avanguardia nel settore della Extended Reality. Si è voluto produrre un software in grando di funzionare sul nuovo visore AR di casa Microsoft, HoloLens 2, sfruttando le potenzialità offerte dalla macchina in concomitanza delle librerie più recenti del settore.
 Come caso di studio si è scelto un videogioco, in modo tale da rendere più stimolante l'apprendimento e l'utilizzo delle tecnologie.
