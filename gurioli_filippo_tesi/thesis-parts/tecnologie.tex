@@ -20,10 +20,8 @@ e audio stereoscopico; infine, se a collegarsi è un qualsiasi pc fornito di mon
 già fornisce OpenGL.\\
 Grazie a questa infrastruttura creata da WebXR è possibile sviluppare applicazioni eseguibili su qualsiasi dispositivo XR, senza dover creare una versione specifica per ognuno di essi.\\
 \newline
-La tecnologia WebXR realizza, tra le altre cose, una gestione capillare della sessione, organizzandola ad eventi. Questi caratterizzano tutta la durata dell'applicazione, a partire da
-eventi \textit{general purpose}\footnote{General purpose: nel settore informatico si riferisce a dispositivi, programmi o sistemi progettati per essere utilizzati in una vasta gamma 
-di applicazioni o per svolgere una varietà di compiti diversi, anziché essere specificamente ottimizzati o progettati per una singola funzione o scopo particolare.} come gli 
-\texttt{XRSessionEvent} e gli \texttt{XRInputSourceEvent}, fino a eventi molto specifici come gli \texttt{XRReferenceSpaceEvent} e gli \texttt{XREyeEvent}.\\
+La tecnologia WebXR realizza, tra le altre cose, una gestione capillare della sessione, organizzandola ad eventi. Questi caratterizzano tutta la durata dell'applicazione, a partire da eventi \textit{general purpose}\footnote{General purpose: nel settore informatico si riferisce a dispositivi, programmi o sistemi progettati per essere utilizzati in una vasta gamma di applicazioni o per svolgere una varietà di compiti diversi, anziché essere specificamente ottimizzati o progettati per una singola funzione o scopo particolare.} come gli 
+\texttt{XRSessionEvent} e gli \texttt{XRInputSourceEvent}, fino a eventi molto specifici come gli \texttt{XRReferenceSpa}-\\-\texttt{ceEvent} e gli \texttt{XREyeEvent}.\\
 WebXR fornisce anche delle API per la creazione di un \textit{XR Frame Loop}, ovvero un ciclo di esecuzione che permette di gestire la scena virtuale. Ogni
 ciclo del game loop viene creato un \texttt{XRFrame} che contiene tutte le informazioni riguardanti tutti gli oggetti in un preciso istante della sessione (di solito quello corrente).
 Successivamente, viene calcolato come \textit{renderizzare}\footnote{Rendering: è il processo computazionale attraverso il quale viene creata un'immagine o un'animazione visuale a 
