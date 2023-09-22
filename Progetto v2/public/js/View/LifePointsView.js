@@ -9,6 +9,11 @@ class LifePointsView extends BaseView {
         handSlate.dimensions = new BABYLON.Vector2(10, 7);
         handSlate.position.y += 0.5;
         handSlate.position.z = 0;
+        if (this.sharedComponents.camera.position.z > 0) {
+                handSlate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+        } else {
+            handSlate.node.rotation = new BABYLON.Vector3(0, 0, 0);
+        }
         
         this.text = new BABYLON.GUI.TextBlock("text");
         this.text.height = 0.8;
