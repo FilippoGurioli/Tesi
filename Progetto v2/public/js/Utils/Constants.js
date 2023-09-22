@@ -1,7 +1,7 @@
 const Constants = {
-    P1_POS: new BABYLON.Vector3(0, 2, 3),
-    P2_POS: new BABYLON.Vector3(0, 2, -3),
-    SPEC_POS: new BABYLON.Vector3(3, 2, 0),
+    P1_POS: new BABYLON.Vector3(0, 1.8, 4),
+    P2_POS: new BABYLON.Vector3(0, 1.8, -4),
+    SPEC_POS: new BABYLON.Vector3(4, 1.8, 0),
     DISC_TIME_LIMIT: 10,
     P1: {
         MONSTER1: {x: 2, y: 1},

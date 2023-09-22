@@ -23,19 +23,26 @@ const app = express();
 const port = 3000;
 //const host = '192.168.40.100';//unibo
 //const host = ipv4Addresses[2];
-const host = ipv4Addresses.filter(addr => addr.startsWith('192.168.'));
+let ip = ipv4Addresses.filter(addr => addr === '192.168.40.100');
+if (ip.length === 0) {
+	ip = ipv4Addresses.filter(addr => addr.startsWith('192.168.'));
+}
+if (ip.length === 0) {
+	ip = [ipv4Addresses[0]];
+}
 
-//ipv4Addresses.forEach(h => {
-	https.createServer(
-		{
-			key: fs.readFileSync("private_key.pem"),
-			cert: fs.readFileSync("cert.pem"),
-		}
-		, app)
-		.listen(port, host[0], () => {
-			console.log('Server started at https://' + host[0] + ':' + port);
-		});
-//});
+const host = ip[0];
+
+https.createServer(
+	{
+		key: fs.readFileSync("private_key.pem"),
+		cert: fs.readFileSync("cert.pem"),
+	}
+	, app)
+	.listen(port, host, () => {
+		console.log('Server started at https://' + host + ':' + port);
+	});
+
 
 
 app.use(express.static(path.join(__dirname, '/public')));

@@ -18,10 +18,7 @@ class HandView extends BaseView {
     }
 
     spawnCard(data) {
-        console.log(data.id);
         const infos = Cards.find(card => card.id === data.id);
-        this._log("new card: ");
-        console.log(infos);
         const material = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
         const front = new BABYLON.Texture(infos.image, this.sharedComponents.scene);
         const f = new BABYLON.Vector4(0,0,0.5,1);
@@ -31,9 +28,9 @@ class HandView extends BaseView {
         card.material = material;
 
         card.position = this.sharedComponents.camera.position.clone();
-        if (card.position.z < 0) card.position.z += 0.8;
-        else                     card.position.z -= 0.8;
-        card.position.y -= 0.2;
+        if (card.position.z < 0) card.position.z += 0.4;
+        else                     card.position.z -= 0.4;
+        card.position.y -= 0.5;
         card.position.x += this.delta;
         this.delta += 0.1;
         card.lookAt(this.sharedComponents.camera.position);

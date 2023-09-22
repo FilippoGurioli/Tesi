@@ -4,7 +4,7 @@ class DeckView extends BaseView {
 
     _initializeScene() {
         const mat = new BABYLON.StandardMaterial("mat", this.sharedComponents.scene);
-        const texture = new BABYLON.Texture("https://cdn.discordapp.com/attachments/1150769991902314589/1154497415613779968/Progetto_senza_titolo_2.png", this.sharedComponents.scene);
+        const texture = new BABYLON.Texture("https://cdn.discordapp.com/attachments/1150769991902314589/1154504784729079878/DeckTexture.png", this.sharedComponents.scene);
         mat.diffuseTexture = texture;
 
         const cols = 6;
@@ -27,8 +27,10 @@ class DeckView extends BaseView {
         this.deck = new BABYLON.MeshBuilder.CreateBox("deck", options, this.sharedComponents.scene);
         this.deck.material = mat;
         this.deck.position = this.sharedComponents.camera.position.clone();
-        this.deck.position.y -= 0.5;
+        this.deck.position.y -= 0.8;
         this.deck.position.x -= 0.5;
+        if (this.deck.position.z < 0) this.deck.position.z += 0.5;
+        else                          this.deck.position.z -= 0.5;
 
         const behavior = new BABYLON.SixDofDragBehavior();
         behavior.disableMovement = true;

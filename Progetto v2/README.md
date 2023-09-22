@@ -12,3 +12,5 @@ For more information on the project, please refer to the thesis document.
 To run the application you need to have node.js installed on your computer. You can download it from the official website: https://nodejs.org/it/download/.
 
 Since WebXR only works on secure sites (https) or localhost, in order to launch the application with a specific IP address, you must associate a certificate to the web page. To do this, install all dependencies and then run the application, launch boot.sh script.
+
+You will find the application at the IP printed by boot.sh.

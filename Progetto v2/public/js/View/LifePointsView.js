@@ -3,13 +3,12 @@ import { BaseView } from "../BaseView.js";
 class LifePointsView extends BaseView { 
 
     _initializeScene() {
-
-        const handSlate = new BABYLON.GUI.HolographicSlate("hand slate");
+        const handSlate = new BABYLON.GUI.HolographicSlate("viewer");
         handSlate.titleBarHeight = 0;
         this.sharedComponents.GUIManager.addControl(handSlate);
-        handSlate.dimensions = new BABYLON.Vector2(15, 11);
-        handSlate.minDimensions = new BABYLON.Vector2(0.5, 0.25);
-        handSlate.position = new BABYLON.Vector3(-8, 7.5, 0);
+        handSlate.dimensions = new BABYLON.Vector2(10, 7);
+        handSlate.position.y += 0.5;
+        handSlate.position.z = 0;
         
         this.text = new BABYLON.GUI.TextBlock("text");
         this.text.height = 0.8;
