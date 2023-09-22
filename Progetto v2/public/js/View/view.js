@@ -15,7 +15,7 @@ class RootView extends BaseView {
 
         //SCENE
         if (this.sharedComponents.scene === null) this.sharedComponents.scene = new BABYLON.Scene(this.sharedComponents.engine);
-        this.sharedComponents.scene.clearColor = new BABYLON.Color3.Black;
+        this.sharedComponents.scene.clearColor = new BABYLON.Color4(0,0,0,1);
         
         //CAMERA
         if (this.sharedComponents.camera === null) this.sharedComponents.camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1.7, -1), this.sharedComponents.scene);
