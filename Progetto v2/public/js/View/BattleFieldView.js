@@ -122,12 +122,12 @@ class BattleFieldView extends BaseView {
                 const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
                 task.loadedMeshes[0].position.x = constantX;
                 task.loadedMeshes[0].position.z = constantZ;
-                this.sharedComponents.scene.show({embedMode:true});
-                this.sharedComponents.scene.select(task.loadedMeshes[0], "VARIANTS");
-                this.sceneObjects.push(task.loadedMeshes);
             }
-
             assetsManager.load();
+            // console.log(mesh);
+            // mesh.loadedMeshes.forEach(m => this.sceneObjects.push(m));
+            //! da sistemare, attualmente non funziona
+
         }
     }
     
