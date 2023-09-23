@@ -9,17 +9,6 @@ class GameModel extends BaseModel {
     #counter = 0;
     
     _initialize() {
-        
-        this.playersInfo = {
-            p1: {
-                viewId: "",
-                isConnected: false,
-            },
-            p2: {
-                viewId: "",
-                isConnected: false,
-            }
-        }
 
         this.turnModel = TurnModel.create({parent: this});
         this.battleFieldModel = BattleFieldModel.create({parent: this, turnModel: this.turnModel});
@@ -38,27 +27,27 @@ class GameModel extends BaseModel {
     join(data) {
         let role = "a Spectator";
         let action = data.view;
-        if (this.playersInfo.p1.viewId === "") {
-            this.playersInfo.p1.viewId = data.view;
-            this.playersInfo.p1.isConnected = true;
+        if (this.player1.view === "") {
+            this.player1.view = data.view;
+            this.player1.isConnected = true;
             action += " joined the game as Player 1.";
             role = "Player 1";
-        } else if (this.playersInfo.p2.viewId === "") {
-            this.playersInfo.p2.viewId = data.view;
-            this.playersInfo.p2.isConnected = true;
+        } else if (this.player2.view === "") {
+            this.player2.viewId = data.view;
+            this.player2.isConnected = true;
             action += " joined the game as Player 2.";
             role = "Player 2";
-            this.publish(this.playersInfo.p1.viewId, "opponent-recover");
-        } else if (this.playersInfo.p1.viewId === data.view) {
-            this.playersInfo.p1.isConnected = true;
+            this.publish(this.player1.view, "opponent-recover");
+        } else if (this.player1.viewId === data.view) {
+            this.player1.isConnected = true;
             action += " reconnected as Player 1.";
             role = "Player 1";
-            this.publish(this.playersInfo.p2.viewId, "opponent-recover");
-        } else if (this.playersInfo.p2.viewId === data.view) {
-            this.playersInfo.p2.isConnected = true;
+            this.publish(this.player2.view, "opponent-recover");
+        } else if (this.player2.view === data.view) {
+            this.player2.isConnected = true;
             action += " reconnected as Player 2.";
             role = "Player 2";
-            this.publish(this.playersInfo.p1.viewId, "opponent-recover");
+            this.publish(this.player1.view, "opponent-recover");
         } else {
             action += " joined the game as a Spectator.";
         }
@@ -67,24 +56,24 @@ class GameModel extends BaseModel {
     }
 
     left(viewId) {
-        if (this.playersInfo.p1.viewId === viewId) {
-            this.playersInfo.p1.isConnected = false;
+        if (this.player1.view === viewId) {
+            this.player1.isConnected = false;
             this._log("Player 1 left.");
             this.selfDestroy();
-            this.publish(this.playersInfo.p2.viewId, "opponent-left");
-        } else if (this.playersInfo.p2.viewId === viewId) {
-            this.playersInfo.p2.isConnected = false;
+            this.publish(this.player2.view, "opponent-left");
+        } else if (this.player2view === viewId) {
+            this.player2.isConnected = false;
             this._log("Player 2 left.");
             this.selfDestroy();
-            this.publish(this.playersInfo.p1.viewId, "opponent-left");
+            this.publish(this.player1.view, "opponent-left");
         }
     }
 
     selfDestroy() {
-        if (!this.playersInfo.p1.isConnected || !this.playersInfo.p2.isConnected) {
+        if (!this.player1.isConnected || !this.player2.isConnected) {
             this.#counter++;
             if (this.#counter >= Constants.DISC_TIME_LIMIT) {
-                this.publish(this.sessionId, "game-over", {winner: this.playersInfo.p1.isConnected ? this.playersInfo.p1.viewId : this.playersInfo.p2.viewId});
+                this.publish(this.sessionId, "game-over", {winner: this.player1.isConnected ? this.player1.view : this.player2.viewId});
             } else {
                 this._log("Waiting for reconnection...");
                 this.future(1000).selfDestroy();

@@ -69,7 +69,7 @@ class TurnView extends BaseView {
         switch(this.role) {
             case "Player 1":
                 slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-                if (this.model.parent.playersInfo.p2.viewId === "")  this.displaySpecialMessage("Waiting for player 2...");
+                if (this.model.parent.player2.view === "")  this.displaySpecialMessage("Waiting for player 2...");
                 break;
             case "Player 2":
                 slate.node.rotation = new BABYLON.Vector3(0, 0, 0);
@@ -113,7 +113,7 @@ class TurnView extends BaseView {
         if (data.winner === this.viewId) message = "You won!";
         else                             message = "You lost!";
         if (this.role === "a Spectator") {
-            if (data.winner === this.model.parent.playersInfo.p1.viewId)
+            if (data.winner === this.model.parent.player1.view)
                 message = "Player 1 won!";
             else
                 message = "Player 2 won!";

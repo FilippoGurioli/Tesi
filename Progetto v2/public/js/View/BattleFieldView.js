@@ -102,38 +102,33 @@ class BattleFieldView extends BaseView {
     }
 
     spawnMoster(data) {
-        // const card = Cards.find(c => c.id === data.id);
-        // if (!card) throw Error("Card not found");
-        // var assetsManager = new BABYLON.AssetsManager(this.sharedComponents.scene);
+        const card = Cards.find(c => c.id === data.id);
+        if (!card) throw Error("Card not found");
+        var assetsManager = new BABYLON.AssetsManager(this.sharedComponents.scene);
+        assetsManager.usingDefaultLoadingScreen = false;
+        assetsManager.autoHideLoadingUI = true;
+        if (card.type === "monster") {
+            var mesh = assetsManager.addMeshTask("monster task", "", "./mesh/", "DarkMagician.glb");
+            mesh.onSuccess = function (task) {
+                task.loadedMeshes[0].position.y = 0.06;
+                task.loadedMeshes[0].scalingDeterminant = 0.075;
+                if (data.player === 1) {
+                    task.loadedMeshes[0].rotate(BABYLON.Vector3.Up(), -Math.PI);
+                }
+                const playerConstants = data.player === 1 ? Constants.P1 : Constants.P2;
+                const monsterConstantPrefix = card.type === "monster" ? "MONSTER" : "SPELL";
 
-        // if (card.type === "monster") {
-        //     var mesh = assetsManager.addMeshTask("monster task", "", "./mesh/", "DarkMagician.glb");
+                const constantX = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].x;
+                const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
+                task.loadedMeshes[0].position.x = constantX;
+                task.loadedMeshes[0].position.z = constantZ;
+                this.sharedComponents.scene.show({embedMode:true});
+                this.sharedComponents.scene.select(task.loadedMeshes[0], "VARIANTS");
+                this.sceneObjects.push(task.loadedMeshes);
+            }
 
-        //     mesh.onSuccess = function (task) {
-        //                 task.loadedMeshes[0].position.y = 0.06;
-        //                 if (data.player === 1) {
-        //                     task.loadedMeshes[0].rotation.y = Math.PI;
-        //                 }
-        //                 const playerConstants = data.player === 1 ? Constants.P1 : Constants.P2;
-        //                 const monsterConstantPrefix = card.type === "monster" ? "MONSTER" : "SPELL";
-
-        //                 const constantX = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].x;
-        //                 const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
-        //                 task.loadedMeshes[0].position.x = constantX;
-        //                 task.loadedMeshes[0].position.z = constantZ;
-        //                 this.sharedComponents.scene.show({embedMode:true});
-        //                 this.sharedComponents.scene.select(task.loadedMeshes[0], "VARIANTS");
-        //         }
-
-        //     assetsManager.onFinish = function (tasks) {
-        //         engine.runRenderLoop(function () {
-        //             this.sharedComponents.scene.render();
-        //         });
-        //     };
-
-        //     assetsManager.load();
-        //     this.sceneObjects.push(mesh);
-        // }
+            assetsManager.load();
+        }
     }
     
 }

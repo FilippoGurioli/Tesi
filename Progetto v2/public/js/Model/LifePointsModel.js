@@ -22,7 +22,7 @@ class LifePointsModel extends BaseModel {
         this.#lifePoints.damage(data.amount);
         this._log("damaged " + data.amount + " LP");
         if (this.#lifePoints.LP === 0) {
-            this.publish(this.sessionId, "game-over", {winner: this.opponent.parent.role});
+            this.publish(this.sessionId, "game-over", {winner: this.opponent.parent.view});
         }
     }
 
