@@ -20,8 +20,8 @@ class TurnView extends BaseView {
         const slate = new BABYLON.GUI.HolographicSlate("slate");
         slate.titleBarHeight = 0;
         this.sharedComponents.GUIManager.addControl(slate);
-        slate.dimensions = new BABYLON.Vector2(10, 7);
-        slate.position.y += 1;
+        slate.dimensions = new BABYLON.Vector2(20, 13);
+        slate.position.y += 2;
         slate.position.z = 0;
         
         const title = new BABYLON.GUI.TextBlock("title");

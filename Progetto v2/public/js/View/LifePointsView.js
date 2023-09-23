@@ -6,8 +6,8 @@ class LifePointsView extends BaseView {
         const handSlate = new BABYLON.GUI.HolographicSlate("viewer");
         handSlate.titleBarHeight = 0;
         this.sharedComponents.GUIManager.addControl(handSlate);
-        handSlate.dimensions = new BABYLON.Vector2(10, 7);
-        handSlate.position.y += 0.5;
+        handSlate.dimensions = new BABYLON.Vector2(20, 13);
+        handSlate.position.y += 1.5;
         handSlate.position.z = 0;
         if (this.sharedComponents.camera.position.z > 0) {
                 handSlate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);
