@@ -53,6 +53,16 @@ class BattleFieldModel extends BaseModel {
         }
     }
 
+    hasAvailableSlots(player, cardId) {
+        if (Cards.find(c => c.id === cardId).type === "monster") {
+            console.log(player);
+            console.log(this.getCardCollection("Monsters", player));
+            return this.getCardCollection("Monsters", player).some(c => c === null);
+        } else {
+            return this.getCardCollection("Spells", player).some(c => c === null);
+        }
+    }
+
     remove(card) {
         this.#battleField.remove(card);
         this.publish(this.id, "removeCard", card);
