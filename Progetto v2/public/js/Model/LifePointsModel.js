@@ -10,11 +10,12 @@ class LifePointsModel extends BaseModel {
     _subscribeAll() {
         this.subscribe(this.id, "heal", this.heal);
         this.subscribe(this.id, "damage", this.damage);
-        this.subscribe(this.id, "info", (data) => {console.log("Broadcast from LPView: "); console.log(data)});
     }
 
     heal(data) {
         this.#lifePoints.heal(data.amount);
+        this.publish(this.id, "update");
+        this.publish(this.opponent.id, "update");
     }
 
     damage(data) {
@@ -22,6 +23,8 @@ class LifePointsModel extends BaseModel {
         if (this.#lifePoints.LP === 0) {
             this.publish(this.sessionId, "game-over", {winner: this.opponent.parent.view});
         }
+        this.publish(this.id, "update");
+        this.publish(this.opponent.id, "update");
     }
 
     get LP() {

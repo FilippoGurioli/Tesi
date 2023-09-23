@@ -104,7 +104,6 @@ class BattleFieldView extends BaseView {
         mesh.position.x = constantX;
         mesh.position.z = constantZ;
         mesh.id = data.player + "" + data.position + card.type;
-        console.log(mesh.id);
         this.sceneObjects.push(mesh);
     }
 

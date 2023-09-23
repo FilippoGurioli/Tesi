@@ -24,6 +24,7 @@ class LifePointsView extends BaseView {
         this.text.paddingTop = "20%";
         this.text.fontWeight = "bold";
         this.text.fontSize = 50;
+        this.text.text = this.model.LP + " - " + this.model.opponent.LP;
         
         const contentGrid = new BABYLON.GUI.Grid("grid");
         contentGrid.addControl(this.text);
@@ -41,8 +42,32 @@ class LifePointsView extends BaseView {
         
     }
 
-    _update() {
-        this.text.text = this.model.LP + " - " + this.model.opponent.LP;
+    _subscribeAll() {
+        this.subscribe(this.model.id, "update", this.showUpdate);
+    }
+    
+    showUpdate() {
+        const from1 = parseInt(this.text.text.substring(0, this.text.text.indexOf(" - ")));
+        const from2 = parseInt(this.text.text.substring(this.text.text.indexOf(" - ") + 3));
+        const to1 = this.model.LP;
+        const to2 = this.model.opponent.LP;
+        
+        const step1 = (to1 - from1) / 60;
+        const step2 = (to2 - from2) / 60;
+        console.log(from1, from2, to1, to2, step1, step2);
+        this.animation(from1, from2, to1, to2, step1, step2);
+        // this.text.text = this.model.LP + " - " + this.model.opponent.LP;
+    }
+
+    animation(from1, from2, to1, to2, step1, step2) {
+        if (Math.abs(from1 - to1) < step1 && Math.abs(from2 - to2) < step2) {
+            this.text.text = to1 + " - " + to2;
+            return;
+        }
+        from1 += step1;
+        from2 += step2;
+        this.text.text = Math.round(from1) + " - " + Math.round(from2);
+        this.future(50).animation(from1, from2, to1, to2, step1, step2);
     }
 }
 
