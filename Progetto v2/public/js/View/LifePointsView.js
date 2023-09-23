@@ -54,20 +54,18 @@ class LifePointsView extends BaseView {
         
         const step1 = (to1 - from1) / 60;
         const step2 = (to2 - from2) / 60;
-        console.log(from1, from2, to1, to2, step1, step2);
         this.animation(from1, from2, to1, to2, step1, step2);
-        // this.text.text = this.model.LP + " - " + this.model.opponent.LP;
     }
 
     animation(from1, from2, to1, to2, step1, step2) {
-        if (Math.abs(from1 - to1) < step1 && Math.abs(from2 - to2) < step2) {
+        if (Math.abs(from1 - to1) <= Math.abs(step1) && Math.abs(from2 - to2) <= Math.abs(step2)) {
             this.text.text = to1 + " - " + to2;
             return;
         }
         from1 += step1;
         from2 += step2;
         this.text.text = Math.round(from1) + " - " + Math.round(from2);
-        this.future(50).animation(from1, from2, to1, to2, step1, step2);
+        this.future(30).animation(from1, from2, to1, to2, step1, step2);
     }
 }
 
