@@ -108,7 +108,7 @@ class BattleFieldView extends BaseView {
         assetsManager.usingDefaultLoadingScreen = false;
         assetsManager.autoHideLoadingUI = true;
         if (card.type === "monster") {
-            var mesh = assetsManager.addMeshTask("monster task", "", "./mesh/", "DarkMagician.glb");
+            var mesh = assetsManager.addMeshTask("monster loading task", "", card.meshRoot, card.meshFile);
             mesh.onSuccess = function (task) {
                 task.loadedMeshes[0].position.y = 0.06;
                 task.loadedMeshes[0].scalingDeterminant = 0.075;
@@ -122,7 +122,7 @@ class BattleFieldView extends BaseView {
                 const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
                 task.loadedMeshes[0].position.x = constantX;
                 task.loadedMeshes[0].position.z = constantZ;
-            }
+            };
             assetsManager.loadAsync().then(() => mesh.loadedMeshes.forEach(m => this.sceneObjects.push(m)));
         }
     }
