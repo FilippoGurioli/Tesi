@@ -66,7 +66,6 @@ class TurnView extends BaseView {
         this.turnMenu.addButton(this.button);
         this.turnMenu.isVisible = false;
 
-        // if (this.role === "Player 1" && this.model.parent.playersInfo.p2.viewId === "")   this.displaySpecialMessage("Waiting for player 2...");
         switch(this.role) {
             case "Player 1":
                 slate.node.rotation = new BABYLON.Vector3(0, Math.PI, 0);

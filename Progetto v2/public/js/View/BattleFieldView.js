@@ -71,12 +71,14 @@ class BattleFieldView extends BaseView {
         if (!card) throw Error("Card not found");
         const mesh = BABYLON.MeshBuilder.CreatePlane("card", { size: 0.8 }, this.sharedComponents.scene);
 
-        const behavior = new BABYLON.SixDofDragBehavior();
-        behavior.disableMovement = true;
-        behavior.onDragStartObservable.add(_=>{
-            this.publish(this.model.id, "attack", {id: card.id});
-        });
-        behavior.attach(mesh);
+        if (card.type === "monster" && ((data.player === 1 && this.sharedComponents.camera.position.z > 0) || (data.player === 2 && this.sharedComponents.camera.position.z < 0))) {
+            const behavior = new BABYLON.SixDofDragBehavior();
+            behavior.disableMovement = true;
+            behavior.onDragStartObservable.add(_=>{
+                this.publish(this.model.id, "attack", data);
+            });
+            behavior.attach(mesh);
+        }
 
         const material = new BABYLON.StandardMaterial("cardMaterial", this.sharedComponents.scene);
         material.diffuseTexture = new BABYLON.Texture(card.imageOnBF, this.sharedComponents.scene);

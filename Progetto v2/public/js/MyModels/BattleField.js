@@ -9,16 +9,16 @@ class BattleField {
     place(card, p1 = true, position = -1) {
         const field = p1 ? (card.type === "spell" || card.type === "trap" ? this.p1SpellField : this.p1MonsterField) : 
         (card.type === "spell" || card.type === "trap" ? this.p2SpellField : this.p2MonsterField);
-
+        const copy = {...card};
         if (position >= 0 && position <= 5) {
-            field[position] = card;
+            field[position] = copy;
             return position;
         } else {
             const emptyIndex = field.indexOf(null);
             if (emptyIndex === -1) {
                 console.error("No automatic position available");
             } else {
-                field[emptyIndex] = card;
+                field[emptyIndex] = copy;
             }
             return emptyIndex;
         }
