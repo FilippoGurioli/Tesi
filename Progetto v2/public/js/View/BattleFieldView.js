@@ -5,6 +5,7 @@ class BattleFieldView extends BaseView {
 
     _subscribeAll() {
         this.subscribe(this.model.id, "placeCard", this.placeCard);
+        this.subscribe(this.model.id, "placeCard", this.spawnMoster);
     }
 
     _initializeScene() {
@@ -25,13 +26,23 @@ class BattleFieldView extends BaseView {
             BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
         );
         const fadeInKeys = [
-            { frame: 0, value: 0 },  
-            { frame: 60, value: 1 }  
+            { frame: 0, value: 0 },
+            { frame: 60, value: 1 }
         ];
         fadeInAnimation.setKeys(fadeInKeys);
         this.plane.animations.push(fadeInAnimation);
         this.sharedComponents.scene.beginAnimation(this.plane, 0, 60, false);
         this.sceneObjects.push(this.plane);
+
+        //if restoring an already start match, place all cards
+        const cardTypes = ["Monsters", "Spells"];
+        for (let player = 1; player <= 2; player++) {
+            for (let type of cardTypes) {
+                this.model.getCardCollection(type, player).forEach((c, i) => {
+                    if (c !== null) this.placeCard({ player, position: i, id: c.id });
+                });
+            }
+        }
     }
 
     _endScene() {
@@ -87,6 +98,42 @@ class BattleFieldView extends BaseView {
 
         this.sceneObjects.push(mesh);
     }
+
+    spawnMoster(data) {
+        // const card = Cards.find(c => c.id === data.id);
+        // if (!card) throw Error("Card not found");
+        // var assetsManager = new BABYLON.AssetsManager(this.sharedComponents.scene);
+
+        // if (card.type === "monster") {
+        //     var mesh = assetsManager.addMeshTask("monster task", "", "./mesh/", "DarkMagician.glb");
+
+        //     mesh.onSuccess = function (task) {
+        //                 task.loadedMeshes[0].position.y = 0.06;
+        //                 if (data.player === 1) {
+        //                     task.loadedMeshes[0].rotation.y = Math.PI;
+        //                 }
+        //                 const playerConstants = data.player === 1 ? Constants.P1 : Constants.P2;
+        //                 const monsterConstantPrefix = card.type === "monster" ? "MONSTER" : "SPELL";
+
+        //                 const constantX = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].x;
+        //                 const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
+        //                 task.loadedMeshes[0].position.x = constantX;
+        //                 task.loadedMeshes[0].position.z = constantZ;
+        //                 this.sharedComponents.scene.show({embedMode:true});
+        //                 this.sharedComponents.scene.select(task.loadedMeshes[0], "VARIANTS");
+        //         }
+
+        //     assetsManager.onFinish = function (tasks) {
+        //         engine.runRenderLoop(function () {
+        //             this.sharedComponents.scene.render();
+        //         });
+        //     };
+
+        //     assetsManager.load();
+        //     this.sceneObjects.push(mesh);
+        // }
+    }
+    
 }
 
 export { BattleFieldView };

@@ -32,6 +32,16 @@ class BattleFieldModel extends BaseModel {
         return { p1: this.#battleField.p1SpellField, p2: this.#battleField.p2SpellField };
     }
 
+    getCardCollection(type, player) {
+        if (type === "Monsters") {
+            return player === 1 ? this.#battleField.p1MonsterField : this.#battleField.p2MonsterField;
+        } else if (type === "Spells") {
+            return player === 1 ? this.#battleField.p1SpellField : this.#battleField.p2SpellField;
+        } else {
+            console.error("Invalid type");
+        }
+    }
+
     remove(card) {
         this.#battleField.remove(card);
 
