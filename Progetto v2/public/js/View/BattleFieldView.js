@@ -123,14 +123,9 @@ class BattleFieldView extends BaseView {
                 task.loadedMeshes[0].position.x = constantX;
                 task.loadedMeshes[0].position.z = constantZ;
             }
-            assetsManager.load();
-            // console.log(mesh);
-            // mesh.loadedMeshes.forEach(m => this.sceneObjects.push(m));
-            //! da sistemare, attualmente non funziona
-
+            assetsManager.loadAsync().then(() => mesh.loadedMeshes.forEach(m => this.sceneObjects.push(m)));
         }
     }
-    
 }
 
 export { BattleFieldView };

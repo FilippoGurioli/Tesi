@@ -30,8 +30,6 @@ class DeckModel extends BaseModel {
             this.hasDrew = true;
             this.handModel.addCard(this.#deck.shift());
             if (this.#deck.length === 0)    this.publish(this.id, "emptyDeck");
-        } else {
-            this._log("NON SI PUO PESCARE ORA LA CARTA");
         }
     }
 }

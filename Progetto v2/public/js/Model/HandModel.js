@@ -37,8 +37,6 @@ class HandModel extends BaseModel {
             this.battleField.place(this.parent.role, data.id);
             this.#hand.splice(this.#hand.indexOf(data.id), 1);
             this.publish(this.id, "removeCard", data);
-        } else {
-            this._log("NON SI PUO GIOCARE ORA LA CARTA");
         }
     }
 }
