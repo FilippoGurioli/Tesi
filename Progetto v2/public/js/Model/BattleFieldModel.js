@@ -55,8 +55,6 @@ class BattleFieldModel extends BaseModel {
 
     hasAvailableSlots(player, cardId) {
         if (Cards.find(c => c.id === cardId).type === "monster") {
-            console.log(player);
-            console.log(this.getCardCollection("Monsters", player));
             return this.getCardCollection("Monsters", player).some(c => c === null);
         } else {
             return this.getCardCollection("Spells", player).some(c => c === null);
@@ -76,16 +74,64 @@ class BattleFieldModel extends BaseModel {
             this.#battleField.p2MonsterField.forEach(c => {
                 if (c !== null) c.hasAttacked = false;
             });
+            this.attacker = undefined;
+            this.target = undefined;
         }
     }
 
     tryAttack(data) {
-        if (((this.turnModel.isPlayer1Turn && data.player === 1) || (!this.turnModel.isPlayer1Turn && data.player === 2)) && this.turnModel.phase === Phase.BattlePhase) {
-            const attacker = this.getCardCollection("Monsters", data.player)[data.position];
-            if (!attacker.hasAttacked) {
-                this.publish(data.player === 1 ? this.#lifePointsModel.p2.id : this.#lifePointsModel.p1.id, "damage", {amount: attacker.ATK});
+        const phase = this.turnModel.phase;
+        const isPlayer1Turn = this.turnModel.isPlayer1Turn;
+    
+        if (phase !== Phase.BattlePhase) return;
+        
+        if (data.from !== undefined) {
+            if (isPlayer1Turn && data.from.player === 2 || !isPlayer1Turn && data.from.player === 1) return;
+            const { player, position } = data.from;
+            const attacker = this.getCardCollection("Monsters", player)[position];
+            if (attacker.hasAttacked) return;
+
+            const opponent = player === 1 ? 2 : 1;
+            if (!this.getCardCollection("Monsters", opponent).some(c => c !== null)) {
+                attacker.hasAttacked = true;
+                this.publish(player === 1 ? this.#lifePointsModel.p2.id : this.#lifePointsModel.p1.id, "damage", {amount: attacker.ATK});
+                return;
             }
-            attacker.hasAttacked = true;
+
+            if (!this.target) {
+                this.attacker = data.from;
+            } else {
+                const {destroyed, damage} = this.#battleField.attack(data.from, this.target);
+                if (destroyed === "opponent") {
+                    this.publish(this.id, "removeCard", this.target);
+                    this.publish(opponent === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
+                } else if (destroyed === "self") {
+                    this.publish(this.id, "removeCard", data.from);
+                    this.publish(player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
+                } else if (destroyed === "both") {
+                } else if (destroyed === "none") {}
+                attacker.hasAttacked = true;
+                this.attacker = undefined;
+                this.target = undefined;
+                return;
+            }
+        } else {
+            if (!this.attacker) {
+                this.target = data.to;
+            } else {
+                const {destroyed, damage} = this.#battleField.attack(this.attacker, data.to);
+                if (destroyed === "opponent") {
+                    this.publish(this.id, "removeCard", data.to);
+                    this.publish(data.to.player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
+                } else if (destroyed === "self") {
+                    this.publish(this.id, "removeCard", this.attacker);
+                    this.publish(this.attacker.player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
+                } else if (destroyed === "both") {
+                } else if (destroyed === "none") {}
+                this.getCardCollection("Monsters", this.attacker.player)[this.attacker.position].hasAttacked = true;
+                this.target = undefined;
+                this.attacker = undefined;
+            }
         }
     }
 

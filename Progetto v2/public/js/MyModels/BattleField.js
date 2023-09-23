@@ -41,6 +41,16 @@ class BattleField {
             console.error("Card not found");
         }
     }
+
+    attack(from, to) {
+        //for now, just remove opponent card
+        if (to.player === 1) {
+            this.p1MonsterField[to.position] = null;
+        } else {
+            this.p2MonsterField[to.position] = null;
+        }
+        return { destroyed: "opponent", damage: 0};
+    }
 }
 
 export { BattleField }; 

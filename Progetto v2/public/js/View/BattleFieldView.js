@@ -6,6 +6,7 @@ class BattleFieldView extends BaseView {
     _subscribeAll() {
         this.subscribe(this.model.id, "placeCard", this.placeCard);
         this.subscribe(this.model.id, "placeCard", this.spawnMoster);
+        this.subscribe(this.model.id, "removeCard", this.removeCard);
     }
 
     _initializeScene() {
@@ -71,13 +72,18 @@ class BattleFieldView extends BaseView {
         if (!card) throw Error("Card not found");
         const mesh = BABYLON.MeshBuilder.CreatePlane("card", { size: 0.8 }, this.sharedComponents.scene);
 
-        if (card.type === "monster" && ((data.player === 1 && this.sharedComponents.camera.position.z > 0) || (data.player === 2 && this.sharedComponents.camera.position.z < 0))) {
-            const behavior = new BABYLON.SixDofDragBehavior();
-            behavior.disableMovement = true;
-            behavior.onDragStartObservable.add(_=>{
-                this.publish(this.model.id, "attack", data);
-            });
-            behavior.attach(mesh);
+        if (card.type === "monster") {
+            if ((data.player === 1 && this.sharedComponents.camera.position.z > 0) || (data.player === 2 && this.sharedComponents.camera.position.z < 0)) {
+                const behavior = new BABYLON.SixDofDragBehavior();
+                behavior.disableMovement = true;
+                behavior.onDragStartObservable.add( _ => this.publish(this.model.id, "attack", {from: data}));
+                behavior.attach(mesh);
+            } else {
+                const behavior = new BABYLON.SixDofDragBehavior();
+                behavior.disableMovement = true;
+                behavior.onDragStartObservable.add( _ => this.publish(this.model.id, "attack", {to: data}));
+                behavior.attach(mesh);
+            }
         }
 
         const material = new BABYLON.StandardMaterial("cardMaterial", this.sharedComponents.scene);
@@ -97,7 +103,8 @@ class BattleFieldView extends BaseView {
         const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
         mesh.position.x = constantX;
         mesh.position.z = constantZ;
-
+        mesh.id = data.player + "" + data.position + card.type;
+        console.log(mesh.id);
         this.sceneObjects.push(mesh);
     }
 
@@ -122,9 +129,27 @@ class BattleFieldView extends BaseView {
                 const constantZ = playerConstants[`${monsterConstantPrefix}${data.position + 1}`].y;
                 task.loadedMeshes[0].position.x = constantX;
                 task.loadedMeshes[0].position.z = constantZ;
+                mesh.loadedMeshes.dispose = function () {
+                    mesh.loadedMeshes.forEach(m => m.dispose());
+                }
+                task.loadedMeshes.id = data.player + "" + data.position + card.id;
             };
-            assetsManager.loadAsync().then(() => mesh.loadedMeshes.forEach(m => this.sceneObjects.push(m)));
+            assetsManager.loadAsync().then(() => {
+                this.sceneObjects.push(mesh.loadedMeshes);
+            });
         }
+    }
+
+    removeCard(data) {
+        const card = Cards.find(c => c.id === data.id);
+        const cardMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.type));
+        if (!cardMesh) throw Error("Card not found");
+        this.sceneObjects.splice(this.sceneObjects.indexOf(cardMesh), 1);
+        cardMesh.dispose();
+        const monsterMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.id));
+        if (!monsterMesh) throw Error("Monster not found");
+        this.sceneObjects.splice(this.sceneObjects.indexOf(monsterMesh), 1);
+        monsterMesh.dispose();
     }
 }
 
