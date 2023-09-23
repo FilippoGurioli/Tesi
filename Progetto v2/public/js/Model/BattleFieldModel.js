@@ -73,7 +73,6 @@ class BattleFieldModel extends BaseModel {
         if (((this.turnModel.isPlayer1Turn && data.player === 1) || (!this.turnModel.isPlayer1Turn && data.player === 2)) && this.turnModel.phase === Phase.BattlePhase) {
             const attacker = this.getCardCollection("Monsters", data.player)[data.position];
             if (!attacker.hasAttacked) {
-                console.log(attacker.ATK);
                 this.publish(data.player === 1 ? this.#lifePointsModel.p2.id : this.#lifePointsModel.p1.id, "damage", {amount: attacker.ATK});
             }
             attacker.hasAttacked = true;

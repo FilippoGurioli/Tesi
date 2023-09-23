@@ -33,7 +33,7 @@ class GameModel extends BaseModel {
             action += " joined the game as Player 1.";
             role = "Player 1";
         } else if (this.player2.view === "") {
-            this.player2.viewId = data.view;
+            this.player2.view = data.view;
             this.player2.isConnected = true;
             action += " joined the game as Player 2.";
             role = "Player 2";
