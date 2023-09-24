@@ -18,8 +18,11 @@ class BattleFieldModel extends BaseModel {
     }
 
     place(player, cardId) {
-        const p = this.#battleField.place(Cards.find(c => c.id === cardId), player === 1);
-        
+        const card = Cards.find(c => c.id === cardId);
+        const p = this.#battleField.place(card, player === 1);
+        if (card.type === "monster") {
+            this.getCardCollection("Monsters", player)[p].hasAttacked = true;
+        }
         this.publish(this.id, "placeCard", {
             player: player,
             position: p,
