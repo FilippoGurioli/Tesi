@@ -92,7 +92,7 @@ class BattleFieldModel extends BaseModel {
             if (isPlayer1Turn && data.from.player === 2 || !isPlayer1Turn && data.from.player === 1) return;
             const { player, position } = data.from;
             const attacker = this.getCardCollection("Monsters", player)[position];
-            if (attacker.hasAttacked) return;
+            if (!attacker || attacker.hasAttacked) return;
 
             const opponent = player === 1 ? 2 : 1;
             if (!this.getCardCollection("Monsters", opponent).some(c => c !== null)) {
@@ -112,8 +112,10 @@ class BattleFieldModel extends BaseModel {
                     this.publish(this.id, "removeCard", data.from);
                     this.publish(player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
                 } else if (destroyed === "both") {
+                    this.publish(this.id, "removeCard", data.from);
+                    this.publish(this.id, "removeCard", this.target);
                 } else if (destroyed === "none") {}
-                attacker.hasAttacked = true;
+                if (attacker) attacker.hasAttacked = true;
                 this.attacker = undefined;
                 this.target = undefined;
                 return;
@@ -130,8 +132,11 @@ class BattleFieldModel extends BaseModel {
                     this.publish(this.id, "removeCard", this.attacker);
                     this.publish(this.attacker.player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
                 } else if (destroyed === "both") {
+                    this.publish(this.id, "removeCard", data.to);
+                    this.publish(this.id, "removeCard", this.attacker);
                 } else if (destroyed === "none") {}
-                this.getCardCollection("Monsters", this.attacker.player)[this.attacker.position].hasAttacked = true;
+                const attacker = this.getCardCollection("Monsters", this.attacker.player)[this.attacker.position];
+                if (attacker) attacker.hasAttacked = true;
                 this.target = undefined;
                 this.attacker = undefined;
             }

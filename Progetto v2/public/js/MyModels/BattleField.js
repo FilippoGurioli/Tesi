@@ -43,13 +43,30 @@ class BattleField {
     }
 
     attack(from, to) {
-        //for now, just remove opponent card
-        if (to.player === 1) {
-            this.p1MonsterField[to.position] = null;
+        let attacker, defender;
+        if (from.player === 1) {
+            attacker = this.p1MonsterField[from.position];
+            defender = this.p2MonsterField[to.position];
         } else {
-            this.p2MonsterField[to.position] = null;
+            attacker = this.p2MonsterField[from.position];
+            defender = this.p1MonsterField[to.position];
         }
-        return { destroyed: "opponent", damage: 0};
+        const diff = attacker.ATK - defender.ATK;
+        if (diff > 0) {
+            this.clearMonsterField(to);
+            return { destroyed: "opponent", damage: diff };
+        } else if (diff < 0) {
+            this.clearMonsterField(from);
+            return { destroyed: "self", damage: -diff };
+        } else {
+            this.clearMonsterField(from);
+            return { destroyed: "both", damage: 0 };
+        }
+    }
+    
+    clearMonsterField(card) {
+        const field = card.player === 1 ? this.p1MonsterField : this.p2MonsterField;
+        field[card.position] = null;
     }
 }
 
