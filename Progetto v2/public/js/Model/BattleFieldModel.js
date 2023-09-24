@@ -105,6 +105,7 @@ class BattleFieldModel extends BaseModel {
                 this.attacker = data.from;
             } else {
                 const {destroyed, damage} = this.#battleField.attack(data.from, this.target);
+                this.publish(this.id, "attackAnim", data.from);
                 if (destroyed === "opponent") {
                     this.publish(this.id, "removeCard", this.target);
                     this.publish(opponent === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});
@@ -125,6 +126,7 @@ class BattleFieldModel extends BaseModel {
                 this.target = data.to;
             } else {
                 const {destroyed, damage} = this.#battleField.attack(this.attacker, data.to);
+                this.publish(this.id, "attackAnim", this.attacker);
                 if (destroyed === "opponent") {
                     this.publish(this.id, "removeCard", data.to);
                     this.publish(data.to.player === 1 ? this.#lifePointsModel.p1.id : this.#lifePointsModel.p2.id, "damage", {amount: damage});

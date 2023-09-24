@@ -7,6 +7,7 @@ class BattleFieldView extends BaseView {
         this.subscribe(this.model.id, "placeCard", this.placeCard);
         this.subscribe(this.model.id, "placeCard", this.spawnMoster);
         this.subscribe(this.model.id, "removeCard", this.removeCard);
+        this.subscribe(this.model.id, "attackAnim", this.playAttackAnim);
     }
 
     _initializeScene() {
@@ -137,21 +138,49 @@ class BattleFieldView extends BaseView {
                 task.loadedMeshes.id = data.player + "" + data.position + card.id;
             };
             assetsManager.loadAsync().then(() => {
+                const attackAnim = this.sharedComponents.scene.animationGroups.filter(ag => ag.name === "Attack")[0];
+                const idleAnim = this.sharedComponents.scene.animationGroups.filter(ag => ag.name === "Idle")[0];
+                if (attackAnim !== undefined) {
+                    attackAnim.name = data.player + "" + data.position + "Attack";
+                    attackAnim.stop();
+                    this.sceneObjects.push(attackAnim);
+                }
+                if (idleAnim !== undefined) {
+                    idleAnim.name = data.player + "" + data.position + "Idle";
+                    idleAnim.play(true);
+                    this.sceneObjects.push(idleAnim);
+                }
                 this.sceneObjects.push(mesh.loadedMeshes);
             });
         }
     }
 
     removeCard(data) {
-        const card = Cards.find(c => c.id === data.id);
-        const cardMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.type));
-        if (!cardMesh) throw Error("Card not found");
-        this.sceneObjects.splice(this.sceneObjects.indexOf(cardMesh), 1);
-        cardMesh.dispose();
-        const monsterMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.id));
-        if (!monsterMesh) throw Error("Monster not found");
-        this.sceneObjects.splice(this.sceneObjects.indexOf(monsterMesh), 1);
-        monsterMesh.dispose();
+        setTimeout(() => {
+            const card = Cards.find(c => c.id === data.id);
+            const cardMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.type));
+            if (!cardMesh) throw Error("Card not found");
+            this.sceneObjects.splice(this.sceneObjects.indexOf(cardMesh), 1);
+            cardMesh.dispose();
+            const monsterMesh = this.sceneObjects.find(m => m.id === (data.player + "" + data.position + card.id));
+            if (!monsterMesh) throw Error("Monster not found");
+            this.sceneObjects.splice(this.sceneObjects.indexOf(monsterMesh), 1);
+            monsterMesh.dispose();
+            const attackAnim = this.sharedComponents.scene.animationGroups.find(ag => ag.name === data.player + "" + data.position + "Attack");
+            if (!attackAnim) throw Error("Attack animation not found");
+            this.sceneObjects.splice(this.sceneObjects.indexOf(attackAnim), 1);
+            attackAnim.dispose();
+            const idleAnim = this.sharedComponents.scene.animationGroups.find(ag => ag.name === data.player + "" + data.position + "Idle");
+            if (!idleAnim) throw Error("Idle animation not found");
+            this.sceneObjects.splice(this.sceneObjects.indexOf(idleAnim), 1);
+            idleAnim.dispose();
+        }, 1000);
+    }
+
+    playAttackAnim(data) {
+        const attackAnim = this.sharedComponents.scene.animationGroups.find(ag => ag.name === data.player + "" + data.position + "Attack");
+        if (!attackAnim) return;
+        attackAnim.play(false);
     }
 }
 

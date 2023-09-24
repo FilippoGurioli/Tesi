@@ -5,8 +5,8 @@
       "type": "monster",
       "image": "https://cdn.discordapp.com/attachments/1150769991902314589/1150795373032505396/carta_dark_magician_completa.png",
       "imageOnBF": "https://cdn.discordapp.com/attachments/1150769991902314589/1150770532569071646/dark-magician-bf.jpg",
-      "meshRoot": "https://cdn.glitch.global/11401533-fceb-4797-8c5a-65fabdaf55a0/",
-      "meshFile": "DarkMagician.glb?v=1695480413271",
+      "meshRoot": "./mesh/",
+      "meshFile": "DarkMagician.glb",
       "description": "The ultimate wizard in terms of attack and defence.",
       "ATK": 2500,
       "DEF": 2100
