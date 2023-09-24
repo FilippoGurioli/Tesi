@@ -46,7 +46,7 @@ class HandModel extends BaseModel {
         if ((this.turnModel.phase === Phase.MainPhase1 || this.turnModel.phase === Phase.MainPhase2) && 
             this.turnModel.isTurnOf(this.parent.role) && this.battleField.hasAvailableSlots(this.parent.role, data.id)) {
             if (Cards.find(c => c.id === data.id).type === "monster" && this.summonTokenUsed) return;
-            else    this.summonTokenUsed = true;
+            else if (Cards.find(c => c.id === data.id).type === "monster" && !this.summonTokenUsed)   this.summonTokenUsed = true;
             this.battleField.place(this.parent.role, data.id);
             this.#hand.splice(this.#hand.indexOf(data.id), 1);
             this.publish(this.id, "removeCard", data);
