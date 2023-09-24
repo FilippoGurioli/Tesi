@@ -60,6 +60,7 @@ class BattleField {
             return { destroyed: "self", damage: -diff };
         } else {
             this.clearMonsterField(from);
+            this.clearMonsterField(to);
             return { destroyed: "both", damage: 0 };
         }
     }
