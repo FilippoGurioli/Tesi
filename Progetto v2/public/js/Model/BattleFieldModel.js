@@ -97,6 +97,7 @@ class BattleFieldModel extends BaseModel {
             const opponent = player === 1 ? 2 : 1;
             if (!this.getCardCollection("Monsters", opponent).some(c => c !== null)) {
                 attacker.hasAttacked = true;
+                this.publish(this.id, "attackAnim", data.from);
                 this.publish(player === 1 ? this.#lifePointsModel.p2.id : this.#lifePointsModel.p1.id, "damage", {amount: attacker.ATK});
                 return;
             }
