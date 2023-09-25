@@ -65,7 +65,30 @@ view lo riceveranno aggiornando l'ologramma alla stessa maniera.\\
 Per creare un ologramma personale si è ricorsi all'istanziamento degli oggetti in modo condizionale. Questo significa che, in base a certe condizioni, vengono creati oggetti di scena 
 diversi. Nel caso particolare del videogioco, ad esempio, se l'utente è un player ed è il suo turno verrà mostrato un
 \textit{near menu}, ovvero un menù capace di seguire l'utente (nativo di MRTK e integrato in BabylonJS), per procedere di fase, al contrario, se non è il suo turno o se non è un
-player, non verrà mostrato nulla. Si fornisce il codice~\ref{lst:ologrammi.js} come esempio. 
+player, non verrà mostrato nulla. Si fornisce il codice~\ref{lst:ologrammi.js} come esempio. Si lasciano anche delle foto dell'applicazione vera e propria in figura~\ref{fig:OlogrammiCondivisi.jpg}
+dove vengono mostrati gli ologrammi condivisi dai due giocatori.
+\begin{figure}
+    \centering
+
+    \begin{subfigure}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/OlogrammiCondivisi1.jpg}
+        \caption{Ologrammi condivisi visti dal giocatore uno (che indossa HoloLens).}
+        \label{fig:OlogrammiCondivisi1.jpg}
+    \end{subfigure}
+
+    \vspace{1cm}
+
+    \begin{subfigure}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/OlogrammiCondivisi2.png}
+        \caption{Ologrammi condivisi visti dal giocatore due (che gioca da PC).}
+        \label{fig:OlogrammiCondivisi2.jpg}
+    \end{subfigure}
+
+    \caption{Ologrammi condivisi visti dai due giocatori.}
+    \label{fig:OlogrammiCondivisi.jpg}
+\end{figure}
 \code{ologrammi.js}{Esempio di istanziazione di ologrammi personali e condivisi.}
 
 \subsection{Interazioni del giocatore}
@@ -92,7 +115,38 @@ Per lasciare un esempio anche delle interazioni che coinvolgono l'utilizzo della
 fase di gioco. All'utente viene fornito un \textit{near menu} che contiene un pulsante per avanzare di fase. L'utente interagisce con il bottone che lancia un evento 
 \textit{`nextPhase'} intercettato dal model \texttt{TurnModel} che aggiorna lo stato. Tornando alla \texttt{TurnView}, nel suo metodo \texttt{\_update}, controlla se lo stato sia
 cambiata e, in caso affermativo, aggiorna la scena. Si faccia riferimento al listato~\ref{lst:ologrammi.js} precedentemente mostrato per capire come è stato implementata questa
-interazione.
+interazione. Si riporta una schermata dell'applicazione in figura~\ref{fig:InterazioneFase.jpg} dove si può vedere il \textit{near menu} e ciò che avviene dopo essere stato premuto.
+\begin{figure}
+    \centering
+
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/interazione1.jpg}
+        \caption{Inizio dell'interazione, stato inziale:\textit{draw phase}.}
+        \label{fig:interazione1.jpg}
+    \end{subfigure}
+
+    \vspace{1cm} % Spazio verticale tra le due subfigure
+
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/nearMenu.jpg}
+        \caption{Pressione del \textit{near menu}.}
+        \label{fig:nearMenu.jpg}
+    \end{subfigure}
+
+    \vspace{1cm} % Spazio verticale tra le due subfigure
+
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/interazione2.jpg}
+        \caption{Fine dell'interazione, stato finale: \textit{main phase}.}
+        \label{fig:interazione2.jpg}
+    \end{subfigure}
+
+    \caption{Fasi dell'interazione tra utente e \textit{near menu}.}
+    \label{fig:interazioneFase.jpg}
+\end{figure}
 
 
 \subsection{Gestione delle connessioni}
