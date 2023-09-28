@@ -52,12 +52,15 @@ class LifePointsView extends BaseView {
         const to1 = this.model.LP;
         const to2 = this.model.opponent.LP;
         
-        const step1 = (to1 - from1) / 60;
-        const step2 = (to2 - from2) / 60;
-        this.animation(from1, from2, to1, to2, step1, step2);
+        const step1 = (to1 - from1) / this.sharedComponents.engine.getFps();
+        const step2 = (to2 - from2) / this.sharedComponents.engine.getFps();
+        let fps;
+        if (this.sharedComponents.xrHelper.baseExperience.sessionManager.inXRSession) fps = 20;
+        else                                                                          fps = 60;
+        this.animation(from1, from2, to1, to2, step1, step2, fps);
     }
 
-    animation(from1, from2, to1, to2, step1, step2) {
+    animation(from1, from2, to1, to2, step1, step2, fps) {
         if (Math.abs(from1 - to1) <= Math.abs(step1) && Math.abs(from2 - to2) <= Math.abs(step2)) {
             this.text.text = to1 + " - " + to2;
             return;
@@ -65,7 +68,7 @@ class LifePointsView extends BaseView {
         from1 += step1;
         from2 += step2;
         this.text.text = Math.round(from1) + " - " + Math.round(from2);
-        this.future(30).animation(from1, from2, to1, to2, step1, step2);
+        this.future(fps / 2).animation(from1, from2, to1, to2, step1, step2, fps);
     }
 }
 
